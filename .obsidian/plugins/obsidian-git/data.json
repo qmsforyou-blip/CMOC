@@ -1,5 +1,5 @@
 {
-  "commitMessage": "vault backup: {{date}}",
+  "commitMessage": "CMOC: {{date}}",
   "autoCommitMessage": "vault backup: {{date}}",
   "commitMessageScript": "",
   "commitDateFormat": "YYYY-MM-DD HH:mm:ss",
@@ -10,6 +10,7 @@
   "autoCommitOnlyStaged": false,
   "disablePush": false,
   "pullBeforePush": true,
+  "squashCommitsBeforePush": false,
   "disablePopups": false,
   "showErrorNotices": true,
   "disablePopupsForNoChanges": false,
