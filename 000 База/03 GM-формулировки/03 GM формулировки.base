@@ -1,0 +1,8 @@
+views:
+  - type: table
+    name: Таблица
+    filters:
+      and:
+        - file.folder == "000 База/03 GM-формулировки"
+    order:
+      - file.name

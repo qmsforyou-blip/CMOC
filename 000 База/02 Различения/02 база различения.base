@@ -1,0 +1,9 @@
+views:
+  - type: table
+    name: Таблица
+    filters:
+      and:
+        - file.folder == "000 База/02 Различения"
+    order:
+      - file.name
+      - basis

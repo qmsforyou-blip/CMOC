@@ -1,0 +1,15 @@
+ROLE-CANDIDATE-001
+Рабочая конструкция роли
+
+ROLE
++
+RESPONSIBILITY
++
+CAPABILITY
++
+SYSTEM SUPPORT
++
+SCOPE / OBJECT
+
+Status: SINGLE-SOURCE
+Source: Имаи, глава 10
