@@ -1,10 +1,10 @@
 # GM-096 — Managing Change
 
-**Source:** GM Quality Systems Basics rev March 2009, Global Purchasing and Supply Chain, pp. 323–345.
+**Source:** GM Quality Systems Basics rev March 2009, Global Purchasing and Supply Chain, pp. 323–350.
 
 ## Scope
 
-The source presents Managing Change as one of eleven key strategies supporting world-class quality. The section describes a controlled change process with defined roles, approval gates, implementation records, trial-run evaluation where applicable, and final approval.
+The source presents Managing Change as one of eleven key strategies supporting world-class quality. The section describes a controlled change process with defined roles, approval gates, implementation records, trial-run evaluation where applicable, final approval, and a workshop mechanism for translating requirements and gaps into organizational action.
 
 ## 1. PPCR process architecture
 
@@ -71,9 +71,43 @@ This represents a controlled temporary or alternative process rather than an inf
 
 `Normal process → controlled entry → backup / bypass process → controlled exit → normal process`
 
-## 7. CMOC architectural extraction
+## 7. Workshop mechanism
 
-The strongest architectural distinction from this section is:
+The later pages of the Managing Change section describe how the QSB strategies are assigned to workshop teams and converted into actionable work.
+
+The source recommends teams of three to five people where possible. Strategies are paired with personnel from the functions capable of changing or controlling the relevant process. Examples include Manufacturing Engineering, Maintenance, Operators, Supervisors, Auditors/Quality, Training/HR and Quality Engineering, with management and operators assigned to Layered Process Audits, Verification Stations and Fast Response.
+
+The architectural implication is important:
+
+> **A strategy is assigned not to an isolated function, but to a cross-functional team capable of changing the corresponding process.**
+
+The workshop is expected to examine whether the applicable requirements are actually being fulfilled and to identify what is required to make them operational.
+
+The source directs teams to consider such elements as forms, tracking, analysis, management review, communication to employees, inclusion in procedures, and To-Do / Action Lists.
+
+Results are presented to Top Management. Items that cannot be completed by the closing meeting are transferred to the QSB Action Plan rather than being left unresolved.
+
+This establishes a transition:
+
+`Requirement / strategy → team examination → current status / gap → required mechanism → action → Top Management → Action Plan`
+
+## 8. Workshop architectural distinction
+
+The strongest distinction from the workshop material is:
+
+> **Workshop is a mechanism for translating a requirement and an identified gap into a governed organizational action.**
+
+A diagnostic result does not become an implemented change merely because the gap has been identified. The source requires the team to determine the supporting mechanisms for execution and follow-up: forms, tracking, analysis, management review, communication and action ownership.
+
+A second distinction is:
+
+> **An action that cannot be completed at the workshop boundary must acquire a subsequent control state rather than disappear.**
+
+The QSB Action Plan provides that continuation state.
+
+## 9. CMOC architectural extraction
+
+The strongest architectural distinction from the complete section is:
 
 > **A change is governed not only by the decision to change, but by controlled transition between states.**
 
@@ -81,15 +115,21 @@ The source controls the transition through identifiable gates:
 
 `Change proposal → classification/review → approval/rejection → required approvals → authorization → implementation → evidence/record → trial/evaluation where required → final approval`
 
+The workshop layer adds:
+
+`Requirement / strategy → team → current status → gap → mechanism → action → management → action plan`
+
 The process also demonstrates that different kinds of decision and evidence must not be collapsed into one event:
 
 - approval is distinct from authorization to proceed;
 - authorization is distinct from implementation;
 - implementation is distinct from the record of implementation;
 - implementation is distinct from trial/evaluation;
-- completion is distinct from final approval.
+- completion is distinct from final approval;
+- identification of a gap is distinct from implementation of corrective action;
+- workshop completion is distinct from closure of unfinished actions.
 
-## 8. CMOC candidate mechanisms
+## 10. CMOC candidate mechanisms
 
 **MC-15** — Required departmental approval is a condition for continuing a change; failure to obtain a required approval stops the process.
 
@@ -113,9 +153,27 @@ The process also demonstrates that different kinds of decision and evidence must
 
 **MC-25** — The result of a change is evaluated separately from the decision to implement it; customer evaluation may form part of acceptance where applicable.
 
-## 9. CMOC significance
+**MC-26** — A cross-functional workshop team is assigned a strategy according to its ability to change or control the relevant process.
+
+**MC-27** — A workshop converts an identified requirement/gap into defined mechanisms and actions rather than treating diagnosis as completion.
+
+**MC-28** — Workshop results are escalated to Top Management for consideration and direction.
+
+**MC-29** — Unfinished workshop actions are transferred into an Action Plan, preserving their continuation and follow-up state.
+
+**MC-30** — Forms, tracking, analysis, management review and communication can function as explicit mechanisms for converting requirements into controlled organizational action.
+
+## 11. CMOC significance
 
 Managing Change in this source is not merely a document-control activity. It is an operational control architecture for moving a process from one accepted state to another while preserving responsibility, authorization, evidence, traceability and acceptance.
+
+The workshop material extends the architecture upstream: before a change is implemented, the organization must be able to translate requirements and identified gaps into mechanisms, actions and management follow-up.
+
+The combined architecture is therefore:
+
+`Requirement → assessment → status/gap → mechanism → authorized change → implementation → verification/evaluation → record → management follow-up → closure`
+
+This provides a concrete industrial example of the CMOC principle that **a system becomes governable when states, transitions, responsibilities, evidence and continuation paths are made explicit**.
 
 The final strategy page places Managing Change alongside Fast Response, Control of Non-Conforming Product, Verification Station, Standardized Operations, Standardized Operator Training, Error Proofing Verification, Layered Process Audits, Risk Reduction, Contamination Control and Supply Chain Management. Together these strategies are presented as contributing to no major disruptions, no PRRs and zero PPM quality performance.
 
