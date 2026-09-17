@@ -1,4 +1,4 @@
-# GM QSB — Risk Reduction — Risk Model Feedback Loop Cross-Check
+# GM QSB — Risk Reduction — Risk Model Feedback Loop — Blind Cross-Domain Test
 
 **Notice:** 0143+170926
 
@@ -6,246 +6,154 @@
 
 Проверить, является ли конструкция **Risk Model Feedback Loop** более общим CMOC Pattern, чем PFMEA / RPN / Reverse PFMEA.
 
-Рабочая гипотеза из GM-8:
+Рабочая гипотеза:
 
-`MODEL → FIELD EVIDENCE → GAP / NEW FAILURE MODE → ACTION → VERIFY → REASSESS → MODEL UPDATE`
+`MODEL → REALITY → EVIDENCE → GAP / NEW INFORMATION → ACTION → VERIFY / REASSESS → MODEL UPDATE`
 
-Это не канонизация, а independent cross-check.
-
----
-
-## 2. What is actually supported by independent sources
-
-### Source A — GM / Reverse PFMEA lineage
-
-GM-8 связывает PFMEA с фактическим состоянием станции: проверяются существующие failure modes, наличие и эффективность prevention/detection controls, затем выполняется поиск новых failure modes; результаты используются для action plan и последующего PFMEA/RPN reassessment.
-
-**Source-supported loop:**
-
-`PFMEA MODEL → STATION → CONTROL CHECK → GAP / NEW FM → ACTION → REASSESS → PFMEA UPDATE`
-
-### Source B — GM-related later material
-
-GM material reproduced in supplier-quality guidance explicitly connects Reverse PFMEA findings with updates to Process Flow, PFMEA, Control Plan and Work Instructions. Risk review therefore does not terminate at observation; evidence is returned into the management model and associated controlled documents.
-
-### Source C — Nexteer supplier requirements
-
-Nexteer describes two linked feedback directions: root cause and corrective action from problem cases are fed back to PFMEA; high-risk PFMEA items are reviewed and action plans created; reverse PFMEA audits process risk and creates action plans; the purpose of preventive action includes verifying known risk is controlled, identifying sources of potential risk and taking action to lessen negative effects.
-
-This independently supports the general relation:
-
-`FIELD / PROBLEM DATA → RISK MODEL → ACTION → RISK CONTROL`
-
-and, in the reverse direction:
-
-`RISK MODEL → FIELD VERIFICATION → NEW / RESIDUAL RISK → ACTION`
-
-### Source D — automotive Reverse PFMEA guidance
-
-Independent Reverse PFMEA guidance describes the method as a documented continuous-improvement tool used proactively or reactively to find gaps or weaknesses in prevention/detection controls, identify additional failure modes, develop more realistic risk ratings, and feed improvements back into PFMEA and related documents.
-
-The important architectural point is the **feedback**, not the particular scoring system.
+Это independent cross-check, не канонизация.
 
 ---
 
-## 3. Cross-domain test
+## 2. Blind test A — Engineering Digital Twin
 
-The candidate Pattern should not depend on the nouns PFMEA, RPN, Failure Mode or manufacturing station.
+В инженерных Digital Twin независимо описывается постоянное согласование виртуальной модели с изменяющейся физической системой через physical observations, model updating и validation. Обнаруженные расхождения могут служить основанием для обновления модели. citeturn0search0turn0search6turn0search9
 
-The generic structure can be expressed as:
+### Mapping
 
-`MODEL → REALITY → EVIDENCE → GAP / NEW INFORMATION → ACTION → VERIFY → MODEL UPDATE`
+| Generic element | Digital Twin realization |
+|---|---|
+| MODEL | virtual / computational model |
+| REALITY | physical system / process |
+| EVIDENCE | sensor / operational observations |
+| GAP | discrepancy between model and observed behaviour |
+| ACTION | parameter / state / model update |
+| VERIFY / REASSESS | validation against observations or changed conditions |
+| MODEL UPDATE | revised digital representation |
 
-Examples that fit the same grammar:
+Result:
 
-- risk model ↔ actual process;
-- planned control ↔ observed control effectiveness;
-- documented process ↔ actual process;
-- expected failure modes ↔ newly discovered failure modes;
-- corrective action ↔ updated risk/control model.
+`MODEL → PHYSICAL OBSERVATION → DISCREPANCY → UPDATE → VALIDATE → MODEL`
 
-The evidence found supports these relations, but does **not yet prove** that the same grammar is universal across unrelated management domains.
+**Blind-test result: PASS.**
 
-Therefore the Pattern should not be promoted beyond candidate status on this cross-check alone.
-
----
-
-## 4. Boundary with existing CMOC constructions
-
-### Not simply Verification
-
-Verification answers whether an object/control satisfies a criterion.
-
-Risk Model Feedback Loop additionally requires that the **result of verification changes or challenges the model**.
-
-### Not simply Problem Solving
-
-Problem Solving can produce corrective action from a detected problem.
-
-The candidate Pattern is broader: the trigger may be routine verification or proactive examination even when no actual defect has occurred.
-
-### Not simply Continuous Improvement
-
-Continuous Improvement is broader and may contain many different feedback structures.
-
-The candidate Pattern is narrower: it specifically describes reconciliation between a representation/model and evidence from the realized system.
-
-### Not simply Record / Traceability
-
-A record preserves evidence. The Pattern requires evidence to feed back into the controlled model and/or its control architecture.
-
-### Not simply Audit
-
-Audit supplies structured evidence against criteria. The Pattern begins when such evidence is used to challenge, update or recalibrate the model.
+Важная граница: calibration/update не равен validation; независимая validation остаётся отдельной частью evidence loop. citeturn0search0turn0search5
 
 ---
 
-## 5. Candidate identity
+## 3. Blind test B — Organizational Change
 
-### Working name
+В guidance по Organizational Change Management feedback loop связывает анализ текущего и желаемого состояния, gap, implementation и ongoing review/metrics. citeturn0search37
+
+### Mapping
+
+| Generic element | Organizational realization |
+|---|---|
+| MODEL | present / desired state and change assumptions |
+| REALITY | actual organization/processes during change |
+| EVIDENCE | metrics, observations, review feedback |
+| GAP | difference between present and desired state |
+| ACTION | implementation / change intervention |
+| VERIFY / REASSESS | metrics + ongoing review |
+| MODEL UPDATE | revised implementation/state understanding |
+
+Result:
+
+`PRESENT/DESIRED MODEL → ACTUAL STATE → FEEDBACK → GAP → INTERVENTION → REVIEW → REVISED STATE`
+
+**Blind-test result: PASS, with qualification.**
+
+Здесь feedback loop подтверждается структурно, но источник не требует формального model-update механизма в инженерном смысле. Поэтому это подтверждение архитектурного сходства, а не терминологической идентичности.
+
+---
+
+## 4. Blind test C — Field feedback into engineering
+
+Независимая closed-loop Digital Twin formulation описывает передачу operational/field results обратно в engineering, чтобы реальные failures и usage влияли на последующие requirements, design и testing. citeturn0search2
+
+Mapping:
+
+`FIELD RESULT → ENGINEERING EVIDENCE → REQUIREMENT / DESIGN CHANGE → TEST → NEW FIELD EVIDENCE`
+
+**Blind-test result: PASS.**
+
+Это ещё одна реализация feedback architecture, не использующая PFMEA/RPN как обязательную основу.
+
+---
+
+## 5. Boundary test
+
+Недостаточно:
+
+`OBSERVE → CORRECT`
+
+Это обычный corrective-action loop.
+
+Недостаточно:
+
+`MODEL → PREDICT`
+
+Это модель без feedback.
+
+Недостаточно:
+
+`MEASURE → REPORT`
+
+Это monitoring без обязательного model update.
+
+Для `Risk Model Feedback Loop` нужна совокупность признаков:
+
+1. существует representation / model / expected state;
+2. существует observable realization;
+3. evidence сопоставляется с representation;
+4. выявляется discrepancy, gap или new information;
+5. запускается consequential action или update;
+6. результат снова проверяется / переоценивается.
+
+### Working boundary
+
+> **Risk Model Feedback Loop существует, когда evidence от реализованной системы используется для обнаружения расхождения или нового знания относительно представленной модели, запускает изменение модели/контроля/действия и затем проходит повторную проверку.**
+
+Это рабочая формулировка CMOC, не отраслевой стандарт.
+
+---
+
+## 6. Architectural result
+
+GM realization:
+
+`PFMEA → ACTUAL STATION → CONTROL GAP / NEW FAILURE MODE → ACTION → VERIFY → REASSESS RPN → PFMEA UPDATE`
+
+Cross-domain realizations:
+
+`MODEL → REALITY → EVIDENCE → DISCREPANCY → ACTION / UPDATE → VERIFY → MODEL UPDATE`
+
+Получается важное уточнение:
+
+> **Risk Reduction — доменная реализация более общего feedback Pattern. Reverse PFMEA — специализированная Machine, реализующая этот Pattern в PFMEA/station domain.**
+
+При этом Organizational Change подтверждает только structural similarity; Engineering Digital Twin даёт более прямое соответствие model ↔ reality ↔ discrepancy ↔ update ↔ validation. citeturn0search0turn0search37
+
+---
+
+## 7. Current CMOC status
 
 **Risk Model Feedback Loop**
 
-This is a CMOC working name, not an assertion that the phrase is an established industry-standard term.
+- **Class:** PATTERN
+- **Status:** STRONG PATTERN CANDIDATE
+- **Evidence:** MULTI-SOURCE CONFIRMED / CROSS-DOMAIN BLIND TEST PASSED
+- **Canon:** NON-CANON
 
-### Working formula
-
-`MODEL → REALITY → EVIDENCE → GAP / NEW INFORMATION → ACTION → VERIFY → MODEL UPDATE`
-
-### Core capability
-
-**Maintain alignment between a management model and the realized state of the system through evidence-driven feedback.**
-
-### Preconditions
-
-- существует explicit model / representation of the controlled object;
-- существует observable realization of that object;
-- evidence can be collected from the realization;
-- discrepancy, new information or residual risk can be identified;
-- there is a mechanism for changing the model/control architecture.
-
-### Output
-
-One or more of:
-
-- confirmed model;
-- corrected model;
-- new risk/failure mode;
-- changed control;
-- revised assessment;
-- recorded rationale/evidence.
+No catalog, Canon or REG-001 update is made by this patch.
 
 ---
 
-## 6. Status decision
+## 8. Next verification
 
-**PATTERN CANDIDATE / STRONG CANDIDATE — MULTI-SOURCE CONFIRMED / NON-CANON**
+Следующий blind test следует провести в домене, где слово `model` вообще не является естественным: например, software configuration/runtime state, maintenance, management-system process performance или product requirements versus field performance.
 
-Why not CANON:
+Вопрос теста:
 
-1. The independent evidence strongly confirms the feedback architecture within quality/risk-management contexts.
-2. The architecture is clearly broader than Reverse PFMEA itself.
-3. However, this cross-check has not yet established a sufficient number of genuinely different domains to prove that the abstraction is not merely an automotive quality-management pattern.
+> сохраняется ли Pattern, если `MODEL` представлен не математической моделью, а requirement, standard, baseline, specification или expected state?
 
-Therefore the correct next status is **STRONG PATTERN CANDIDATE**, not Canon.
-
----
-
-## 7. Architectural result
-
-The relationship between the constructs can now be represented as:
-
-```text
-                    ┌──────────────────────┐
-                    │      RISK MODEL      │
-                    │ PFMEA / assumptions  │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │      REAL SYSTEM     │
-                    │ station / process    │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │       EVIDENCE       │
-                    │ observation / test   │
-                    └──────────┬───────────┘
-                               │
-                    ┌──────────▼───────────┐
-                    │ GAP / NEW INFORMATION│
-                    │ residual / new risk  │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │        ACTION        │
-                    │ control / prevention │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ VERIFY / REASSESS    │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │    MODEL UPDATE      │
-                    └──────────┬───────────┘
-                               │
-                               └──────→ next cycle
-```
-
-**Reverse PFMEA** is therefore best treated as a specialized Machine implementing this feedback pattern, rather than as the Pattern itself.
-
----
-
-## 8. Important new distinction
-
-The most reusable object may not be **risk reduction** itself.
-
-The deeper construction is:
-
-> **A model is not trusted merely because it exists; it is repeatedly confronted with evidence from the realized system, and the model/control architecture is changed when reality contradicts or enriches it.**
-
-This is a CMOC architectural hypothesis, not a source quotation.
-
----
-
-## 9. No catalog / canon changes
-
-Do not yet:
-
-- add Risk Model Feedback Loop to Machine Pattern catalog;
-- modify Canon;
-- modify REG-001;
-- create a fundamental Machine from it.
-
-The existing Managed Transition pattern remains unaffected.
-
----
-
-## 10. Next step
-
-The next verification should be a **blind cross-domain test** on at least two domains where there is no PFMEA vocabulary — for example:
-
-1. software / IT architecture or operations;
-2. organizational / regulatory management;
-3. engineering design verification.
-
-The question is simple:
-
-> Does the same MODEL → REALITY → EVIDENCE → GAP → ACTION → VERIFY → MODEL UPDATE structure appear without importing PFMEA terminology?
-
-If yes, the Pattern becomes materially stronger. If not, we should narrow it back toward **Risk Model Feedback** as a domain-specific family rather than a general CMOC Pattern.
-
----
-
-## Evidence used for independent cross-check
-
-- GM-derived Reverse PFMEA material: on-station verification of controls, discovery of new failure modes, action plans and PFMEA/RPN reassessment.
-- Nexteer supplier requirements: feedback of root cause/corrective action to PFMEA; high-risk review and action planning; reverse PFMEA to verify known risk, identify potential risk and lessen its impact. External evidence: Nexteer NSRs, section 6.1.2.1–6.1.2.2.
-- Automotive Control Plan / Reverse PFMEA guidance: Reverse PFMEA as proactive/reactive continuous improvement; gaps in controls, new failure modes, more realistic risk ratings, and updates to PFMEA and related documents.
-
-All external evidence is used as cross-check evidence; no source is treated as proof of the CMOC nomenclature itself.
+Если да — это будет более сильная проверка границы Pattern.
