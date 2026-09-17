@@ -132,7 +132,7 @@ Result:
 
 ---
 
-## 7. Boundary test
+## 7. Boundary test — positive boundary
 
 Недостаточно:
 
@@ -182,7 +182,104 @@ Result:
 
 ---
 
-## 8. Architectural result
+## 8. Negative boundary test
+
+Цель — проверить не наличие сходства, а **необходимость минимальных признаков** Pattern. Проверены пять соседних механизмов.
+
+### N1 — Change Control без discrepancy
+
+NIST configuration change control включает proposal → review/approval → implementation → documentation → monitoring/review. Change control может запускаться самим предложением изменения, ещё до появления фактического расхождения между intended и realized state. citeturn1search3turn1search13
+
+Mapping:
+
+`PROPOSED CHANGE → REVIEW → APPROVE → IMPLEMENT → RECORD`
+
+Отсутствуют обязательные элементы:
+
+- comparison of realized state against representation;
+- discrepancy/new information as trigger.
+
+**Result: FAIL as Risk Model Feedback Loop.**
+
+Важно: если после внедрения change control появляется baseline-vs-reality verification, drift detection и re-baselining, туда уже добавляется отдельная feedback architecture.
+
+### N2 — Audit без model/expected-state update
+
+ISO определяет audit как систематический и независимый процесс получения evidence и его объективной оценки относительно audit criteria. Audit сам по себе заканчивается оценкой соответствия критериям; последующий corrective action или изменение criteria/model — отдельные действия. citeturn1search2turn1search7
+
+Mapping:
+
+`AUDIT CRITERIA → EVIDENCE → EVALUATION → FINDING`
+
+Есть representation и evidence, но нет обязательных:
+
+- consequential action;
+- update of representation;
+- re-verification of changed state.
+
+**Result: FAIL as complete Risk Model Feedback Loop.**
+
+При этом audit может быть **входным механизмом** Pattern: он добывает evidence для feedback loop.
+
+### N3 — Corrective Action без explicit representation
+
+ISO/IAF guidance определяет corrective action как действие по устранению причины nonconformity и предотвращению recurrence; effectiveness action затем проверяется. citeturn1search25turn1search27
+
+Типовая структура:
+
+`NONCONFORMITY → CAUSE → CORRECTIVE ACTION → EFFECTIVENESS REVIEW`
+
+Здесь есть gap относительно requirement, если nonconformity действительно установлена. Но representation может оставаться внешним и не подвергаться изменению: corrective action может просто восстановить соответствие или устранить причину.
+
+**Result: FAIL as sufficient definition of the Pattern.**
+
+Это особенно важная граница: **Risk Model Feedback Loop шире corrective action, но corrective action сама по себе не доказывает наличие Pattern.**
+
+### N4 — Monitoring без consequential action
+
+ISO 9000 определяет monitoring как determination of the status of a system, process or activity. Само monitoring не требует ни gap-driven action, ни update representation. citeturn1search9
+
+`MEASURE / OBSERVE → DETERMINE STATUS`
+
+**Result: FAIL.**
+
+Monitoring может поставлять `EVIDENCE`, но не является Pattern без последующего comparison/action/verification cycle.
+
+### N5 — Versioning / Record Keeping без evidence-based reconciliation
+
+Versioning или record keeping может сохранять последовательность состояний:
+
+`STATE(t1) → STATE(t2) → STATE(t3)`
+
+Но сама фиксация истории не требует:
+
+- comparison against intended state;
+- discrepancy/new information;
+- consequential action;
+- effectiveness verification.
+
+**Result: FAIL.**
+
+Versioning может быть инфраструктурой Pattern — особенно для `MODEL UPDATE`, baseline history и rollback — но не является Pattern самостоятельно.
+
+---
+
+## 9. Negative-boundary matrix
+
+| Neighbor mechanism | Representation | Evidence | Gap comparison | Consequential action | Re-check | Representation update | Result |
+|---|---:|---:|---:|---:|---:|---:|---|
+| Change Control | +/− | − | − | + | +/− | +/− | **FAIL** |
+| Audit | + | + | + | − | − | − | **FAIL** |
+| Corrective Action | +/− | + | +/− | + | + | − | **FAIL** |
+| Monitoring | +/− | + | − | − | − | − | **FAIL** |
+| Versioning / Records | +/− | + | − | − | − | +/− | **FAIL** |
+| Risk Model Feedback Loop | **+** | **+** | **+** | **+** | **+** | **+ when intended state changes** | **PASS** |
+
+`+` означает, что элемент может присутствовать; `+/−` — не является обязательным; `−` — не является необходимой частью механизма.
+
+---
+
+## 10. Architectural result
 
 GM realization:
 
@@ -200,42 +297,46 @@ Management-system realization:
 
 `REQUIREMENTS / PLANNED OUTCOME → ACTUAL PROCESS → EVIDENCE → GAP → ACTION → EFFECTIVENESS REVIEW → PROCESS UPDATE`
 
+Negative boundary gives a useful decomposition:
+
+- **Audit** supplies evidence and evaluation;
+- **Monitoring** supplies evidence/status;
+- **Corrective Action** supplies consequential action against a nonconformity;
+- **Change Control** governs authorized transition;
+- **Versioning / Records** preserve state/history;
+- **Risk Model Feedback Loop** is the architecture that **binds these functions through comparison of intended/expected state with realized state and a consequential verified response**.
+
 Получается более сильное уточнение:
 
 > **Pattern относится не к “моделям” как таковым, а к управляемому согласованию принятого intended/expected state с его реализованным состоянием через evidence, gap/new information, action и повторную проверку.**
 
 Это позволяет считать PFMEA, Digital Twin, configuration baseline и management-system requirements разными domain realizations одной feedback architecture.
 
-При этом Organizational Change подтверждает только structural similarity; Engineering Digital Twin и Configuration Baseline дают более прямое соответствие representation ↔ reality ↔ discrepancy ↔ update ↔ verification. citeturn0search0turn0search37turn0search39
+При этом отдельные соседние механизмы не являются конкурентами Pattern: они могут быть его составными механизмами или источниками отдельных шагов.
 
 ---
 
-## 9. Current CMOC status
+## 11. Current CMOC status
 
 **Risk Model Feedback Loop**
 
 - **Class:** PATTERN
 - **Status:** STRONG PATTERN CANDIDATE
-- **Evidence:** MULTI-SOURCE CONFIRMED / CROSS-DOMAIN BLIND TEST PASSED
+- **Evidence:** MULTI-SOURCE CONFIRMED / CROSS-DOMAIN BLIND TEST PASSED / NEGATIVE BOUNDARY PASSED
 - **Cross-domain coverage:** Engineering model / Organizational change / Field feedback / Configuration baseline / Management-system process
+- **Boundary:** distinguished from Change Control / Audit / Corrective Action / Monitoring / Versioning
 - **Canon:** NON-CANON
 
 No catalog, Canon or REG-001 update is made by this patch.
 
 ---
 
-## 10. Next verification
+## 12. Next verification
 
-Следующий шаг — не искать ещё один похожий источник, а проверить **отрицательные границы** Pattern:
-
-1. change control без discrepancy;
-2. audit без model/expected-state update;
-3. corrective action без representation;
-4. monitoring без consequential action;
-5. ordinary versioning / record keeping без evidence-based reconciliation.
+Следующий шаг уже не требует расширять список похожих доменов. Если продолжать проверку, наиболее полезным будет **composition test**: собрать реальную management machine, в которой Audit + Monitoring + Corrective Action + Change Control + Versioning соединены в один feedback loop, и проверить, возникает ли Pattern как отдельный архитектурный уровень, а не как сумма названий.
 
 Вопрос:
 
-> Какие минимальные признаки действительно отличают Risk Model Feedback Loop от обычных Change Control, Audit, Corrective Action, Monitoring и Versioning?
+> Можно ли реализовать Risk Model Feedback Loop как Assembly из существующих CMOC Machines/Patterns, сохранив его собственную capability и boundary?
 
-Если boundary test покажет устойчивое ядро, можно рассматривать переход статуса от **STRONG PATTERN CANDIDATE** к следующей стадии — но пока **не к CANON**.
+Если да, это даст основание перейти от чистого Pattern-candidate к **архитектурно определённому Pattern**. Но пока **не к CANON**.
