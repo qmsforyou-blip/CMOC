@@ -1,265 +1,338 @@
-# GM-096 — Candidate Catalog Cross-Check
+# GM-096 Candidate Catalog Cross-Check
 
-## Извещение на изменение — `0130+170926`
-
-**Название файла:** `GM-096-Candidate-Catalog-CrossCheck.md`
-
----
-
-## 1. Назначение
-
-Провести сверку Machine Candidates, извлечённых из `GM Quality System Basics Overview Supplier Audit`, с текущим `MACHINE-CATALOG` CMOC.
-
-Цель этапа — не канонизация, а разделение:
-
-- новых Machine Candidates;
-- уже существующих Machine / Machine Families;
-- механизмов и паттернов;
-- Assemblies / Chains;
-- элементов, требующих дополнительного cross-check.
-
-Правило: наличие отдельного термина в источнике само по себе не создаёт новую Machine.
+> Извещение на изменение: **0130+170926**
+>
+> Файл: `04 PATCH/GM-096-Candidate-Catalog-CrossCheck.md`
+>
+> Статус: **WORKING / CROSS-CHECK / NON-CANON**
+>
+> Предыдущий подтверждённый commit: `2f62d43aeaea67a5a078983d17cd8b21015757b4` — `CMOC: final cross-check GM-096 Managing Change`.
 
 ---
 
-## 2. База сравнения
+## 1. Purpose
 
-Текущий каталог содержит Machine Patterns:
+Провести сверку кандидатов, выявленных при разборе **GM Quality System Basics Overview Supplier Audit**, раздел **11 Managing Change**, с существующей архитектурой `MACHINE-CATALOG` CMOC.
 
-- MP-001 Visual Control;
-- MP-002 Response to Abnormality;
-- MP-003 Problem Solving;
-- MP-004 Knowledge Transfer;
-- MP-005 Assessment against Criterion.
+Цель этапа — разделить:
 
-И существующие Machines:
+- новую Machine;
+- существующую Machine / новую provenance;
+- Mechanism;
+- Pattern;
+- Assembly;
+- специализацию существующей архитектуры;
+- HOLD / требуется дополнительная проверка.
 
-- MC-008-03 Визуализация производственного потока;
-- MC-008-05 Стандарт на рабочем месте;
-- MC-008-06 Цель–факт;
-- MC-008-07 Визуальная карта разработки;
-- MC-009-10 Andon;
-- MC-009-11 Gemba Walk;
-- MC-009-12 Asaichi;
-- MC-009-15 Audit;
-- MC-009-17 Yokoten.
+Ключевое правило:
 
-System Machines:
+> **SOURCE CLAIM ≠ CMOC INTERPRETATION.**
 
-- MC-009-14 Двойной цикл мастера;
-- MC-009-16 Kamishibai;
-- MC-009-13 Сертификация лучшей линии.
+Наличие отдельного термина в GM не создаёт автоматически новую Machine.
 
-Каталог является WORKING / NON-CANON; канонизация выполняется отдельно.
+GM-096 на уровне CMOC рассматривается не как плоский набор независимых Machines, а как возможная **грамматика управляемого изменения**. Это именно CMOC-интерпретация, а не утверждение, что GM QSB буквально представляет единую такую схему.
 
----
+На этой стадии:
 
-## 3. Сверка кандидатов GM-096
-
-| GM element | CMOC classification | Existing CMOC relation | Decision |
-|---|---|---|---|
-| Plant Process Change Control (PPCR) | MACHINE CANDIDATE | Exact existing Machine not identified | KEEP as new candidate |
-| Production Trial Run (PTR) | SPECIALIZED MACHINE CANDIDATE | Exact existing Machine not identified | KEEP as specialized candidate |
-| Banking Process | SPECIALIZED MACHINE CANDIDATE | Exact existing Machine not identified | KEEP as specialized candidate |
-| Bypass Process Control | SPECIALIZED MACHINE CANDIDATE | Parent mechanism: Controlled Deviation | KEEP candidate; do not duplicate parent mechanism |
-| Supplier Capability Assessment | MACHINE CANDIDATE | No exact existing Machine identified | KEEP as candidate |
-| Nonconforming Product Control | MACHINE CANDIDATE | No exact existing Machine identified | KEEP as candidate |
-| LPA | SPECIALIZED AUDIT FAMILY / PATTERN | MC-009-15 Audit | DO NOT create top-level duplicate |
-| Fast Response | RESPONSE PATTERN / CHAIN | MC-009-10 Andon + MP-002 Response to Abnormality | HOLD; further evidence required |
-| Systemic Problem Resolution | PROBLEM-SOLVING PATTERN / EXISTING ARCHITECTURE | MP-003 + MC-009-12 Asaichi | DO NOT create duplicate |
-| Workshop / Action-Plan Conversion | ASSEMBLY / PATTERN | composes problem-solving actions | DO NOT create Machine |
-| Measurement-to-Action | FUNDAMENTAL PATTERN / MECHANISM | supports Control / Response / Decision | DO NOT create Machine |
-| Control Means Verification | SPECIALIZED MECHANISM / MACHINE-SUBCANDIDATE | related to Verification / Audit | HOLD below top-level Machine |
-| Error-Proofing Verification | SPECIALIZATION of Control Means Verification | related to Verification | DO NOT create separate top-level Machine |
-| Controlled Deviation | GENERIC MECHANISM / PATTERN | parent for Bypass specialization | DO NOT create Machine |
-| Decision Gate | MECHANISM | supports approval / release decisions | HOLD pending wider architecture cross-check |
-| Controlled Change Implementation | MECHANISM / SUBPROCESS | part of PPCR architecture | DO NOT create separate Machine |
+- не выполняется канонизация;
+- не создаются дубли существующих Machines;
+- `REG-001` не изменяется;
+- Canon не изменяется;
+- `MACHINE-CATALOG` данным PATCH не изменяется;
+- паспорта новых кандидатов не создаются.
 
 ---
 
-## 4. Candidate identity test
+## 2. Source Basis
 
-### 4.1 Plant Process Change Control
+Основной источник: **GM Quality System Basics rev March 2009**, раздел **11 Managing Change**.
 
-Source architecture describes a controlled procedure for planned, emergency and other plant process changes, with a Plant Process Change Request, review/approval, implementation recording and final approval.
+Source pages:
 
-CMOC interpretation:
+| Page | Content |
+|---:|---|
+| 324 | Outline: Introduction, Benefits, Change Process, PTR, Banking, Bypass, Summary |
+| 325–326 | Purpose / Benefits |
+| 327–329 | Plant Process Change / PPCR |
+| 330–332 | продолжение Change Process / переход к PTR |
+| 333–335 | Production Trial Run (PTR) |
+| 336–339 | Banking Process |
+| 340–343 | Bypass Process / Manufacturing Process Backup Worksheet |
+| 344 | Summary, Shalls |
 
-`REQUEST → REVIEW → APPROVAL → IMPLEMENTATION → POST-IMPLEMENTATION → FINAL APPROVAL`
+Источник требует систему управления planned/unplanned plant process changes, документирование PPCR и запись изменений; отдельно определяет PTR, Banking Process и Bypass Process. fileciteturn5file2L73-L104 fileciteturn5file1L20-L66 fileciteturn7file0L20-L75 fileciteturn7file1L100-L114
 
-This is sufficiently structured to remain a Machine Candidate.
-
-**Status:** MACHINE CANDIDATE / NON-CANON.
-
----
-
-### 4.2 Production Trial Run
-
-PTR is described as a limited, controlled and contained production tryout used to evaluate a change before full production implementation, with readiness reviews, communication, approvals and evaluation.
-
-PTR is not treated as a generic "test" term. Its identity is the controlled organizational construction around a production trial.
-
-**Status:** SPECIALIZED MACHINE CANDIDATE / NON-CANON.
+Для Bypass источник дополнительно фиксирует breakpoints, tooling/inspection/audit requirements, LPA, training/certification, verification перед возвратом и approval. fileciteturn4file4L94-L120
 
 ---
 
-### 4.3 Banking Process
+## 3. Candidate Map
 
-Banking is a controlled process for identification, protection, retrieval and quality control of parts/material stored for extended periods, including traceability, FIFO, environmental protection, LPA and quality requirements before shipment.
-
-It is not reduced to ordinary storage because the source defines a specific controlled process with responsibilities, records and release-related checks.
-
-**Status:** SPECIALIZED MACHINE CANDIDATE / NON-CANON.
-
----
-
-### 4.4 Bypass Process Control
-
-The source defines a controlled procedure for temporary operation outside an approved documented Control Plan, including authorization, documented bypasses, PFMEA/Control Plan inclusion, standardized work, training, monitoring, breakpoint records and verified return to the original process.
-
-Generic parent:
-
-`Controlled Deviation`
-
-Specialized realization:
-
-`Bypass Process Control`
-
-**Status:** SPECIALIZED MACHINE CANDIDATE / NON-CANON.
-
----
-
-### 4.5 Supplier Capability Assessment
-
-The candidate is retained because the GM material describes a structured assessment of supplier capability rather than merely naming an assessment criterion.
-
-At this stage no exact existing Machine identity in the current catalog has been established.
-
-**Status:** MACHINE CANDIDATE / NON-CANON.
+| GM concept | CMOC classification | Existing CMOC ID | Decision | Rationale |
+|---|---|---|---|---|
+| **Plant Process Change Control (PPCR)** | Machine candidate | — | **NEW MACHINE CANDIDATE / STRONG** | Бounded repeatable construction: procedure, form, stakeholder review, approvals, records; covers planned and emergency changes. pp. 327–329, 344. fileciteturn5file2L85-L104 |
+| **Production Trial Run (PTR)** | Specialized change-validation Machine candidate | — | **SPECIALIZED MACHINE CANDIDATE / NON-CANON** | Отдельная PTR procedure, communication form, decision/approval, customer/internal requirement decision and evaluation. pp. 333–335. fileciteturn5file1L20-L52 |
+| **Banking Process** | Specialized material-state control Machine candidate | — | **SPECIALIZED MACHINE CANDIDATE / NON-CANON** | Идентификация, защита, retrieval, traceability, FIFO, storage and quality requirements for banked material. pp. 336–339. fileciteturn7file0L20-L75 |
+| **Bypass Process Control** | Specialized implementation of Controlled Deviation | — | **SPECIALIZED MACHINE CANDIDATE / NON-CANON** | Контролируемый выход за approved process с defined entry/exit, verification and return requirements. pp. 340–343. fileciteturn7file1L100-L114 |
+| **Supplier Capability Assessment** | Assessment pattern / adjacent architecture | — | **HOLD** | В reviewed pages 324–344 отдельная Machine identity не установлена. Не переносить термин в новую Machine без проверки исходной provenance. |
+| **Nonconforming Product Control** | Existing quality-control architecture | — | **EXISTING ARCHITECTURE / NEW PROVENANCE** | QSB выделяет Control of Non-Conforming Product как отдельную strategy; GM-096 не даёт основания создавать ещё одну Machine поверх этой архитектуры. fileciteturn6file6L136-L156 |
+| **LPA** | Audit family / verification mechanism | **MC-009-15 Audit** | **EXISTING MACHINE / NEW PROVENANCE** | GM-096 использует LPA для bypass и banking. Это новая application context существующего Audit, не новая top-level Machine. fileciteturn4file4L94-L120 |
+| **Fast Response** | Response architecture / Pattern | **MC-009-10 Andon; MP-002 Response to Abnormality** | **EXISTING ARCHITECTURE / NEW PROVENANCE** | Active bypass reviewed at daily Fast Response meeting. Это provenance существующей response architecture. fileciteturn4file4L94-L104 |
+| **Systemic Problem Resolution** | Existing problem-solving architecture | **MP-003 Problem Solving** | **HOLD** | Сильное пересечение с существующей Problem Solving architecture; distinct Machine identity не доказана. |
+| **Workshop / Action-Plan Conversion** | Assembly / Pattern | — | **ASSEMBLY / PATTERN / NON-CANON** | Workshop produces starting points and action development; это не отдельная bounded Machine. fileciteturn4file4L165-L180 |
+| **Measurement-to-Action** | Fundamental action Pattern | — | **PATTERN / NON-CANON** | Generic evidence → decision/action transformation; самостоятельная Machine не требуется. |
+| **Control Means Verification** | Verification mechanism | — | **MECHANISM** | Verification of process parameters/settings and validation before return from bypass. fileciteturn4file4L100-L104 |
+| **Error-Proofing Verification** | Specialized verification mechanism | — | **SPECIALIZED MECHANISM / HOLD** | QSB separately defines EPV as assuring error-proof/detection devices work as intended; GM-096 overlap не создаёт отдельной Machine. fileciteturn7file3L159-L197 |
+| **Controlled Deviation** | Generic deviation / bypass mechanism | — | **MECHANISM / PATTERN** | Generic parent; Bypass Process Control — specialized realization. fileciteturn7file1L100-L114 |
+| **Decision Gate** | Decision mechanism | — | **MECHANISM / PATTERN** | PTR содержит decision/approval steps; generic Gate is an abstraction, not a separate Machine. fileciteturn5file1L30-L44 |
+| **Controlled Change Implementation** | Change-execution mechanism | — | **MECHANISM / PATTERN** | Распределён между PPCR, PTR, bypass, documentation, approval and verification; distinct Machine identity не установлена. |
+| **Process Verification** | Verification mechanism / existing architecture | **MC-009-15 Audit** (partial overlap) | **MECHANISM / EXISTING ARCHITECTURE** | Embedded verification step in change/bypass re-entry; no basis for new top-level Machine. |
+| **Contamination Control** | Existing specialized control architecture | — | **EXISTING ARCHITECTURE / NEW PROVENANCE** | Banking guidance explicitly considers environmental conditions causing rust, contamination, mold or distortion. fileciteturn7file0L46-L67 |
 
 ---
 
-### 4.6 Nonconforming Product Control
+## 4. Duplicate / Specialization Check
 
-The candidate is retained as a controlled organizational construction around identification, containment, disposition and control of nonconforming product.
+### Andon — `MC-009-10`
 
-It should not be collapsed into the generic Problem Solving or Response patterns: those may be invoked by the machine, but they are not identical to the machine's control purpose.
+Fast Response concerns structured response to quality/process abnormalities. It overlaps with `Andon` and `MP-002 Response to Abnormality`, but does not establish a separate Machine identity.
 
-**Status:** MACHINE CANDIDATE / NON-CANON.
+**Decision:** existing architecture / new provenance.
+
+### Gemba Walk — `MC-009-11`
+
+GM-096 does not establish Gemba Walk as the realization of Managing Change. No duplicate.
+
+**Decision:** no new Machine.
+
+### Asaichi — `MC-009-12`
+
+Fast Response review may share a meeting function with Asaichi, but the source does not equate them.
+
+**Decision:** no duplicate; relationship may be recorded later if evidence requires it.
+
+### Audit — `MC-009-15`
+
+LPA is the strongest direct overlap. GM-096 adds application context for bypass and banked material.
+
+**Decision:** existing Audit / new provenance.
+
+### Kamishibai — `MC-009-16`
+
+No evidence that GM-096 requires a Kamishibai construction.
+
+**Decision:** no duplicate.
+
+### Problem Solving — `MP-003`
+
+Systemic Problem Resolution overlaps the existing Problem Solving family. Workshop/action-plan conversion is better treated as Assembly/Pattern.
+
+**Decision:** HOLD for Systemic Problem Resolution; no new top-level Machine.
+
+### MP-002 Response to Abnormality
+
+Fast Response and bypass management concern response to abnormal process conditions.
+
+**Decision:** retain existing Pattern; GM-096 supplies provenance/application context.
+
+### MP-005 Assessment against Criterion
+
+PTR evaluation, process verification and Supplier Capability Assessment can instantiate assessment against criteria, but this alone does not establish a new Machine.
+
+**Decision:** HOLD / existing Pattern relationship.
 
 ---
 
-## 5. Existing architecture absorbs the following GM elements
+## 5. Architectural Interpretation
 
-### LPA
+### 5.1 Patterns
 
-LPA is retained as source provenance and specialized Audit realization. The current catalog already contains `MC-009-15 Audit`; therefore a second top-level Machine would risk duplication.
+Reusable Patterns identified or reinforced by GM-096:
 
-### Fast Response
+- **Measurement-to-Action** — evidence → decision/action;
+- **Controlled Deviation** — controlled departure from approved state;
+- **Decision Gate** — evidence/requirements → authorization decision;
+- **Response to Abnormality** — abnormal state → structured response;
+- **Assessment against Criterion** — state/evidence → criterion-based judgment.
 
-Fast Response is not promoted independently at this stage. In the existing architecture it can be realized as a chain involving `Andon` and `Response to Abnormality` and should not automatically become a duplicate Machine.
+### 5.2 Mechanisms
 
-### Systemic Problem Resolution
+GM-096 contributes mechanisms such as:
 
-The existing `MP-003 Problem Solving` and `MC-009-12 Asaichi` already cover the problem-solving family. GM-096 adds useful source evidence and specialization, but no independent top-level Machine identity is established by this cross-check.
+- change registration;
+- stakeholder notification;
+- approval before execution;
+- trial/no-trial decision;
+- breakpoint definition;
+- material status separation;
+- verification before re-entry;
+- documented return to approved state;
+- traceability;
+- management authorization.
 
-### Workshop / Action-Plan Conversion
+### 5.3 Machines
 
-This is better understood as an Assembly / Pattern that converts a problem-solving workshop output into controlled actions. It is not itself a single Machine.
+The current evidence supports four Machine directions:
 
-### Measurement-to-Action
+```text
+PPCR
+→ NEW MACHINE CANDIDATE / STRONG
 
-The previously established GM-096 cross-check classified this as a fundamental pattern/mechanism:
+PTR
+→ SPECIALIZED MACHINE CANDIDATE / NON-CANON
 
-`Observe → Compare → Interpret → Decide → Act → Verify`
+Banking Process
+→ SPECIALIZED MACHINE CANDIDATE / NON-CANON
 
-No separate Machine is created.
+Bypass Process Control
+→ SPECIALIZED MACHINE CANDIDATE / NON-CANON
+```
 
-### Control Means Verification
+### 5.4 Assembly
 
-This remains below top-level Machine level as a specialized mechanism / Machine-subcandidate. `Error-Proofing Verification` is treated as its specialization, not as a separate Machine.
+Workshop / Action-Plan Conversion is an **Assembly / Pattern** combining existing mechanisms and outputs.
 
-### Controlled Deviation
+### 5.5 Chain
 
-Generic mechanism/pattern. `Bypass Process Control` is the specialized Machine candidate.
-
----
-
-## 6. Architectural consequence
-
-GM-096 should not be represented in CMOC as a flat list of independent Machines.
-
-Its stronger architectural reading is a managed-change grammar:
+The strongest CMOC interpretation is:
 
 ```text
 CHANGE / CHANGE NEED
         ↓
 PLANT PROCESS CHANGE CONTROL
         ↓
-NORMAL CHANGE or TRIAL REQUIRED
+NORMAL CHANGE OR TRIAL REQUIRED?
         ↓
-PTR
-        ↓
-QUALITY / EVALUATION
-        ↓
-IMPLEMENTED STATE
-        ↓
- ┌───────────────┬─────────────────┐
- ↓               ↓                 ↓
-NORMAL FLOW    BANKING          BYPASS STATE
-                 MATERIAL
- └───────────────┴─────────────────┘
-        ↓
-VERIFICATION / REVIEW
-        ↓
-ACCEPTED / CLOSED
+      ┌─┴───────────────┐
+      │                 │
+   NORMAL            PTR REQUIRED
+      │                 ↓
+      │          PTR / EVALUATION
+      │                 ↓
+      └───────→ IMPLEMENTED STATE
+                         ↓
+              ┌──────────┴──────────┐
+              │                     │
+        NORMAL FLOW          TEMPORARY / EXCEPTION
+              │                     │
+              │          BANKING / BYPASS CONTROL
+              │                     ↓
+              │               VERIFICATION
+              └──────────────→ REVIEW / APPROVAL
+                                   ↓
+                              ACCEPTED / CLOSED
 ```
 
-This is a CMOC architectural interpretation, not a claim that the GM source presents the above as one literal flow chart.
+Это **CMOC interpretation**, а не буквальная схема GM QSB. Source отдельно defines Change Process, PTR, Banking and Bypass. fileciteturn7file0L4-L12
 
-The four principal operational questions are:
+### 5.6 Four principal questions
 
-1. **Can we change?** → Plant Process Change Control.
-2. **Do we need to test first?** → Production Trial Run.
-3. **What do we do with material outside normal flow?** → Banking Process.
-4. **What do we do when the normal process is temporarily unavailable?** → Bypass Process Control.
+| GM-096 question | CMOC element |
+|---|---|
+| **Can we change?** | Plant Process Change Control |
+| **Do we need to test first?** | Production Trial Run |
+| **What to do with material outside normal flow?** | Banking Process |
+| **What to do if normal process is temporarily unavailable?** | Bypass Process Control |
 
 ---
 
-## 7. What is deliberately NOT changed
+## 6. Decisions
 
-At this stage:
+### NEW MACHINE CANDIDATE
 
-- `REG-001` is not modified;
-- Canon is not modified;
-- existing Machine passports are not rewritten;
-- no GM term is canonized;
-- no existing Machine is renamed merely to absorb GM terminology;
-- no new Machine ID is assigned yet.
+**Plant Process Change Control (PPCR)** — **STRONG / NON-CANON**.
 
-The catalog update should follow this cross-check, not precede it.
+### SPECIALIZED MACHINE CANDIDATE
+
+1. **Production Trial Run (PTR)** — NON-CANON.
+2. **Banking Process** — NON-CANON.
+3. **Bypass Process Control** — NON-CANON.
+
+### EXISTING MACHINE / NEW PROVENANCE
+
+- **LPA → MC-009-15 Audit**
+- **Fast Response → MC-009-10 Andon / MP-002 Response to Abnormality**
+- **Nonconforming Product Control → existing quality-control architecture**
+- **Contamination Control → existing contamination-control architecture**
+- **Process Verification → existing verification/audit architecture**
+
+### MECHANISM
+
+- Controlled Deviation;
+- Control Means Verification;
+- Decision Gate;
+- Controlled Change Implementation;
+- Process Verification.
+
+### PATTERN
+
+- Measurement-to-Action;
+- Response to Abnormality;
+- Assessment against Criterion;
+- Controlled Deviation as reusable abstraction.
+
+### ASSEMBLY
+
+- Workshop / Action-Plan Conversion.
+
+### HOLD
+
+- Supplier Capability Assessment;
+- Systemic Problem Resolution;
+- Error-Proofing Verification as an independent Machine;
+- any attempt to promote LPA, Fast Response or Process Verification to new top-level Machines.
+
+---
+
+## 7. Impact on CMOC Core
+
+### REG-001
+
+**No change.** No contradiction requiring an append-only correction was found.
+
+### Canon
+
+**No change.** No GM-096 element reaches the evidence threshold for canonization in this PATCH.
+
+### MACHINE-CATALOG
+
+**No direct update in this PATCH.**
+
+The candidate catalog must not be expanded merely because the cross-check produced candidate classifications. Any catalog update is a separate next-stage PATCH after candidate passport work and/or additional provenance confirmation.
+
+### Required next evidence
+
+1. Passport the PPCR candidate and test whether its identity remains distinct from broader change-control mechanisms.
+2. Compare PTR, Banking and Bypass candidates to determine whether they remain independent Machines or specialized realizations of a common change-control architecture.
+3. Resolve provenance of Supplier Capability Assessment.
+4. Keep LPA, Fast Response and Problem Solving attached to existing architecture unless new evidence demonstrates a distinct reproducible construction.
 
 ---
 
 ## VERDICT
 
-GM-096 yields **six retained new Machine Candidates**:
+GM-096 is better represented in CMOC as a **change-control grammar / Chain** than as a collection of independent Machines.
 
-- Plant Process Change Control;
-- Production Trial Run;
-- Banking Process;
-- Bypass Process Control;
-- Supplier Capability Assessment;
-- Nonconforming Product Control.
+Current cross-check result:
 
-The remaining significant elements are absorbed as existing Machines, Patterns, Mechanisms or Assemblies, or remain on HOLD.
+```text
+1 NEW MACHINE CANDIDATE
+3 SPECIALIZED MACHINE CANDIDATES
+multiple EXISTING ARCHITECTURE / NEW PROVENANCE links
+several MECHANISMS
+several PATTERNS
+1 ASSEMBLY
+several HOLD items
+
+REG-001: UNCHANGED
+CANON: UNCHANGED
+MACHINE-CATALOG: UNCHANGED
+```
 
 ## STATUS
 
 `CROSS-CHECK COMPLETE / NON-CANON`
 
-No Canon or REG-001 changes.
-
 ## NEXT CHECK
 
-Update `03_MACHINE-CATALOG/MACHINE-CATALOG.md.md` with the six retained candidates, preserving their NON-CANON / CANDIDATE status and without assigning premature canonical IDs.
+Only if the next evidence review confirms distinct Machine identity: update `03_MACHINE-CATALOG/MACHINE-CATALOG.md.md` and/or proceed to passports for the new candidates. Do not skip the passport/cross-check stage.
