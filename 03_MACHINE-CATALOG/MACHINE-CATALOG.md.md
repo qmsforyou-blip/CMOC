@@ -93,9 +93,7 @@ CANDIDATE
 MACHINE-CATALOG
 │
 ├── PATTERNS
-│
 ├── MACHINES
-│
 └── CHAINS
 ```
 
@@ -187,9 +185,9 @@ Yokoten
 
 |ID|Machine|Mechanism|Physical realization|Status|
 |---|---|---|---|---|
-|MC-CAND-011-08|Mizusumashi Material Delivery Loop|Internal Material Flow|recurring route + supermarkets + delivery points|STRONG CANDIDATE|
+|MC-CAND-011-08|Mizusumashi Material Delivery Loop|Internal Material Flow|route + supermarkets + delivery points|STRONG CANDIDATE|
 |MC-CAND-011-09|Heijunka Scheduling System|Production Leveling|Heijunka Box + Kanban + time slots + rules|STRONG CANDIDATE|
-### **Извещение на изменение `0008+240826`**
+### Извещение на изменение `0008+240826`
 
 
 | ID             | Machine                            | Mechanism                      | Physical realization                              | Status        |
@@ -199,10 +197,10 @@ Yokoten
 | MC-CAND-011-10 | VMI Replenishment Control          | Replenishment by Actual Stock  | daily stock/order review + replenishment decision | SINGLE-SOURCE |
 ### Извещение на изменение `0010+240826`
 
-| ID             | Machine           | Mechanism                               | Physical realization     | Status                 |
-| -------------- | ----------------- | --------------------------------------- | ------------------------ | ---------------------- |
+| ID | Machine | Mechanism | Physical realization | Status |
+|---|---|---|---|---|
 | MC-CAND-011-11 | Supplier Milk Run | Scheduled Closed-Loop Supplier Delivery | recurring supplier route | STRONG / SINGLE-SOURCE |
-|                |                   |                                         |                          |                        |
+
 Application Context:
 - Supply
 - Delivery
@@ -297,7 +295,6 @@ NOT YET IDENTIFIED
 ---
 ### Извещение на изменение — `0028+240826`
 
-
 Изменение только индекса кандидатов:
 
 > `Setup Time Reduction` — уточнить `Application Context = Small-Batch / Flexible Production`; `Capability Enabled = Production Responsiveness`.
@@ -314,3 +311,39 @@ NOT YET IDENTIFIED
 **Извещение на изменение — `0036+240826`**  
 **Файл:** `MACHINE-CATALOG.md`  
 **Изменение:** проведена консолидация кандидатов главы 12; `Upstream Quality Stabilization` добавлена как `MACHINE-CANDIDATE`; дубли и элементы физической реализации не канонизированы.
+
+## Извещение на изменение — `0131+170926`
+
+### GM-096 — добавление Machine Candidates после Candidate Catalog Cross-Check
+
+В индекс добавлены шесть новых **NON-CANON / CANDIDATE** позиций. Они не являются элементами CMOC-Core автоматически и требуют последующей multi-source verification.
+
+| ID | Machine Candidate | Mechanism / Purpose | Source | Status |
+|---|---|---|---|---|
+| MC-CAND-096-01 | Plant Process Change Control | Controlled Change / approval / implementation / final approval | GM QSB, pp. 323–331 | CANDIDATE |
+| MC-CAND-096-02 | Production Trial Run | Controlled production trial before full implementation | GM QSB, pp. 332–335 | SPECIALIZED CANDIDATE |
+| MC-CAND-096-03 | Banking Process | Controlled identification / preservation / retrieval of banked material | GM QSB, pp. 336–339 | SPECIALIZED CANDIDATE |
+| MC-CAND-096-04 | Bypass Process Control | Controlled Deviation / bypass / verified return | GM QSB, pp. 340–344 | SPECIALIZED CANDIDATE |
+| MC-CAND-096-05 | Supplier Capability Assessment | Structured supplier capability assessment | GM QSB | CANDIDATE |
+| MC-CAND-096-06 | Nonconforming Product Control | Identification / containment / disposition / control of nonconforming product | GM QSB | CANDIDATE |
+
+### Deliberately not added as top-level Machines
+
+- `LPA` — specialized Audit family; existing `MC-009-15 Audit`.
+- `Fast Response` — overlaps existing `MP-002 Response to Abnormality` and `MC-009-10 Andon`.
+- `Systemic Problem Resolution` — existing `MP-003 Problem Solving` / `MC-009-12 Asaichi`.
+- `Workshop / Action-Plan Conversion` — Assembly / Pattern.
+- `Measurement-to-Action` — fundamental Pattern / Mechanism.
+- `Control Means Verification` — specialized Mechanism / Machine-subcandidate.
+- `Error-Proofing Verification` — specialization of Control Means Verification.
+- `Controlled Deviation` — generic Mechanism / Pattern; Bypass is its specialized Machine candidate.
+- `Decision Gate` — Mechanism, HOLD pending wider architecture cross-check.
+- `Controlled Change Implementation` — Mechanism / subprocess within PPCR, not a separate Machine.
+
+### Rule
+
+GM-derived candidates are indexed here for further work; **no canonization is implied**.
+
+Source provenance and full architectural analysis are stored in:
+
+`04 PATCH/GM-096-Candidate-Catalog-CrossCheck.md`
