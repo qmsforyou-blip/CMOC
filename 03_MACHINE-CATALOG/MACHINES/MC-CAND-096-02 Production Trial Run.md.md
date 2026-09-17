@@ -80,7 +80,6 @@ checks:
 improves: []
 standardizes:
   - PTR procedure
-standardizes: []
 replicates: []
 composes:
   - decision gate
