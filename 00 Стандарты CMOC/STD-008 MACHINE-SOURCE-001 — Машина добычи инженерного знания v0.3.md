@@ -1,10 +1,10 @@
 # STD-008 — MACHINE-SOURCE-001
 ## Машина добычи инженерного знания
 
-**Версия:** v0.6  
+**Версия:** v0.7  
 **Дата:** 18-09-2026  
 **Статус:** Standard  
-**Основание редакции:** v0.5 + AUTOMATED-RUN-003 on SRC-003 TXT + TASK interchangeability tests.
+**Основание редакции:** v0.6 + clean direct TASK tests M02/M03 on SRC-003 + TASK-CONTRACT-001 v0.2.
 
 ---
 
@@ -48,8 +48,8 @@ MACHINE-SOURCE-001 реализует последовательность:
 | Модуль | Вход | Операция | Выход | Кардинальность |
 |---|---|---|---|---|
 | M01 | SOURCE_PACKAGE | проверка и фиксация Источника | Extraction Batch | 1→1 |
-| M02 | Extraction Record | извлечение различения | Distinction Record | 1→1* |
-| M03 | Distinction | три уровня формулировки | Formulation Records | 1→3 |
+| M02 | Extraction Record OR SOURCE_PACKAGE when explicitly contracted | извлечение различения | Distinction Record | 1→1* |
+| M03 | Distinction OR SOURCE_PACKAGE when explicitly contracted | три уровня формулировки | Formulation Records | 1→3 |
 | M04 | Formulation Records | выделение кандидатов номенклатуры | Nomenclature Candidates | N→N/1 |
 | M05 | Nomenclature Candidate | рабочая типизация | Classification Record | 1→1 |
 | M06 | Classification Record | сборка паспорта | Passport Record | 1→1 |
@@ -413,30 +413,69 @@ M01–M07 показали сопоставимость структуры; M07 
 - [x] проверен TASK=FORMULATIONS непосредственно от SOURCE_PACKAGE;
 - [x] зафиксирована граница TASK interchangeability;
 - [x] зафиксирована граница прямого входа TASK;
+- [x] подтверждён прямой SOURCE_PACKAGE → M02;
+- [x] подтверждён прямой SOURCE_PACKAGE → M03;
+- [x] разделена интерфейсная возможность прямого входа и универсальная семантическая применимость;
 
 ---
 
-## 25. Связанные документы
+## 25. TASK contract boundary v0.7
+
+`TASK` является самостоятельным параметром производственного интерфейса. Допустимый вход определяется контрактом конкретного TASK, а не предположением о линейности конвейера.
+
+Для M01–M03 подтверждён прямой вход `SOURCE_PACKAGE`:
+
+- M01 — EXTRACTION;
+- M02 — DISTINCTIONS, clean Run-006;
+- M03 — FORMULATIONS, clean Run-007.
+
+Для M04–M08 прямой вход `SOURCE_PACKAGE` данной редакцией не устанавливается. Проверенные пути остаются через результаты предыдущих модулей.
+
+Прямой TASK не означает универсальную семантическую применимость. Каждая новая комбинация `SOURCE_PACKAGE × TASK` требует выполнения соответствующего контракта и QC.
+
+Различие `SOURCE_PACKAGE` как интерфейсного входа и предыдущего TASK output как operational input является обязательным.
+
+## 26. Evidence boundary
+
+Установлено:
+
+1. fixed machine core сохраняется при смене TASK;
+2. один SOURCE_PACKAGE может использоваться с несколькими TASK;
+3. M01, M02 и M03 имеют подтверждённый прямой вход от SOURCE_PACKAGE;
+4. каждый запуск остаётся отдельным BATCH;
+5. source traceability сохраняется;
+6. предыдущие результаты не должны использоваться скрыто.
+
+Не установлено:
+
+1. любой TASK допустим непосредственно от SOURCE_PACKAGE;
+2. любой TASK применим к любому SOURCE_PACKAGE;
+3. универсальная семантическая полнота;
+4. автоматическая канонизация.
+
+## 27. Связанные документы
 
 - `STD-007` — стандартный сменный модуль Источника;
 - `SPEC-002` — интерфейс Источника;
 - `PROMPT-001` — рабочая инструкция AGENT-SOURCE-001;
 - `STD-100` — конвейер инженерного знания;
 - `STD-008-v0.2-Delta-after-Full-Machine-Test.md`;
+- `TASK-CONTRACT-001-M01-M08-v0.2.md`;
+- `TASK-CONTRACT-001-QC-AUDIT-002.md`;
 - `M08-QC-001-GOST-ISO-10002-2007-DECISION-RULE-v0.1.md`;
 - `M08-THIRD-RUN-CRITERIA-001-GOST-ISO-10002-2007.md`.
 
 ---
 
-## 18. Результат AUTOMATED-RUN-002
+## 28. Результат AUTOMATED-RUN-002
 
 Базовый automated run M01–M08 выполнен на SRC-002. Он подтверждает интерфейсное исполнение конвейера, но не закрывает relation-dependent ветвь M08. Подробности зафиксированы в `STD-008-v0.4-Delta-after-Automated-Run-002.md`.
 
-## 19. Relation-dependent ветвь
+## 29. Relation-dependent ветвь
 
 M07/M08 relation-dependent branch испытана отдельно. Изолированный Passport даёт явный `NO_RELATION`; source-supported multi-object context позволяет создать relation candidates и передать их в M08. CANONICAL автоматически не присваивается.
 
-## 20. Следующая операция
+## 30. Следующая операция
 
 Следующий производственный этап:
 
