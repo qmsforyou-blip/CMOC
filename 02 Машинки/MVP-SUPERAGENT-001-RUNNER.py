@@ -181,7 +181,7 @@ def execute(source_id: str, source_package: dict[str, Any],
             raise Reject("TASK_CONTRACT_NOT_FOUND", "DISPATCH")
 
         batch = new_batch(
-            source_id, task, contract.task,
+            source_id, task, machine.machine_id,
             current.get("output_reference", "SOURCE_PACKAGE"), run_id
         )
 
