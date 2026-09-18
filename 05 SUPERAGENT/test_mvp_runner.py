@@ -27,11 +27,19 @@ def test_sequential():
     assert len(result["results"][1]["records"])==6
     assert len(result["results"][2]["records"])==18
 
-def test_type_reject_before_batch():
+def test_contract_reject_before_execution():
     r=build_demo_runner()
-    result=r.run_chain("MVP-RUN-002",SOURCE,initial(),["M01","M02"])
-    # M01 output is valid; M02 accepts it, so this is not a reject case.
-    assert result["status"]=="ACCEPT"
+    m02 = r.execute("MVP-RUN-002",SOURCE,"M02",{
+        **initial(),"type":"SOURCE_PACKAGE","ref":"INPUT"
+    })
+    assert m02["status"]=="ACCEPT"
+    rejected = r.execute("MVP-RUN-002",SOURCE,"M04",{
+        **m02,"type":"DISTINCTION_RECORDS","ref":"M02:OUTPUT"
+    })
+    assert rejected["status"]=="REJECT"
+    assert "TYPE_MISMATCH" in rejected["reason"]
+    assert rejected["batch_id"] is None
+    assert not any(e.task=="M04" and e.batch_id for e in r.journal)
 
 def test_missing_trace_reject():
     r=build_demo_runner()
@@ -40,21 +48,17 @@ def test_missing_trace_reject():
     assert result["status"]=="REJECT"
     assert result["results"][0]["reason"]=="MISSING_TRACEABILITY"
 
-def test_contract_mismatch():
-    r=build_demo_runner()
-    m02 = r.execute("MVP-RUN-004",SOURCE,"M02",{
-        **initial(),"type":"SOURCE_PACKAGE","ref":"INPUT"
-    })
-    assert m02["status"]=="ACCEPT"
-    rejected = r.execute("MVP-RUN-004",SOURCE,"M04",{
-        **m02,"type":"DISTINCTION_RECORDS","ref":"M02:OUTPUT"
-    })
-    assert rejected["status"]=="REJECT"
-    assert "TYPE_MISMATCH" in rejected["reason"]
-
 def test_trace_survives_chain():
     r=build_demo_runner()
     result=r.run_chain("MVP-RUN-005",SOURCE,initial(),["M01","M02","M03"])
     final=result["results"][-1]
     assert final["traceability"]["source_id"]=="SRC-002"
     assert final["traceability"]["from"]["source_id"]=="SRC-002"
+    assert final["batch_id"].startswith("BATCH-SRC-002-M03-")
+
+def test_new_batch_per_task():
+    r=build_demo_runner()
+    result=r.run_chain("MVP-RUN-006",SOURCE,initial(),["M01","M02","M03"])
+    batches=[x["batch_id"] for x in result["results"]]
+    assert len(batches)==3
+    assert len(set(batches))==3
