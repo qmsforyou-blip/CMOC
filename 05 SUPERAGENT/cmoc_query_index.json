@@ -1,0 +1,5360 @@
+{
+  "schema": "SPEC-003",
+  "version": "0.1-MVP",
+  "generated_from": "CMOC repository main",
+  "generated_note": "Read-only filename/object index for first CMOC QUERY control run. Status UNKNOWN means metadata was not inferred from file content.",
+  "objects": [
+    {
+      "object_id": "T-0001",
+      "object_type": "TERM",
+      "name": "Управляемость",
+      "path": "000 База/01 Термины/T-0001 Управляемость.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0001 Управляемость.md"
+    },
+    {
+      "object_id": "T-0002",
+      "object_type": "TERM",
+      "name": "Организация",
+      "path": "000 База/01 Термины/T-0002 Организация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0002 Организация.md"
+    },
+    {
+      "object_id": "T-0003",
+      "object_type": "TERM",
+      "name": "Организационная система",
+      "path": "000 База/01 Термины/T-0003 Организационная система.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0003 Организационная система.md"
+    },
+    {
+      "object_id": "T-0004",
+      "object_type": "TERM",
+      "name": "Организационная конструкция",
+      "path": "000 База/01 Термины/T-0004 Организационная конструкция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0004 Организационная конструкция.md"
+    },
+    {
+      "object_id": "T-0005",
+      "object_type": "TERM",
+      "name": "Организационная инженерия",
+      "path": "000 База/01 Термины/T-0005 Организационная инженерия.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0005 Организационная инженерия.md"
+    },
+    {
+      "object_id": "T-0006",
+      "object_type": "TERM",
+      "name": "Организационный инженер",
+      "path": "000 База/01 Термины/T-0006 Организационный инженер.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0006 Организационный инженер.md"
+    },
+    {
+      "object_id": "T-0007",
+      "object_type": "TERM",
+      "name": "Объективная реальность",
+      "path": "000 База/01 Термины/T-0007 Объективная реальность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0007 Объективная реальность.md"
+    },
+    {
+      "object_id": "T-0008",
+      "object_type": "TERM",
+      "name": "Реальность",
+      "path": "000 База/01 Термины/T-0008 Реальность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0008 Реальность.md"
+    },
+    {
+      "object_id": "T-0009",
+      "object_type": "TERM",
+      "name": "Закон",
+      "path": "000 База/01 Термины/T-0009 Закон.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0009 Закон.md"
+    },
+    {
+      "object_id": "T-0010",
+      "object_type": "TERM",
+      "name": "Принцип",
+      "path": "000 База/01 Термины/T-0010 Принцип.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0010 Принцип.md"
+    },
+    {
+      "object_id": "T-0011",
+      "object_type": "TERM",
+      "name": "Требование",
+      "path": "000 База/01 Термины/T-0011 Требование.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0011 Требование.md"
+    },
+    {
+      "object_id": "T-0012",
+      "object_type": "TERM",
+      "name": "Обязательство",
+      "path": "000 База/01 Термины/T-0012 Обязательство.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0012 Обязательство.md"
+    },
+    {
+      "object_id": "T-0013",
+      "object_type": "TERM",
+      "name": "Ответственность",
+      "path": "000 База/01 Термины/T-0013 Ответственность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0013 Ответственность.md"
+    },
+    {
+      "object_id": "T-0014",
+      "object_type": "TERM",
+      "name": "Полномочие",
+      "path": "000 База/01 Термины/T-0014 Полномочие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0014 Полномочие.md"
+    },
+    {
+      "object_id": "T-0015",
+      "object_type": "TERM",
+      "name": "Решение",
+      "path": "000 База/01 Термины/T-0015 Решение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0015 Решение.md"
+    },
+    {
+      "object_id": "T-0016",
+      "object_type": "TERM",
+      "name": "Гипотеза",
+      "path": "000 База/01 Термины/T-0016 Гипотеза.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0016 Гипотеза.md"
+    },
+    {
+      "object_id": "T-0017",
+      "object_type": "TERM",
+      "name": "Практика",
+      "path": "000 База/01 Термины/T-0017 Практика.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0017 Практика.md"
+    },
+    {
+      "object_id": "T-0018",
+      "object_type": "TERM",
+      "name": "Факт",
+      "path": "000 База/01 Термины/T-0018 Факт.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0018 Факт.md"
+    },
+    {
+      "object_id": "T-0019",
+      "object_type": "TERM",
+      "name": "Различение",
+      "path": "000 База/01 Термины/T-0019 Различение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0019 Различение.md"
+    },
+    {
+      "object_id": "T-0020",
+      "object_type": "TERM",
+      "name": "Граница",
+      "path": "000 База/01 Термины/T-0020 Граница.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0020 Граница.md"
+    },
+    {
+      "object_id": "T-0021",
+      "object_type": "TERM",
+      "name": "Идентификация",
+      "path": "000 База/01 Термины/T-0021 Идентификация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0021 Идентификация.md"
+    },
+    {
+      "object_id": "T-0022",
+      "object_type": "TERM",
+      "name": "Фиксация",
+      "path": "000 База/01 Термины/T-0022 Фиксация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0022 Фиксация.md"
+    },
+    {
+      "object_id": "T-0023",
+      "object_type": "TERM",
+      "name": "Организационная память",
+      "path": "000 База/01 Термины/T-0023 Организационная память.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0023 Организационная память.md"
+    },
+    {
+      "object_id": "T-0024",
+      "object_type": "TERM",
+      "name": "Статус",
+      "path": "000 База/01 Термины/T-0024 Статус.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0024 Статус.md"
+    },
+    {
+      "object_id": "T-0025",
+      "object_type": "TERM",
+      "name": "Наблюдение",
+      "path": "000 База/01 Термины/T-0025 Наблюдение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0025 Наблюдение.md"
+    },
+    {
+      "object_id": "T-0026",
+      "object_type": "TERM",
+      "name": "Измерение",
+      "path": "000 База/01 Термины/T-0026 Измерение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0026 Измерение.md"
+    },
+    {
+      "object_id": "T-0027",
+      "object_type": "TERM",
+      "name": "Оценка",
+      "path": "000 База/01 Термины/T-0027 Оценка.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0027 Оценка.md"
+    },
+    {
+      "object_id": "T-0028",
+      "object_type": "TERM",
+      "name": "Передача",
+      "path": "000 База/01 Термины/T-0028 Передача.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0028 Передача.md"
+    },
+    {
+      "object_id": "T-0029",
+      "object_type": "TERM",
+      "name": "Результат",
+      "path": "000 База/01 Термины/T-0029 Результат.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0029 Результат.md"
+    },
+    {
+      "object_id": "T-0030",
+      "object_type": "TERM",
+      "name": "Свойство",
+      "path": "000 База/01 Термины/T-0030 Свойство.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0030 Свойство.md"
+    },
+    {
+      "object_id": "T-0031",
+      "object_type": "TERM",
+      "name": "Действие",
+      "path": "000 База/01 Термины/T-0031 Действие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0031 Действие.md"
+    },
+    {
+      "object_id": "T-0032",
+      "object_type": "TERM",
+      "name": "Запись",
+      "path": "000 База/01 Термины/T-0032 Запись.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0032 Запись.md"
+    },
+    {
+      "object_id": "T-0033",
+      "object_type": "TERM",
+      "name": "Прослеживаемость",
+      "path": "000 База/01 Термины/T-0033 Прослеживаемость.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0033 Прослеживаемость.md"
+    },
+    {
+      "object_id": "T-0034",
+      "object_type": "TERM",
+      "name": "Состояние",
+      "path": "000 База/01 Термины/T-0034 Состояние.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0034 Состояние.md"
+    },
+    {
+      "object_id": "T-0035",
+      "object_type": "TERM",
+      "name": "Изменение",
+      "path": "000 База/01 Термины/T-0035 Изменение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0035 Изменение.md"
+    },
+    {
+      "object_id": "T-0036",
+      "object_type": "TERM",
+      "name": "Соответствие",
+      "path": "000 База/01 Термины/T-0036 Соответствие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0036 Соответствие.md"
+    },
+    {
+      "object_id": "T-0037",
+      "object_type": "TERM",
+      "name": "Несоответствие",
+      "path": "000 База/01 Термины/T-0037 Несоответствие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0037 Несоответствие.md"
+    },
+    {
+      "object_id": "T-0038",
+      "object_type": "TERM",
+      "name": "Отклонение",
+      "path": "000 База/01 Термины/T-0038 Отклонение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0038 Отклонение.md"
+    },
+    {
+      "object_id": "T-0039",
+      "object_type": "TERM",
+      "name": "Причина",
+      "path": "000 База/01 Термины/T-0039 Причина.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0039 Причина.md"
+    },
+    {
+      "object_id": "T-0040",
+      "object_type": "TERM",
+      "name": "Последствие",
+      "path": "000 База/01 Термины/T-0040 Последствие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0040 Последствие.md"
+    },
+    {
+      "object_id": "T-0041",
+      "object_type": "TERM",
+      "name": "Событие",
+      "path": "000 База/01 Термины/T-0041 Событие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0041 Событие.md"
+    },
+    {
+      "object_id": "T-0042",
+      "object_type": "TERM",
+      "name": "Процесс",
+      "path": "000 База/01 Термины/T-0042 Процесс.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0042 Процесс.md"
+    },
+    {
+      "object_id": "T-0043",
+      "object_type": "TERM",
+      "name": "Поток",
+      "path": "000 База/01 Термины/T-0043 Поток.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0043 Поток.md"
+    },
+    {
+      "object_id": "T-0044",
+      "object_type": "TERM",
+      "name": "Связь",
+      "path": "000 База/01 Термины/T-0044 Связь.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0044 Связь.md"
+    },
+    {
+      "object_id": "T-0045",
+      "object_type": "TERM",
+      "name": "Отношение",
+      "path": "000 База/01 Термины/T-0045 Отношение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0045 Отношение.md"
+    },
+    {
+      "object_id": "T-0046",
+      "object_type": "TERM",
+      "name": "Цель",
+      "path": "000 База/01 Термины/T-0046 Цель.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0046 Цель.md"
+    },
+    {
+      "object_id": "T-0047",
+      "object_type": "TERM",
+      "name": "Ограничение",
+      "path": "000 База/01 Термины/T-0047 Ограничение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0047 Ограничение.md"
+    },
+    {
+      "object_id": "T-0048",
+      "object_type": "TERM",
+      "name": "Риск",
+      "path": "000 База/01 Термины/T-0048 Риск.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0048 Риск.md"
+    },
+    {
+      "object_id": "T-0049",
+      "object_type": "TERM",
+      "name": "Возможность",
+      "path": "000 База/01 Термины/T-0049 Возможность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0049 Возможность.md"
+    },
+    {
+      "object_id": "T-0050",
+      "object_type": "TERM",
+      "name": "Способность",
+      "path": "000 База/01 Термины/T-0050 Способность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0050 Способность.md"
+    },
+    {
+      "object_id": "T-0051",
+      "object_type": "TERM",
+      "name": "Механизм",
+      "path": "000 База/01 Термины/T-0051 Механизм.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0051 Механизм.md"
+    },
+    {
+      "object_id": "T-0052",
+      "object_type": "TERM",
+      "name": "Функция",
+      "path": "000 База/01 Термины/T-0052 Функция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0052 Функция.md"
+    },
+    {
+      "object_id": "T-0053",
+      "object_type": "TERM",
+      "name": "Роль",
+      "path": "000 База/01 Термины/T-0053 Роль.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0053 Роль.md"
+    },
+    {
+      "object_id": "T-0054",
+      "object_type": "TERM",
+      "name": "Компетенция",
+      "path": "000 База/01 Термины/T-0054 Компетенция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0054 Компетенция.md"
+    },
+    {
+      "object_id": "T-0055",
+      "object_type": "TERM",
+      "name": "Ресурс",
+      "path": "000 База/01 Термины/T-0055 Ресурс.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0055 Ресурс.md"
+    },
+    {
+      "object_id": "T-0056",
+      "object_type": "TERM",
+      "name": "Объект",
+      "path": "000 База/01 Термины/T-0056 Объект.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0056 Объект.md"
+    },
+    {
+      "object_id": "T-0057",
+      "object_type": "TERM",
+      "name": "Субъект",
+      "path": "000 База/01 Термины/T-0057 Субъект.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0057 Субъект.md"
+    },
+    {
+      "object_id": "T-0058",
+      "object_type": "TERM",
+      "name": "Среда",
+      "path": "000 База/01 Термины/T-0058 Среда.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0058 Среда.md"
+    },
+    {
+      "object_id": "T-0059",
+      "object_type": "TERM",
+      "name": "Система",
+      "path": "000 База/01 Термины/T-0059 Система.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0059 Система.md"
+    },
+    {
+      "object_id": "T-0060",
+      "object_type": "TERM",
+      "name": "Архитектура",
+      "path": "000 База/01 Термины/T-0060 Архитектура.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0060 Архитектура.md"
+    },
+    {
+      "object_id": "T-0061",
+      "object_type": "TERM",
+      "name": "Модель",
+      "path": "000 База/01 Термины/T-0061 Модель.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0061 Модель.md"
+    },
+    {
+      "object_id": "T-0062",
+      "object_type": "TERM",
+      "name": "Структура",
+      "path": "000 База/01 Термины/T-0062 Структура.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0062 Структура.md"
+    },
+    {
+      "object_id": "T-0063",
+      "object_type": "TERM",
+      "name": "Элемент",
+      "path": "000 База/01 Термины/T-0063 Элемент.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0063 Элемент.md"
+    },
+    {
+      "object_id": "T-0064",
+      "object_type": "TERM",
+      "name": "Интерфейс",
+      "path": "000 База/01 Термины/T-0064 Интерфейс.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0064 Интерфейс.md"
+    },
+    {
+      "object_id": "T-0065",
+      "object_type": "TERM",
+      "name": "Взаимодействие",
+      "path": "000 База/01 Термины/T-0065 Взаимодействие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0065 Взаимодействие.md"
+    },
+    {
+      "object_id": "T-0066",
+      "object_type": "TERM",
+      "name": "Координация",
+      "path": "000 База/01 Термины/T-0066 Координация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0066 Координация.md"
+    },
+    {
+      "object_id": "T-0067",
+      "object_type": "TERM",
+      "name": "Согласованность",
+      "path": "000 База/01 Термины/T-0067 Согласованность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0067 Согласованность.md"
+    },
+    {
+      "object_id": "T-0068",
+      "object_type": "TERM",
+      "name": "Целостность",
+      "path": "000 База/01 Термины/T-0068 Целостность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0068 Целостность.md"
+    },
+    {
+      "object_id": "T-0069",
+      "object_type": "TERM",
+      "name": "Устойчивость",
+      "path": "000 База/01 Термины/T-0069 Устойчивость.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0069 Устойчивость.md"
+    },
+    {
+      "object_id": "T-0070",
+      "object_type": "TERM",
+      "name": "Развитие",
+      "path": "000 База/01 Термины/T-0070 Развитие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0070 Развитие.md"
+    },
+    {
+      "object_id": "T-0071",
+      "object_type": "TERM",
+      "name": "Компонент",
+      "path": "000 База/01 Термины/T-0071 Компонент.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0071 Компонент.md"
+    },
+    {
+      "object_id": "T-0072",
+      "object_type": "TERM",
+      "name": "Модуль",
+      "path": "000 База/01 Термины/T-0072 Модуль.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0072 Модуль.md"
+    },
+    {
+      "object_id": "T-0073",
+      "object_type": "TERM",
+      "name": "Контур",
+      "path": "000 База/01 Термины/T-0073 Контур.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0073 Контур.md"
+    },
+    {
+      "object_id": "T-0074",
+      "object_type": "TERM",
+      "name": "Конфигурация",
+      "path": "000 База/01 Термины/T-0074 Конфигурация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0074 Конфигурация.md"
+    },
+    {
+      "object_id": "T-0075",
+      "object_type": "TERM",
+      "name": "Конфигурирование",
+      "path": "000 База/01 Термины/T-0075 Конфигурирование.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0075 Конфигурирование.md"
+    },
+    {
+      "object_id": "T-0076",
+      "object_type": "TERM",
+      "name": "Интеграция",
+      "path": "000 База/01 Термины/T-0076 Интеграция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0076 Интеграция.md"
+    },
+    {
+      "object_id": "T-0077",
+      "object_type": "TERM",
+      "name": "Декомпозиция",
+      "path": "000 База/01 Термины/T-0077 Декомпозиция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0077 Декомпозиция.md"
+    },
+    {
+      "object_id": "T-0078",
+      "object_type": "TERM",
+      "name": "Композиция",
+      "path": "000 База/01 Термины/T-0078 Композиция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0078 Композиция.md"
+    },
+    {
+      "object_id": "T-0079",
+      "object_type": "TERM",
+      "name": "Инвариант",
+      "path": "000 База/01 Термины/T-0079 Инвариант.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0079 Инвариант.md"
+    },
+    {
+      "object_id": "T-0080",
+      "object_type": "TERM",
+      "name": "Вариант",
+      "path": "000 База/01 Термины/T-0080 Вариант.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0080 Вариант.md"
+    },
+    {
+      "object_id": "T-0081",
+      "object_type": "TERM",
+      "name": "Масштаб",
+      "path": "000 База/01 Термины/T-0081 Масштаб.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0081 Масштаб.md"
+    },
+    {
+      "object_id": "T-0082",
+      "object_type": "TERM",
+      "name": "Уровень",
+      "path": "000 База/01 Термины/T-0082 Уровень.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0082 Уровень.md"
+    },
+    {
+      "object_id": "T-0083",
+      "object_type": "TERM",
+      "name": "Иерархия",
+      "path": "000 База/01 Термины/T-0083 Иерархия.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0083 Иерархия.md"
+    },
+    {
+      "object_id": "T-0084",
+      "object_type": "TERM",
+      "name": "Абстракция",
+      "path": "000 База/01 Термины/T-0084 Абстракция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0084 Абстракция.md"
+    },
+    {
+      "object_id": "T-0085",
+      "object_type": "TERM",
+      "name": "Детализация",
+      "path": "000 База/01 Термины/T-0085 Детализация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0085 Детализация.md"
+    },
+    {
+      "object_id": "T-0086",
+      "object_type": "TERM",
+      "name": "Контекст",
+      "path": "000 База/01 Термины/T-0086 Контекст.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0086 Контекст.md"
+    },
+    {
+      "object_id": "T-0087",
+      "object_type": "TERM",
+      "name": "Проекция",
+      "path": "000 База/01 Термины/T-0087 Проекция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0087 Проекция.md"
+    },
+    {
+      "object_id": "T-0088",
+      "object_type": "TERM",
+      "name": "Представление",
+      "path": "000 База/01 Термины/T-0088 Представление.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0088 Представление.md"
+    },
+    {
+      "object_id": "T-0089",
+      "object_type": "TERM",
+      "name": "Метамодель",
+      "path": "000 База/01 Термины/T-0089 Метамодель.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0089 Метамодель.md"
+    },
+    {
+      "object_id": "T-0090",
+      "object_type": "TERM",
+      "name": "Канон",
+      "path": "000 База/01 Термины/T-0090 Канон.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0090 Канон.md"
+    },
+    {
+      "object_id": "T-0091",
+      "object_type": "TERM",
+      "name": "Эволюция",
+      "path": "000 База/01 Термины/T-0091 Эволюция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0091 Эволюция.md"
+    },
+    {
+      "object_id": "T-0092",
+      "object_type": "TERM",
+      "name": "Развитие",
+      "path": "000 База/01 Термины/T-0092 Развитие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0092 Развитие.md"
+    },
+    {
+      "object_id": "T-0093",
+      "object_type": "TERM",
+      "name": "Зрелость",
+      "path": "000 База/01 Термины/T-0093 Зрелость.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0093 Зрелость.md"
+    },
+    {
+      "object_id": "T-0094",
+      "object_type": "TERM",
+      "name": "Жизненный цикл",
+      "path": "000 База/01 Термины/T-0094 Жизненный цикл.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0094 Жизненный цикл.md"
+    },
+    {
+      "object_id": "T-0095",
+      "object_type": "TERM",
+      "name": "Изменчивость",
+      "path": "000 База/01 Термины/T-0095 Изменчивость.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0095 Изменчивость.md"
+    },
+    {
+      "object_id": "T-0096",
+      "object_type": "TERM",
+      "name": "Адаптация",
+      "path": "000 База/01 Термины/T-0096 Адаптация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0096 Адаптация.md"
+    },
+    {
+      "object_id": "T-0097",
+      "object_type": "TERM",
+      "name": "Самоорганизация",
+      "path": "000 База/01 Термины/T-0097 Самоорганизация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0097 Самоорганизация.md"
+    },
+    {
+      "object_id": "T-0098",
+      "object_type": "TERM",
+      "name": "Оптимизация",
+      "path": "000 База/01 Термины/T-0098 Оптимизация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0098 Оптимизация.md"
+    },
+    {
+      "object_id": "T-0099",
+      "object_type": "TERM",
+      "name": "Трансформация",
+      "path": "000 База/01 Термины/T-0099 Трансформация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0099 Трансформация.md"
+    },
+    {
+      "object_id": "T-0100",
+      "object_type": "TERM",
+      "name": "Развитие системы",
+      "path": "000 База/01 Термины/T-0100 Развитие системы.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0100 Развитие системы.md"
+    },
+    {
+      "object_id": "T-0101",
+      "object_type": "TERM",
+      "name": "Устойчивое развитие",
+      "path": "000 База/01 Термины/T-0101 Устойчивое развитие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0101 Устойчивое развитие.md"
+    },
+    {
+      "object_id": "T-0102",
+      "object_type": "TERM",
+      "name": "Жизнеспособность системы",
+      "path": "000 База/01 Термины/T-0102 Жизнеспособность системы.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0102 Жизнеспособность системы.md"
+    },
+    {
+      "object_id": "T-0103",
+      "object_type": "TERM",
+      "name": "Восстанавливаемость",
+      "path": "000 База/01 Термины/T-0103 Восстанавливаемость.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0103 Восстанавливаемость.md"
+    },
+    {
+      "object_id": "T-0104",
+      "object_type": "TERM",
+      "name": "Самосовершенствование",
+      "path": "000 База/01 Термины/T-0104 Самосовершенствование.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0104 Самосовершенствование.md"
+    },
+    {
+      "object_id": "T-0105",
+      "object_type": "TERM",
+      "name": "Самонаблюдение",
+      "path": "000 База/01 Термины/T-0105 Самонаблюдение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0105 Самонаблюдение.md"
+    },
+    {
+      "object_id": "T-0106",
+      "object_type": "TERM",
+      "name": "Самооценка",
+      "path": "000 База/01 Термины/T-0106 Самооценка.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0106 Самооценка.md"
+    },
+    {
+      "object_id": "T-0107",
+      "object_type": "TERM",
+      "name": "Саморегулирование",
+      "path": "000 База/01 Термины/T-0107 Саморегулирование.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0107 Саморегулирование.md"
+    },
+    {
+      "object_id": "T-0108",
+      "object_type": "TERM",
+      "name": "Организационное обучение",
+      "path": "000 База/01 Термины/T-0108 Организационное обучение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0108 Организационное обучение.md"
+    },
+    {
+      "object_id": "T-0109",
+      "object_type": "TERM",
+      "name": "Самоуправление",
+      "path": "000 База/01 Термины/T-0109 Самоуправление.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0109 Самоуправление.md"
+    },
+    {
+      "object_id": "T-0110",
+      "object_type": "TERM",
+      "name": "Саморазвитие",
+      "path": "000 База/01 Термины/T-0110 Саморазвитие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0110 Саморазвитие.md"
+    },
+    {
+      "object_id": "T-0111",
+      "object_type": "TERM",
+      "name": "Самосохранение",
+      "path": "000 База/01 Термины/T-0111 Самосохранение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0111 Самосохранение.md"
+    },
+    {
+      "object_id": "T-0112",
+      "object_type": "TERM",
+      "name": "Самоидентификация",
+      "path": "000 База/01 Термины/T-0112 Самоидентификация.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0112 Самоидентификация.md"
+    },
+    {
+      "object_id": "T-0113",
+      "object_type": "TERM",
+      "name": "Самоопределение",
+      "path": "000 База/01 Термины/T-0113 Самоопределение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0113 Самоопределение.md"
+    },
+    {
+      "object_id": "T-0114",
+      "object_type": "TERM",
+      "name": "Самоконтроль",
+      "path": "000 База/01 Термины/T-0114 Самоконтроль.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0114 Самоконтроль.md"
+    },
+    {
+      "object_id": "T-0115",
+      "object_type": "TERM",
+      "name": "Самодиагностика",
+      "path": "000 База/01 Термины/T-0115 Самодиагностика.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0115 Самодиагностика.md"
+    },
+    {
+      "object_id": "T-0116",
+      "object_type": "TERM",
+      "name": "Самокоррекция",
+      "path": "000 База/01 Термины/T-0116 Самокоррекция.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0116 Самокоррекция.md"
+    },
+    {
+      "object_id": "T-0117",
+      "object_type": "TERM",
+      "name": "Самовоспроизводство",
+      "path": "000 База/01 Термины/T-0117 Самовоспроизводство.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0117 Самовоспроизводство.md"
+    },
+    {
+      "object_id": "T-0118",
+      "object_type": "TERM",
+      "name": "Самоорганизация деятельности",
+      "path": "000 База/01 Термины/T-0118 Самоорганизация деятельности.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0118 Самоорганизация деятельности.md"
+    },
+    {
+      "object_id": "T-0119",
+      "object_type": "TERM",
+      "name": "Самосогласованность",
+      "path": "000 База/01 Термины/T-0119 Самосогласованность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0119 Самосогласованность.md"
+    },
+    {
+      "object_id": "T-0120",
+      "object_type": "TERM",
+      "name": "Самодостаточность",
+      "path": "000 База/01 Термины/T-0120 Самодостаточность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0120 Самодостаточность.md"
+    },
+    {
+      "object_id": "T-0121",
+      "object_type": "TERM",
+      "name": "Самообеспечение",
+      "path": "000 База/01 Термины/T-0121 Самообеспечение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0121 Самообеспечение.md"
+    },
+    {
+      "object_id": "T-0122",
+      "object_type": "TERM",
+      "name": "Самодостаточное развитие",
+      "path": "000 База/01 Термины/T-0122 Самодостаточное развитие.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0122 Самодостаточное развитие.md"
+    },
+    {
+      "object_id": "T-0123",
+      "object_type": "TERM",
+      "name": "Самоэффективность",
+      "path": "000 База/01 Термины/T-0123 Самоэффективность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0123 Самоэффективность.md"
+    },
+    {
+      "object_id": "T-0124",
+      "object_type": "TERM",
+      "name": "Самонастройка",
+      "path": "000 База/01 Термины/T-0124 Самонастройка.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0124 Самонастройка.md"
+    },
+    {
+      "object_id": "T-0125",
+      "object_type": "TERM",
+      "name": "Самоописание",
+      "path": "000 База/01 Термины/T-0125 Самоописание.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/01 Термины/T-0125 Самоописание.md"
+    },
+    {
+      "object_id": "DIS-000001",
+      "object_type": "DISTINCTION",
+      "name": "Требования",
+      "path": "000 База/02 Различения/DIS-000001 Требования.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000001 Требования.md"
+    },
+    {
+      "object_id": "DIS-000002",
+      "object_type": "DISTINCTION",
+      "name": "Управляемость",
+      "path": "000 База/02 Различения/DIS-000002 Управляемость.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000002 Управляемость.md"
+    },
+    {
+      "object_id": "DIS-000003",
+      "object_type": "DISTINCTION",
+      "name": "Если результат зависит от отдельных людей",
+      "path": "000 База/02 Различения/DIS-000003 Если результат зависит от отдельных людей.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000003 Если результат зависит от отдельных людей.md"
+    },
+    {
+      "object_id": "DIS-000004",
+      "object_type": "DISTINCTION",
+      "name": "Организационные роли",
+      "path": "000 База/02 Различения/DIS-000004 Организационные роли.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000004 Организационные роли.md"
+    },
+    {
+      "object_id": "DIS-000005Система",
+      "object_type": "DISTINCTION",
+      "name": "способна обучать людей",
+      "path": "000 База/02 Различения/DIS-000005Система способна обучать людей.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000005Система способна обучать людей.md"
+    },
+    {
+      "object_id": "DIS-000006",
+      "object_type": "DISTINCTION",
+      "name": "Карьерный рост",
+      "path": "000 База/02 Различения/DIS-000006 Карьерный рост.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000006 Карьерный рост.md"
+    },
+    {
+      "object_id": "DIS-000007",
+      "object_type": "DISTINCTION",
+      "name": "ключевой ценность Для собственника",
+      "path": "000 База/02 Различения/DIS-000007 ключевой ценность Для собственника.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000007 ключевой ценность Для собственника.md"
+    },
+    {
+      "object_id": "DIS-000008",
+      "object_type": "DISTINCTION",
+      "name": "Эффективность  после результативности",
+      "path": "000 База/02 Различения/DIS-000008 Эффективность  после результативности.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000008 Эффективность  после результативности.md"
+    },
+    {
+      "object_id": "DIS-000009",
+      "object_type": "DISTINCTION",
+      "name": "Искусственный интеллект",
+      "path": "000 База/02 Различения/DIS-000009 Искусственный интеллект.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000009 Искусственный интеллект.md"
+    },
+    {
+      "object_id": "DIS-000010",
+      "object_type": "DISTINCTION",
+      "name": "Корректирующее действие оценивается",
+      "path": "000 База/02 Различения/DIS-000010 Корректирующее действие оценивается.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-000010 Корректирующее действие оценивается.md"
+    },
+    {
+      "object_id": "DIS-0001",
+      "object_type": "DISTINCTION",
+      "name": "решение и обсуждение",
+      "path": "000 База/02 Различения/DIS-0001 решение и обсуждение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0001 решение и обсуждение.md"
+    },
+    {
+      "object_id": "DIS-0002",
+      "object_type": "DISTINCTION",
+      "name": "решение и согласование",
+      "path": "000 База/02 Различения/DIS-0002 решение и согласование.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0002 решение и согласование.md"
+    },
+    {
+      "object_id": "DIS-0003",
+      "object_type": "DISTINCTION",
+      "name": "статус и комментарий",
+      "path": "000 База/02 Различения/DIS-0003 статус и комментарий.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0003 статус и комментарий.md"
+    },
+    {
+      "object_id": "DIS-0004",
+      "object_type": "DISTINCTION",
+      "name": "документ и запись",
+      "path": "000 База/02 Различения/DIS-0004 документ и запись.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0004 документ и запись.md"
+    },
+    {
+      "object_id": "DIS-0005",
+      "object_type": "DISTINCTION",
+      "name": "факт и его фиксацию",
+      "path": "000 База/02 Различения/DIS-0005 факт и его фиксацию.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0005 факт и его фиксацию.md"
+    },
+    {
+      "object_id": "DIS-0006",
+      "object_type": "DISTINCTION",
+      "name": "процесс и деятельность",
+      "path": "000 База/02 Различения/DIS-0006 процесс и деятельность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0006 процесс и деятельность.md"
+    },
+    {
+      "object_id": "DIS-0007",
+      "object_type": "DISTINCTION",
+      "name": "стадию и операцию",
+      "path": "000 База/02 Различения/DIS-0007 стадию и операцию.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0007 стадию и операцию.md"
+    },
+    {
+      "object_id": "DIS-0008",
+      "object_type": "DISTINCTION",
+      "name": "контроль и давление",
+      "path": "000 База/02 Различения/DIS-0008 контроль и давление.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0008 контроль и давление.md"
+    },
+    {
+      "object_id": "DIS-0009",
+      "object_type": "DISTINCTION",
+      "name": "технологию и героизм",
+      "path": "000 База/02 Различения/DIS-0009 технологию и героизм.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0009 технологию и героизм.md"
+    },
+    {
+      "object_id": "DIS-0010",
+      "object_type": "DISTINCTION",
+      "name": "выпуск и завершение работы",
+      "path": "000 База/02 Различения/DIS-0010 выпуск и завершение работы.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0010 выпуск и завершение работы.md"
+    },
+    {
+      "object_id": "DIS-0011",
+      "object_type": "DISTINCTION",
+      "name": "приёмка и поиск ошибок",
+      "path": "000 База/02 Различения/DIS-0011 приёмка и поиск ошибок.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0011 приёмка и поиск ошибок.md"
+    },
+    {
+      "object_id": "DIS-0012",
+      "object_type": "DISTINCTION",
+      "name": "подпись и принятие последствий",
+      "path": "000 База/02 Различения/DIS-0012 подпись и принятие последствий.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0012 подпись и принятие последствий.md"
+    },
+    {
+      "object_id": "DIS-0013",
+      "object_type": "DISTINCTION",
+      "name": "человека как проблему и человека как компенсатор",
+      "path": "000 База/02 Различения/DIS-0013 человека как проблему и человека как компенсатор.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0013 человека как проблему и человека как компенсатор.md"
+    },
+    {
+      "object_id": "DIS-0014",
+      "object_type": "DISTINCTION",
+      "name": "роль и должность",
+      "path": "000 База/02 Различения/DIS-0014 роль и должность.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0014 роль и должность.md"
+    },
+    {
+      "object_id": "DIS-0015",
+      "object_type": "DISTINCTION",
+      "name": "мотивацию и архитектуру",
+      "path": "000 База/02 Различения/DIS-0015 мотивацию и архитектуру.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0015 мотивацию и архитектуру.md"
+    },
+    {
+      "object_id": "DIS-0016",
+      "object_type": "DISTINCTION",
+      "name": "спокойствие системы и отсутствие проблем",
+      "path": "000 База/02 Различения/DIS-0016 спокойствие системы и отсутствие проблем.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0016 спокойствие системы и отсутствие проблем.md"
+    },
+    {
+      "object_id": "DIS-0017",
+      "object_type": "DISTINCTION",
+      "name": "процесс и картину системы",
+      "path": "000 База/02 Различения/DIS-0017 процесс и картину системы.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0017 процесс и картину системы.md"
+    },
+    {
+      "object_id": "DIS-0018",
+      "object_type": "DISTINCTION",
+      "name": "управление действие и управление способ видеть",
+      "path": "000 База/02 Различения/DIS-0018 управление действие и управление способ видеть.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0018 управление действие и управление способ видеть.md"
+    },
+    {
+      "object_id": "DIS-0019",
+      "object_type": "DISTINCTION",
+      "name": "диагностику и обучение",
+      "path": "000 База/02 Различения/DIS-0019 диагностику и обучение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0019 диагностику и обучение.md"
+    },
+    {
+      "object_id": "DIS-0020",
+      "object_type": "DISTINCTION",
+      "name": "диагностический вопрос и рекомендацию",
+      "path": "000 База/02 Различения/DIS-0020 диагностический вопрос и рекомендацию.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0020 диагностический вопрос и рекомендацию.md"
+    },
+    {
+      "object_id": "DIS-0021",
+      "object_type": "DISTINCTION",
+      "name": "изменение и переход состояния",
+      "path": "000 База/02 Различения/DIS-0021 изменение и переход состояния.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0021 изменение и переход состояния.md"
+    },
+    {
+      "object_id": "DIS-0022",
+      "object_type": "DISTINCTION",
+      "name": "улучшение и эволюцию системы.",
+      "path": "000 База/02 Различения/DIS-0022 улучшение и эволюцию системы..md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0022 улучшение и эволюцию системы..md"
+    },
+    {
+      "object_id": "DIS-0023",
+      "object_type": "DISTINCTION",
+      "name": "аудит и диагностику",
+      "path": "000 База/02 Различения/DIS-0023 аудит и диагностику.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0023 аудит и диагностику.md"
+    },
+    {
+      "object_id": "DIS-0024",
+      "object_type": "DISTINCTION",
+      "name": "стандарт и архитектуру управления",
+      "path": "000 База/02 Различения/DIS-0024 стандарт и архитектуру управления.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0024 стандарт и архитектуру управления.md"
+    },
+    {
+      "object_id": "DIS-0025",
+      "object_type": "DISTINCTION",
+      "name": "рост и смену архитектуры",
+      "path": "000 База/02 Различения/DIS-0025 рост и смену архитектуры.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0025 рост и смену архитектуры.md"
+    },
+    {
+      "object_id": "DIS-0026",
+      "object_type": "DISTINCTION",
+      "name": "масштаб и количество",
+      "path": "000 База/02 Различения/DIS-0026 масштаб и количество.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0026 масштаб и количество.md"
+    },
+    {
+      "object_id": "DIS-0027",
+      "object_type": "DISTINCTION",
+      "name": "развитие и деградацию",
+      "path": "000 База/02 Различения/DIS-0027 развитие и деградацию.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0027 развитие и деградацию.md"
+    },
+    {
+      "object_id": "DIS-0028.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0028.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0028.md"
+    },
+    {
+      "object_id": "DIS-0029.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0029.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0029.md"
+    },
+    {
+      "object_id": "DIS-0030.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0030.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0030.md"
+    },
+    {
+      "object_id": "DIS-0031.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0031.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0031.md"
+    },
+    {
+      "object_id": "DIS-0032.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0032.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0032.md"
+    },
+    {
+      "object_id": "DIS-0033.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0033.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0033.md"
+    },
+    {
+      "object_id": "DIS-0034.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0034.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0034.md"
+    },
+    {
+      "object_id": "DIS-0035.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0035.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0035.md"
+    },
+    {
+      "object_id": "DIS-0036.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0036.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0036.md"
+    },
+    {
+      "object_id": "DIS-0037.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0037.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0037.md"
+    },
+    {
+      "object_id": "DIS-0038.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0038.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0038.md"
+    },
+    {
+      "object_id": "DIS-0039.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0039.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0039.md"
+    },
+    {
+      "object_id": "DIS-0040.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0040.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0040.md"
+    },
+    {
+      "object_id": "DIS-0041.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0041.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0041.md"
+    },
+    {
+      "object_id": "DIS-0042.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0042.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0042.md"
+    },
+    {
+      "object_id": "DIS-0043",
+      "object_type": "DISTINCTION",
+      "name": "Следует различать карту как модель и объект, который она описывает.",
+      "path": "000 База/02 Различения/DIS-0043 Следует различать карту как модель и объект, который она описывает..md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0043 Следует различать карту как модель и объект, который она описывает..md"
+    },
+    {
+      "object_id": "DIS-0044.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0044.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0044.md"
+    },
+    {
+      "object_id": "DIS-0045.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0045.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0045.md"
+    },
+    {
+      "object_id": "DIS-0046.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0046.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0046.md"
+    },
+    {
+      "object_id": "DIS-0047.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0047.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0047.md"
+    },
+    {
+      "object_id": "DIS-0048.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0048.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0048.md"
+    },
+    {
+      "object_id": "DIS-0049.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0049.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0049.md"
+    },
+    {
+      "object_id": "DIS-0050.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0050.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0050.md"
+    },
+    {
+      "object_id": "DIS-0051.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0051.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0051.md"
+    },
+    {
+      "object_id": "DIS-0052.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0052.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0052.md"
+    },
+    {
+      "object_id": "DIS-0053.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0053.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0053.md"
+    },
+    {
+      "object_id": "DIS-0054.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0054.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0054.md"
+    },
+    {
+      "object_id": "DIS-0055.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0055.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0055.md"
+    },
+    {
+      "object_id": "DIS-0056.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0056.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0056.md"
+    },
+    {
+      "object_id": "DIS-0057.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0057.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0057.md"
+    },
+    {
+      "object_id": "DIS-0058.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0058.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0058.md"
+    },
+    {
+      "object_id": "DIS-0059.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0059.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0059.md"
+    },
+    {
+      "object_id": "DIS-0060.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0060.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0060.md"
+    },
+    {
+      "object_id": "DIS-0061.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0061.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0061.md"
+    },
+    {
+      "object_id": "DIS-0062.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0062.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0062.md"
+    },
+    {
+      "object_id": "DIS-0063.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0063.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0063.md"
+    },
+    {
+      "object_id": "DIS-0064.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0064.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0064.md"
+    },
+    {
+      "object_id": "DIS-0065.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0065.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0065.md"
+    },
+    {
+      "object_id": "DIS-0066.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0066.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0066.md"
+    },
+    {
+      "object_id": "DIS-0067.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0067.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0067.md"
+    },
+    {
+      "object_id": "DIS-0068.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0068.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0068.md"
+    },
+    {
+      "object_id": "DIS-0069.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0069.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0069.md"
+    },
+    {
+      "object_id": "DIS-0070.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0070.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0070.md"
+    },
+    {
+      "object_id": "DIS-0071.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0071.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0071.md"
+    },
+    {
+      "object_id": "DIS-0072.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0072.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0072.md"
+    },
+    {
+      "object_id": "DIS-0073.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0073.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0073.md"
+    },
+    {
+      "object_id": "DIS-0074.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0074.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0074.md"
+    },
+    {
+      "object_id": "DIS-0075.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0075.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0075.md"
+    },
+    {
+      "object_id": "DIS-0076.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0076.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0076.md"
+    },
+    {
+      "object_id": "DIS-0077.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0077.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0077.md"
+    },
+    {
+      "object_id": "DIS-0078.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0078.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0078.md"
+    },
+    {
+      "object_id": "DIS-0079.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0079.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0079.md"
+    },
+    {
+      "object_id": "DIS-0080.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0080.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0080.md"
+    },
+    {
+      "object_id": "DIS-0081.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0081.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0081.md"
+    },
+    {
+      "object_id": "DIS-0082.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0082.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0082.md"
+    },
+    {
+      "object_id": "DIS-0083.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0083.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0083.md"
+    },
+    {
+      "object_id": "DIS-0084.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0084.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0084.md"
+    },
+    {
+      "object_id": "DIS-0085.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0085.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0085.md"
+    },
+    {
+      "object_id": "DIS-0086.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0086.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0086.md"
+    },
+    {
+      "object_id": "DIS-0087.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0087.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0087.md"
+    },
+    {
+      "object_id": "DIS-0088.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0088.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0088.md"
+    },
+    {
+      "object_id": "DIS-0089.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0089.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0089.md"
+    },
+    {
+      "object_id": "DIS-0090.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0090.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0090.md"
+    },
+    {
+      "object_id": "DIS-0091.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0091.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0091.md"
+    },
+    {
+      "object_id": "DIS-0092.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0092.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0092.md"
+    },
+    {
+      "object_id": "DIS-0093.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0093.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0093.md"
+    },
+    {
+      "object_id": "DIS-0094.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0094.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0094.md"
+    },
+    {
+      "object_id": "DIS-0095.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0095.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0095.md"
+    },
+    {
+      "object_id": "DIS-0096.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0096.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0096.md"
+    },
+    {
+      "object_id": "DIS-0097.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0097.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0097.md"
+    },
+    {
+      "object_id": "DIS-0098.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0098.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0098.md"
+    },
+    {
+      "object_id": "DIS-0099.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0099.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0099.md"
+    },
+    {
+      "object_id": "DIS-0100.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0100.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0100.md"
+    },
+    {
+      "object_id": "DIS-0101.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0101.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0101.md"
+    },
+    {
+      "object_id": "DIS-0102.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0102.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0102.md"
+    },
+    {
+      "object_id": "DIS-0103.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0103.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0103.md"
+    },
+    {
+      "object_id": "DIS-0104.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0104.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0104.md"
+    },
+    {
+      "object_id": "DIS-0105.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0105.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0105.md"
+    },
+    {
+      "object_id": "DIS-0106.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0106.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0106.md"
+    },
+    {
+      "object_id": "DIS-0107.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0107.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0107.md"
+    },
+    {
+      "object_id": "DIS-0108.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0108.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0108.md"
+    },
+    {
+      "object_id": "DIS-0109.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0109.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0109.md"
+    },
+    {
+      "object_id": "DIS-0110.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0110.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0110.md"
+    },
+    {
+      "object_id": "DIS-0111.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0111.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0111.md"
+    },
+    {
+      "object_id": "DIS-0112.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0112.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0112.md"
+    },
+    {
+      "object_id": "DIS-0113.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0113.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0113.md"
+    },
+    {
+      "object_id": "DIS-0114.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0114.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0114.md"
+    },
+    {
+      "object_id": "DIS-0115.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0115.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0115.md"
+    },
+    {
+      "object_id": "DIS-0116.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0116.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0116.md"
+    },
+    {
+      "object_id": "DIS-0117.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0117.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0117.md"
+    },
+    {
+      "object_id": "DIS-0118.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0118.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0118.md"
+    },
+    {
+      "object_id": "DIS-0119.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0119.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0119.md"
+    },
+    {
+      "object_id": "DIS-0120.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0120.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0120.md"
+    },
+    {
+      "object_id": "DIS-0121.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0121.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0121.md"
+    },
+    {
+      "object_id": "DIS-0122.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0122.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0122.md"
+    },
+    {
+      "object_id": "DIS-0123.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0123.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0123.md"
+    },
+    {
+      "object_id": "DIS-0124.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0124.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0124.md"
+    },
+    {
+      "object_id": "DIS-0125.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0125.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0125.md"
+    },
+    {
+      "object_id": "DIS-0126.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0126.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0126.md"
+    },
+    {
+      "object_id": "DIS-0127.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0127.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0127.md"
+    },
+    {
+      "object_id": "DIS-0128.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0128.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0128.md"
+    },
+    {
+      "object_id": "DIS-0129.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0129.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0129.md"
+    },
+    {
+      "object_id": "DIS-0130.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0130.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0130.md"
+    },
+    {
+      "object_id": "DIS-0131.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0131.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0131.md"
+    },
+    {
+      "object_id": "DIS-0132.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0132.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0132.md"
+    },
+    {
+      "object_id": "DIS-0133.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0133.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0133.md"
+    },
+    {
+      "object_id": "DIS-0134.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0134.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0134.md"
+    },
+    {
+      "object_id": "DIS-0135.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0135.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0135.md"
+    },
+    {
+      "object_id": "DIS-0136.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0136.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0136.md"
+    },
+    {
+      "object_id": "DIS-0137.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0137.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0137.md"
+    },
+    {
+      "object_id": "DIS-0138.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0138.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0138.md"
+    },
+    {
+      "object_id": "DIS-0139.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0139.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0139.md"
+    },
+    {
+      "object_id": "DIS-0140.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0140.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0140.md"
+    },
+    {
+      "object_id": "DIS-0141.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0141.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0141.md"
+    },
+    {
+      "object_id": "DIS-0142.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0142.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0142.md"
+    },
+    {
+      "object_id": "DIS-0143.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0143.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0143.md"
+    },
+    {
+      "object_id": "DIS-0144.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0144.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0144.md"
+    },
+    {
+      "object_id": "DIS-0145.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0145.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0145.md"
+    },
+    {
+      "object_id": "DIS-0146.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0146.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0146.md"
+    },
+    {
+      "object_id": "DIS-0147.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0147.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0147.md"
+    },
+    {
+      "object_id": "DIS-0148.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0148.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0148.md"
+    },
+    {
+      "object_id": "DIS-0149.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0149.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0149.md"
+    },
+    {
+      "object_id": "DIS-0150.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0150.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0150.md"
+    },
+    {
+      "object_id": "DIS-0151.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0151.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0151.md"
+    },
+    {
+      "object_id": "DIS-0152.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0152.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0152.md"
+    },
+    {
+      "object_id": "DIS-0153.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0153.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0153.md"
+    },
+    {
+      "object_id": "DIS-0154.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0154.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0154.md"
+    },
+    {
+      "object_id": "DIS-0155.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0155.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0155.md"
+    },
+    {
+      "object_id": "DIS-0156.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0156.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0156.md"
+    },
+    {
+      "object_id": "DIS-0157.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0157.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0157.md"
+    },
+    {
+      "object_id": "DIS-0158.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0158.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0158.md"
+    },
+    {
+      "object_id": "DIS-0159.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0159.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0159.md"
+    },
+    {
+      "object_id": "DIS-0160.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0160.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0160.md"
+    },
+    {
+      "object_id": "DIS-0161.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0161.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0161.md"
+    },
+    {
+      "object_id": "DIS-0162.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0162.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0162.md"
+    },
+    {
+      "object_id": "DIS-0163.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0163.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0163.md"
+    },
+    {
+      "object_id": "DIS-0164.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0164.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0164.md"
+    },
+    {
+      "object_id": "DIS-0165.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0165.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0165.md"
+    },
+    {
+      "object_id": "DIS-0166.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0166.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0166.md"
+    },
+    {
+      "object_id": "DIS-0167.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0167.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0167.md"
+    },
+    {
+      "object_id": "DIS-0168.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0168.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0168.md"
+    },
+    {
+      "object_id": "DIS-0169.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0169.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0169.md"
+    },
+    {
+      "object_id": "DIS-0170.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0170.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0170.md"
+    },
+    {
+      "object_id": "DIS-0171.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0171.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0171.md"
+    },
+    {
+      "object_id": "DIS-0172.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0172.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0172.md"
+    },
+    {
+      "object_id": "DIS-0173.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0173.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0173.md"
+    },
+    {
+      "object_id": "DIS-0174.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0174.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0174.md"
+    },
+    {
+      "object_id": "DIS-0175.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0175.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0175.md"
+    },
+    {
+      "object_id": "DIS-0176.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0176.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0176.md"
+    },
+    {
+      "object_id": "DIS-0177.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0177.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0177.md"
+    },
+    {
+      "object_id": "DIS-0178.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0178.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0178.md"
+    },
+    {
+      "object_id": "DIS-0179.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0179.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0179.md"
+    },
+    {
+      "object_id": "DIS-0180.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0180.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0180.md"
+    },
+    {
+      "object_id": "DIS-0181.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0181.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0181.md"
+    },
+    {
+      "object_id": "DIS-0182.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0182.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0182.md"
+    },
+    {
+      "object_id": "DIS-0183.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0183.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0183.md"
+    },
+    {
+      "object_id": "DIS-0184.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0184.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0184.md"
+    },
+    {
+      "object_id": "DIS-0185.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0185.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0185.md"
+    },
+    {
+      "object_id": "DIS-0186.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0186.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0186.md"
+    },
+    {
+      "object_id": "DIS-0187.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0187.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0187.md"
+    },
+    {
+      "object_id": "DIS-0188.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0188.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0188.md"
+    },
+    {
+      "object_id": "DIS-0189.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0189.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0189.md"
+    },
+    {
+      "object_id": "DIS-0190.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0190.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0190.md"
+    },
+    {
+      "object_id": "DIS-0191.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0191.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0191.md"
+    },
+    {
+      "object_id": "DIS-0192.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0192.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0192.md"
+    },
+    {
+      "object_id": "DIS-0193.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0193.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0193.md"
+    },
+    {
+      "object_id": "DIS-0194.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0194.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0194.md"
+    },
+    {
+      "object_id": "DIS-0195.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0195.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0195.md"
+    },
+    {
+      "object_id": "DIS-0196.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0196.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0196.md"
+    },
+    {
+      "object_id": "DIS-0197.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0197.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0197.md"
+    },
+    {
+      "object_id": "DIS-0198.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0198.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0198.md"
+    },
+    {
+      "object_id": "DIS-0199.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0199.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0199.md"
+    },
+    {
+      "object_id": "DIS-0200.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0200.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0200.md"
+    },
+    {
+      "object_id": "DIS-0201.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0201.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0201.md"
+    },
+    {
+      "object_id": "DIS-0202.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0202.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0202.md"
+    },
+    {
+      "object_id": "DIS-0203.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0203.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0203.md"
+    },
+    {
+      "object_id": "DIS-0204.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0204.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0204.md"
+    },
+    {
+      "object_id": "DIS-0205.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0205.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0205.md"
+    },
+    {
+      "object_id": "DIS-0206.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0206.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0206.md"
+    },
+    {
+      "object_id": "DIS-0207.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0207.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0207.md"
+    },
+    {
+      "object_id": "DIS-0208.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0208.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0208.md"
+    },
+    {
+      "object_id": "DIS-0209.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0209.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0209.md"
+    },
+    {
+      "object_id": "DIS-0210.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0210.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0210.md"
+    },
+    {
+      "object_id": "DIS-0211.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0211.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0211.md"
+    },
+    {
+      "object_id": "DIS-0212.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0212.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0212.md"
+    },
+    {
+      "object_id": "DIS-0213.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0213.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0213.md"
+    },
+    {
+      "object_id": "DIS-0214.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0214.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0214.md"
+    },
+    {
+      "object_id": "DIS-0215.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0215.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0215.md"
+    },
+    {
+      "object_id": "DIS-0216.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0216.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0216.md"
+    },
+    {
+      "object_id": "DIS-0217.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0217.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0217.md"
+    },
+    {
+      "object_id": "DIS-0218.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0218.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0218.md"
+    },
+    {
+      "object_id": "DIS-0219.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0219.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0219.md"
+    },
+    {
+      "object_id": "DIS-0220.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0220.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0220.md"
+    },
+    {
+      "object_id": "DIS-0221.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0221.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0221.md"
+    },
+    {
+      "object_id": "DIS-0222.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0222.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0222.md"
+    },
+    {
+      "object_id": "DIS-0223.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0223.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0223.md"
+    },
+    {
+      "object_id": "DIS-0224.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0224.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0224.md"
+    },
+    {
+      "object_id": "DIS-0225.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0225.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0225.md"
+    },
+    {
+      "object_id": "DIS-0226.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0226.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0226.md"
+    },
+    {
+      "object_id": "DIS-0227.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0227.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0227.md"
+    },
+    {
+      "object_id": "DIS-0228.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0228.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0228.md"
+    },
+    {
+      "object_id": "DIS-0229.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0229.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0229.md"
+    },
+    {
+      "object_id": "DIS-0230.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0230.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0230.md"
+    },
+    {
+      "object_id": "DIS-0231.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0231.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0231.md"
+    },
+    {
+      "object_id": "DIS-0232.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0232.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0232.md"
+    },
+    {
+      "object_id": "DIS-0233.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0233.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0233.md"
+    },
+    {
+      "object_id": "DIS-0234.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0234.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0234.md"
+    },
+    {
+      "object_id": "DIS-0235.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0235.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0235.md"
+    },
+    {
+      "object_id": "DIS-0236.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0236.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0236.md"
+    },
+    {
+      "object_id": "DIS-0237.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0237.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0237.md"
+    },
+    {
+      "object_id": "DIS-0238.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0238.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0238.md"
+    },
+    {
+      "object_id": "DIS-0239.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0239.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0239.md"
+    },
+    {
+      "object_id": "DIS-0240.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0240.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0240.md"
+    },
+    {
+      "object_id": "DIS-0241",
+      "object_type": "DISTINCTION",
+      "name": "регистрацию артефакта и его хранение",
+      "path": "000 База/02 Различения/DIS-0241 регистрацию артефакта и его хранение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0241 регистрацию артефакта и его хранение.md"
+    },
+    {
+      "object_id": "DIS-0242.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0242.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0242.md"
+    },
+    {
+      "object_id": "DIS-0243.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0243.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0243.md"
+    },
+    {
+      "object_id": "DIS-0244.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0244.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0244.md"
+    },
+    {
+      "object_id": "DIS-0245.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0245.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0245.md"
+    },
+    {
+      "object_id": "DIS-0246.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0246.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0246.md"
+    },
+    {
+      "object_id": "DIS-0247.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0247.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0247.md"
+    },
+    {
+      "object_id": "DIS-0248.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0248.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0248.md"
+    },
+    {
+      "object_id": "DIS-0249.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0249.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0249.md"
+    },
+    {
+      "object_id": "DIS-0250.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0250.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0250.md"
+    },
+    {
+      "object_id": "DIS-0251.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0251.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0251.md"
+    },
+    {
+      "object_id": "DIS-0252.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0252.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0252.md"
+    },
+    {
+      "object_id": "DIS-0253.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0253.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0253.md"
+    },
+    {
+      "object_id": "DIS-0254.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0254.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0254.md"
+    },
+    {
+      "object_id": "DIS-0255.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0255.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0255.md"
+    },
+    {
+      "object_id": "DIS-0256.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0256.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0256.md"
+    },
+    {
+      "object_id": "DIS-0257.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0257.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0257.md"
+    },
+    {
+      "object_id": "DIS-0258.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0258.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0258.md"
+    },
+    {
+      "object_id": "DIS-0259.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0259.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0259.md"
+    },
+    {
+      "object_id": "DIS-0260.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0260.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0260.md"
+    },
+    {
+      "object_id": "DIS-0261.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0261.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0261.md"
+    },
+    {
+      "object_id": "DIS-0262.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0262.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0262.md"
+    },
+    {
+      "object_id": "DIS-0263.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0263.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0263.md"
+    },
+    {
+      "object_id": "DIS-0264.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0264.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0264.md"
+    },
+    {
+      "object_id": "DIS-0265.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0265.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0265.md"
+    },
+    {
+      "object_id": "DIS-0266.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0266.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0266.md"
+    },
+    {
+      "object_id": "DIS-0267.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0267.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0267.md"
+    },
+    {
+      "object_id": "DIS-0268.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0268.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0268.md"
+    },
+    {
+      "object_id": "DIS-0269.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0269.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0269.md"
+    },
+    {
+      "object_id": "DIS-0270.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0270.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0270.md"
+    },
+    {
+      "object_id": "DIS-0271.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0271.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0271.md"
+    },
+    {
+      "object_id": "DIS-0272.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0272.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0272.md"
+    },
+    {
+      "object_id": "DIS-0273.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0273.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0273.md"
+    },
+    {
+      "object_id": "DIS-0274.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0274.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0274.md"
+    },
+    {
+      "object_id": "DIS-0275.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0275.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0275.md"
+    },
+    {
+      "object_id": "DIS-0276.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0276.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0276.md"
+    },
+    {
+      "object_id": "DIS-0277.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0277.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0277.md"
+    },
+    {
+      "object_id": "DIS-0278.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0278.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0278.md"
+    },
+    {
+      "object_id": "DIS-0279.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0279.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0279.md"
+    },
+    {
+      "object_id": "DIS-0280.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0280.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0280.md"
+    },
+    {
+      "object_id": "DIS-0281.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0281.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0281.md"
+    },
+    {
+      "object_id": "DIS-0282.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0282.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0282.md"
+    },
+    {
+      "object_id": "DIS-0283.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0283.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0283.md"
+    },
+    {
+      "object_id": "DIS-0284.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0284.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0284.md"
+    },
+    {
+      "object_id": "DIS-0285.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0285.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0285.md"
+    },
+    {
+      "object_id": "DIS-0286.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0286.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0286.md"
+    },
+    {
+      "object_id": "DIS-0287.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0287.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0287.md"
+    },
+    {
+      "object_id": "DIS-0288.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0288.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0288.md"
+    },
+    {
+      "object_id": "DIS-0289.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0289.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0289.md"
+    },
+    {
+      "object_id": "DIS-0290.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0290.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0290.md"
+    },
+    {
+      "object_id": "DIS-0291.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0291.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0291.md"
+    },
+    {
+      "object_id": "DIS-0292.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0292.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0292.md"
+    },
+    {
+      "object_id": "DIS-0293.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0293.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0293.md"
+    },
+    {
+      "object_id": "DIS-0294.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0294.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0294.md"
+    },
+    {
+      "object_id": "DIS-0295.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0295.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0295.md"
+    },
+    {
+      "object_id": "DIS-0296.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0296.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0296.md"
+    },
+    {
+      "object_id": "DIS-0297.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0297.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0297.md"
+    },
+    {
+      "object_id": "DIS-0298.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0298.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0298.md"
+    },
+    {
+      "object_id": "DIS-0299.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0299.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0299.md"
+    },
+    {
+      "object_id": "DIS-0300.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0300.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0300.md"
+    },
+    {
+      "object_id": "DIS-0301.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0301.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0301.md"
+    },
+    {
+      "object_id": "DIS-0302.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0302.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0302.md"
+    },
+    {
+      "object_id": "DIS-0303.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0303.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0303.md"
+    },
+    {
+      "object_id": "DIS-0304.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0304.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0304.md"
+    },
+    {
+      "object_id": "DIS-0305.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0305.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0305.md"
+    },
+    {
+      "object_id": "DIS-0306.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0306.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0306.md"
+    },
+    {
+      "object_id": "DIS-0307.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0307.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0307.md"
+    },
+    {
+      "object_id": "DIS-0308.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0308.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0308.md"
+    },
+    {
+      "object_id": "DIS-0309.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0309.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0309.md"
+    },
+    {
+      "object_id": "DIS-0310.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0310.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0310.md"
+    },
+    {
+      "object_id": "DIS-0311.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0311.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0311.md"
+    },
+    {
+      "object_id": "DIS-0312.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0312.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0312.md"
+    },
+    {
+      "object_id": "DIS-0313.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0313.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0313.md"
+    },
+    {
+      "object_id": "DIS-0314.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0314.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0314.md"
+    },
+    {
+      "object_id": "DIS-0315.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0315.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0315.md"
+    },
+    {
+      "object_id": "DIS-0316.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0316.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0316.md"
+    },
+    {
+      "object_id": "DIS-0317.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0317.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0317.md"
+    },
+    {
+      "object_id": "DIS-0318.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0318.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0318.md"
+    },
+    {
+      "object_id": "DIS-0319.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0319.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0319.md"
+    },
+    {
+      "object_id": "DIS-0320.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0320.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0320.md"
+    },
+    {
+      "object_id": "DIS-0321.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0321.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0321.md"
+    },
+    {
+      "object_id": "DIS-0322.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0322.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0322.md"
+    },
+    {
+      "object_id": "DIS-0323.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0323.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0323.md"
+    },
+    {
+      "object_id": "DIS-0324.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0324.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0324.md"
+    },
+    {
+      "object_id": "DIS-0325.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0325.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0325.md"
+    },
+    {
+      "object_id": "DIS-0326.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0326.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0326.md"
+    },
+    {
+      "object_id": "DIS-0327.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0327.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0327.md"
+    },
+    {
+      "object_id": "DIS-0328.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0328.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0328.md"
+    },
+    {
+      "object_id": "DIS-0329.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0329.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0329.md"
+    },
+    {
+      "object_id": "DIS-0330.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0330.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0330.md"
+    },
+    {
+      "object_id": "DIS-0331.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0331.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0331.md"
+    },
+    {
+      "object_id": "DIS-0332.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0332.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0332.md"
+    },
+    {
+      "object_id": "DIS-0333.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0333.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0333.md"
+    },
+    {
+      "object_id": "DIS-0334.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0334.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0334.md"
+    },
+    {
+      "object_id": "DIS-0335.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0335.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0335.md"
+    },
+    {
+      "object_id": "DIS-0336.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0336.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0336.md"
+    },
+    {
+      "object_id": "DIS-0337.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0337.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0337.md"
+    },
+    {
+      "object_id": "DIS-0338.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0338.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0338.md"
+    },
+    {
+      "object_id": "DIS-0339.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0339.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0339.md"
+    },
+    {
+      "object_id": "DIS-0340.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0340.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0340.md"
+    },
+    {
+      "object_id": "DIS-0341.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0341.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0341.md"
+    },
+    {
+      "object_id": "DIS-0342.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0342.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0342.md"
+    },
+    {
+      "object_id": "DIS-0343.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0343.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0343.md"
+    },
+    {
+      "object_id": "DIS-0344.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0344.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0344.md"
+    },
+    {
+      "object_id": "DIS-0345.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0345.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0345.md"
+    },
+    {
+      "object_id": "DIS-0346.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0346.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0346.md"
+    },
+    {
+      "object_id": "DIS-0347.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0347.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0347.md"
+    },
+    {
+      "object_id": "DIS-0348.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0348.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0348.md"
+    },
+    {
+      "object_id": "DIS-0349.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0349.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0349.md"
+    },
+    {
+      "object_id": "DIS-0350.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0350.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0350.md"
+    },
+    {
+      "object_id": "DIS-0351.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0351.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0351.md"
+    },
+    {
+      "object_id": "DIS-0352.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0352.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0352.md"
+    },
+    {
+      "object_id": "DIS-0353.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0353.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0353.md"
+    },
+    {
+      "object_id": "DIS-0354.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0354.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0354.md"
+    },
+    {
+      "object_id": "DIS-0355.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0355.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0355.md"
+    },
+    {
+      "object_id": "DIS-0356.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0356.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0356.md"
+    },
+    {
+      "object_id": "DIS-0357.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0357.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0357.md"
+    },
+    {
+      "object_id": "DIS-0358.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0358.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0358.md"
+    },
+    {
+      "object_id": "DIS-0359.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0359.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0359.md"
+    },
+    {
+      "object_id": "DIS-0360.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0360.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0360.md"
+    },
+    {
+      "object_id": "DIS-0361.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0361.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0361.md"
+    },
+    {
+      "object_id": "DIS-0362.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0362.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0362.md"
+    },
+    {
+      "object_id": "DIS-0363.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0363.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0363.md"
+    },
+    {
+      "object_id": "DIS-0364.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0364.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0364.md"
+    },
+    {
+      "object_id": "DIS-0365.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0365.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0365.md"
+    },
+    {
+      "object_id": "DIS-0366.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0366.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0366.md"
+    },
+    {
+      "object_id": "DIS-0367.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0367.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0367.md"
+    },
+    {
+      "object_id": "DIS-0368.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0368.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0368.md"
+    },
+    {
+      "object_id": "DIS-0369.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0369.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0369.md"
+    },
+    {
+      "object_id": "DIS-0370.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0370.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0370.md"
+    },
+    {
+      "object_id": "DIS-0371.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0371.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0371.md"
+    },
+    {
+      "object_id": "DIS-0372.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0372.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0372.md"
+    },
+    {
+      "object_id": "DIS-0373.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0373.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0373.md"
+    },
+    {
+      "object_id": "DIS-0374.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0374.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0374.md"
+    },
+    {
+      "object_id": "DIS-0375.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0375.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0375.md"
+    },
+    {
+      "object_id": "DIS-0376.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0376.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0376.md"
+    },
+    {
+      "object_id": "DIS-0377.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0377.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0377.md"
+    },
+    {
+      "object_id": "DIS-0378.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0378.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0378.md"
+    },
+    {
+      "object_id": "DIS-0379.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0379.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0379.md"
+    },
+    {
+      "object_id": "DIS-0380.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0380.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0380.md"
+    },
+    {
+      "object_id": "DIS-0381.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0381.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0381.md"
+    },
+    {
+      "object_id": "DIS-0382.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0382.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0382.md"
+    },
+    {
+      "object_id": "DIS-0383.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0383.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0383.md"
+    },
+    {
+      "object_id": "DIS-0384.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0384.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0384.md"
+    },
+    {
+      "object_id": "DIS-0385.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0385.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0385.md"
+    },
+    {
+      "object_id": "DIS-0386.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0386.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0386.md"
+    },
+    {
+      "object_id": "DIS-0387.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0387.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0387.md"
+    },
+    {
+      "object_id": "DIS-0388.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0388.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0388.md"
+    },
+    {
+      "object_id": "DIS-0389.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0389.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0389.md"
+    },
+    {
+      "object_id": "DIS-0390.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0390.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0390.md"
+    },
+    {
+      "object_id": "DIS-0391.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0391.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0391.md"
+    },
+    {
+      "object_id": "DIS-0392.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0392.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0392.md"
+    },
+    {
+      "object_id": "DIS-0393.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0393.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0393.md"
+    },
+    {
+      "object_id": "DIS-0394.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0394.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0394.md"
+    },
+    {
+      "object_id": "DIS-0395.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0395.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0395.md"
+    },
+    {
+      "object_id": "DIS-0396.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0396.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0396.md"
+    },
+    {
+      "object_id": "DIS-0397.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0397.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0397.md"
+    },
+    {
+      "object_id": "DIS-0398.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0398.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0398.md"
+    },
+    {
+      "object_id": "DIS-0399.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0399.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0399.md"
+    },
+    {
+      "object_id": "DIS-0400.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0400.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0400.md"
+    },
+    {
+      "object_id": "DIS-0401.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0401.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0401.md"
+    },
+    {
+      "object_id": "DIS-0402.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0402.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0402.md"
+    },
+    {
+      "object_id": "DIS-0403.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0403.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0403.md"
+    },
+    {
+      "object_id": "DIS-0404.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0404.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0404.md"
+    },
+    {
+      "object_id": "DIS-0405.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0405.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0405.md"
+    },
+    {
+      "object_id": "DIS-0406.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0406.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0406.md"
+    },
+    {
+      "object_id": "DIS-0407.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0407.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0407.md"
+    },
+    {
+      "object_id": "DIS-0408.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0408.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0408.md"
+    },
+    {
+      "object_id": "DIS-0409.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0409.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0409.md"
+    },
+    {
+      "object_id": "DIS-0410.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0410.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0410.md"
+    },
+    {
+      "object_id": "DIS-0411.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0411.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0411.md"
+    },
+    {
+      "object_id": "DIS-0412.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0412.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0412.md"
+    },
+    {
+      "object_id": "DIS-0413.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0413.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0413.md"
+    },
+    {
+      "object_id": "DIS-0414.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0414.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0414.md"
+    },
+    {
+      "object_id": "DIS-0415.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0415.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0415.md"
+    },
+    {
+      "object_id": "DIS-0416.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0416.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0416.md"
+    },
+    {
+      "object_id": "DIS-0417.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0417.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0417.md"
+    },
+    {
+      "object_id": "DIS-0418.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0418.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0418.md"
+    },
+    {
+      "object_id": "DIS-0419.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0419.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0419.md"
+    },
+    {
+      "object_id": "DIS-0420.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0420.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0420.md"
+    },
+    {
+      "object_id": "DIS-0421.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0421.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0421.md"
+    },
+    {
+      "object_id": "DIS-0422.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0422.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0422.md"
+    },
+    {
+      "object_id": "DIS-0423.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0423.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0423.md"
+    },
+    {
+      "object_id": "DIS-0424.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0424.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0424.md"
+    },
+    {
+      "object_id": "DIS-0425.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0425.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0425.md"
+    },
+    {
+      "object_id": "DIS-0426.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0426.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0426.md"
+    },
+    {
+      "object_id": "DIS-0427.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0427.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0427.md"
+    },
+    {
+      "object_id": "DIS-0428.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0428.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0428.md"
+    },
+    {
+      "object_id": "DIS-0429.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0429.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0429.md"
+    },
+    {
+      "object_id": "DIS-0430.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0430.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0430.md"
+    },
+    {
+      "object_id": "DIS-0431.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0431.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0431.md"
+    },
+    {
+      "object_id": "DIS-0432.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0432.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0432.md"
+    },
+    {
+      "object_id": "DIS-0433.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0433.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0433.md"
+    },
+    {
+      "object_id": "DIS-0434.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0434.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0434.md"
+    },
+    {
+      "object_id": "DIS-0435.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0435.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0435.md"
+    },
+    {
+      "object_id": "DIS-0436.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0436.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0436.md"
+    },
+    {
+      "object_id": "DIS-0437.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0437.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0437.md"
+    },
+    {
+      "object_id": "DIS-0438.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0438.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0438.md"
+    },
+    {
+      "object_id": "DIS-0439.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0439.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0439.md"
+    },
+    {
+      "object_id": "DIS-0440.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0440.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0440.md"
+    },
+    {
+      "object_id": "DIS-0441.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0441.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0441.md"
+    },
+    {
+      "object_id": "DIS-0442.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0442.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0442.md"
+    },
+    {
+      "object_id": "DIS-0443.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0443.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0443.md"
+    },
+    {
+      "object_id": "DIS-0444.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0444.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0444.md"
+    },
+    {
+      "object_id": "DIS-0445.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0445.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0445.md"
+    },
+    {
+      "object_id": "DIS-0446.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0446.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0446.md"
+    },
+    {
+      "object_id": "DIS-0447.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0447.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0447.md"
+    },
+    {
+      "object_id": "DIS-0448.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0448.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0448.md"
+    },
+    {
+      "object_id": "DIS-0449.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0449.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0449.md"
+    },
+    {
+      "object_id": "DIS-0450.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0450.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0450.md"
+    },
+    {
+      "object_id": "DIS-0451.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0451.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0451.md"
+    },
+    {
+      "object_id": "DIS-0452.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0452.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0452.md"
+    },
+    {
+      "object_id": "DIS-0453.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0453.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0453.md"
+    },
+    {
+      "object_id": "DIS-0454.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0454.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0454.md"
+    },
+    {
+      "object_id": "DIS-0455.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0455.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0455.md"
+    },
+    {
+      "object_id": "DIS-0456.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0456.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0456.md"
+    },
+    {
+      "object_id": "DIS-0457.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0457.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0457.md"
+    },
+    {
+      "object_id": "DIS-0458.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0458.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0458.md"
+    },
+    {
+      "object_id": "DIS-0459.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0459.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0459.md"
+    },
+    {
+      "object_id": "DIS-0460.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0460.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0460.md"
+    },
+    {
+      "object_id": "DIS-0461.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0461.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0461.md"
+    },
+    {
+      "object_id": "DIS-0462.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0462.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0462.md"
+    },
+    {
+      "object_id": "DIS-0463.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0463.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0463.md"
+    },
+    {
+      "object_id": "DIS-0464.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0464.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0464.md"
+    },
+    {
+      "object_id": "DIS-0465.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0465.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0465.md"
+    },
+    {
+      "object_id": "DIS-0466.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0466.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0466.md"
+    },
+    {
+      "object_id": "DIS-0467.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0467.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0467.md"
+    },
+    {
+      "object_id": "DIS-0468.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0468.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0468.md"
+    },
+    {
+      "object_id": "DIS-0469.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0469.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0469.md"
+    },
+    {
+      "object_id": "DIS-0470.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0470.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0470.md"
+    },
+    {
+      "object_id": "DIS-0471.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0471.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0471.md"
+    },
+    {
+      "object_id": "DIS-0472.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0472.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0472.md"
+    },
+    {
+      "object_id": "DIS-0473.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0473.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0473.md"
+    },
+    {
+      "object_id": "DIS-0474.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0474.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0474.md"
+    },
+    {
+      "object_id": "DIS-0475",
+      "object_type": "DISTINCTION",
+      "name": "обнаружение отклонения и предотвращение повторения",
+      "path": "000 База/02 Различения/DIS-0475 обнаружение отклонения и предотвращение повторения.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0475 обнаружение отклонения и предотвращение повторения.md"
+    },
+    {
+      "object_id": "DIS-0476",
+      "object_type": "DISTINCTION",
+      "name": "локальное улучшение и системное улучшение",
+      "path": "000 База/02 Различения/DIS-0476 локальное улучшение и системное улучшение.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0476 локальное улучшение и системное улучшение.md"
+    },
+    {
+      "object_id": "DIS-0477.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0477.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0477.md"
+    },
+    {
+      "object_id": "DIS-0478.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0478.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0478.md"
+    },
+    {
+      "object_id": "DIS-0479.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0479.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0479.md"
+    },
+    {
+      "object_id": "DIS-0480.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0480.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0480.md"
+    },
+    {
+      "object_id": "DIS-0481.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0481.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0481.md"
+    },
+    {
+      "object_id": "DIS-0482.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0482.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0482.md"
+    },
+    {
+      "object_id": "DIS-0483.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0483.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0483.md"
+    },
+    {
+      "object_id": "DIS-0484.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0484.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0484.md"
+    },
+    {
+      "object_id": "DIS-0485.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0485.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0485.md"
+    },
+    {
+      "object_id": "DIS-0486.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0486.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0486.md"
+    },
+    {
+      "object_id": "DIS-0487.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0487.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0487.md"
+    },
+    {
+      "object_id": "DIS-0488.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0488.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0488.md"
+    },
+    {
+      "object_id": "DIS-0489.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0489.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0489.md"
+    },
+    {
+      "object_id": "DIS-0490.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0490.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0490.md"
+    },
+    {
+      "object_id": "DIS-0491.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0491.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0491.md"
+    },
+    {
+      "object_id": "DIS-0492.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0492.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0492.md"
+    },
+    {
+      "object_id": "DIS-0493.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0493.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0493.md"
+    },
+    {
+      "object_id": "DIS-0494.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0494.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0494.md"
+    },
+    {
+      "object_id": "DIS-0495.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0495.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0495.md"
+    },
+    {
+      "object_id": "DIS-0496.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0496.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0496.md"
+    },
+    {
+      "object_id": "DIS-0497.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0497.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0497.md"
+    },
+    {
+      "object_id": "DIS-0498.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0498.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0498.md"
+    },
+    {
+      "object_id": "DIS-0499.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0499.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0499.md"
+    },
+    {
+      "object_id": "DIS-0500.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0500.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0500.md"
+    },
+    {
+      "object_id": "DIS-0501.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0501.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0501.md"
+    },
+    {
+      "object_id": "DIS-0502.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0502.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0502.md"
+    },
+    {
+      "object_id": "DIS-0503.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0503.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0503.md"
+    },
+    {
+      "object_id": "DIS-0504.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0504.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0504.md"
+    },
+    {
+      "object_id": "DIS-0505.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0505.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0505.md"
+    },
+    {
+      "object_id": "DIS-0506.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0506.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0506.md"
+    },
+    {
+      "object_id": "DIS-0507.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0507.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0507.md"
+    },
+    {
+      "object_id": "DIS-0508.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0508.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0508.md"
+    },
+    {
+      "object_id": "DIS-0509.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0509.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0509.md"
+    },
+    {
+      "object_id": "DIS-0510.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0510.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0510.md"
+    },
+    {
+      "object_id": "DIS-0511.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0511.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0511.md"
+    },
+    {
+      "object_id": "DIS-0512.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0512.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0512.md"
+    },
+    {
+      "object_id": "DIS-0513.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0513.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0513.md"
+    },
+    {
+      "object_id": "DIS-0514.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0514.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0514.md"
+    },
+    {
+      "object_id": "DIS-0515.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0515.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0515.md"
+    },
+    {
+      "object_id": "DIS-0516.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0516.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0516.md"
+    },
+    {
+      "object_id": "DIS-0517.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0517.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0517.md"
+    },
+    {
+      "object_id": "DIS-0518.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0518.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0518.md"
+    },
+    {
+      "object_id": "DIS-0519.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0519.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0519.md"
+    },
+    {
+      "object_id": "DIS-0520.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0520.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0520.md"
+    },
+    {
+      "object_id": "DIS-0521.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0521.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0521.md"
+    },
+    {
+      "object_id": "DIS-0522.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0522.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0522.md"
+    },
+    {
+      "object_id": "DIS-0523.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0523.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0523.md"
+    },
+    {
+      "object_id": "DIS-0524.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0524.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0524.md"
+    },
+    {
+      "object_id": "DIS-0525.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0525.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0525.md"
+    },
+    {
+      "object_id": "DIS-0526.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0526.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0526.md"
+    },
+    {
+      "object_id": "DIS-0527.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0527.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0527.md"
+    },
+    {
+      "object_id": "DIS-0528.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0528.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0528.md"
+    },
+    {
+      "object_id": "DIS-0529.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0529.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0529.md"
+    },
+    {
+      "object_id": "DIS-0530.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0530.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0530.md"
+    },
+    {
+      "object_id": "DIS-0531.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0531.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0531.md"
+    },
+    {
+      "object_id": "DIS-0532.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0532.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0532.md"
+    },
+    {
+      "object_id": "DIS-0533.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0533.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0533.md"
+    },
+    {
+      "object_id": "DIS-0534.md",
+      "object_type": "DISTINCTION",
+      "name": "",
+      "path": "000 База/02 Различения/DIS-0534.md",
+      "status": "UNKNOWN",
+      "traceability": "CMOC:000 База/02 Различения/DIS-0534.md"
+    }
+  ]
+}
