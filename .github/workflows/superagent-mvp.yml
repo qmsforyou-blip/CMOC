@@ -10,6 +10,7 @@ on:
       - "00 Стандарты CMOC/PROMPT-001*"
       - "00 Стандарты CMOC/ORCH-POLICY-001*"
       - "00 Стандарты CMOC/ESCALATION-CONTRACT-001*"
+      - ".github/workflows/superagent-mvp.yml"
   workflow_dispatch:
 
 jobs:
