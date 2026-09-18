@@ -1,10 +1,10 @@
 # STD-008 — MACHINE-SOURCE-001
 ## Машина добычи инженерного знания
 
-**Версия:** v0.4  
+**Версия:** v0.5  
 **Дата:** 18-09-2026  
 **Статус:** Standard  
-**Основание редакции:** STD-008 v0.3 + AUTOMATED-RUN-002 на SRC-002 + STD-008-v0.4 Delta.
+**Основание редакции:** STD-008 v0.4 + AUTOMATED-RUN-002 M07/M08 relation-dependent tests + STD-008-v0.5 Delta.
 
 ---
 
@@ -367,7 +367,8 @@ M01–M07 показали сопоставимость структуры; M07 
 - [x] определены критерии необходимости третьего M08;
 - [x] выполнен базовый AUTOMATED RUN M01–M08 на втором независимом Источнике.
 - [x] зафиксированы ограничения automated relation branch M07/M08.
-- [ ] выполнен отдельный automated test relation-dependent ветви M07→M08.
+- [x] выполнен отдельный automated test relation-dependent ветви M07→M08.
+- [x] relation evidence передан в M08 и обработан по DECISION RULE.
 
 ---
 
@@ -387,7 +388,11 @@ M01–M07 показали сопоставимость структуры; M07 
 
 Базовый automated run M01–M08 выполнен на SRC-002. Он подтверждает интерфейсное исполнение конвейера, но не закрывает relation-dependent ветвь M08. Подробности зафиксированы в `STD-008-v0.4-Delta-after-Automated-Run-002.md`.
 
-## 19. Следующая операция
+## 19. Relation-dependent ветвь
+
+M07/M08 relation-dependent branch испытана отдельно. Изолированный Passport даёт явный `NO_RELATION`; source-supported multi-object context позволяет создать relation candidates и передать их в M08. CANONICAL автоматически не присваивается.
+
+## 20. Следующая операция
 
 Следующий производственный этап:
 
