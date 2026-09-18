@@ -1,127 +1,72 @@
 # REPEATABILITY-RUN-001-GOST-M08-A-B-SEMANTIC-COMPARISON
 
-Дата: 17-09-2026
+Дата: 18-09-2026
 
-## Назначение
+## Исправление предыдущей сверки
 
-Сверка результатов M08 CANONIZATION между Run A и Run B для:
+При повторной проверке исходного M08 Run A обнаружено, что ранее в сверке были неверно указаны 8 объектов Run A как `001–008`.
 
-`SOURCE_ID: SRC-GOST-ISO-10002-2007-001`
+Фактический Run A содержит `NEEDS_EVIDENCE` у:
 
-Сравнение выполнено по идентичности паспортных объектов и по решениям канонизации, а не по поверхностным формулировкам.
+`001, 002, 003, 005, 006, 007, 008, 009`
 
-## Исходные результаты
+Run B содержит `NEEDS_EVIDENCE` у:
 
-### Run A
-- Objects: 40
-- PROVISIONAL: 32
-- NEEDS_EVIDENCE: 8
-- CANONICAL: 0
+`002, 009, 012, 019`
 
-В Run A статус `NEEDS_EVIDENCE` был присвоен объектам 001–008.
+## Фактический результат
 
-### Run B
-- Objects: 40
-- PROVISIONAL: 36
-- NEEDS_EVIDENCE: 4
-- CANONICAL: 0
+Общее `NEEDS_EVIDENCE`:
 
-В Run B статус `NEEDS_EVIDENCE` был присвоен объектам 002, 009, 012, 019.
+`002, 009` → 2 объекта.
 
-Relations Run B:
-- 25 PROVISIONAL
-- 0 CANONICAL
+Только Run A:
 
-## Сверка объектов
+`001, 003, 005, 006, 007, 008` → 6 объектов.
 
-Общим `NEEDS_EVIDENCE` является только объект 002.
+Только Run B:
 
-Следовательно:
+`012, 019` → 2 объекта.
 
-- PROVISIONAL / PROVISIONAL: **29**
-- NEEDS_EVIDENCE / NEEDS_EVIDENCE: **1**
-- Run A NEEDS_EVIDENCE → Run B PROVISIONAL: **7**
-- Run A PROVISIONAL → Run B NEEDS_EVIDENCE: **3**
-- CANONICAL в обоих: **0**
+Общее `PROVISIONAL`:
+
+30 объектов.
 
 Итого:
 
-**MATCH: 30/40**  
-**VARIANT: 10/40**  
-**DIVERGENCE: 0/40**
+- **MATCH: 32/40**
+- **VARIANT: 8/40**
+- **DIVERGENCE: 0/40**
 
-Здесь `VARIANT` означает нестабильность решения степени доказанности, а не потерю объекта или содержательное расхождение самого объекта.
+`MATCH` здесь означает совпадение решения epistemic status.
+`VARIANT` означает различие решения `PROVISIONAL ↔ NEEDS_EVIDENCE`.
+Объектные границы и идентичность 40 объектов не расходятся.
 
-## Матрица нестабильных решений
+## 8 реальных вариантов
 
-| Object | Run A | Run B | Тип |
+| Object | Run A | Run B | Направление |
 |---|---|---|---|
-| 001 | NEEDS_EVIDENCE | PROVISIONAL | variant |
-| 003 | NEEDS_EVIDENCE | PROVISIONAL | variant |
-| 004 | NEEDS_EVIDENCE | PROVISIONAL | variant |
-| 005 | NEEDS_EVIDENCE | PROVISIONAL | variant |
-| 006 | NEEDS_EVIDENCE | PROVISIONAL | variant |
-| 007 | NEEDS_EVIDENCE | PROVISIONAL | variant |
-| 008 | NEEDS_EVIDENCE | PROVISIONAL | variant |
-| 009 | PROVISIONAL | NEEDS_EVIDENCE | variant |
-| 012 | PROVISIONAL | NEEDS_EVIDENCE | variant |
-| 019 | PROVISIONAL | NEEDS_EVIDENCE | variant |
-
-Объект 002 совпадает как `NEEDS_EVIDENCE`.
+| 001 Руководство по управлению претензиями | NEEDS_EVIDENCE | PROVISIONAL | A → B |
+| 003 Область применимости процесса жалоб | NEEDS_EVIDENCE | PROVISIONAL | A → B |
+| 005 Функции процесса работы с жалобами | NEEDS_EVIDENCE | PROVISIONAL | A → B |
+| 006 Интеграция процесса в СМК | NEEDS_EVIDENCE | PROVISIONAL | A → B |
+| 007 Жизненный цикл процесса жалоб | NEEDS_EVIDENCE | PROVISIONAL | A → B |
+| 008 Условия эффективности процесса | NEEDS_EVIDENCE | PROVISIONAL | A → B |
+| 012 Цель, политика и процесс | PROVISIONAL | NEEDS_EVIDENCE | B → A |
+| 019 Представитель руководства | PROVISIONAL | NEEDS_EVIDENCE | B → A |
 
 ## Relations
 
-Для Run B получено 25 PROVISIONAL Relations.
-
-По результатам M07 после нормализации endpoint identity:
+M07 после нормализации endpoint identity:
 
 **25/25 MATCH, 0 VARIANT, 0 DIVERGENCE.**
 
-Поэтому на уровне множества и семантики Relations расхождения между повторными проходами не обнаружено.
-
 ## Вывод
 
-M08 **не проходит строгий тест повторяемости решений по epistemic status**.
+M08 выявляет 8, а не 10 нестабильных решений.
 
-Однако это не означает, что M08 разрушает трассируемость или меняет объектную модель:
+Нестабильность относится исключительно к критерию присвоения `PROVISIONAL / NEEDS_EVIDENCE`. Это не расхождение объектного множества, не потеря трассируемости и не расхождение Relations.
 
-- все 40 объектов сохранены;
-- все 40 получили явное решение;
-- 0 объектов потеряно;
-- 0 объектов получили CANONICAL;
-- нестабильность затронула только границу `PROVISIONAL ↔ NEEDS_EVIDENCE`.
+Следующая операция — анализ восьми вариантов и формализация воспроизводимого M08 DECISION RULE.
 
-Иными словами, проблема находится не в добыче объектов, а в **критерии присвоения степени доказанности на M08**.
-
-## Методологический вывод
-
-M08 требует более жёсткого и воспроизводимого `DECISION_RULE`.
-
-До следующего запуска необходимо отделить:
-
-1. факт наличия достаточного основания для фиксации объекта;
-2. наличие конкретного дефицита доказательств;
-3. критерий, при котором объект обязан перейти из `PROVISIONAL` в `NEEDS_EVIDENCE`.
-
-Рекомендуемая следующая операция:
-
-**не переписывать Run A или Run B задним числом**, а создать отдельный QC/patch для определения нормативного критерия M08 и затем провести контрольную сверку на тех 10 объектах, где решения расходятся.
-
-## Статус Repeatability Run
-
-| Модуль | Результат |
-|---|---|
-| M01 | повторяемость по cardinality подтверждена |
-| M02 | объектное множество сохранено; требуется учитывать naming variation |
-| M03 | 40→120 |
-| M04 | 40/40 semantic MATCH |
-| M05 | 40/40 semantic MATCH |
-| M06 | 40/40 semantic MATCH |
-| M07 | 25/25 semantic MATCH после endpoint normalization |
-| M08 | **30/40 MATCH; 10 VARIANT** |
-
-### Общий вывод
-
-Повторный прогон подтвердил устойчивость основной производственной цепочки до M07 и выявил конкретную точку, где требуется нормативное уточнение: **M08 decision rule for epistemic status**.
-
-Это результат теста, а не основание для искусственного выравнивания Run A и Run B.
+Run A и Run B не переписываются.
