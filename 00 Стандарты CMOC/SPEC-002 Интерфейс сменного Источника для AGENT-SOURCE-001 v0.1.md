@@ -1,6 +1,6 @@
 # SPEC-002 — Интерфейс сменного Источника для AGENT-SOURCE-001
 
-**Версия:** 0.3  
+**Версия:** 0.4  
 **Дата:** 18-09-2026  
 **Назначение:** определить минимальный стандарт подключения любого нового Источника к `AGENT-SOURCE-001`.
 
@@ -192,9 +192,9 @@ CANONIZATION
 
 `TASK` является самостоятельным входным параметром интерфейса. Один и тот же `SOURCE_PACKAGE` может запускаться с разными `TASK` без изменения фиксированного ядра агента. Для нового прохода создаётся новый `BATCH_ID`. Входом может быть непосредственно `SOURCE_PACKAGE` либо результат предыдущего прохода, если это предусмотрено контрактом TASK; предыдущий результат не должен использоваться молча.
 
-Проверено на SRC-003: `TASK=EXTRACTION`, `TASK=DISTINCTIONS`, `TASK=FORMULATIONS (direct from SOURCE_PACKAGE)`.
+Проверено на SRC-003: `TASK=EXTRACTION`, `TASK=DISTINCTIONS`, `TASK=FORMULATIONS` непосредственно от `SOURCE_PACKAGE`.
 
-В пределах проверенной границы `TASK` и `SOURCE_PACKAGE` являются независимыми измерениями сменности интерфейса.
+В пределах проверенной границы `TASK` и `SOURCE_PACKAGE` являются независимыми измерениями сменности интерфейса. Это подтверждает интерфейсную возможность прямого входа для M01–M03, но не универсальную допустимость прямого входа для остальных TASK.
 
 ## 10B. Прямой TASK
 
@@ -345,4 +345,23 @@ BATCH           — производственная партия прохода
 ---
 
 **Статус:** Standard  
-**Версия:** 0.3
+**Версия:** 0.4
+
+
+---
+
+## 19. Evidence boundary after clean direct tests
+
+Clean direct SOURCE_PACKAGE tests established:
+
+| TASK | Direct SOURCE_PACKAGE | Evidence |
+|---|---|---|
+| M01 EXTRACTION | YES | TESTED |
+| M02 DISTINCTIONS | YES | TESTED — SRC-003 Run-006 |
+| M03 FORMULATIONS | YES | TESTED — SRC-003 Run-007 |
+| M04–M08 | NO | no direct-source claim |
+
+The existence of a direct interface path for M01–M03 does not imply that M04–M08 may be executed directly from SOURCE_PACKAGE.
+
+Direct TASK entry remains a contract property, not an automatic capability of every module.
+
