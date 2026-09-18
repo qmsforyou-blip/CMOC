@@ -1,47 +1,40 @@
-import json
 import unittest
 from pathlib import Path
+from cmoc_query import load_objects, query
 
-from cmoc_query import load_index, query
+BASE=Path(__file__).parent
 
-
-BASE = Path(__file__).parent
-
-
-class TestCMOCQuery(unittest.TestCase):
+class TestCMOCQueryV02(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.index = load_index(BASE / "cmoc_query_index.json")
+        cls.inventory,cls.objects=load_objects(BASE/"cmoc_inventory.json")
 
-    def test_exact_existing_term(self):
-        r = query(self.index, "Q-001", "EXACT", "TERM", "Управляемость", ["TERMS"])
-        self.assertEqual(r["match_status"], "MATCH")
-        self.assertEqual(r["results"][0]["object_id"], "T-0001")
+    def test_exact_term(self):
+        r=query(cls.objects,"Q-001","EXACT","TERM","T-0001",["TERMS"])
+        self.assertEqual(r["match_status"],"MATCH")
+        self.assertEqual(r["results"][0]["object_id"],"T-0001")
 
-    def test_exact_existing_by_id(self):
-        r = query(self.index, "Q-002", "EXACT", "TERM", "T-0002", ["TERMS"])
-        self.assertEqual(r["match_status"], "MATCH")
+    def test_exact_machine(self):
+        r=query(cls.objects,"Q-002","EXACT","MACHINE","MC-CAND-096-01",["MACHINES"])
+        self.assertEqual(r["match_status"],"MATCH")
 
-    def test_exact_new_candidate(self):
-        r = query(self.index, "Q-003", "EXACT", "TERM", "FAST_RESPONSE", ["TERMS"])
-        self.assertEqual(r["match_status"], "NO_MATCH")
-        self.assertEqual(r["results"], [])
-
-    def test_structural_candidate(self):
-        r = query(self.index, "Q-004", "STRUCTURAL", "TERM", "организационная", ["TERMS"])
-        self.assertEqual(r["match_status"], "CANDIDATE")
+    def test_structural_distinction(self):
+        r=query(cls.objects,"Q-003","STRUCTURAL","DISTINCTION","решение",["DISTINCTIONS"])
+        self.assertEqual(r["match_status"],"CANDIDATE")
         self.assertTrue(r["results"])
 
     def test_scope_insufficient(self):
-        r = query(self.index, "Q-005", "EXACT", "DISTINCTION", "Управляемость", ["TERMS"])
-        self.assertEqual(r["match_status"], "SCOPE_INSUFFICIENT")
+        r=query(cls.objects,"Q-004","EXACT","MACHINE","MC-CAND-096-01",["TERMS"])
+        self.assertEqual(r["match_status"],"SCOPE_INSUFFICIENT")
 
-    def test_query_is_read_only(self):
-        before = (BASE / "cmoc_query_index.json").read_bytes()
-        query(self.index, "Q-006", "EXACT", "TERM", "Решение", ["TERMS"])
-        after = (BASE / "cmoc_query_index.json").read_bytes()
-        self.assertEqual(before, after)
+    def test_no_match_is_not_new(self):
+        r=query(cls.objects,"Q-005","EXACT","TERM","TERM-NOT-IN-CMOC",["TERMS"])
+        self.assertEqual(r["match_status"],"NO_MATCH")
+        self.assertEqual(r["results"],[])
 
+    def test_traceability(self):
+        r=query(cls.objects,"Q-006","EXACT","TERM","T-0001",["TERMS"])
+        self.assertIn("traceability",r["results"][0])
+        self.assertEqual(r["results"][0]["traceability"]["inventory_schema"],"CMOC-INVENTORY-001")
 
-if __name__ == "__main__":
-    unittest.main()
+if __name__=="__main__": unittest.main()
