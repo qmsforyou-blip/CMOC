@@ -1,0 +1,25 @@
+name: SUPERAGENT MVP tests
+
+on:
+  push:
+    paths:
+      - "05 SUPERAGENT/**"
+      - "00 Стандарты CMOC/MVP-SUPERAGENT-001*"
+      - "00 Стандарты CMOC/STD-008*"
+      - "00 Стандарты CMOC/SPEC-002*"
+      - "00 Стандарты CMOC/PROMPT-001*"
+      - "00 Стандарты CMOC/ORCH-POLICY-001*"
+      - "00 Стандарты CMOC/ESCALATION-CONTRACT-001*"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Run MVP runner tests
+        working-directory: 05 SUPERAGENT
+        run: python -m unittest discover -s . -p "test_*.py" -v
