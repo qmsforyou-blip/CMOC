@@ -1,10 +1,10 @@
 # STD-008 — MACHINE-SOURCE-001
 ## Машина добычи инженерного знания
 
-**Версия:** v0.5  
+**Версия:** v0.6  
 **Дата:** 18-09-2026  
 **Статус:** Standard  
-**Основание редакции:** STD-008 v0.4 + AUTOMATED-RUN-002 M07/M08 relation-dependent tests + STD-008-v0.5 Delta.
+**Основание редакции:** v0.5 + AUTOMATED-RUN-003 on SRC-003 TXT + TASK interchangeability tests.
 
 ---
 
@@ -370,9 +370,53 @@ M01–M07 показали сопоставимость структуры; M07 
 - [x] выполнен отдельный automated test relation-dependent ветви M07→M08.
 - [x] relation evidence передан в M08 и обработан по DECISION RULE.
 
+## 21. TASK interchangeability
+
+`TASK` является самостоятельным параметром производственного интерфейса. На одном `SOURCE_PACKAGE` SRC-003 проверены `EXTRACTION`, `DISTINCTIONS` и `FORMULATIONS` напрямую от SOURCE_PACKAGE при неизменном ядре MACHINE-SOURCE-001.
+
+В пределах проведённых тестов сменяемость `SOURCE_PACKAGE` и сменяемость `TASK` являются независимыми измерениями интерфейса машины.
+
+## 22. Прямой вход TASK
+
+Проведён отдельный тест `TASK=FORMULATIONS` непосредственно от `SOURCE_PACKAGE`, без использования предыдущего M03.
+
+Результат: `SOURCE → 20 source observations → 60 FORM`.
+
+Проверено: 20 входов; 60 формулировок; 3 уровня на вход; предыдущий M03 не использован; traceability to SOURCE PASS; external knowledge NONE; downstream fields NONE.
+
+Это устанавливает, что предыдущий проход не является технически обязательным входом для каждого TASK. Допустимая точка входа определяется контрактом TASK.
+
+## 23. Новая граница доказательства v0.6
+
+Подтверждено:
+1. fixed machine core сохраняется при смене TASK;
+2. один SOURCE_PACKAGE может использоваться с несколькими TASK;
+3. TASK может иметь прямой вход из SOURCE_PACKAGE, если это разрешено его контрактом;
+4. каждый запуск остаётся отдельным BATCH;
+5. source traceability сохраняется;
+6. предыдущие результаты не должны использоваться скрыто.
+
+Не подтверждено:
+1. любой TASK допустим непосредственно от SOURCE_PACKAGE;
+2. любой TASK применим к любому SOURCE_PACKAGE;
+3. универсальная семантическая полнота;
+4. автоматическая канонизация.
+
+## 24. Definition of Done v0.6
+
+- [x] выполнен AUTOMATED-RUN-003 на TXT SOURCE_PACKAGE;
+- [x] полный M01–M08 SRC-003 закрыт;
+- [x] проверены M07 isolated и multi-object;
+- [x] проверен relation-dependent M08;
+- [x] проверена сменяемость TASK на том же SOURCE_PACKAGE;
+- [x] проверен TASK=DISTINCTIONS без предыдущего M02;
+- [x] проверен TASK=FORMULATIONS непосредственно от SOURCE_PACKAGE;
+- [x] зафиксирована граница TASK interchangeability;
+- [x] зафиксирована граница прямого входа TASK;
+
 ---
 
-## 17. Связанные документы
+## 25. Связанные документы
 
 - `STD-007` — стандартный сменный модуль Источника;
 - `SPEC-002` — интерфейс Источника;
