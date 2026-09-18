@@ -3,14 +3,13 @@
   "autoCommitMessage": "vault backup: {{date}}",
   "commitMessageScript": "",
   "commitDateFormat": "YYYY-MM-DD HH:mm:ss",
-  "autoSaveInterval": 0,
+  "autoSaveInterval": 0.7,
   "autoPushInterval": 0,
   "autoPullInterval": 0,
   "autoPullOnBoot": false,
   "autoCommitOnlyStaged": false,
   "disablePush": false,
   "pullBeforePush": true,
-  "squashCommitsBeforePush": false,
   "disablePopups": false,
   "showErrorNotices": true,
   "disablePopupsForNoChanges": false,
@@ -64,5 +63,6 @@
     "ignoreWhitespace": false,
     "lastShownAuthorDisplay": "initials",
     "lastShownDateTimeFormatOptions": "date"
-  }
+  },
+  "squashCommitsBeforePush": false
 }
