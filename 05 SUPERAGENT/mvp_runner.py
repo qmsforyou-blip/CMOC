@@ -43,6 +43,7 @@ class JournalEntry:
     reason: str = ""
 
 class Superagent:
+    """Orchestration kernel; semantic production remains in injected MACHINE handlers."""
     def __init__(self, contracts: Dict[str, Contract], handlers: Dict[str, Callable[[dict, Batch], dict]]):
         self.contracts = contracts
         self.handlers = handlers
