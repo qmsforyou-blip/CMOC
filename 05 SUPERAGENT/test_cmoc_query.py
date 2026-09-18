@@ -10,7 +10,7 @@ class TestCMOCQueryV02(unittest.TestCase):
         cls.inventory,cls.objects=load_objects(BASE/"cmoc_inventory.json")
 
     def test_exact_term(self):
-        r=query(cls.objects,"Q-001","EXACT","TERM","T-0001",["TERMS"])
+        r=query(self.objects,"Q-001","EXACT","TERM","T-0001",["TERMS"])
         self.assertEqual(r["match_status"],"MATCH")
         self.assertEqual(r["results"][0]["object_id"],"T-0001")
 
