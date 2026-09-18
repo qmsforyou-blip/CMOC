@@ -84,7 +84,7 @@ class Superagent:
             self.journal.append(JournalEntry(run_id, source["source_id"], task, None,
                                              inp.get("ref","UNKNOWN"), None, STATUS_REJECT,
                                              "NOT_RUN", "NOT_CREATED", reason))
-            return {"status": STATUS_REJECT, "reason": reason, "task": task}
+            return {"status": STATUS_REJECT, "reason": reason, "task": task, "batch_id": None}
 
         batch = self.new_batch(source["source_id"], task, inp.get("ref","INPUT"))
         handler = self.handlers.get(task)
