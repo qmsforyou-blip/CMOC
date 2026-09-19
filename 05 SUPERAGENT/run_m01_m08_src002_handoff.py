@@ -136,6 +136,7 @@ def m07(inp, batch):
         records,
         inp,
         relation_evidence=RELATION_EVIDENCE,
+        passports=inp["records"],
         evaluated_passport_ids=[p["id"] for p in inp["records"]],
         relation_evidence_ids=[e["evidence_id"] for e in RELATION_EVIDENCE],
     )
@@ -143,8 +144,8 @@ def m07(inp, batch):
 
 def m08(inp, batch):
     records = decide(
+        inp["passports"],
         inp["records"],
-        inp.get("records", []),
         inp.get("relation_evidence", RELATION_EVIDENCE),
     )
     return wrap_output(
