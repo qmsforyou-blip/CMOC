@@ -61,7 +61,7 @@ class TestCMOCObjectIndexV02(unittest.TestCase):
             "CHAIN": {"representations": 2, "object_files": 2, "registry_records": 0, "unique_object_ids": 2},
             "LAW": {"representations": 1, "object_files": 1, "registry_records": 0, "unique_object_ids": 1},
             "OBSERVATION": {"representations": 1, "object_files": 1, "registry_records": 0, "unique_object_ids": 1},
-            "ORGANIZATIONAL_CONSTRUCTION": {"representations": 479, "object_files": 1, "registry_records": 478, "unique_object_ids": 1},
+            "ORGANIZATIONAL_CONSTRUCTION": {"representations": 479, "object_files": 1, "registry_records": 478, "unique_object_ids": 479},
             "INVARIANT": {"representations": 11, "object_files": 0, "registry_records": 11, "unique_object_ids": 11},
         }
         self.assertEqual(self.data["count_views"]["by_object_type"], expected)
