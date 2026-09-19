@@ -27,10 +27,12 @@ class Batch:
     source_id: str
     task: str
     input_ref: str
+    handoff_id: Optional[str] = None
     output: Optional[dict] = None
 
 @dataclass
 class Handoff:
+    handoff_id: str
     source_id: str
     from_task: str
     to_task: str
@@ -52,6 +54,7 @@ class JournalEntry:
     qc_result: str
     handoff_result: str
     reason: str = ""
+    handoff_id: Optional[str] = None
 
 class Superagent:
     """Orchestration kernel; semantic production remains in injected MACHINE handlers."""
@@ -60,11 +63,18 @@ class Superagent:
         self.handlers = handlers
         self.journal: List[JournalEntry] = []
         self._batch_seq: Dict[str, int] = {}
+        self._handoff_seq: Dict[str, int] = {}
+        self.handoffs: List[Handoff] = []
 
-    def new_batch(self, source_id: str, task: str, input_ref: str) -> Batch:
+    def new_handoff_id(self, source_id: str, from_task: str, to_task: str) -> str:
+        key = f"{source_id}-{from_task}-{to_task}"
+        self._handoff_seq[key] = self._handoff_seq.get(key, 0) + 1
+        return f"HANDOFF-{source_id}-{from_task}-{to_task}-{self._handoff_seq[key]:03d}"
+
+    def new_batch(self, source_id: str, task: str, input_ref: str, handoff_id: Optional[str] = None) -> Batch:
         key = f"{source_id}-{task}"
         self._batch_seq[key] = self._batch_seq.get(key, 0) + 1
-        return Batch(f"BATCH-{source_id}-{task}-{self._batch_seq[key]:03d}", source_id, task, input_ref)
+        return Batch(f"BATCH-{source_id}-{task}-{self._batch_seq[key]:03d}", source_id, task, input_ref, handoff_id)
 
     def check_input(self, task: str, inp: dict) -> tuple[bool, str]:
         c = self.contracts.get(task)
@@ -90,28 +100,35 @@ class Superagent:
             return False, "MISSING_TRACEABILITY"
         return True, "PASS"
 
-    def create_handoff(self, source: dict, from_task: str, to_task: str, output: dict) -> Handoff:
+    def create_handoff(self, run_id: str, source: dict, from_task: str, to_task: str, output: dict) -> Handoff:
+        handoff_id = self.new_handoff_id(source["source_id"], from_task, to_task)
         contract = self.contracts.get(to_task)
         input_type = output.get("type", "UNKNOWN")
         traceability = output.get("traceability", {})
         output_ref = output.get("ref", "UNKNOWN")
         if not contract:
-            return Handoff(source["source_id"], from_task, to_task, output_ref,
-                           input_type, traceability, STATUS_REJECT, "REQUEST_CONTRACT")
-        if input_type not in contract.accepted_inputs:
-            return Handoff(source["source_id"], from_task, to_task, output_ref,
-                           input_type, traceability, STATUS_REJECT,
-                           f"TYPE_MISMATCH: {input_type} -> {sorted(contract.accepted_inputs)}")
-        if not output.get("source_id"):
-            return Handoff(source["source_id"], from_task, to_task, output_ref,
-                           input_type, traceability, STATUS_REJECT, "MISSING_SOURCE_ID")
-        if not traceability:
-            return Handoff(source["source_id"], from_task, to_task, output_ref,
-                           input_type, traceability, STATUS_REJECT, "MISSING_TRACEABILITY")
-        return Handoff(source["source_id"], from_task, to_task, output_ref,
-                       input_type, traceability, STATUS_ACCEPT, "READY")
+            handoff = Handoff(handoff_id, source["source_id"], from_task, to_task, output_ref,
+                              input_type, traceability, STATUS_REJECT, "REQUEST_CONTRACT")
+        elif input_type not in contract.accepted_inputs:
+            handoff = Handoff(handoff_id, source["source_id"], from_task, to_task, output_ref,
+                              input_type, traceability, STATUS_REJECT,
+                              f"TYPE_MISMATCH: {input_type} -> {sorted(contract.accepted_inputs)}")
+        elif not output.get("source_id"):
+            handoff = Handoff(handoff_id, source["source_id"], from_task, to_task, output_ref,
+                              input_type, traceability, STATUS_REJECT, "MISSING_SOURCE_ID")
+        elif not traceability:
+            handoff = Handoff(handoff_id, source["source_id"], from_task, to_task, output_ref,
+                              input_type, traceability, STATUS_REJECT, "MISSING_TRACEABILITY")
+        else:
+            handoff = Handoff(handoff_id, source["source_id"], from_task, to_task, output_ref,
+                              input_type, traceability, STATUS_ACCEPT, "READY")
+        self.handoffs.append(handoff)
+        self.journal.append(JournalEntry(run_id, source["source_id"], f"{from_task}->{to_task}",
+                                         None, output_ref, output_ref, handoff.status,
+                                         "PASS", handoff.status, handoff.reason, handoff.handoff_id))
+        return handoff
 
-    def execute(self, run_id: str, source: dict, task: str, inp: dict) -> dict:
+    def execute(self, run_id: str, source: dict, task: str, inp: dict, handoff_id: Optional[str] = None) -> dict:
         ok, reason = self.check_input(task, inp)
         if not ok:
             self.journal.append(JournalEntry(run_id, source["source_id"], task, None,
@@ -119,7 +136,7 @@ class Superagent:
                                              "NOT_RUN", "NOT_CREATED", reason))
             return {"status": STATUS_REJECT, "reason": reason, "task": task, "batch_id": None}
 
-        batch = self.new_batch(source["source_id"], task, inp.get("ref","INPUT"))
+        batch = self.new_batch(source["source_id"], task, inp.get("ref","INPUT"), handoff_id)
         handler = self.handlers.get(task)
         if not handler:
             reason = "MACHINE_NOT_REGISTERED"
@@ -145,18 +162,20 @@ class Superagent:
 
     def run_chain(self, run_id: str, source: dict, initial: dict, tasks: List[str]) -> dict:
         current = initial
+        current_handoff_id = None
         results = []
         for i, task in enumerate(tasks):
-            result = self.execute(run_id, source, task, current)
+            result = self.execute(run_id, source, task, current, current_handoff_id)
             results.append(result)
             if result.get("status") != STATUS_ACCEPT:
                 return {"status": result.get("status"), "results": results, "journal": self.journal}
             if i < len(tasks) - 1:
                 next_task = tasks[i + 1]
-                handoff = self.create_handoff(source, task, next_task, result)
+                handoff = self.create_handoff(run_id, source, task, next_task, result)
                 if handoff.status != STATUS_ACCEPT:
                     return {"status": STATUS_REJECT, "results": results,
                             "journal": self.journal, "handoff": handoff}
+                current_handoff_id = handoff.handoff_id
                 current = {
                     **result,
                     "type": handoff.input_type,
