@@ -35,7 +35,12 @@ class TestCMOCQueryV03(unittest.TestCase):
         self.assertEqual(len(r["results"]), 3)
         self.assertIn("canonical OBJECT_FILE present", r["match_basis"])
         addresses = {
-            (x["representation"]["container"], x["representation"]["location"]["line"])
+            (
+                x["representation"]["container"],
+                x["representation"]["location"]["line"]
+                if isinstance(x["representation"]["location"], dict)
+                else x["representation"]["location"],
+            )
             for x in r["results"]
         }
         self.assertEqual(addresses, {
