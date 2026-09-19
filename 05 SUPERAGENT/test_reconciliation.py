@@ -65,13 +65,39 @@ class TestReconciliation(unittest.TestCase):
                          "SRC-002:BATCH-SRC-002-M04-001:NOM-001")
 
     def test_ambiguous_exact_is_not_equivalent(self):
+        ambiguous_index = [
+            {
+                "object_id": "DIS-TEST-AMB",
+                "object_type": "DISTINCTION",
+                "object_name": "Test ambiguity",
+                "representation": {
+                    "kind": "REGISTRY_RECORD",
+                    "container": "registry.md",
+                    "location": {"line": 10},
+                },
+                "indexed_attributes": {},
+                "traceability": {},
+            },
+            {
+                "object_id": "DIS-TEST-AMB",
+                "object_type": "DISTINCTION",
+                "object_name": "Test ambiguity",
+                "representation": {
+                    "kind": "REGISTRY_RECORD",
+                    "container": "registry.md",
+                    "location": {"line": 20},
+                },
+                "indexed_attributes": {},
+                "traceability": {},
+            },
+        ]
         records = [{
             "record_id": "NOM-TEST-005",
-            "value": "DIS-0155",
+            "value": "DIS-TEST-AMB",
             "target_object_type": "DISTINCTION",
             "traceability": "SRC-TEST:p5",
         }]
-        r = reconcile(self.index, "SRC-TEST", "BATCH-TEST-003",
+        r = reconcile(ambiguous_index, "SRC-TEST", "BATCH-TEST-003",
                       "NOMENCLATURE", records, ["DISTINCTIONS"])
         self.assertEqual(r[0]["match_result"], "NEEDS_REVIEW")
         self.assertIsNone(r[0]["cmoc_object_id"])
