@@ -37,7 +37,13 @@ def load_objects(path):
     return inv,[o for r in inv["records"] if (o:=object_from_record(r))]
 
 def load_index(path):
-    """Backward-compatible loader for RECONCILIATION v0.1 tests/contracts."""
+    """Load the legacy SPEC-003 query index used by RECONCILIATION tests."""
+    data=json.loads(Path(path).read_text(encoding="utf-8"))
+    if "objects" in data:
+        objects=data["objects"]
+        for obj in objects:
+            obj.setdefault("aliases", [])
+        return objects
     return load_objects(path)[1]
 
 
