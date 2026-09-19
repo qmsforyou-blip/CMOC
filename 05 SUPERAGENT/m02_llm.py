@@ -23,6 +23,10 @@ Rules:
 - Preserve the source-grounded meaning; do not add external knowledge.
 - A distinction must state what the source differentiates, separates, defines,
   requires, or makes operationally significant.
+- Do not infer causal, logical, hierarchical, or justificatory links between
+  statements unless that link is explicitly expressed in the extraction record.
+- Do not turn mere co-occurrence or adjacency of source statements into a
+  relationship such as "basis for", "causes", "enables", or "therefore".
 - Do not perform formulation, nomenclature, classification, passporting,
   relation-building, canonization, or synthesis across records.
 - Do not merge records.
