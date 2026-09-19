@@ -342,6 +342,48 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(r.journal[-1].task,"M01")
         self.assertEqual(r.journal[-1].machine_id,"MACHINE-SOURCE-001")
 
+
+    def test_source_package_contract_requires_production_payload(self):
+        r=build_demo_runner()
+        inp={
+            "type":"SOURCE_PACKAGE",
+            "source_id":"SRC-002",
+            "traceability":{"source_id":"SRC-002"},
+            "ref":"PKG-001",
+        }
+        result=r.run_chain("MVP-RUN-SPC01",SOURCE,inp,["M01"])
+        self.assertEqual(result["status"],"REJECT")
+        self.assertEqual(result["results"][0]["reason"],
+                         "MISSING_REQUIRED_INPUT_FIELDS: ['source_package']")
+        self.assertEqual(len(r.batches),0)
+
+    def test_source_package_contract_reaches_production_m01(self):
+        r=build_demo_runner()
+        def fake_extractor(package):
+            self.assertEqual(package["package_id"],"PKG-002")
+            self.assertEqual(package["fragments"][0]["location"],"p1")
+            return [{
+                "id":"EX-001","location":"p1","observation":"TEST",
+                "source_quote_or_evidence":"TEST","uncertainty":"CLEAR",
+                "source_id":package["source_id"],
+            }]
+        r.handlers["M01"]=build_m01_handler(extractor=fake_extractor)
+        r.machine_ids["M01"]="MACHINE-SOURCE-001"
+        package={
+            "package_id":"PKG-002","source_id":"SRC-002",
+            "source_name":"GM Quality System Basics Overview Supplier Audit",
+            "fragments":[{"location":"p1","text":"TEST"}],
+        }
+        inp={
+            "type":"SOURCE_PACKAGE","source_id":"SRC-002",
+            "traceability":{"source_id":"SRC-002","package_id":"PKG-002"},
+            "ref":"PKG-002","source_package":package,
+        }
+        result=r.run_chain("MVP-RUN-SPC02",SOURCE,inp,["M01"])
+        self.assertEqual(result["status"],"ACCEPT")
+        self.assertEqual(result["results"][0]["type"],"EXTRACTION_RECORDS")
+        self.assertEqual(r.journal[-1].machine_id,"MACHINE-SOURCE-001")
+
     def test_new_batch_per_task(self):
         r=build_demo_runner()
         result=r.run_chain("MVP-RUN-006",SOURCE,initial(),["M01","M02","M03"])
