@@ -82,10 +82,10 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(result["status"],"ACCEPT")
         self.assertEqual(len(r.handoffs),2)
         self.assertEqual(result["results"][1]["batch_id"],"BATCH-SRC-002-M02-001")
+        self.assertEqual(r.batches[1].handoff_id,r.handoffs[0].handoff_id)
         self.assertEqual(r.journal[2].handoff_id,r.handoffs[0].handoff_id)
-        self.assertEqual(r.journal[2].status,"ACCEPT")
-        self.assertEqual(r.journal[3].handoff_id,r.handoffs[1].handoff_id)
-        self.assertEqual(r.journal[3].status,"ACCEPT")
+        self.assertEqual(r.batches[2].handoff_id,r.handoffs[1].handoff_id)
+        self.assertEqual(r.journal[4].handoff_id,r.handoffs[1].handoff_id)
 
     def test_new_batch_per_task(self):
         r=build_demo_runner()
