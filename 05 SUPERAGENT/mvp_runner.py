@@ -65,6 +65,7 @@ class Superagent:
         self._batch_seq: Dict[str, int] = {}
         self._handoff_seq: Dict[str, int] = {}
         self.handoffs: List[Handoff] = []
+        self.batches: List[Batch] = []
 
     def new_handoff_id(self, source_id: str, from_task: str, to_task: str) -> str:
         key = f"{source_id}-{from_task}-{to_task}"
@@ -74,7 +75,9 @@ class Superagent:
     def new_batch(self, source_id: str, task: str, input_ref: str, handoff_id: Optional[str] = None) -> Batch:
         key = f"{source_id}-{task}"
         self._batch_seq[key] = self._batch_seq.get(key, 0) + 1
-        return Batch(f"BATCH-{source_id}-{task}-{self._batch_seq[key]:03d}", source_id, task, input_ref, handoff_id)
+        batch = Batch(f"BATCH-{source_id}-{task}-{self._batch_seq[key]:03d}", source_id, task, input_ref, handoff_id)
+        self.batches.append(batch)
+        return batch
 
     def check_input(self, task: str, inp: dict) -> tuple[bool, str]:
         c = self.contracts.get(task)
