@@ -3,13 +3,13 @@ from m05_llm import classify
 
 
 CANDIDATES = [
-    {"id": "NOM-001", "distinction_id": "DIS-001", "candidate_term": "Quality Systems Basics source revision", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},
-    {"id": "NOM-002", "distinction_id": "DIS-002", "candidate_term": "QSB strategy set", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},
-    {"id": "NOM-003", "distinction_id": "DIS-003", "candidate_term": "Red-rated strategy workshop identification", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},
-    {"id": "NOM-004", "distinction_id": "DIS-004", "candidate_term": "Red and Yellow Audit question strategy delivery and action planning", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},
-    {"id": "NOM-005", "distinction_id": "DIS-005", "candidate_term": "QSB common principles, methods, processes, and global language", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},
-    {"id": "NOM-006", "distinction_id": "DIS-006", "candidate_term": "Fast Response visual management", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},
-    {"id": "NOM-007", "distinction_id": "DIS-007", "candidate_term": "Fast Response and Problem Solving section separation", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},
+    {"id": "NOM-001", "distinction_id": "DIS-001", "candidate_term": "Quality Systems Basics source revision", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},, "basis_refs": ["FORM-001","FORM-002","FORM-003"]
+    {"id": "NOM-002", "distinction_id": "DIS-002", "candidate_term": "QSB strategy set", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},, "basis_refs": ["FORM-004","FORM-005","FORM-006"]
+    {"id": "NOM-003", "distinction_id": "DIS-003", "candidate_term": "Red-rated strategy workshop identification", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},, "basis_refs": ["FORM-007","FORM-008","FORM-009"]
+    {"id": "NOM-004", "distinction_id": "DIS-004", "candidate_term": "Red and Yellow Audit question strategy delivery and action planning", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},, "basis_refs": ["FORM-010","FORM-011","FORM-012"]
+    {"id": "NOM-005", "distinction_id": "DIS-005", "candidate_term": "QSB common principles, methods, processes, and global language", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},, "basis_refs": ["FORM-013","FORM-014","FORM-015"]
+    {"id": "NOM-006", "distinction_id": "DIS-006", "candidate_term": "Fast Response visual management", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},, "basis_refs": ["FORM-016","FORM-017","FORM-018"]
+    {"id": "NOM-007", "distinction_id": "DIS-007", "candidate_term": "Fast Response and Problem Solving section separation", "status": "PROVISIONAL", "uncertainty": "CLEAR", "source_id": "SRC-002"},, "basis_refs": ["FORM-019","FORM-020","FORM-021"]
 ]
 
 SOURCE_PACKAGE = {
