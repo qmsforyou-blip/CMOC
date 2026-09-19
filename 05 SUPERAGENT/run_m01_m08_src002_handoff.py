@@ -67,12 +67,24 @@ RELATION_EVIDENCE_TEMPLATE = {
 }
 
 def build_relation_evidence(passports):
-    by_term = {p.get("term"): p.get("id") for p in passports}
-    strategy_set_id = by_term.get("Quality Systems Basics strategy set")
-    fast_response_id = by_term.get("Fast Response")
-    if not strategy_set_id or not fast_response_id:
-        raise RuntimeError("Controlled positive relation fixture requires current-run passports for 'Quality Systems Basics strategy set' and 'Fast Response'")
-    return [{**RELATION_EVIDENCE_TEMPLATE, "supports": [strategy_set_id, fast_response_id]}]
+    def has_basis(passport, refs):
+        return bool(set(passport.get("source_basis", [])) & set(refs))
+
+    strategy_set = next(
+        (p for p in passports if has_basis(p, ["FORM-004", "FORM-005", "FORM-006"])),
+        None,
+    )
+    fast_response = next(
+        (p for p in passports if has_basis(p, ["FORM-016", "FORM-017", "FORM-018"])),
+        None,
+    )
+    if not strategy_set or not fast_response:
+        raise RuntimeError(
+            "Controlled positive relation fixture requires current-run passports "
+            "traceable to QSB strategy-set formulations FORM-004..006 and "
+            "Fast Response formulations FORM-016..018"
+        )
+    return [{**RELATION_EVIDENCE_TEMPLATE, "supports": [strategy_set["id"], fast_response["id"]]}]
 
 
 
