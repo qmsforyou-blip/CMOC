@@ -96,7 +96,7 @@ class Superagent:
             return False, "SOURCE_PACKAGE_FRAGMENTS_NOT_LIST"
         return True, status
 
-    def check_input(self, task: str, inp: dict) -> tuple[bool, str]:
+    def check_input(self, task: str, inp: dict, source_id: Optional[str] = None) -> tuple[bool, str]:
         c = self.contracts.get(task)
         if not c:
             return False, "REQUEST_CONTRACT"
@@ -110,12 +110,10 @@ class Superagent:
         missing = sorted(c.required_input_fields - set(inp))
         if missing:
             return False, f"MISSING_REQUIRED_INPUT_FIELDS: {missing}"
-        if "source_package" in c.required_input_fields:
-            ok, reason = self.check_source_package(inp["source_package"], source["source_id"])
+        if "source_package" in c.required_input_fields and source_id:
+            ok, reason = self.check_source_package(inp["source_package"], source_id)
             if not ok:
                 return False, reason
-        if missing:
-            return False, f"MISSING_REQUIRED_INPUT_FIELDS: {missing}"
         return True, "PASS"
 
     def check_output(self, task: str, out: dict) -> tuple[bool, str]:
@@ -158,7 +156,7 @@ class Superagent:
         return handoff
 
     def execute(self, run_id: str, source: dict, task: str, inp: dict, handoff_id: Optional[str] = None) -> dict:
-        ok, reason = self.check_input(task, inp)
+        ok, reason = self.check_input(task, inp, source["source_id"])
         if not ok:
             self.journal.append(JournalEntry(run_id, source["source_id"], task, None,
                                              inp.get("ref","UNKNOWN"), None, STATUS_REJECT,
