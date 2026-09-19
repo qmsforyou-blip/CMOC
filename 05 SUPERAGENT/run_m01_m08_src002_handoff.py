@@ -151,7 +151,7 @@ def m07(inp, batch):
 
 def m08(inp, batch):
     relation_evidence = inp.get("relation_evidence", [])
-    if not relation_evidence and inp.get("records") and all(r.get("status") == "NO_RELATION" for r in inp["records"]):
+    if inp.get("records") and all(r.get("status") == "NO_RELATION" for r in inp["records"]):
         records = []
     else:
         if not relation_evidence:
