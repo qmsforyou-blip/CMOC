@@ -109,6 +109,10 @@ QC_RESULT
 HANDOFF_RESULT  
 REASON
 
+TASK and MACHINE_ID are distinct journal fields:
+- TASK identifies the contracted operation being executed;
+- MACHINE_ID identifies the concrete MACHINE implementation that executed it.
+
 The journal must preserve the HANDOFF identity and its relation to the corresponding task boundary.
 
 ## 7. Acceptance tests
