@@ -16,14 +16,14 @@ class TestReconciliation(unittest.TestCase):
     def test_existing_equivalent(self):
         records = [{
             "record_id": "NOM-TEST-001",
-            "value": "Управляемость",
-            "target_object_type": "TERM",
+            "value": "INV-0009",
+            "target_object_type": "INVARIANT",
             "traceability": "SRC-TEST:p1",
         }]
         r = reconcile(self.index, "SRC-TEST", "BATCH-TEST-001",
-                      "NOMENCLATURE", records, ["TERMS"])
+                      "NOMENCLATURE", records, ["INVARIANTS"])
         self.assertEqual(r[0]["match_result"], "EXISTING_EQUIVALENT")
-        self.assertEqual(r[0]["cmoc_object_id"], "T-0001")
+        self.assertEqual(r[0]["cmoc_object_id"], "INV-0009")
 
     def test_source_candidate_not_declared_new(self):
         records = [{
