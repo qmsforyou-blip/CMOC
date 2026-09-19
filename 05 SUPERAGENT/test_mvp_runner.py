@@ -168,6 +168,54 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual([b.task for b in r.batches],["M01","M02"])
         self.assertEqual(r.batches[1].handoff_id,r.handoffs[0].handoff_id)
 
+
+    def test_output_qc_rejects_invalid_machine_output(self):
+        r=build_demo_runner()
+
+        def bad_m01(inp, batch):
+            return {
+                "status": "ACCEPT",
+                "type": "WRONG_OUTPUT_TYPE",
+                "source_id": batch.source_id,
+                "batch_id": batch.batch_id,
+                "records": [],
+                "traceability": {"source_id": batch.source_id},
+                "ref": f"{batch.batch_id}:OUTPUT",
+            }
+
+        r.handlers["M01"]=bad_m01
+        result=r.run_chain("MVP-RUN-QC01",SOURCE,initial(),["M01","M02"])
+        self.assertEqual(result["status"],"REJECT")
+        self.assertEqual(result["results"][0]["reason"],"OUTPUT_TYPE_MISMATCH: WRONG_OUTPUT_TYPE != EXTRACTION_RECORDS")
+        self.assertEqual(len(r.batches),1)
+        self.assertEqual(len(r.handoffs),0)
+        self.assertEqual(len(result["results"]),1)
+        self.assertEqual(r.journal[-1].qc_result,"FAIL")
+        self.assertEqual(r.journal[-1].handoff_result,"STOP")
+
+    def test_output_qc_rejects_missing_required_field(self):
+        r=build_demo_runner()
+
+        def bad_m01(inp, batch):
+            return {
+                "status": "ACCEPT",
+                "type": "EXTRACTION_RECORDS",
+                "source_id": batch.source_id,
+                "batch_id": batch.batch_id,
+                "records": [],
+                "ref": f"{batch.batch_id}:OUTPUT",
+            }
+
+        r.handlers["M01"]=bad_m01
+        result=r.run_chain("MVP-RUN-QC02",SOURCE,initial(),["M01","M02"])
+        self.assertEqual(result["status"],"REJECT")
+        self.assertIn("MISSING_REQUIRED_FIELDS",result["results"][0]["reason"])
+        self.assertEqual(len(r.batches),1)
+        self.assertEqual(len(r.handoffs),0)
+        self.assertEqual(len(result["results"]),1)
+        self.assertEqual(r.journal[-1].qc_result,"FAIL")
+        self.assertEqual(r.journal[-1].handoff_result,"STOP")
+
     def test_new_batch_per_task(self):
         r=build_demo_runner()
         result=r.run_chain("MVP-RUN-006",SOURCE,initial(),["M01","M02","M03"])
