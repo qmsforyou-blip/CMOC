@@ -219,7 +219,8 @@ audit = {
         }
         for h in runner.handoffs
     ],
-    "m07_result": m07_result,\n    "final_result": result.get("results", [])[-1] if result.get("results") else None,
+    "m07_result": m07_result,
+    "final_result": result.get("results", [])[-1] if result.get("results") else None,
 }
 
 print(json.dumps(audit, ensure_ascii=False, indent=2))
