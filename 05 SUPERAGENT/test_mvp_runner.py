@@ -274,6 +274,37 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(len(r.handoffs),0)
         self.assertEqual(len(r.batches),1)
 
+
+    def test_journal_records_machine_id_separately_from_task(self):
+        r=build_demo_runner()
+        result=r.run_chain("MVP-RUN-MID",SOURCE,initial(),["M01","M02","M03"])
+        self.assertEqual(result["status"],"ACCEPT")
+        task_entries=[e for e in r.journal if e.run_id=="MVP-RUN-MID" and "->" not in e.task]
+        self.assertEqual([e.task for e in task_entries],["M01","M02","M03"])
+        self.assertEqual([e.machine_id for e in task_entries],
+                         ["M01-DEMO","M02-DEMO","M03-DEMO"])
+        self.assertNotEqual(task_entries[0].task,task_entries[0].machine_id)
+
+    def test_journal_records_machine_id_on_output_qc_reject(self):
+        r=build_demo_runner()
+        def bad_m01(inp,batch):
+            return {
+                "status":"ACCEPT",
+                "type":"WRONG_OUTPUT_TYPE",
+                "source_id":batch.source_id,
+                "batch_id":batch.batch_id,
+                "records":[],
+                "traceability":{"source_id":batch.source_id},
+                "ref":f"{batch.batch_id}:OUTPUT",
+            }
+        r.handlers["M01"]=bad_m01
+        result=r.run_chain("MVP-RUN-MID-REJECT",SOURCE,initial(),["M01","M02"])
+        self.assertEqual(result["status"],"REJECT")
+        entry=r.journal[-1]
+        self.assertEqual(entry.task,"M01")
+        self.assertEqual(entry.machine_id,"M01-DEMO")
+        self.assertEqual(entry.qc_result,"FAIL")
+
     def test_new_batch_per_task(self):
         r=build_demo_runner()
         result=r.run_chain("MVP-RUN-006",SOURCE,initial(),["M01","M02","M03"])
