@@ -163,6 +163,7 @@ def select_nomenclature(formulation_input: Dict[str, Any]) -> List[Dict[str, Any
             "status": "PROVISIONAL",
             "uncertainty": record["uncertainty"],
             "source_id": formulation_input["source_id"],
+            "basis_refs": [r["id"] for r in next(g["formulations"] for g in groups if g["distinction_id"] == record["distinction_id"])],
         })
 
     actual_ids = [r["distinction_id"] for r in normalized]
