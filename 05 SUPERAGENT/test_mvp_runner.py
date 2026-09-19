@@ -1,5 +1,6 @@
 import unittest
 from mvp_runner import build_demo_runner
+from m01_integration import build_m01_handler
 
 SOURCE = {"source_id":"SRC-002","source_name":"GM Quality System Basics Overview Supplier Audit"}
 
@@ -304,6 +305,42 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(entry.task,"M01")
         self.assertEqual(entry.machine_id,"M01-DEMO")
         self.assertEqual(entry.qc_result,"FAIL")
+
+
+    def test_production_m01_conforms_to_runner_machine_boundary(self):
+        r=build_demo_runner()
+        def fake_extractor(package):
+            return [{
+                "id":"EX-001",
+                "location":"p1",
+                "observation":"TEST OBSERVATION",
+                "source_quote_or_evidence":"TEST EVIDENCE",
+                "uncertainty":"CLEAR",
+                "source_id":package["source_id"],
+            }]
+
+        r.handlers["M01"]=build_m01_handler(extractor=fake_extractor)
+        r.machine_ids["M01"]="MACHINE-SOURCE-001"
+        source_package={
+            "package_id":"PKG-001",
+            "source_id":"SRC-002",
+            "source_name":"GM Quality System Basics Overview Supplier Audit",
+            "fragments":[{"location":"p1","text":"TEST"}],
+        }
+        inp={
+            "type":"SOURCE_PACKAGE",
+            "source_id":"SRC-002",
+            "traceability":{"source_id":"SRC-002","package_id":"PKG-001"},
+            "ref":"PKG-001",
+            "source_package":source_package,
+        }
+        result=r.run_chain("MVP-RUN-PROD-M01",SOURCE,inp,["M01"])
+        self.assertEqual(result["status"],"ACCEPT")
+        self.assertEqual(result["results"][0]["type"],"EXTRACTION_RECORDS")
+        self.assertEqual(result["results"][0]["source_id"],"SRC-002")
+        self.assertEqual(result["results"][0]["batch_id"],"BATCH-SRC-002-M01-001")
+        self.assertEqual(r.journal[-1].task,"M01")
+        self.assertEqual(r.journal[-1].machine_id,"MACHINE-SOURCE-001")
 
     def test_new_batch_per_task(self):
         r=build_demo_runner()
