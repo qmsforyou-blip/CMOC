@@ -60,14 +60,20 @@ SOURCE = {
     ],
 }
 
-RELATION_EVIDENCE = [
-    {
-        "evidence_id": "EVID-SRC-002-P2-STRATEGY-SET-001",
-        "locations": ["p2"],
-        "text": SOURCE["fragments"][1]["text"],
-        "supports": ["PAS-001", "PAS-005"],
-    }
-]
+RELATION_EVIDENCE_TEMPLATE = {
+    "evidence_id": "EVID-SRC-002-P2-STRATEGY-SET-001",
+    "locations": ["p2"],
+    "text": SOURCE["fragments"][1]["text"],
+}
+
+def build_relation_evidence(passports):
+    by_term = {p.get("term"): p.get("id") for p in passports}
+    strategy_set_id = by_term.get("Quality Systems Basics strategy set")
+    fast_response_id = by_term.get("Fast Response")
+    if not strategy_set_id or not fast_response_id:
+        raise RuntimeError("Controlled positive relation fixture requires current-run passports for 'Quality Systems Basics strategy set' and 'Fast Response'")
+    return [{**RELATION_EVIDENCE_TEMPLATE, "supports": [strategy_set_id, fast_response_id]}]
+
 
 
 class ControlledBatchSuperagent(Superagent):
@@ -129,32 +135,35 @@ def m06(inp, batch):
 
 
 def m07(inp, batch):
-    records = build_relation_candidates(inp["records"], RELATION_EVIDENCE)
+    relation_evidence = build_relation_evidence(inp["records"])
+    records = build_relation_candidates(inp["records"], relation_evidence)
     return wrap_output(
         batch,
         "RELATION_CANDIDATES",
         records,
         inp,
-        relation_evidence=RELATION_EVIDENCE,
+        relation_evidence=relation_evidence,
         passports=inp["records"],
         evaluated_passport_ids=[p["id"] for p in inp["records"]],
-        relation_evidence_ids=[e["evidence_id"] for e in RELATION_EVIDENCE],
+        relation_evidence_ids=[e["evidence_id"] for e in relation_evidence],
     )
 
 
 def m08(inp, batch):
-    records = decide(
-        inp["passports"],
-        inp["records"],
-        inp.get("relation_evidence", RELATION_EVIDENCE),
-    )
+    relation_evidence = inp.get("relation_evidence", [])
+    if not relation_evidence and inp.get("records") and all(r.get("status") == "NO_RELATION" for r in inp["records"]):
+        records = []
+    else:
+        if not relation_evidence:
+            raise RuntimeError("M08 requires relation evidence when relation candidates are supplied")
+        records = decide(inp["passports"], inp["records"], relation_evidence)
     return wrap_output(
         batch,
         "DECISION_RECORDS",
         records,
         inp,
         upstream_m07_batch=inp.get("batch_id"),
-        relation_evidence_ids=[e["evidence_id"] for e in inp.get("relation_evidence", RELATION_EVIDENCE)],
+        relation_evidence_ids=[e["evidence_id"] for e in relation_evidence],
     )
 
 
