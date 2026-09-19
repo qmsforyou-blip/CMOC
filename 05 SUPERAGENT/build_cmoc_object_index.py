@@ -34,6 +34,17 @@ ID_PATTERNS = [
     re.compile(r"\bOC-\d+\b"),
 ]
 
+# Inventory-classified files observed not to be addressable object files.
+# They remain in CMOC-INVENTORY-001 but are excluded from OBJECT_FILE indexing.
+NON_OBJECT_PATHS = {
+    "000 База/01 Термины/01 База Термины.base",
+    "000 База/02 Различения/02 база различения.base",
+    "000 База/02 Различения/Без названия.md",
+    "000 База/03 GM-формулировки/03 GM формулировки.base",
+    "03_MACHINE-CATALOG/MACHINES/MACHINE-CANDIDATES.md",
+    "07 К/LAW/Реестр LAW.md.md",
+}
+
 def read_text(path):
     return path.read_text(encoding="utf-8")
 
@@ -70,10 +81,6 @@ def explicit_object_id(text, path):
             m = p.search(part)
             if m:
                 return m.group(0)
-    for p in ID_PATTERNS:
-        m = p.search(text[:4000])
-        if m:
-            return m.group(0)
     return None
 
 def object_record(inv, root):
@@ -184,7 +191,7 @@ def build():
     inv = json.loads(read_text(INVENTORY))
     records = []
     for item in inv["records"]:
-        if item["class"] in CLASS_TO_TYPE:
+        if item["class"] in CLASS_TO_TYPE and item["path"] not in NON_OBJECT_PATHS:
             records.append(object_record(item, ROOT))
 
     containers = {
@@ -199,7 +206,10 @@ def build():
 
     for r in records:
         if r["object_id"] is None:
-            raise RuntimeError(f"Unresolved object_id: {r['representation']['container']}")
+            raise RuntimeError(
+                f"Unresolved object_id in addressable representation: "
+                f"{r['representation']['container']}"
+            )
 
     full_keys = [
         (
@@ -248,11 +258,28 @@ def build():
     return data
 
 if __name__ == "__main__":
+    import sys
+
     data = build()
     generated = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
-    OUTPUT.write_text(generated, encoding="utf-8")
-    print(json.dumps({
-        "representation_record_count": data["representation_record_count"],
-        "representation_kind_counts": data["representation_kind_counts"],
-        "unique_object_ids": data["count_views"]["unique_object_ids"],
-    }, ensure_ascii=False))
+
+    if "--check" in sys.argv:
+        if not OUTPUT.exists():
+            raise SystemExit("OBJECT INDEX file is missing")
+        committed = OUTPUT.read_text(encoding="utf-8")
+        if committed != generated:
+            raise SystemExit("OBJECT INDEX is not reproducible from current repository state")
+        print(json.dumps({
+            "check": "PASS",
+            "representation_record_count": data["representation_record_count"],
+            "representation_kind_counts": data["representation_kind_counts"],
+            "unique_object_ids": data["count_views"]["unique_object_ids"],
+        }, ensure_ascii=False))
+    else:
+        OUTPUT.write_text(generated, encoding="utf-8")
+        print(json.dumps({
+            "generated": "OK",
+            "representation_record_count": data["representation_record_count"],
+            "representation_kind_counts": data["representation_kind_counts"],
+            "unique_object_ids": data["count_views"]["unique_object_ids"],
+        }, ensure_ascii=False))
