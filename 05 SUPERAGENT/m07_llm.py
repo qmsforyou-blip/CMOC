@@ -1,6 +1,6 @@
 """Production M07 relation-candidate adapter.
 
-Input: Passport Records.
+Input: Passport Records plus optional source-bound relation evidence.
 Output: source-bound Relation Candidates / explicit NO_RELATION / NEEDS_EVIDENCE.
 """
 
@@ -17,10 +17,9 @@ class M07LLMError(RuntimeError):
 SYSTEM_PROMPT = """
 You are M07 RELATIONS of MACHINE-SOURCE-001.
 
-Your operation is strictly limited to identifying SOURCE-SUPPORTED RELATION CANDIDATES
-between supplied Passport Records.
+Identify only SOURCE-SUPPORTED RELATION CANDIDATES between supplied Passport Records.
 
-Use ONLY the supplied Passport Records and their source_basis references.
+Use ONLY the supplied Passport Records and supplied source-bound relation evidence.
 Do not use external knowledge.
 
 A relation candidate requires:
@@ -40,14 +39,15 @@ Do NOT infer a relation from:
 - presumed dependency;
 - general domain knowledge.
 
-If the supplied passports do not contain explicit evidence supporting a relation,
-return an explicit NO_RELATION result rather than inventing one.
-
-If a relation might exist but the supplied evidence is insufficient to establish it,
-return NEEDS_EVIDENCE with a concrete evidence_gap.
+If no explicit evidence supports a relation, return NO_RELATION.
+If the evidence is suggestive but insufficient, return NEEDS_EVIDENCE with a concrete evidence_gap.
 
 A RELATION_CANDIDATE is provisional. It is NOT an established CMOC relation.
 Never assign CANONICAL.
+
+For RELATION_CANDIDATE use status "RELATION_CANDIDATE" and epistemic_status "PROVISIONAL".
+For NO_RELATION use status "NO_RELATION".
+For NEEDS_EVIDENCE use status "NEEDS_EVIDENCE".
 
 Return JSON only:
 {
@@ -58,23 +58,13 @@ Return JSON only:
       "from_passport_id": "PAS-...",
       "to_passport_id": "PAS-...",
       "relation_type": "...",
-      "status": "ЧЕРНОВИК",
+      "status": "RELATION_CANDIDATE",
       "epistemic_status": "PROVISIONAL",
-      "basis_refs": ["..."],
+      "basis_refs": ["EVID-001"],
       "evidence_gap": null
     }
   ],
   "evaluated_scope": ["PAS-001", "..."]
-}
-
-For NO_RELATION or NEEDS_EVIDENCE use:
-{
-  "id": "REL-NONE-001",
-  "source_id": "...",
-  "status": "NO_RELATION",
-  "epistemic_status": "PROVISIONAL",
-  "basis_refs": [],
-  "evidence_gap": "..."
 }
 
 Every supplied passport must be represented in evaluated_scope.
@@ -124,13 +114,18 @@ def _request_json(payload: Dict[str, Any]) -> Dict[str, Any]:
         raise M07LLMError(f"Invalid M07 LLM response: {exc}") from exc
 
 
-def build_relation_candidates(passports: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def build_relation_candidates(
+    passports: List[Dict[str, Any]],
+    relation_evidence: List[Dict[str, Any]] | None = None,
+) -> List[Dict[str, Any]]:
     if not passports:
         raise M07LLMError("No Passport Records supplied")
 
+    evidence = relation_evidence or []
     payload = {
         "task": "M07 RELATIONS",
         "passports": passports,
+        "relation_evidence": evidence,
     }
     result = _request_json(payload)
 
@@ -149,6 +144,7 @@ def build_relation_candidates(passports: List[Dict[str, Any]]) -> List[Dict[str,
         )
 
     passport_ids = set(expected_scope)
+    evidence_ids = {e.get("evidence_id") for e in evidence}
 
     for record in records:
         status = record.get("status")
@@ -165,12 +161,13 @@ def build_relation_candidates(passports: List[Dict[str, Any]]) -> List[Dict[str,
                 raise M07LLMError("Self-relation is not allowed")
             if not record.get("relation_type"):
                 raise M07LLMError("Relation candidate requires relation_type")
-            if record.get("status") != "RELATION_CANDIDATE":
-                raise M07LLMError("Invalid relation candidate status")
             if record.get("epistemic_status") != "PROVISIONAL":
                 raise M07LLMError("Relation candidate must remain PROVISIONAL")
-            if not isinstance(record.get("basis_refs"), list) or not record["basis_refs"]:
+            basis_refs = record.get("basis_refs")
+            if not isinstance(basis_refs, list) or not basis_refs:
                 raise M07LLMError("Relation candidate requires basis_refs")
+            if evidence_ids and not set(basis_refs).issubset(evidence_ids):
+                raise M07LLMError("Relation candidate cites unavailable evidence")
             if record.get("evidence_gap") not in (None, ""):
                 raise M07LLMError("Accepted relation candidate must not carry evidence_gap")
 
