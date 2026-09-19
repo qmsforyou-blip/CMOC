@@ -178,7 +178,7 @@ QUERY не использует NEW, EXISTING_EQUIVALENT, EXISTING_RELATED, NEED
         match_mode:
         match_status:
         match_basis:
-        object_status:
+        indexed_attributes:
         representation:
         traceability:
 
@@ -253,8 +253,7 @@ QUERY v0.3 не должен содержать механизмов: прочи
 6. CANDIDATE;
 7. MATCH;
 8. NO_MATCH;
-9. CANDIDATE;
-10. AMBIGUOUS;
+9. AMBIGUOUS;
 11. SCOPE_INSUFFICIENT;
 12. полную traceability;
 13. сохранение отдельных Representation при одинаковом object_id.
