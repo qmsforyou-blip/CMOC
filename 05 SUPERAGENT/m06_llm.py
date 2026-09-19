@@ -71,7 +71,7 @@ def build_passports(classifications: List[Dict[str, Any]]) -> List[Dict[str, Any
             "lifecycle_status must be ЧЕРНОВИК.",
             "epistemic_status must be PROVISIONAL.",
             "Object boundary must be explicitly source-bound.",
-            "source_basis must not invent unsupported source locations or evidence.",
+            "source_basis must preserve the supplied upstream basis references; do not invent source locations or evidence.",
             "Do not create relations.",
             "Do not canonize.",
             "Do not assign CANONICAL.",
@@ -88,7 +88,7 @@ def build_passports(classifications: List[Dict[str, Any]]) -> List[Dict[str, Any
                     "candidate_id": "NOM-001",
                     "classification_id": "CLS-001",
                     "source_id": "SRC-002",
-                    "term": "...",
+                    "term": "candidate term",
                     "working_class": "...",
                     "lifecycle_status": "ЧЕРНОВИК",
                     "epistemic_status": "PROVISIONAL",
@@ -117,6 +117,10 @@ def build_passports(classifications: List[Dict[str, Any]]) -> List[Dict[str, Any
             raise M06LLMError(f"Classification binding mismatch at position {i}")
         if record.get("source_id") != source.get("source_id"):
             raise M06LLMError(f"Source binding mismatch at position {i}")
+        if record.get("term") != source.get("candidate_term"):
+            raise M06LLMError(f"Candidate term mismatch at position {i}")
+        if record.get("source_basis") != source.get("basis_refs", []):
+            raise M06LLMError(f"Source basis mismatch at position {i}")
         if record.get("lifecycle_status") != "ЧЕРНОВИК":
             raise M06LLMError(f"Invalid lifecycle status at position {i}")
         if record.get("epistemic_status") not in {"PROVISIONAL", "NEEDS_EVIDENCE"}:
