@@ -8,12 +8,12 @@
   "source_commit": "fd12c417358723b97205730084b87e9068a37854",
   "purpose": "Read-only structural/addressable index. No semantic reconciliation or CMOC mutation.",
   "record_model": "One record per discovered representation; the same object_id may therefore occur more than once.",
-  "representation_record_count": 1952,
+  "representation_record_count": 1953,
   "object_type_counts": {
     "CHAIN": 2,
     "DISTINCTION": 1167,
     "GM_FORMULATION": 49,
-    "INVARIANT": 9,
+    "INVARIANT": 10,
     "LAW": 1,
     "MACHINE": 8,
     "OBSERVATION": 1,
@@ -23,7 +23,7 @@
   },
   "representation_kind_counts": {
     "OBJECT_FILE": 732,
-    "REGISTRY_RECORD": 1220,
+    "REGISTRY_RECORD": 1221,
     "OTHER_ADDRESSABLE": 0
   },
   "records": [
@@ -47022,338 +47022,6 @@
     {
       "schema": "CMOC-OBJECT-INDEX-RECORD",
       "version": "0.2",
-      "object_id": "INV-0001",
-      "object_type": "INVARIANT",
-      "object_name": "Требование",
-      "representation": {
-        "kind": "REGISTRY_RECORD",
-        "container": "08 CMOC Core/LAB-004 Инварианты.md",
-        "location": {
-          "record_id": "INV-0001",
-          "line": 2
-        }
-      },
-      "indexed_attributes": {},
-      "structure": {
-        "fields_present": [
-          "id"
-        ],
-        "sections_present": [
-          "Без требования невозможно установить отклонение",
-          "Статус",
-          "Класс",
-          "ISO",
-          "GM QSB",
-          "Военная приёмка",
-          "Практика предприятий",
-          "Управлять можно только различимыми состояниями",
-          "INV-0003 Организационная память"
-        ]
-      },
-      "provenance": {
-        "repository": "qmsforyou-blip/CMOC",
-        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
-        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
-      },
-      "traceability": {
-        "source": "UNKNOWN",
-        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
-      },
-      "discovery": {
-        "basis": "mechanical identifier discovery in registry"
-      }
-    },
-    {
-      "schema": "CMOC-OBJECT-INDEX-RECORD",
-      "version": "0.2",
-      "object_id": "INV-0004",
-      "object_type": "INVARIANT",
-      "object_name": "Сравнение",
-      "representation": {
-        "kind": "REGISTRY_RECORD",
-        "container": "08 CMOC Core/LAB-004 Инварианты.md",
-        "location": {
-          "record_id": "INV-0004",
-          "line": 554
-        }
-      },
-      "indexed_attributes": {},
-      "structure": {
-        "fields_present": [
-          "id"
-        ],
-        "sections_present": [
-          "Управление начинается с акта сравнения"
-        ]
-      },
-      "provenance": {
-        "repository": "qmsforyou-blip/CMOC",
-        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
-        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
-      },
-      "traceability": {
-        "source": "UNKNOWN",
-        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
-      },
-      "discovery": {
-        "basis": "mechanical identifier discovery in registry"
-      }
-    },
-    {
-      "schema": "CMOC-OBJECT-INDEX-RECORD",
-      "version": "0.2",
-      "object_id": "INV-0005",
-      "object_type": "INVARIANT",
-      "object_name": "**Решение",
-      "representation": {
-        "kind": "REGISTRY_RECORD",
-        "container": "08 CMOC Core/LAB-004 Инварианты.md",
-        "location": {
-          "record_id": "INV-0005",
-          "line": 668
-        }
-      },
-      "indexed_attributes": {},
-      "structure": {
-        "fields_present": [
-          "id"
-        ],
-        "sections_present": [
-          "Управление возникает только после принятия решения"
-        ]
-      },
-      "provenance": {
-        "repository": "qmsforyou-blip/CMOC",
-        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
-        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
-      },
-      "traceability": {
-        "source": "UNKNOWN",
-        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
-      },
-      "discovery": {
-        "basis": "mechanical identifier discovery in registry"
-      }
-    },
-    {
-      "schema": "CMOC-OBJECT-INDEX-RECORD",
-      "version": "0.2",
-      "object_id": "INV-0006",
-      "object_type": "INVARIANT",
-      "object_name": "Ответственность",
-      "representation": {
-        "kind": "REGISTRY_RECORD",
-        "container": "08 CMOC Core/LAB-004 Инварианты.md",
-        "location": {
-          "record_id": "INV-0006",
-          "line": 787
-        }
-      },
-      "indexed_attributes": {},
-      "structure": {
-        "fields_present": [
-          "id"
-        ],
-        "sections_present": [
-          "Ответственность должна быть назначена"
-        ]
-      },
-      "provenance": {
-        "repository": "qmsforyou-blip/CMOC",
-        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
-        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
-      },
-      "traceability": {
-        "source": "UNKNOWN",
-        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
-      },
-      "discovery": {
-        "basis": "mechanical identifier discovery in registry"
-      }
-    },
-    {
-      "schema": "CMOC-OBJECT-INDEX-RECORD",
-      "version": "0.2",
-      "object_id": "INV-0007",
-      "object_type": "INVARIANT",
-      "object_name": "Исполнение",
-      "representation": {
-        "kind": "REGISTRY_RECORD",
-        "container": "08 CMOC Core/LAB-004 Инварианты.md",
-        "location": {
-          "record_id": "INV-0007",
-          "line": 898
-        }
-      },
-      "indexed_attributes": {},
-      "structure": {
-        "fields_present": [
-          "id"
-        ],
-        "sections_present": []
-      },
-      "provenance": {
-        "repository": "qmsforyou-blip/CMOC",
-        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
-        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
-      },
-      "traceability": {
-        "source": "UNKNOWN",
-        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
-      },
-      "discovery": {
-        "basis": "mechanical identifier discovery in registry"
-      }
-    },
-    {
-      "schema": "CMOC-OBJECT-INDEX-RECORD",
-      "version": "0.2",
-      "object_id": "INV-0008",
-      "object_type": "INVARIANT",
-      "object_name": "Подтверждение исполнения",
-      "representation": {
-        "kind": "REGISTRY_RECORD",
-        "container": "08 CMOC Core/LAB-004 Инварианты.md",
-        "location": {
-          "record_id": "INV-0008",
-          "line": 1027
-        }
-      },
-      "indexed_attributes": {},
-      "structure": {
-        "fields_present": [
-          "id"
-        ],
-        "sections_present": [
-          "Formula",
-          "Mechanism",
-          "Why",
-          "Consequences",
-          "Implementations",
-          "Polygon",
-          "Counterexamples",
-          "Limits",
-          "Origin"
-        ]
-      },
-      "provenance": {
-        "repository": "qmsforyou-blip/CMOC",
-        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
-        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
-      },
-      "traceability": {
-        "source": "UNKNOWN",
-        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
-      },
-      "discovery": {
-        "basis": "mechanical identifier discovery in registry"
-      }
-    },
-    {
-      "schema": "CMOC-OBJECT-INDEX-RECORD",
-      "version": "0.2",
-      "object_id": "INV-0010",
-      "object_type": "INVARIANT",
-      "object_name": "Механизм должен быть наблюдаем",
-      "representation": {
-        "kind": "REGISTRY_RECORD",
-        "container": "08 CMOC Core/LAB-004 Инварианты.md",
-        "location": {
-          "record_id": "INV-0010",
-          "line": 1305
-        }
-      },
-      "indexed_attributes": {},
-      "structure": {
-        "fields_present": [
-          "id"
-        ],
-        "sections_present": []
-      },
-      "provenance": {
-        "repository": "qmsforyou-blip/CMOC",
-        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
-        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
-      },
-      "traceability": {
-        "source": "UNKNOWN",
-        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
-      },
-      "discovery": {
-        "basis": "mechanical identifier discovery in registry"
-      }
-    },
-    {
-      "schema": "CMOC-OBJECT-INDEX-RECORD",
-      "version": "0.2",
-      "object_id": "INV-0011",
-      "object_type": "INVARIANT",
-      "object_name": "Согласованность",
-      "representation": {
-        "kind": "REGISTRY_RECORD",
-        "container": "08 CMOC Core/LAB-004 Инварианты.md",
-        "location": {
-          "record_id": "INV-0011",
-          "line": 1312
-        }
-      },
-      "indexed_attributes": {},
-      "structure": {
-        "fields_present": [
-          "id"
-        ],
-        "sections_present": []
-      },
-      "provenance": {
-        "repository": "qmsforyou-blip/CMOC",
-        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
-        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
-      },
-      "traceability": {
-        "source": "UNKNOWN",
-        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
-      },
-      "discovery": {
-        "basis": "mechanical identifier discovery in registry"
-      }
-    },
-    {
-      "schema": "CMOC-OBJECT-INDEX-RECORD",
-      "version": "0.2",
-      "object_id": "INV-0009",
-      "object_type": "INVARIANT",
-      "object_name": null,
-      "representation": {
-        "kind": "REGISTRY_RECORD",
-        "container": "08 CMOC Core/LAB-004 Инварианты.md",
-        "location": {
-          "record_id": "INV-0009",
-          "line": 1299
-        }
-      },
-      "indexed_attributes": {},
-      "structure": {
-        "fields_present": [
-          "id"
-        ],
-        "sections_present": []
-      },
-      "provenance": {
-        "repository": "qmsforyou-blip/CMOC",
-        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
-        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
-      },
-      "traceability": {
-        "source": "UNKNOWN",
-        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
-      },
-      "discovery": {
-        "basis": "mechanical identifier discovery in registry"
-      }
-    },
-    {
-      "schema": "CMOC-OBJECT-INDEX-RECORD",
-      "version": "0.2",
       "object_id": "C-0001",
       "object_type": "ORGANIZATIONAL_CONSTRUCTION",
       "object_name": "Требование → Состояние → Решение → Последствие",
@@ -64080,6 +63748,373 @@
       "discovery": {
         "basis": "mechanical identifier discovery in registry"
       }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0001",
+      "object_type": "INVARIANT",
+      "object_name": "Требование",
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0001",
+          "line": 2
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": [
+          "Без требования невозможно установить отклонение",
+          "Статус",
+          "Класс",
+          "ISO",
+          "GM QSB",
+          "Военная приёмка",
+          "Практика предприятий",
+          "Управлять можно только различимыми состояниями"
+        ]
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0003",
+      "object_type": "INVARIANT",
+      "object_name": "Организационная память",
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0003",
+          "line": 469
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": [
+          "INV-0003 Организационная память"
+        ]
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0004",
+      "object_type": "INVARIANT",
+      "object_name": "Сравнение",
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0004",
+          "line": 554
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": [
+          "Управление начинается с акта сравнения"
+        ]
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0005",
+      "object_type": "INVARIANT",
+      "object_name": "**Решение",
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0005",
+          "line": 668
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": [
+          "Управление возникает только после принятия решения"
+        ]
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0006",
+      "object_type": "INVARIANT",
+      "object_name": "Ответственность",
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0006",
+          "line": 787
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": [
+          "Ответственность должна быть назначена"
+        ]
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0007",
+      "object_type": "INVARIANT",
+      "object_name": "Исполнение",
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0007",
+          "line": 898
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": []
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0008",
+      "object_type": "INVARIANT",
+      "object_name": "Подтверждение исполнения",
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0008",
+          "line": 1027
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": [
+          "Formula",
+          "Mechanism",
+          "Why",
+          "Consequences",
+          "Implementations",
+          "Polygon",
+          "Counterexamples",
+          "Limits",
+          "Origin"
+        ]
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0009",
+      "object_type": "INVARIANT",
+      "object_name": null,
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0009",
+          "line": 1299
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": []
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0010",
+      "object_type": "INVARIANT",
+      "object_name": "Механизм должен быть наблюдаем",
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0010",
+          "line": 1305
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": []
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
+    },
+    {
+      "schema": "CMOC-OBJECT-INDEX-RECORD",
+      "version": "0.2",
+      "object_id": "INV-0011",
+      "object_type": "INVARIANT",
+      "object_name": "Согласованность",
+      "representation": {
+        "kind": "REGISTRY_RECORD",
+        "container": "08 CMOC Core/LAB-004 Инварианты.md",
+        "location": {
+          "record_id": "INV-0011",
+          "line": 1312
+        }
+      },
+      "indexed_attributes": {},
+      "structure": {
+        "fields_present": [
+          "id"
+        ],
+        "sections_present": []
+      },
+      "provenance": {
+        "repository": "qmsforyou-blip/CMOC",
+        "git_sha": "a2a49acca6f5f8de550aaa68dddd734a9bfe4c4d",
+        "inventory_snapshot": "CMOC-INVENTORY-001@2026-09-18/fd12c417358723b97205730084b87e9068a37854"
+      },
+      "traceability": {
+        "source": "UNKNOWN",
+        "registry": "08 CMOC Core/LAB-004 Инварианты.md"
+      },
+      "discovery": {
+        "basis": "mechanical identifier discovery in registry"
+      }
     }
   ],
   "count_views": {
@@ -64103,10 +64138,10 @@
         "unique_object_ids": 49
       },
       "INVARIANT": {
-        "representations": 9,
+        "representations": 10,
         "object_files": 0,
-        "registry_records": 9,
-        "unique_object_ids": 9
+        "registry_records": 10,
+        "unique_object_ids": 10
       },
       "LAW": {
         "representations": 1,
@@ -64145,6 +64180,6 @@
         "unique_object_ids": 125
       }
     },
-    "unique_object_ids": 1219
+    "unique_object_ids": 1220
   }
 }
