@@ -64,6 +64,8 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(h.to_task,"M02")
         self.assertEqual(h.input_type,"EXTRACTION_RECORDS")
         self.assertEqual(h.output_ref,m01["ref"])
+        self.assertTrue(h.handoff_id.startswith("HANDOFF-SRC-002-M01-M02-"))
+        self.assertEqual(r.handoffs[-1].handoff_id,h.handoff_id)
 
     def test_handoff_rejects_incompatible_destination(self):
         r=build_demo_runner()
@@ -71,6 +73,19 @@ class TestMvpRunner(unittest.TestCase):
         h=r.create_handoff(SOURCE,"M01","M04",m01)
         self.assertEqual(h.status,"REJECT")
         self.assertIn("TYPE_MISMATCH",h.reason)
+        self.assertEqual(r.handoffs[-1].status,"REJECT")
+        self.assertEqual(r.journal[-1].handoff_id,h.handoff_id)
+
+    def test_chain_links_handoff_to_downstream_batch(self):
+        r=build_demo_runner()
+        result=r.run_chain("MVP-RUN-H03",SOURCE,initial(),["M01","M02","M03"])
+        self.assertEqual(result["status"],"ACCEPT")
+        self.assertEqual(len(r.handoffs),2)
+        self.assertEqual(result["results"][1]["batch_id"],"BATCH-SRC-002-M02-001")
+        self.assertEqual(r.journal[2].handoff_id,r.handoffs[0].handoff_id)
+        self.assertEqual(r.journal[2].status,"ACCEPT")
+        self.assertEqual(r.journal[3].handoff_id,r.handoffs[1].handoff_id)
+        self.assertEqual(r.journal[3].status,"ACCEPT")
 
     def test_new_batch_per_task(self):
         r=build_demo_runner()
