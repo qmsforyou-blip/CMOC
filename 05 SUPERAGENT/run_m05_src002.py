@@ -32,7 +32,7 @@ SOURCE_PACKAGE = {
 
 
 def m05(source_package_input, batch):
-    records = classify(CANDIDATES)
+    records = classify(source_package_input["records"])
     return {
         "status": "ACCEPT",
         "type": "CLASSIFICATION_RECORDS",
