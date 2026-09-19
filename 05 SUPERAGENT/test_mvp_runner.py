@@ -356,6 +356,36 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(r.journal[-1].machine_id,"MACHINE-SOURCE-001")
 
 
+    def test_source_package_integrity_gate(self):
+        r=build_demo_runner()
+        package={
+            "package_id":"SOURCE-002-PACKAGE-001-CONTROLLED-1-6",
+            "source_id":"SRC-002",
+            "source_name":"GM Quality System Basics Overview Supplier Audit",
+            "source_version":"rev March 2009",
+            "source_package_status":"PARTIAL",
+            "work_scope":"pages 1-6 only",
+            "fragments":[{"location":"p1","text":"Quality Systems Basics rev March 2009."}],
+        }
+        inp={
+            "type":"SOURCE_PACKAGE","source_id":"SRC-002",
+            "traceability":{"source_id":"SRC-002","package_id":package["package_id"]},
+            "ref":package["package_id"],"source_package":package,
+        }
+        result=r.run_chain("MVP-RUN-SPC03",SOURCE,inp,["M01"])
+        self.assertEqual(result["status"],"ACCEPT")
+        self.assertEqual(len(r.batches),1)
+        self.assertEqual(r.journal[-1].machine_id,"M01-DEMO")
+
+    def test_source_package_rejects_source_id_mismatch(self):
+        r=build_demo_runner()
+        package={**initial()["source_package"],"source_id":"SRC-OTHER"}
+        inp={**initial(),"source_package":package}
+        result=r.run_chain("MVP-RUN-SPC04",SOURCE,inp,["M01"])
+        self.assertEqual(result["status"],"REJECT")
+        self.assertEqual(result["results"][0]["reason"],"SOURCE_PACKAGE_SOURCE_ID_MISMATCH")
+        self.assertEqual(len(r.batches),0)
+
     def test_source_package_contract_requires_production_payload(self):
         r=build_demo_runner()
         inp={
