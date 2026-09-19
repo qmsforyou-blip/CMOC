@@ -55,6 +55,23 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(final["traceability"]["from"]["source_id"],"SRC-002")
         self.assertTrue(final["batch_id"].startswith("BATCH-SRC-002-M03-"))
 
+    def test_handoff_contract(self):
+        r=build_demo_runner()
+        m01=r.execute("MVP-RUN-H01",SOURCE,"M01",initial())
+        h=r.create_handoff(SOURCE,"M01","M02",m01)
+        self.assertEqual(h.status,"ACCEPT")
+        self.assertEqual(h.from_task,"M01")
+        self.assertEqual(h.to_task,"M02")
+        self.assertEqual(h.input_type,"EXTRACTION_RECORDS")
+        self.assertEqual(h.output_ref,m01["ref"])
+
+    def test_handoff_rejects_incompatible_destination(self):
+        r=build_demo_runner()
+        m01=r.execute("MVP-RUN-H02",SOURCE,"M01",initial())
+        h=r.create_handoff(SOURCE,"M01","M04",m01)
+        self.assertEqual(h.status,"REJECT")
+        self.assertIn("TYPE_MISMATCH",h.reason)
+
     def test_new_batch_per_task(self):
         r=build_demo_runner()
         result=r.run_chain("MVP-RUN-006",SOURCE,initial(),["M01","M02","M03"])
