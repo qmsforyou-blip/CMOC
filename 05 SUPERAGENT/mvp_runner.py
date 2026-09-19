@@ -30,6 +30,17 @@ class Batch:
     output: Optional[dict] = None
 
 @dataclass
+class Handoff:
+    source_id: str
+    from_task: str
+    to_task: str
+    output_ref: str
+    input_type: str
+    traceability: dict
+    status: str
+    reason: str = ""
+
+@dataclass
 class JournalEntry:
     run_id: str
     source_id: str
@@ -79,6 +90,27 @@ class Superagent:
             return False, "MISSING_TRACEABILITY"
         return True, "PASS"
 
+    def create_handoff(self, source: dict, from_task: str, to_task: str, output: dict) -> Handoff:
+        contract = self.contracts.get(to_task)
+        input_type = output.get("type", "UNKNOWN")
+        traceability = output.get("traceability", {})
+        output_ref = output.get("ref", "UNKNOWN")
+        if not contract:
+            return Handoff(source["source_id"], from_task, to_task, output_ref,
+                           input_type, traceability, STATUS_REJECT, "REQUEST_CONTRACT")
+        if input_type not in contract.accepted_inputs:
+            return Handoff(source["source_id"], from_task, to_task, output_ref,
+                           input_type, traceability, STATUS_REJECT,
+                           f"TYPE_MISMATCH: {input_type} -> {sorted(contract.accepted_inputs)}")
+        if not output.get("source_id"):
+            return Handoff(source["source_id"], from_task, to_task, output_ref,
+                           input_type, traceability, STATUS_REJECT, "MISSING_SOURCE_ID")
+        if not traceability:
+            return Handoff(source["source_id"], from_task, to_task, output_ref,
+                           input_type, traceability, STATUS_REJECT, "MISSING_TRACEABILITY")
+        return Handoff(source["source_id"], from_task, to_task, output_ref,
+                       input_type, traceability, STATUS_ACCEPT, "READY")
+
     def execute(self, run_id: str, source: dict, task: str, inp: dict) -> dict:
         ok, reason = self.check_input(task, inp)
         if not ok:
@@ -114,18 +146,26 @@ class Superagent:
     def run_chain(self, run_id: str, source: dict, initial: dict, tasks: List[str]) -> dict:
         current = initial
         results = []
-        for task in tasks:
+        for i, task in enumerate(tasks):
             result = self.execute(run_id, source, task, current)
             results.append(result)
             if result.get("status") != STATUS_ACCEPT:
                 return {"status": result.get("status"), "results": results, "journal": self.journal}
-            current = {
-                **result,
-                "type": result["type"],
-                "source_id": source["source_id"],
-                "traceability": result["traceability"],
-                "ref": result["ref"],
-            }
+            if i < len(tasks) - 1:
+                next_task = tasks[i + 1]
+                handoff = self.create_handoff(source, task, next_task, result)
+                if handoff.status != STATUS_ACCEPT:
+                    return {"status": STATUS_REJECT, "results": results,
+                            "journal": self.journal, "handoff": handoff}
+                current = {
+                    **result,
+                    "type": handoff.input_type,
+                    "source_id": handoff.source_id,
+                    "traceability": handoff.traceability,
+                    "ref": handoff.output_ref,
+                }
+            else:
+                current = result
         return {"status": STATUS_ACCEPT, "results": results, "journal": self.journal}
 
 def build_demo_runner() -> Superagent:
