@@ -148,18 +148,30 @@ def query(
     if qtype == "EXACT":
         raw = str(value).strip()
         normalized = norm(raw)
-        hits = [
+
+        # EXACT is deterministic by the strongest explicit address first:
+        # object_id. If the requested ID has several physical representations,
+        # preserve all of them and report AMBIGUOUS. Do not let a coincidental
+        # match in another indexed field create additional hits.
+        id_hits = [
             r for r in candidates
             if str(r.get("object_id", "")).upper() == raw.upper()
-            or (r.get("object_name") is not None and norm(r["object_name"]) == normalized)
-            or any(
-                norm(v) == normalized
-                for v in (r.get("indexed_attributes") or {}).values()
-                if isinstance(v, (str, int, float))
-            )
         ]
+        if id_hits:
+            hits = id_hits
+            basis = "exact object_id"
+        else:
+            # If no object_id matches, an exact object_name match is allowed.
+            # Again, other indexed attributes are deliberately not considered:
+            # they are not an EXACT address.
+            hits = [
+                r for r in candidates
+                if r.get("object_name") is not None
+                and norm(r["object_name"]) == normalized
+            ]
+            basis = "exact object_name"
+
         status = "MATCH" if len(hits) == 1 else ("AMBIGUOUS" if hits else "NO_MATCH")
-        basis = "exact object_id/object_name/indexed_attribute"
     elif qtype == "ALIAS":
         normalized = norm(value)
         hits = [
