@@ -1,19 +1,21 @@
 # TASK-CONTRACT-001-M07 — RELATIONS — SRC-002
 
-**Version:** v0.1  
+**Version:** v0.2  
 **Date:** 19-09-2026  
 **Status:** Controlled contract  
-**Basis:** STD-008 v0.7, TASK-CONTRACT-001 v0.2, controlled M06 SRC-002 output.
+**Basis:** STD-008 v0.7, TASK-CONTRACT-001 v0.2, controlled M06 SRC-002 output, M07-001 negative test.
 
 ## 1. INPUT
 
-`PASSPORT_RECORDS` from M06.
+Primary input: `PASSPORT_RECORDS` from M06.
 
-Controlled input:
+Optional controlled evidence context may accompany the passports when the purpose is to test the MULTI-OBJECT relation branch. Such context must contain only source-bound evidence explicitly available in the controlled SOURCE_PACKAGE.
+
+Controlled SRC-002 input:
 - SOURCE_ID: `SRC-002`
 - upstream BATCH: `BATCH-SRC-002-M06-001`
 - source package: `SOURCE-002-PACKAGE-001-CONTROLLED-1-6`
-- cardinality: 7 Passport Records
+- Passport cardinality: 7
 
 ## 2. OPERATION
 
@@ -23,18 +25,10 @@ A relation candidate requires:
 1. two explicit passport endpoints;
 2. source-bound basis for the relation;
 3. a relation type;
-4. an explicit evidence/basis reference;
+4. explicit evidence/basis reference;
 5. no reliance on external knowledge.
 
-If the supplied passport input does not contain sufficient relation evidence, M07 returns an explicit `NO_RELATION` result with a concrete reason. It must not infer a relation merely from:
-- similar or related terminology;
-- working class;
-- common source;
-- shared formulation basis;
-- adjacency in the source;
-- presumed hierarchy;
-- presumed causality;
-- presumed dependency.
+For MULTI-OBJECT testing, relation evidence may be supplied separately from the passport fields, but it must be traceable to the controlled SOURCE_PACKAGE.
 
 ## 3. OUTPUT
 
@@ -51,7 +45,7 @@ A relation candidate is provisional and is not an established CMOC relation.
 
 `N → M`.
 
-For the controlled SRC-002 test, the result is not required to contain a candidate for every possible pair. Every evaluated input scope must have an explicit result.
+The result is not required to contain a candidate for every possible pair. Every evaluated scope must have an explicit result.
 
 ## 5. REQUIRED FIELDS
 
@@ -62,6 +56,12 @@ For the controlled SRC-002 test, the result is not required to contain a candida
 - `term`
 - `working_class`
 - `source_basis`
+
+### Controlled relation evidence
+- `evidence_id`
+- `locations`
+- `text`
+- `supports`
 
 ### Relation Candidate
 - `id`
@@ -90,9 +90,7 @@ Minimum lineage:
 
 `SRC-002 → BATCH-SRC-002-M06-001 → PASSPORT_ID → RELATION_ID`
 
-For a negative result:
-
-`SRC-002 → BATCH-SRC-002-M06-001 → evaluated passport scope → NO_RELATION`
+When separate evidence context is used, the relation candidate additionally retains `basis_refs` to that evidence.
 
 ## 8. PROHIBITIONS
 
@@ -100,7 +98,7 @@ M07 must not:
 - establish a canonical relation;
 - assign `CANONICAL`;
 - create relations from external knowledge;
-- infer causal, hierarchical, dependency or justificatory relations without explicit basis;
+- infer causal, hierarchical, dependency or justificatory relations without explicit source basis;
 - treat `SAME SOURCE` as a relation;
 - treat `SAME TERM` as identity or relation;
 - use absence of evidence as evidence;
@@ -117,10 +115,18 @@ M07 is complete when:
 - insufficient evidence is explicitly returned;
 - traceability is complete.
 
-## 10. CONTROLLED SRC-002 EXPECTATION
+## 10. CONTROLLED SRC-002 TESTS
 
-The current M06 passports contain candidate terms, working classes and upstream formulation references, but do not themselves contain explicit relation evidence.
+### M07-001 — negative boundary
 
-Therefore M07 must not manufacture relations from these fields.
+Passports only, without relation evidence.
 
-The controlled test must establish this negative boundary explicitly.
+Expected result: `NO_RELATION`.
+
+### M07-002 — MULTI-OBJECT positive branch
+
+Use explicit source evidence from the controlled pages 1–6 package.
+
+The test must demonstrate that M07 can create a relation candidate when both endpoints and source evidence are explicitly present.
+
+The test must not use external knowledge or a relation inferred merely from the existence of both terms in the same source.
