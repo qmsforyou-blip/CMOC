@@ -85,7 +85,6 @@ def extract(source_package: Dict[str, Any]) -> List[Dict[str, Any]]:
 
     response = _request_json({
         "model": os.environ["LLM_MODEL"],
-        "temperature": 0,
         "messages": [
             {"role": "system", "content": M01_SYSTEM_PROMPT},
             {"role": "user", "content": json.dumps(user_payload, ensure_ascii=False)},
