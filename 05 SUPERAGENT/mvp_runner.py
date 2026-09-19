@@ -55,12 +55,14 @@ class JournalEntry:
     handoff_result: str
     reason: str = ""
     handoff_id: Optional[str] = None
+    machine_id: Optional[str] = None
 
 class Superagent:
     """Orchestration kernel; semantic production remains in injected MACHINE handlers."""
-    def __init__(self, contracts: Dict[str, Contract], handlers: Dict[str, Callable[[dict, Batch], dict]]):
+    def __init__(self, contracts: Dict[str, Contract], handlers: Dict[str, Callable[[dict, Batch], dict]], machine_ids: Optional[Dict[str, str]] = None):
         self.contracts = contracts
         self.handlers = handlers
+        self.machine_ids = machine_ids or {task: f"{task}-DEMO" for task in handlers}
         self.journal: List[JournalEntry] = []
         self._batch_seq: Dict[str, int] = {}
         self._handoff_seq: Dict[str, int] = {}
@@ -141,6 +143,7 @@ class Superagent:
 
         batch = self.new_batch(source["source_id"], task, inp.get("ref","INPUT"), handoff_id)
         handler = self.handlers.get(task)
+        machine_id = self.machine_ids.get(task)
         if not handler:
             reason = "MACHINE_NOT_REGISTERED"
             self.journal.append(JournalEntry(run_id, source["source_id"], task, batch.batch_id,
@@ -153,14 +156,14 @@ class Superagent:
         if not ok:
             self.journal.append(JournalEntry(run_id, source["source_id"], task, batch.batch_id,
                                              inp.get("ref","INPUT"), None, STATUS_REJECT,
-                                             "FAIL", "STOP", reason))
+                                             "FAIL", "STOP", reason, None, machine_id))
             return {"status": STATUS_REJECT, "reason": reason, "task": task, "batch_id": batch.batch_id}
 
         batch.output = out
         out["batch_id"] = batch.batch_id
         self.journal.append(JournalEntry(run_id, source["source_id"], task, batch.batch_id,
                                          inp.get("ref","INPUT"), out.get("ref"),
-                                         STATUS_ACCEPT, "PASS", "READY", ""))
+                                         STATUS_ACCEPT, "PASS", "READY", "", None, machine_id))
         return out
 
     def run_chain(self, run_id: str, source: dict, initial: dict, tasks: List[str]) -> dict:
@@ -232,7 +235,7 @@ def build_demo_runner() -> Superagent:
                                  "from":inp["traceability"]},
                 "ref":f"{b.batch_id}:OUTPUT"}
 
-    return Superagent(contracts, {"M01":m01,"M02":m02,"M03":m03})
+    return Superagent(contracts, {"M01":m01,"M02":m02,"M03":m03}, {"M01":"M01-DEMO","M02":"M02-DEMO","M03":"M03-DEMO"})
 
 def main() -> int:
     payload = json.load(sys.stdin)
