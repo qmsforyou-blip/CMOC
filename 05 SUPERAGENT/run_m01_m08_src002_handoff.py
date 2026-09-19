@@ -65,7 +65,7 @@ RELATION_EVIDENCE = [
         "evidence_id": "EVID-SRC-002-P2-STRATEGY-SET-001",
         "locations": ["p2"],
         "text": SOURCE["fragments"][1]["text"],
-        "supports": ["PAS-002", "PAS-006"],
+        "supports": ["PAS-001", "PAS-005"],
     }
 ]
 
