@@ -187,7 +187,9 @@ initial = {
     "ref": SOURCE_PACKAGE,
 }
 
-tasks = ["M01","M02","M03","M04","M05","M06","M07","M08"]\n\nresult = runner.run_chain(
+tasks = ["M01","M02","M03","M04","M05","M06","M07","M08"]
+
+result = runner.run_chain(
     run_id=RUN_ID,
     source=SOURCE,
     initial=initial,
