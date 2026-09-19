@@ -134,6 +134,25 @@ def decide(
     if not isinstance(records, list):
         raise M08LLMError("M08 response must contain records list")
 
+    # Terminal negative branch: M07 may explicitly return NO_RELATION.
+    # In that case M08 must consume the actual M07 result and produce no
+    # downstream decision. It must not reinterpret NO_RELATION as a relation.
+    if relation_candidates and all(
+        r.get("status") == "NO_RELATION" for r in relation_candidates
+    ):
+        if records:
+            raise M08LLMError(
+                "M08 must return no decisions for a terminal NO_RELATION branch"
+            )
+        return result
+
+    if relation_candidates and any(
+        r.get("status") == "NO_RELATION" for r in relation_candidates
+    ):
+        raise M08LLMError(
+            "Mixed NO_RELATION and relation records require explicit branch handling"
+        )
+
     expected = relation_candidates if relation_candidates else passports
     if len(records) != len(expected):
         raise M08LLMError(
