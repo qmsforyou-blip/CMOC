@@ -130,6 +130,44 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(received["traceability"],h.traceability)
         self.assertEqual(received["ref"],h.output_ref)
 
+
+    def test_runner_machine_boundary(self):
+        r=build_demo_runner()
+        observed={}
+        original_m01=r.handlers["M01"]
+
+        def spy_m01(inp, batch):
+            observed["batch_id"]=batch.batch_id
+            observed["task"]=batch.task
+            observed["input_ref"]=inp["ref"]
+            observed["batch_count_during_machine"]=len(r.batches)
+            out=original_m01(inp, batch)
+            observed["output_batch_id"]=out["batch_id"]
+            return out
+
+        r.handlers["M01"]=spy_m01
+        result=r.run_chain("MVP-RUN-M01",SOURCE,initial(),["M01","M02"])
+        self.assertEqual(result["status"],"ACCEPT")
+        self.assertEqual(observed["task"],"M01")
+        self.assertEqual(observed["batch_id"],result["results"][0]["batch_id"])
+        self.assertEqual(observed["input_ref"],initial()["ref"])
+        self.assertEqual(observed["batch_count_during_machine"],1)
+        self.assertEqual(observed["output_batch_id"],observed["batch_id"])
+
+    def test_machine_does_not_create_downstream_batch(self):
+        r=build_demo_runner()
+        original_m01=r.handlers["M01"]
+
+        def guarded_m01(inp, batch):
+            self.assertEqual(len(r.batches),1)
+            return original_m01(inp, batch)
+
+        r.handlers["M01"]=guarded_m01
+        result=r.run_chain("MVP-RUN-M02",SOURCE,initial(),["M01","M02"])
+        self.assertEqual(result["status"],"ACCEPT")
+        self.assertEqual([b.task for b in r.batches],["M01","M02"])
+        self.assertEqual(r.batches[1].handoff_id,r.handoffs[0].handoff_id)
+
     def test_new_batch_per_task(self):
         r=build_demo_runner()
         result=r.run_chain("MVP-RUN-006",SOURCE,initial(),["M01","M02","M03"])
