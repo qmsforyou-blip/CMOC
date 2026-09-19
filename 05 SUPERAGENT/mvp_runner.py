@@ -229,7 +229,10 @@ def build_demo_runner() -> Superagent:
     }
 
     def m01(inp: dict, b: Batch) -> dict:
-        records = inp["records"]
+        # Demo M01 does not perform extraction from SOURCE_PACKAGE.
+        # When no demo records are supplied, keep the output structurally valid
+        # without inventing semantic content. Production M01 performs extraction.
+        records = inp.get("records", [])
         return {"status": STATUS_ACCEPT, "type":"EXTRACTION_RECORDS",
                 "source_id":b.source_id, "batch_id":b.batch_id, "records":records,
                 "traceability":{"source_id":b.source_id,"batch_id":b.batch_id,
@@ -239,7 +242,7 @@ def build_demo_runner() -> Superagent:
     def m02(inp: dict, b: Batch) -> dict:
         records=[{"id":f"DIS-{i+1:03d}","source_record":r["id"],
                   "distinction":r["distinction"]} for i,r in enumerate(inp["records"])]
-        return {"status":STATUS_ACCEPT, "type":"DISTINCTION_RECORDS",
+        return {"status": STATUS_ACCEPT, "type":"DISTINCTION_RECORDS",
                 "source_id":b.source_id, "batch_id":b.batch_id, "records":records,
                 "traceability":{"source_id":b.source_id,"batch_id":b.batch_id,
                                  "from":inp["traceability"]},
@@ -252,7 +255,7 @@ def build_demo_runner() -> Superagent:
                 records.append({"id":f"FORM-{len(records)+1:03d}",
                                 "source_record":r["id"],"level":level,
                                 "formulation":f"{level}: {r['distinction']}"})
-        return {"status":STATUS_ACCEPT, "type":"FORMULATION_RECORDS",
+        return {"status": STATUS_ACCEPT, "type":"FORMULATION_RECORDS",
                 "source_id":b.source_id, "batch_id":b.batch_id, "records":records,
                 "traceability":{"source_id":b.source_id,"batch_id":b.batch_id,
                                  "from":inp["traceability"]},
