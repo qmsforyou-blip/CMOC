@@ -32,6 +32,9 @@ Rules:
   canonization, or synthesis across records.
 - Do not infer causal, logical, hierarchical, or justificatory links unless
   they are explicitly present in the input distinction.
+- Do not replace, reinterpret, or alter source-grounded qualifiers, directions,
+  temporal terms, quantities, modality, or other semantic parameters.
+- Preserve such semantic parameters when reformulating.
 - Do not turn adjacency or wording into a new relationship.
 - Keep the link to the input distinction record.
 - If a distinction is insufficient to support a reliable formulation, preserve
