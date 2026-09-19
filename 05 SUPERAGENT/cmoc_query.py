@@ -162,8 +162,7 @@ def query(
             basis = "exact object_id"
         else:
             # If no object_id matches, an exact object_name match is allowed.
-            # Again, other indexed attributes are deliberately not considered:
-            # they are not an EXACT address.
+            # Other indexed attributes are deliberately not considered.
             hits = [
                 r for r in candidates
                 if r.get("object_name") is not None
@@ -171,7 +170,22 @@ def query(
             ]
             basis = "exact object_name"
 
-        status = "MATCH" if len(hits) == 1 else ("AMBIGUOUS" if hits else "NO_MATCH")
+        # OBJECT_FILE is the canonical addressable representation for an
+        # object. Registry rows are additional physical representations.
+        # Therefore one canonical OBJECT_FILE plus registry representation(s)
+        # is still a resolved MATCH; multiple non-canonical representations
+        # without a unique OBJECT_FILE remain AMBIGUOUS.
+        object_files = [
+            r for r in hits
+            if (r.get("representation") or {}).get("kind") == "OBJECT_FILE"
+        ]
+        if len(object_files) == 1:
+            status = "MATCH"
+            basis += "; canonical OBJECT_FILE present"
+        elif len(hits) == 1:
+            status = "MATCH"
+        else:
+            status = "AMBIGUOUS" if hits else "NO_MATCH"
     elif qtype == "ALIAS":
         normalized = norm(value)
         hits = [
