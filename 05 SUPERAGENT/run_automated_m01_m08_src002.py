@@ -125,11 +125,12 @@ def m07(inp, batch):
 
 def m08(inp, batch):
     # Production M08 receives the actual M07 output object.
-    records = decide(
+    decision_output = decide(
         inp["passports"],
         inp["records"],
         inp.get("relation_evidence", []),
     )
+    records = decision_output.get("records", [])
     return wrap_output(
         batch,
         "DECISION_RECORDS",
