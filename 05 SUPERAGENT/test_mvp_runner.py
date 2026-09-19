@@ -99,6 +99,37 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(r.batches[2].handoff_id,r.handoffs[1].handoff_id)
         self.assertEqual(r.journal[3].handoff_id,r.handoffs[1].handoff_id)
 
+
+    def test_handoff_output_becomes_next_input(self):
+        r=build_demo_runner()
+        result=r.run_chain("MVP-RUN-H05",SOURCE,initial(),["M01","M02","M03"])
+        self.assertEqual(result["status"],"ACCEPT")
+        self.assertEqual(r.batches[1].input_ref,r.handoffs[0].output_ref)
+        self.assertEqual(r.batches[2].input_ref,r.handoffs[1].output_ref)
+
+    def test_next_task_receives_explicit_handoff_input(self):
+        r=build_demo_runner()
+        received={}
+        original_m02=r.handlers["M02"]
+
+        def spy_m02(inp, batch):
+            received.update({
+                "type":inp["type"],
+                "source_id":inp["source_id"],
+                "traceability":inp["traceability"],
+                "ref":inp["ref"],
+            })
+            return original_m02(inp, batch)
+
+        r.handlers["M02"]=spy_m02
+        result=r.run_chain("MVP-RUN-H06",SOURCE,initial(),["M01","M02","M03"])
+        self.assertEqual(result["status"],"ACCEPT")
+        h=r.handoffs[0]
+        self.assertEqual(received["type"],h.input_type)
+        self.assertEqual(received["source_id"],h.source_id)
+        self.assertEqual(received["traceability"],h.traceability)
+        self.assertEqual(received["ref"],h.output_ref)
+
     def test_new_batch_per_task(self):
         r=build_demo_runner()
         result=r.run_chain("MVP-RUN-006",SOURCE,initial(),["M01","M02","M03"])
