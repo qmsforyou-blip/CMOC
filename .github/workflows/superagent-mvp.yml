@@ -16,6 +16,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,6 +43,18 @@ jobs:
       - name: Run MVP runner tests
         working-directory: 05 SUPERAGENT
         run: python -m unittest discover -s . -p "test_*.py" -v
+
+      - name: Commit generated OBJECT INDEX
+        run: |
+          if git diff --quiet -- "05 SUPERAGENT/cmoc_object_index.json"; then
+            echo "OBJECT INDEX already matches deterministic builder output"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add "05 SUPERAGENT/cmoc_object_index.json"
+            git commit -m "Regenerate CMOC OBJECT INDEX v0.2"
+            git push
+          fi
 
       - name: Check committed OBJECT INDEX is reproducible
         run: git diff --exit-code -- "05 SUPERAGENT/cmoc_object_index.json"
