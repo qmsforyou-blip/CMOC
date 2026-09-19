@@ -82,6 +82,20 @@ class Superagent:
         self.batches.append(batch)
         return batch
 
+    def check_source_package(self, source_package: dict, source_id: str) -> tuple[bool, str]:
+        required = {"package_id", "source_id", "source_name", "fragments"}
+        missing = sorted(required - set(source_package))
+        if missing:
+            return False, f"MISSING_SOURCE_PACKAGE_FIELDS: {missing}"
+        if source_package["source_id"] != source_id:
+            return False, "SOURCE_PACKAGE_SOURCE_ID_MISMATCH"
+        status = source_package.get("source_package_status", "UNKNOWN")
+        if status not in {"COMPLETE", "PARTIAL", "UNKNOWN"}:
+            return False, f"INVALID_SOURCE_PACKAGE_STATUS: {status}"
+        if not isinstance(source_package["fragments"], list):
+            return False, "SOURCE_PACKAGE_FRAGMENTS_NOT_LIST"
+        return True, status
+
     def check_input(self, task: str, inp: dict) -> tuple[bool, str]:
         c = self.contracts.get(task)
         if not c:
@@ -94,6 +108,12 @@ class Superagent:
         if not inp.get("traceability"):
             return False, "MISSING_TRACEABILITY"
         missing = sorted(c.required_input_fields - set(inp))
+        if missing:
+            return False, f"MISSING_REQUIRED_INPUT_FIELDS: {missing}"
+        if "source_package" in c.required_input_fields:
+            ok, reason = self.check_source_package(inp["source_package"], source["source_id"])
+            if not ok:
+                return False, reason
         if missing:
             return False, f"MISSING_REQUIRED_INPUT_FIELDS: {missing}"
         return True, "PASS"
