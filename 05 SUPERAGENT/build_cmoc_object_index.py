@@ -1,0 +1,258 @@
+import json
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+INVENTORY = ROOT / "05 SUPERAGENT" / "cmoc_inventory.json"
+OUTPUT = ROOT / "05 SUPERAGENT" / "cmoc_object_index.json"
+
+INVENTORY_SNAPSHOT = "CMOC-INVENTORY-001@2026-09-18"
+INVENTORY_COMMIT = "fd12c417358723b97205730084b87e9068a37854"
+REPOSITORY = "qmsforyou-blip/CMOC"
+
+CLASS_TO_TYPE = {
+    "TERM_FILE": "TERM",
+    "DISTINCTION_FILE": "DISTINCTION",
+    "GM_FORMULATION_FILE": "GM_FORMULATION",
+    "MACHINE": "MACHINE",
+    "CHAIN": "CHAIN",
+    "PATTERN": "PATTERN",
+    "LAW": "LAW",
+    "OBSERVATION": "OBSERVATION",
+    "ORGANIZATIONAL_CONSTRUCTION": "ORGANIZATIONAL_CONSTRUCTION",
+}
+
+ID_PATTERNS = [
+    re.compile(r"\bT-\d{4}\b"),
+    re.compile(r"\bDIS-\d+\b"),
+    re.compile(r"\bLAB-\d+\b"),
+    re.compile(r"\bMC-[A-Z0-9-]+\b"),
+    re.compile(r"\bCHAIN-[A-Z0-9-]+\b"),
+    re.compile(r"\bMP-[A-Z0-9-]+\b"),
+    re.compile(r"\bLAW-\d+\b"),
+    re.compile(r"\bOBS-\d+\b"),
+    re.compile(r"\bOC-\d+\b"),
+]
+
+def read_text(path):
+    return path.read_text(encoding="utf-8")
+
+def frontmatter(text):
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return {}
+    out = {}
+    for line in lines[1:]:
+        if line.strip() == "---":
+            break
+        m = re.match(r"^([A-Za-z_][A-Za-z0-9_-]*):\s*(.*)$", line)
+        if m:
+            out[m.group(1)] = m.group(2).strip().strip('"').strip("'")
+    return out
+
+def structure(text):
+    fm = frontmatter(text)
+    sections = []
+    for line in text.splitlines():
+        m = re.match(r"^#{1,6}\s+(.+?)\s*$", line)
+        if m:
+            sections.append(m.group(1).strip())
+    return {"fields_present": list(fm.keys()), "sections_present": sections}
+
+def explicit_object_id(text, path):
+    fm = frontmatter(text)
+    for key in ("id", "machine_id", "chain_id", "pattern_id", "law_id", "observation_id", "construction_id"):
+        value = fm.get(key)
+        if value and any(p.fullmatch(value) for p in ID_PATTERNS):
+            return value
+    for part in (Path(path).name, Path(path).stem):
+        for p in ID_PATTERNS:
+            m = p.search(part)
+            if m:
+                return m.group(0)
+    for p in ID_PATTERNS:
+        m = p.search(text[:4000])
+        if m:
+            return m.group(0)
+    return None
+
+def object_record(inv, root):
+    path = inv["path"]
+    text = read_text(root / path)
+    fm = frontmatter(text)
+    oid = explicit_object_id(text, path)
+    otype = CLASS_TO_TYPE[inv["class"]]
+    name = fm.get("name")
+    return {
+        "schema": "CMOC-OBJECT-INDEX-RECORD",
+        "version": "0.2",
+        "object_id": oid,
+        "object_type": otype,
+        "object_name": name,
+        "representation": {"kind": "OBJECT_FILE", "container": path, "location": "FILE"},
+        "indexed_attributes": {},
+        "structure": structure(text),
+        "provenance": {
+            "repository": REPOSITORY,
+            "git_sha": inv["git_sha"],
+            "inventory_snapshot": f"{INVENTORY_SNAPSHOT}/{INVENTORY_COMMIT}",
+        },
+        "traceability": {
+            "source": fm.get("source", "UNKNOWN"),
+            "registry": "UNKNOWN",
+        },
+        "discovery": {"basis": "CMOC-INVENTORY-001 classified object file"},
+        "count_basis": "OBJECT_FILE",
+    }
+
+def registry_record(oid, otype, container, line, name=None, fields=None, sections=None, source="UNKNOWN", sha=None):
+    return {
+        "schema": "CMOC-OBJECT-INDEX-RECORD",
+        "version": "0.2",
+        "object_id": oid,
+        "object_type": otype,
+        "object_name": name,
+        "representation": {
+            "kind": "REGISTRY_RECORD",
+            "container": container,
+            "location": {"record_id": oid, "line": line},
+        },
+        "indexed_attributes": {},
+        "structure": {
+            "fields_present": fields or ["id"],
+            "sections_present": sections or [],
+        },
+        "provenance": {
+            "repository": REPOSITORY,
+            "git_sha": sha,
+            "inventory_snapshot": f"{INVENTORY_SNAPSHOT}/{INVENTORY_COMMIT}",
+        },
+        "traceability": {"source": source, "registry": container},
+        "discovery": {"basis": "mechanical identifier discovery in registry"},
+        "count_basis": "REGISTRY_RECORD",
+    }
+
+def term_records(text, container, sha):
+    out = []
+    for n, line in enumerate(text.splitlines(), 1):
+        m = re.match(r"^\s*(T-\d{4})\s+(.+?)\s*$", line)
+        if m:
+            out.append(registry_record(m.group(1), "TERM", container, n, m.group(2).strip(), ["id", "name"], sha=sha))
+    return out
+
+def distinction_records(text, container, sha):
+    out = []
+    for n, line in enumerate(text.splitlines(), 1):
+        m = re.match(r"^\|\s*\*{0,2}(DIS-\d+)\*{0,2}\s*\|", line)
+        if m:
+            out.append(registry_record(m.group(1), "DISTINCTION", container, n, None, ["id"], sha=sha))
+    return out
+
+def invariant_records(text, container, sha):
+    lines = text.splitlines()
+    found = {}
+    for n, line in enumerate(lines, 1):
+        m = re.match(r"^\s*#{1,6}\s+.*?(INV-\d{4})(?:\s+(.+?))?\s*$", line)
+        if m and m.group(1) not in found:
+            name = (m.group(2) or "").strip().strip("*") or None
+            found[m.group(1)] = (n, name)
+    if "INV-0009" not in found:
+        for n, line in enumerate(lines, 1):
+            if "CMOC INV-0009" in line:
+                found["INV-0009"] = (n, None)
+                break
+    if "INV-0002" not in found:
+        for n, line in enumerate(lines, 1):
+            if line.strip() == "INV-0002":
+                name = lines[n].strip() if n < len(lines) else None
+                found["INV-0002"] = (n, name)
+                break
+    out = []
+    for oid, (line, name) in sorted(found.items(), key=lambda x: x[1][0]):
+        out.append(registry_record(oid, "INVARIANT", container, line, name, ["id"], sha=sha))
+    return out
+
+def organizational_records(text, container, sha):
+    out = []
+    for n, line in enumerate(text.splitlines(), 1):
+        m = re.match(r"^\|\s*(C-\d{4})\s*\|\s*([^|]+?)\s*\|", line)
+        if m:
+            out.append(registry_record(m.group(1), "ORGANIZATIONAL_CONSTRUCTION", container, n, m.group(2).strip(), ["id", "construction"], sha=sha))
+    return out
+
+def build():
+    inv = json.loads(read_text(INVENTORY))
+    records = []
+    for item in inv["records"]:
+        if item["class"] in CLASS_TO_TYPE:
+            records.append(object_record(item, ROOT))
+
+    containers = {
+        "LAB-000": ("08 CMOC Core/LAB-000 Опись терминов ОН.md", "TERM", term_records),
+        "LAB-002": ("08 CMOC Core/LAB-002 Реестр различений.md", "DISTINCTION", distinction_records),
+        "LAB-004": ("08 CMOC Core/LAB-004 Инварианты.md", "INVARIANT", invariant_records),
+        "LAB-005": ("08 CMOC Core/LAB-005 Опись организационных конструкций.md", "ORGANIZATIONAL_CONSTRUCTION", organizational_records),
+    }
+    by_path = {x["path"]: x["git_sha"] for x in inv["records"]}
+    for _, (path, _, parser) in containers.items():
+        records.extend(parser(read_text(ROOT / path), path, by_path[path]))
+
+    for r in records:
+        if r["object_id"] is None:
+            raise RuntimeError(f"Unresolved object_id: {r['representation']['container']}")
+
+    full_keys = [
+        (
+            r["object_type"],
+            r["representation"]["kind"],
+            r["representation"]["container"],
+            json.dumps(r["representation"]["location"], sort_keys=True),
+        )
+        for r in records
+    ]
+    if len(full_keys) != len(set(full_keys)):
+        raise RuntimeError("Duplicate addressable representations detected")
+
+    object_types = sorted({r["object_type"] for r in records})
+    data = {
+        "schema": "CMOC-OBJECT-INDEX-001",
+        "version": "0.2",
+        "generated_at": "2026-09-19",
+        "repository": REPOSITORY,
+        "branch": "main",
+        "source_inventory": INVENTORY_SNAPSHOT,
+        "source_commit": INVENTORY_COMMIT,
+        "purpose": "Read-only structural/addressable index. No semantic reconciliation or CMOC mutation.",
+        "record_model": "One record per discovered representation; the same object_id may therefore occur more than once.",
+        "representation_record_count": len(records),
+        "object_type_counts": {t: sum(r["object_type"] == t for r in records) for t in object_types},
+        "representation_kind_counts": {
+            "OBJECT_FILE": sum(r["representation"]["kind"] == "OBJECT_FILE" for r in records),
+            "REGISTRY_RECORD": sum(r["representation"]["kind"] == "REGISTRY_RECORD" for r in records),
+            "OTHER_ADDRESSABLE": sum(r["representation"]["kind"] == "OTHER_ADDRESSABLE" for r in records),
+        },
+        "count_views": {
+            "by_object_type": {
+                t: {
+                    "representations": sum(r["object_type"] == t for r in records),
+                    "object_files": sum(r["object_type"] == t and r["representation"]["kind"] == "OBJECT_FILE" for r in records),
+                    "registry_records": sum(r["object_type"] == t and r["representation"]["kind"] == "REGISTRY_RECORD" for r in records),
+                    "unique_object_ids": len({r["object_id"] for r in records if r["object_type"] == t}),
+                }
+                for t in object_types
+            },
+            "unique_object_ids": len({r["object_id"] for r in records}),
+        },
+        "records": records,
+    }
+    return data
+
+if __name__ == "__main__":
+    data = build()
+    generated = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    OUTPUT.write_text(generated, encoding="utf-8")
+    print(json.dumps({
+        "representation_record_count": data["representation_record_count"],
+        "representation_kind_counts": data["representation_kind_counts"],
+        "unique_object_ids": data["count_views"]["unique_object_ids"],
+    }, ensure_ascii=False))
