@@ -128,6 +128,20 @@ def decide(
         "canonicalization_criterion": None,
     }
 
+    # Terminal negative branch: consume an explicit M07 NO_RELATION result
+    # without asking the semantic model to reinterpret it as a decision target.
+    if relation_candidates and all(
+        r.get("status") == "NO_RELATION" for r in relation_candidates
+    ):
+        return {"records": []}
+
+    if relation_candidates and any(
+        r.get("status") == "NO_RELATION" for r in relation_candidates
+    ):
+        raise M08LLMError(
+            "Mixed NO_RELATION and relation records require explicit branch handling"
+        )
+
     result = _request_json(payload)
     records = result.get("records")
 
