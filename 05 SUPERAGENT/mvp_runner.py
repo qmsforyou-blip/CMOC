@@ -20,6 +20,7 @@ class Contract:
     accepted_inputs: set[str]
     output_type: str
     required_output_fields: set[str]
+    required_input_fields: set[str] = field(default_factory=set)
 
 @dataclass
 class Batch:
@@ -92,6 +93,9 @@ class Superagent:
             return False, "MISSING_SOURCE_ID"
         if not inp.get("traceability"):
             return False, "MISSING_TRACEABILITY"
+        missing = sorted(c.required_input_fields - set(inp))
+        if missing:
+            return False, f"MISSING_REQUIRED_INPUT_FIELDS: {missing}"
         return True, "PASS"
 
     def check_output(self, task: str, out: dict) -> tuple[bool, str]:
@@ -196,7 +200,8 @@ class Superagent:
 def build_demo_runner() -> Superagent:
     contracts = {
         "M01": Contract("M01", {"SOURCE_PACKAGE"}, "EXTRACTION_RECORDS",
-                        {"source_id","batch_id","records","traceability","ref"}),
+                        {"source_id","batch_id","records","traceability","ref"},
+                        {"source_package"}),
         "M02": Contract("M02", {"EXTRACTION_RECORDS","SOURCE_PACKAGE"}, "DISTINCTION_RECORDS",
                         {"source_id","batch_id","records","traceability","ref"}),
         "M03": Contract("M03", {"DISTINCTION_RECORDS","SOURCE_PACKAGE"}, "FORMULATION_RECORDS",
