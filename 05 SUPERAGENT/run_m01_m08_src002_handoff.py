@@ -187,11 +187,11 @@ initial = {
     "ref": SOURCE_PACKAGE,
 }
 
-result = runner.run_chain(
+tasks = ["M01","M02","M03","M04","M05","M06","M07","M08"]\n\nresult = runner.run_chain(
     run_id=RUN_ID,
     source=SOURCE,
     initial=initial,
-    tasks=["M01","M02","M03","M04","M05","M06","M07","M08"],
+    tasks=tasks,
 )
 
 audit = {
@@ -199,7 +199,7 @@ audit = {
     "run_id": RUN_ID,
     "task_batches": [
         {
-            "task": r.get("task"),
+            "task": tasks[i] if i < len(tasks) else None,
             "batch_id": r.get("batch_id"),
             "input_ref": r.get("traceability", {}).get("upstream_batch") if isinstance(r, dict) else None,
             "output_ref": r.get("ref") if isinstance(r, dict) else None,
@@ -217,7 +217,7 @@ audit = {
         }
         for h in runner.handoffs
     ],
-    "final_result": result.get("results", [])[-1] if result.get("results") else None,
+    "m07_result": m07_result,\n    "final_result": result.get("results", [])[-1] if result.get("results") else None,
 }
 
 print(json.dumps(audit, ensure_ascii=False, indent=2))
