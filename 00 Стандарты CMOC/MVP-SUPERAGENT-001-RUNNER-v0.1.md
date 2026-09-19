@@ -11,7 +11,26 @@ SOURCE: GM Quality System Basics Overview Supplier Audit
 SOURCE_PACKAGE_STATUS: COMPLETE  
 TASK_SEQUENCE: M01 → M02 → M03
 
-## 2. Execution protocol
+## 2. SOURCE_PACKAGE integrity gate
+
+До создания первого производственного BATCH для M01 runner обязан проверить целостность входного `SOURCE_PACKAGE`:
+
+1. наличие обязательных полей;
+2. соответствие `SOURCE_ID` внешнему идентификатору Источника;
+3. допустимость `SOURCE_PACKAGE_STATUS` (`COMPLETE`, `PARTIAL`, `UNKNOWN`);
+4. наличие `fragments` как структурированного списка.
+
+При нарушении проверки:
+
+```text
+REJECT + REASON + CHAIN STOP
+```
+
+Производственный BATCH не создаётся.
+
+`PARTIAL` является допустимым состоянием для обработки доступной части Источника, но ограничение должно сохраняться в `SOURCE_PACKAGE` и прослеживаемости результата.
+
+## 3. Execution protocol
 
 Для каждого TASK:
 
@@ -24,7 +43,7 @@ TASK_SEQUENCE: M01 → M02 → M03
 7. проверить контракт следующего TASK;
 8. при REJECT остановить цепочку.
 
-## 3. Chain
+## 4. Chain
 
 SOURCE_PACKAGE
 → M01 / EXTRACTION
@@ -39,7 +58,7 @@ SOURCE_PACKAGE
 → BATCH-003
 → FORMULATION OUTPUT
 
-## 4. Input contracts
+## 5. Input contracts
 
 M01 accepts SOURCE_PACKAGE.
 
@@ -55,7 +74,7 @@ M03 accepts:
 
 For this sequential run M03 receives the explicit M02 OUTPUT.
 
-## 5. Gate model
+## 6. Gate model
 
 Before each machine:
 
@@ -93,7 +112,7 @@ Any failed gate:
 
 REJECT + REASON + CHAIN STOP.
 
-## 6. Required journal
+## 7. Required journal
 
 Each task records:
 
@@ -115,7 +134,7 @@ TASK and MACHINE_ID are distinct journal fields:
 
 The journal must preserve the HANDOFF identity and its relation to the corresponding task boundary.
 
-## 7. Acceptance tests
+## 8. Acceptance tests
 
 ### A — Sequential
 M01→M02→M03 completes with three distinct Batch IDs.
@@ -144,13 +163,13 @@ An accepted HANDOFF is explicitly linked to the downstream BATCH that receives i
 ### I — Reject stops downstream creation
 A rejected HANDOFF preserves its REASON and produces no downstream BATCH.
 
-## 8. MVP completion condition
+## 9. MVP completion condition
 
 The MVP is not considered operational merely because the chain can be described.
 
 It is operational only after a runner produces the journal and artifacts for A–I without manually constructing hidden intermediate state.
 
-## 9. Current implementation boundary
+## 10. Current implementation boundary
 
 This file defines the runner contract. The present CMOC repository does not yet contain a separate executable agent runtime that can invoke M01/M02/M03 as independent processes.
 
@@ -158,7 +177,7 @@ The current MVP runner implements orchestration and explicit HANDOFF control ins
 
 The next implementation step is to bind this runner contract to an actual execution mechanism while keeping MACHINE, TASK CONTRACT, SOURCE PACKAGE, BATCH, OUTPUT and HANDOFF separate.
 
-## 10. Architectural rule
+## 11. Architectural rule
 
 The runner may orchestrate.
 
