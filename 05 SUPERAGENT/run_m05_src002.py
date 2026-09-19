@@ -1,4 +1,4 @@
-from mvp_runner import Contract, MVPAgentRunner
+from mvp_runner import Contract, Superagent
 from m05_llm import classify
 
 
@@ -49,7 +49,7 @@ def m05(source_package_input, batch):
     }
 
 
-runner = MVPAgentRunner(
+runner = Superagent(
     contracts={
         "M05": Contract(
             task="M05",
