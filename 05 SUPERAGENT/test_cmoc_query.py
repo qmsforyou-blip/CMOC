@@ -15,22 +15,25 @@ class TestCMOCQueryV03(unittest.TestCase):
 
     def test_q001_exact_term_with_multiple_representations(self):
         r = query(self.records, "Q-001", "EXACT", "TERM", "T-0001", ["TERMS"])
-        self.assertEqual(r["match_status"], "AMBIGUOUS")
+        self.assertEqual(r["match_status"], "MATCH")
         self.assertEqual(len(r["results"]), 2)
         self.assertTrue(all(x["object_id"] == "T-0001" for x in r["results"]))
+        self.assertIn("canonical OBJECT_FILE present", r["match_basis"])
 
     def test_q002_exact_distinction_with_multiple_representations(self):
         r = query(self.records, "Q-002", "EXACT", "DISTINCTION", "DIS-000001", ["DISTINCTIONS"])
-        self.assertEqual(r["match_status"], "AMBIGUOUS")
+        self.assertEqual(r["match_status"], "MATCH")
         self.assertEqual(len(r["results"]), 2)
         self.assertTrue(all(x["object_id"] == "DIS-000001" for x in r["results"]))
+        self.assertIn("canonical OBJECT_FILE present", r["match_basis"])
 
     def test_q003_duplicate_physical_representations_preserved(self):
         r = query(
             self.records, "Q-003", "EXACT", "DISTINCTION", "DIS-0155", ["DISTINCTIONS"]
         )
-        self.assertEqual(r["match_status"], "AMBIGUOUS")
+        self.assertEqual(r["match_status"], "MATCH")
         self.assertEqual(len(r["results"]), 3)
+        self.assertIn("canonical OBJECT_FILE present", r["match_basis"])
         addresses = {
             (x["representation"]["container"], x["representation"]["location"]["line"])
             for x in r["results"]
