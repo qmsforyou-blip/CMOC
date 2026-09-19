@@ -216,6 +216,64 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(r.journal[-1].qc_result,"FAIL")
         self.assertEqual(r.journal[-1].handoff_result,"STOP")
 
+
+    def test_journal_proves_complete_successful_run_chain(self):
+        r=build_demo_runner()
+        run_id="MVP-RUN-J01"
+        result=r.run_chain(run_id,SOURCE,initial(),["M01","M02","M03"])
+        self.assertEqual(result["status"],"ACCEPT")
+
+        task_entries=[e for e in r.journal if e.run_id==run_id and "->" not in e.task]
+        handoff_entries=[e for e in r.journal if e.run_id==run_id and "->" in e.task]
+
+        self.assertEqual([e.task for e in task_entries],["M01","M02","M03"])
+        self.assertEqual([e.status for e in task_entries],["ACCEPT","ACCEPT","ACCEPT"])
+        self.assertEqual([e.qc_result for e in task_entries],["PASS","PASS","PASS"])
+        self.assertEqual([e.handoff_result for e in task_entries],["READY","READY","READY"])
+
+        self.assertEqual(len(handoff_entries),2)
+        self.assertEqual(handoff_entries[0].task,"M01->M02")
+        self.assertEqual(handoff_entries[1].task,"M02->M03")
+        self.assertEqual(handoff_entries[0].handoff_id,r.handoffs[0].handoff_id)
+        self.assertEqual(handoff_entries[1].handoff_id,r.handoffs[1].handoff_id)
+
+        self.assertEqual(task_entries[0].batch_id,r.batches[0].batch_id)
+        self.assertEqual(task_entries[1].batch_id,r.batches[1].batch_id)
+        self.assertEqual(task_entries[2].batch_id,r.batches[2].batch_id)
+        self.assertEqual(handoff_entries[0].output_ref,task_entries[0].output_ref)
+        self.assertEqual(handoff_entries[1].output_ref,task_entries[1].output_ref)
+
+    def test_journal_proves_rejected_output_stops_run(self):
+        r=build_demo_runner()
+        run_id="MVP-RUN-J02"
+
+        def bad_m01(inp, batch):
+            return {
+                "status":"ACCEPT",
+                "type":"WRONG_OUTPUT_TYPE",
+                "source_id":batch.source_id,
+                "batch_id":batch.batch_id,
+                "records":[],
+                "traceability":{"source_id":batch.source_id},
+                "ref":f"{batch.batch_id}:OUTPUT",
+            }
+
+        r.handlers["M01"]=bad_m01
+        result=r.run_chain(run_id,SOURCE,initial(),["M01","M02"])
+        self.assertEqual(result["status"],"REJECT")
+
+        task_entries=[e for e in r.journal if e.run_id==run_id]
+        self.assertEqual(len(task_entries),1)
+        entry=task_entries[0]
+        self.assertEqual(entry.task,"M01")
+        self.assertEqual(entry.status,"REJECT")
+        self.assertEqual(entry.qc_result,"FAIL")
+        self.assertEqual(entry.handoff_result,"STOP")
+        self.assertIn("OUTPUT_TYPE_MISMATCH",entry.reason)
+        self.assertIsNone(entry.output_ref)
+        self.assertEqual(len(r.handoffs),0)
+        self.assertEqual(len(r.batches),1)
+
     def test_new_batch_per_task(self):
         r=build_demo_runner()
         result=r.run_chain("MVP-RUN-006",SOURCE,initial(),["M01","M02","M03"])
