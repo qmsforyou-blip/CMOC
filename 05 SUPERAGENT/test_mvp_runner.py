@@ -9,6 +9,19 @@ def initial():
         "type":"SOURCE_PACKAGE","source_id":"SRC-002",
         "traceability":{"source_id":"SRC-002","pages":[1,2,3,4,5,6]},
         "ref":"SRC-002-PAGES-1-6",
+        "source_package":{
+            "package_id":"PKG-TEST-001",
+            "source_id":"SRC-002",
+            "source_name":"GM Quality System Basics Overview Supplier Audit",
+            "fragments":[
+                {"location":"p1","text":"SOURCE IDENTIFICATION != SOURCE CONTENT"},
+                {"location":"p2","text":"QSB STRATEGY SET != SINGLE STRATEGY"},
+                {"location":"p3","text":"AUDIT RESULT != WORKSHOP DECISION"},
+                {"location":"p4","text":"COMMON PRINCIPLES != COMMON METHODS != COMMON PROCESSES"},
+                {"location":"p5","text":"FAST RESPONSE != PROBLEM SOLVING"},
+                {"location":"p6","text":"PROBLEM IDENTIFICATION != PROBLEM SOLVING"},
+            ],
+        },
         "records":[
             {"id":"EX-006","location":"p1","distinction":"SOURCE IDENTIFICATION != SOURCE CONTENT"},
             {"id":"EX-007","location":"p2","distinction":"QSB STRATEGY SET != SINGLE STRATEGY"},
