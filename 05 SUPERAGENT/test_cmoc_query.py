@@ -13,22 +13,24 @@ class TestCMOCQueryV03(unittest.TestCase):
     def setUpClass(cls):
         cls.records = load_object_index(BASE / "cmoc_object_index.json")
 
-    def test_q001_exact_term(self):
+    def test_q001_exact_term_with_multiple_representations(self):
         r = query(self.records, "Q-001", "EXACT", "TERM", "T-0001", ["TERMS"])
-        self.assertEqual(r["match_status"], "MATCH")
-        self.assertEqual(r["results"][0]["object_id"], "T-0001")
+        self.assertEqual(r["match_status"], "AMBIGUOUS")
+        self.assertEqual(len(r["results"]), 2)
+        self.assertTrue(all(x["object_id"] == "T-0001" for x in r["results"]))
 
-    def test_q002_exact_distinction(self):
+    def test_q002_exact_distinction_with_multiple_representations(self):
         r = query(self.records, "Q-002", "EXACT", "DISTINCTION", "DIS-000001", ["DISTINCTIONS"])
-        self.assertEqual(r["match_status"], "MATCH")
-        self.assertEqual(r["results"][0]["object_id"], "DIS-000001")
+        self.assertEqual(r["match_status"], "AMBIGUOUS")
+        self.assertEqual(len(r["results"]), 2)
+        self.assertTrue(all(x["object_id"] == "DIS-000001" for x in r["results"]))
 
     def test_q003_duplicate_physical_representations_preserved(self):
         r = query(
             self.records, "Q-003", "EXACT", "DISTINCTION", "DIS-0155", ["DISTINCTIONS"]
         )
         self.assertEqual(r["match_status"], "AMBIGUOUS")
-        self.assertEqual(len(r["results"]), 2)
+        self.assertEqual(len(r["results"]), 3)
         addresses = {
             (x["representation"]["container"], x["representation"]["location"]["line"])
             for x in r["results"]
@@ -36,6 +38,7 @@ class TestCMOCQueryV03(unittest.TestCase):
         self.assertEqual(addresses, {
             ("08 CMOC Core/LAB-002 Реестр различений.md", 1473),
             ("08 CMOC Core/LAB-002 Реестр различений.md", 1501),
+            ("000 База/02 Различения/DIS-0155.md", "FILE"),
         })
 
     def test_q004_unknown_name_preserved(self):
