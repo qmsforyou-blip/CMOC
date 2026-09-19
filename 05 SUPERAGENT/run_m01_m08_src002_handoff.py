@@ -196,6 +196,8 @@ result = runner.run_chain(
     tasks=tasks,
 )
 
+m07_result = result.get("results", [])[6] if len(result.get("results", [])) > 6 else None
+
 audit = {
     "status": result["status"],
     "run_id": RUN_ID,
@@ -206,7 +208,7 @@ audit = {
             "input_ref": r.get("traceability", {}).get("upstream_batch") if isinstance(r, dict) else None,
             "output_ref": r.get("ref") if isinstance(r, dict) else None,
         }
-        for r in result.get("results", [])
+        for i, r in enumerate(result.get("results", []))
     ],
     "handoffs": [
         {
