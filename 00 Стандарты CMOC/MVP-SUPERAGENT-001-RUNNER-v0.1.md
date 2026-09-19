@@ -67,7 +67,27 @@ OUTPUT → OUTPUT QC
 
 Before next machine:
 
-OUTPUT → DECLARED HANDOFF → NEXT CONTRACT CHECK
+OUTPUT → HANDOFF-ID → HANDOFF CONTRACT CHECK → INPUT → NEXT BATCH → MACHINE
+
+A HANDOFF is an explicit transfer artifact between the OUTPUT of one TASK and the INPUT of the next TASK.
+
+Minimum HANDOFF fields:
+
+- HANDOFF_ID
+- RUN_ID
+- SOURCE_ID
+- FROM_TASK
+- TO_TASK
+- OUTPUT_REF
+- INPUT_TYPE
+- TRACEABILITY
+- STATUS
+- REASON
+
+HANDOFF status controls downstream execution:
+
+- ACCEPT → downstream BATCH may be created and execution may continue;
+- REJECT → downstream BATCH must not be created; chain stops with REASON.
 
 Any failed gate:
 
@@ -89,6 +109,8 @@ QC_RESULT
 HANDOFF_RESULT  
 REASON
 
+The journal must preserve the HANDOFF identity and its relation to the corresponding task boundary.
+
 ## 7. Acceptance tests
 
 ### A — Sequential
@@ -109,17 +131,26 @@ A deliberately incompatible M02→M04 handoff must return CONTRACT_MISMATCH and 
 ### F — Missing field
 An otherwise type-compatible input with a required field removed must be rejected.
 
+### G — Handoff identity
+Each accepted or rejected HANDOFF has a deterministic HANDOFF_ID within the RUN and is preserved in the journal.
+
+### H — Downstream linkage
+An accepted HANDOFF is explicitly linked to the downstream BATCH that receives it.
+
+### I — Reject stops downstream creation
+A rejected HANDOFF preserves its REASON and produces no downstream BATCH.
+
 ## 8. MVP completion condition
 
 The MVP is not considered operational merely because the chain can be described.
 
-It is operational only after a runner produces the journal and artifacts for A–F without manually constructing hidden intermediate state.
+It is operational only after a runner produces the journal and artifacts for A–I without manually constructing hidden intermediate state.
 
 ## 9. Current implementation boundary
 
 This file defines the runner contract. The present CMOC repository does not yet contain a separate executable agent runtime that can invoke M01/M02/M03 as independent processes.
 
-Therefore this artifact must not be reported as an AUTOMATED RUN.
+The current MVP runner implements orchestration and explicit HANDOFF control inside one runner process. It must not be reported as an AUTOMATED RUN of independent production machines.
 
 The next implementation step is to bind this runner contract to an actual execution mechanism while keeping MACHINE, TASK CONTRACT, SOURCE PACKAGE, BATCH, OUTPUT and HANDOFF separate.
 
