@@ -92,7 +92,7 @@ def classify(candidates: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             "Return exactly one classification record per candidate.",
             "Classification is a source-derived provisional working type assignment.",
             "Use exactly one type from ALLOWED_TYPES.",
-            "Preserve candidate_id and source_id.",
+            "Preserve candidate_id, candidate_term, distinction_id, basis_refs and source_id.",
             "Do not create passport fields.",
             "Do not create relation fields.",
             "Do not canonize.",
@@ -111,6 +111,9 @@ def classify(candidates: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
                     "status": "PROVISIONAL",
                     "uncertainty": "CLEAR_OR_NEEDS_EVIDENCE",
                     "source_id": "SRC-002",
+                    "candidate_term": "...",
+                    "distinction_id": "DIS-001",
+                    "basis_refs": ["FORM-001", "FORM-002", "FORM-003"],
                 }
             ]
         },
@@ -160,6 +163,9 @@ def classify(candidates: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             "status": "PROVISIONAL",
             "uncertainty": uncertainty,
             "source_id": candidate["source_id"],
+            "candidate_term": candidate["candidate_term"],
+            "distinction_id": candidate["distinction_id"],
+            "basis_refs": candidate.get("basis_refs", []),
         })
 
     return normalized
