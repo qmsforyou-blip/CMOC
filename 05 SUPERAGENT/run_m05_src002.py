@@ -79,14 +79,10 @@ source_input = {
 
 result = runner.execute(
     run_id="RUN-SRC-002-M05-001",
-    source_id="SRC-002",
+    source={"source_id": "SRC-002"},
     task="M05",
-    input_ref="BATCH-SRC-002-M04-001:OUTPUT",
-    input_data=source_input,
+    inp=source_input,
 )
 
 import json
-print(json.dumps(result.output if result.output else {
-    "status": result.status,
-    "reason": result.reason,
-}, ensure_ascii=False, indent=2))
+print(json.dumps(result, ensure_ascii=False, indent=2))
