@@ -1,7 +1,8 @@
-from mvp_runner import Contract, Superagent
+from mvp_runner import Contract, Superagent, Batch
 from m07_llm import build_relation_candidates
 
 RUN_ID = "RUN-SRC-002-M07-002"
+BATCH_ID = "BATCH-SRC-002-M07-002"
 SOURCE_ID = "SRC-002"
 SOURCE_PACKAGE = "SOURCE-002-PACKAGE-001-CONTROLLED-1-6"
 UPSTREAM_BATCH = "BATCH-SRC-002-M06-001"
@@ -55,7 +56,11 @@ contract = Contract(
     required_output_fields={"source_id","batch_id","records","traceability","ref"},
 )
 
-runner = Superagent(
+class ControlledBatchSuperagent(Superagent):
+    def new_batch(self, source_id, task, input_ref, handoff_id=None):
+        return Batch(BATCH_ID, source_id, task, input_ref, handoff_id)
+
+runner = ControlledBatchSuperagent(
     contracts={"M07": contract},
     handlers={"M07": m07},
     machine_ids={"M07": "M07-PRODUCTION"},
