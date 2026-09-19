@@ -36,6 +36,11 @@ def load_objects(path):
     inv=json.loads(Path(path).read_text(encoding="utf-8"))
     return inv,[o for r in inv["records"] if (o:=object_from_record(r))]
 
+def load_index(path):
+    """Backward-compatible loader for RECONCILIATION v0.1 tests/contracts."""
+    return load_objects(path)[1]
+
+
 def query(objects,qid,qtype,target,value,scope):
     scope=set(scope or [])
     if target and TYPE_SCOPE.get(target) not in scope:
