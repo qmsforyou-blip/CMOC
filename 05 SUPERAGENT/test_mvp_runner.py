@@ -76,6 +76,18 @@ class TestMvpRunner(unittest.TestCase):
         self.assertEqual(r.handoffs[-1].status,"REJECT")
         self.assertEqual(r.journal[-1].handoff_id,h.handoff_id)
 
+    def test_rejected_handoff_creates_no_downstream_batch(self):
+        r=build_demo_runner()
+        result=r.run_chain("MVP-RUN-H04",SOURCE,initial(),["M01","M04"])
+        self.assertEqual(result["status"],"REJECT")
+        self.assertEqual(len(r.handoffs),1)
+        self.assertEqual(r.handoffs[0].status,"REJECT")
+        self.assertIn("TYPE_MISMATCH",r.handoffs[0].reason)
+        self.assertEqual(len(r.batches),1)
+        self.assertEqual(r.batches[0].task,"M01")
+        self.assertEqual(result["results"][0]["batch_id"],r.batches[0].batch_id)
+        self.assertEqual(len(result["results"]),1)
+
     def test_chain_links_handoff_to_downstream_batch(self):
         r=build_demo_runner()
         result=r.run_chain("MVP-RUN-H03",SOURCE,initial(),["M01","M02","M03"])
