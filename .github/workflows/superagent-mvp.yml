@@ -18,6 +18,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            05 SUPERAGENT
+            000 База/01 Термины
+            000 База/02 Различения
+            000 База/03 GM-формулировки
+            03_MACHINE-CATALOG/MACHINES
+            03_MACHINE-CATALOG/CHAINS
+            03_MACHINE-CATALOG/PATTERNS
+            07 К/LAW
+            07 К/OBS
+            07 К/OC
+            08 CMOC Core
+          sparse-checkout-cone-mode: true
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
