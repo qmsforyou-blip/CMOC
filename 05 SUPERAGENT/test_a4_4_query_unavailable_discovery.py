@@ -115,7 +115,7 @@ def main() -> None:
                 {input_type},
                 output_type,
                 {"source_id", "batch_id", "records", "traceability", "ref"},
-                {"records"},
+                {"source_package"} if task == "M01" else {"records"},
             )
             handlers[task] = make_handler(task, output_type)
             machine_ids[task] = f"{task}-A4.4-CONTROL"
