@@ -137,6 +137,9 @@ def main() -> None:
             "source_id": SOURCE_ID,
             "source_name": "A4.4 controlled source",
             "source_package_status": "PARTIAL",
+            "fragments": [
+                {"location": "p1", "text": "controlled source fragment"},
+            ],
         }
         initial = {
             "type": "SOURCE_PACKAGE",
