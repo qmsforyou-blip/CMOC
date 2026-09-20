@@ -1,10 +1,10 @@
 # STD-008 — MACHINE-SOURCE-001
 ## Машина добычи инженерного знания
 
-**Версия:** v0.7  
-**Дата:** 18-09-2026  
+**Версия:** v0.8  
+**Дата:** 20-09-2026  
 **Статус:** Standard  
-**Основание редакции:** v0.6 + clean direct TASK tests M02/M03 on SRC-003 + TASK-CONTRACT-001 v0.2.
+**Основание редакции:** v0.7 + production automated M01–M08 run on SRC-002 + controlled M07/M08 NO_RELATION branch.
 
 ---
 
@@ -183,6 +183,30 @@ MACHINE-SOURCE-001 реализует последовательность:
 
 FULL SEQUENTIAL TEST не является доказательством AUTOMATED RUN.
 
+### Подтверждённый production AUTOMATED RUN
+
+На SRC-002 выполнен production AUTOMATED RUN M01–M08 через SUPERAGENT runner с production adapters.
+
+Каждый следующий TASK получил фактический OUTPUT предыдущего TASK через формальный HANDOFF без ручного конструирования семантических промежуточных результатов.
+
+Run:
+
+`RUN-SRC-002-AUTOMATED-M01-M08-001`
+
+Результат:
+
+- 8 production BATCH;
+- 7/7 HANDOFF = ACCEPT;
+- SOURCE_ID и production traceability сохранены;
+- M01–M08 выполнены последовательно;
+- machine identity зафиксирована для каждого TASK.
+
+Evidence:
+
+`05 SUPERAGENT/EVIDENCE-AUTOMATED-RUN-003-M01-M08-SRC-002-001.md`
+
+Данный результат подтверждает automated one-process SUPERAGENT execution в пределах указанного SOURCE_PACKAGE и контролируемой ветви M07/M08.
+
 ---
 
 ## 11. Контроль качества
@@ -220,6 +244,22 @@ FULL SEQUENTIAL TEST не является доказательством AUTOMA
 ### Test E — Repeatability
 
 Один и тот же SOURCE и одинаковый контракт должны давать сопоставимую структуру результата.
+
+### Test F — Automated execution
+
+Production M01–M08 выполняются программным агентом через формальные TASK-интерфейсы.
+
+Контроль считается пройденным, если:
+
+1. каждый TASK получает допустимый INPUT по своему контракту;
+2. создаётся отдельный BATCH;
+3. фактический OUTPUT предыдущего TASK передаётся следующему через HANDOFF;
+4. HANDOFF проходит контрактную проверку;
+5. промежуточные семантические результаты не конструируются вручную;
+6. SOURCE_ID и traceability сохраняются;
+7. исключения и отрицательные ветви не превращаются в скрытые положительные результаты.
+
+AUTOMATED RUN является отдельным типом доказательства и не заменяет проверки семантических и relation-dependent ветвей.
 
 ---
 
@@ -475,12 +515,50 @@ M01–M07 показали сопоставимость структуры; M07 
 
 M07/M08 relation-dependent branch испытана отдельно. Изолированный Passport даёт явный `NO_RELATION`; source-supported multi-object context позволяет создать relation candidates и передать их в M08. CANONICAL автоматически не присваивается.
 
+### Automated negative branch
+
+В рамках текущего production automated run проверена отрицательная ветвь relation-dependent M07/M08 без предоставленного relation evidence.
+
+Фактическая последовательность:
+
+`M06 PASSPORTS → M07 → NO_RELATION → HANDOFF → M08 → 0 DECISION_RECORDS`
+
+M07 не сформировал relation candidate при отсутствии source-bound relation evidence.
+
+Фактический результат:
+
+- M07: `NO_RELATION`;
+- `basis_refs = []`;
+- `relation_evidence = []`;
+- M08: `DECISION_RECORDS` с `records = []`.
+
+Данный результат подтверждает, что отсутствие relation evidence не преобразуется M08 в установленное отношение или downstream decision.
+
+Положительная relation-evidence ветвь подтверждена отдельным controlled evidence и не считается повторно доказанной данным AUTOMATED RUN.
+
 ## 30. Следующая операция
+
+Базовый production AUTOMATED RUN M01–M08 на SRC-002 выполнен и принят в пределах контролируемой NO_RELATION ветви.
+
+Подтверждено:
+
+`SOURCE_PACKAGE → M01 → M02 → M03 → M04 → M05 → M06 → M07 → M08`
+
+через production BATCH и формальные HANDOFF без ручного конструирования промежуточных семантических результатов.
 
 Следующий производственный этап:
 
-**AUTOMATED RUN M01–M08**
+1. проверка воспроизводимости технологии на новом SOURCE;
+2. проверка сохранения контрактов и traceability при смене SOURCE;
+3. отдельное расширение automated relation branch при наличии соответствующего source-bound evidence.
 
-Цель — проверить, что зафиксированная технология может быть выполнена агентом по интерфейсам SOURCE и модулей без ручного конструирования промежуточных результатов.
+Следующий этап не должен расширять доказательство за пределы фактически проверенных условий.
 
-Автоматизация не должна изменять нормативную семантику машины. Она должна реализовать уже проверенный контракт.
+Не установлено данным AUTOMATED RUN:
+
+- distributed execution;
+- process isolation;
+- failure recovery между независимыми машинами;
+- семантическая полнота;
+- автоматическая канонизация;
+- автоматическое обнаружение положительных relations на произвольном SOURCE.
