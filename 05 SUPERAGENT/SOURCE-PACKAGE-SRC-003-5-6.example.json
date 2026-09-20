@@ -1,0 +1,29 @@
+{
+  "package_id": "SOURCE-003-PACKAGE-001-CONTROLLED-5-6",
+  "source_id": "SRC-003",
+  "source_name": "ISO/DIS 9001:2025 — Quality management systems — Requirements",
+  "source_type": "PDF",
+  "source_version": "ISO/DIS 9001:2025(en), sixth edition, draft",
+  "source_package_status": "PARTIAL",
+  "work_scope": "pages 5-6 of 50 only",
+  "source_file_library": "ISO-DIS 9001-2025(E)-6th-Ed(2).pdf",
+  "fragments": [
+    {
+      "location": "p5",
+      "file_page": 5,
+      "file_id": "file_00000000965082308baaebe583560b44",
+      "text": "Foreword. ISO draws attention to the possibility that implementation of this document may involve patents and states that any trade name used is information for convenience and does not constitute endorsement. The document was prepared by ISO/TC 176, Quality management and quality assurance, Subcommittee SC 2, Quality systems. This sixth edition cancels and replaces the fifth edition (EN ISO 9001:2015)."
+    },
+    {
+      "location": "p6",
+      "file_page": 6,
+      "file_id": "file_00000000965082308baaebe583560b44",
+      "text": "Introduction 0.1 General. The adoption of a quality management system is a strategic decision for an organization that can help improve overall performance and provide a sound basis for sustainable development initiatives. Potential benefits listed include consistently providing products and services that meet customer and applicable statutory and regulatory requirements; facilitating opportunities to enhance customer satisfaction; addressing risks and opportunities associated with context and objectives; and demonstrating conformity to specified quality management system requirements. The document can be used by internal and external parties. It states that it is not intended to imply uniformity in the structure of different quality management systems, alignment of documentation to the clause structure, or use of the specific terminology of the document within the organization. The document distinguishes verbal forms: shall indicates a requirement; should a recommendation; may a permission; can a possibility or capability. NOTE information is for guidance. Annex A is informative and does not contain additional requirements. Section 0.2 states that the document is based on quality management principles described in ISO/CD 9000."
+    }
+  ],
+  "traceability": {
+    "source_id": "SRC-003",
+    "source_package_id": "SOURCE-003-PACKAGE-001-CONTROLLED-5-6",
+    "library_file_id": "file_00000000965082308baaebe583560b44"
+  }
+}
