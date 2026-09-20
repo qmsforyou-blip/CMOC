@@ -3,7 +3,7 @@
 
 The control uses the production-derived SRC-002 M06 fixture, injects a synthetic
 CMOC TERM into an in-memory copy of the OBJECT INDEX, runs Reconciliation, and
-asserts that the source-bound Discovery/Passport fixture is byte-equivalent
+asserts that the source-bound Discovery/Passport fixture is unchanged
 before and after. The real OBJECT INDEX file is never modified.
 """
 from __future__ import annotations
@@ -32,7 +32,7 @@ def main() -> None:
     synthetic_equivalent = {
         "object_id": "TEST-T-FR-001",
         "object_type": "TERM",
-        "object_name": "Fast Response",
+        "object_name": "Fast Response visual management",
         "representation": {
             "kind": "OBJECT_FILE",
             "container": "A4.1-SYNTHETIC-CMOC",
