@@ -2,7 +2,7 @@
 
 **ID:** WORK-PLAN-DISCOVERY-RECONCILIATION-001  
 **Дата:** 20-09-2026  
-**Статус:** A4 CLOSED / A5 ACTIVE  
+**Статус:** A5 CLOSED / A6 NEXT  
 **Область:** CMOC / MACHINE-SOURCE-001 / SUPERAGENT  
 **Основание:** STD-008 v0.8 + OBJECT INDEX / QUERY / RECONCILIATION architecture
 
@@ -311,15 +311,15 @@ Work Plan считается закрытым, когда:
 - [ ] OBJECT INDEX / QUERY остаются за границей DISCOVERY;
 - [ ] DISCOVERY RESULT определён как отдельный immutable input для RECONCILIATION;
 - [x] выполнены negative controls;
-- [ ] проведён тест на новом SOURCE;
-- [ ] создано evidence;
+- [x] проведён тест на новом SOURCE;
+- [x] создано evidence;
 - [ ] STD-008 и связанные контракты синхронизированы при необходимости.
 
 ---
 
 ## 9. A4 Closure
 
-A4 закрыт после прохождения всех пяти negative controls и создания сводного evidence:\n\n`05 SUPERAGENT/EVIDENCE-A4-RECONCILIATION-DISCOVERY-ISOLATION-001.md`\n\nРезультаты: A4.1 PASS, A4.2 PASS, A4.3 PASS, A4.4 PASS, A4.5 PASS.\n\nA4 доказывает downstream isolation границы DISCOVERY → RECONCILIATION. A4.3 не доказывает conflict detection/resolution. A4.4 является controlled orchestration test, а не новым LLM production run.\n\n**STOP-GATE A4: CLOSED**\n\nСледующий этап: **A5 — Новый SOURCE**.\n\n## 10. Рабочее правило проекта
+A4 закрыт после прохождения всех пяти negative controls и создания сводного evidence:\n\n`05 SUPERAGENT/EVIDENCE-A4-RECONCILIATION-DISCOVERY-ISOLATION-001.md`\n\nРезультаты: A4.1 PASS, A4.2 PASS, A4.3 PASS, A4.4 PASS, A4.5 PASS.\n\nA4 доказывает downstream isolation границы DISCOVERY → RECONCILIATION. A4.3 не доказывает conflict detection/resolution. A4.4 является controlled orchestration test, а не новым LLM production run.\n\n**STOP-GATE A4: CLOSED**\n\nСледующий этап: **A6 — Документирование и синхронизация стандартов/контрактов**.\n\n## 10. Рабочее правило проекта
 
 > **Сначала добываем. Потом сопоставляем.**
 
