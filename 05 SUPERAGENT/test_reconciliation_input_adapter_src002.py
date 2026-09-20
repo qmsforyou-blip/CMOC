@@ -10,6 +10,8 @@ from copy import deepcopy
 from reconciliation_input_adapter import build_reconciliation_input
 
 
+PASSPORT_CLASSES = ["SOURCE_IDENTITY", "COLLECTION", "DECISION", "ACTIVITY", "CONCEPT_MODEL", "STRATEGY", "STRUCTURAL_DISTINCTION"]
+
 PASSPORT_TERMS = [
     ("PAS-001", "NOM-001", "CLS-001", "Quality Systems Basics source revision", ["FORM-001", "FORM-002", "FORM-003"]),
     ("PAS-002", "NOM-002", "CLS-002", "QSB 11-strategy set", ["FORM-004", "FORM-005", "FORM-006"]),
@@ -39,7 +41,7 @@ def make_fixture():
                 "epistemic_status": "PROVISIONAL",
                 "source_basis": basis,
             }
-            for passport_id, candidate_id, classification_id, term, basis in PASSPORT_TERMS
+            for (passport_id, candidate_id, classification_id, term, basis), working_class in zip(PASSPORT_TERMS, PASSPORT_CLASSES)
         ],
         "traceability": {
             "source_id": "SRC-002",
