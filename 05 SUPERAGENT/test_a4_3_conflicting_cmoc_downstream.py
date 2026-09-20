@@ -34,7 +34,7 @@ def main() -> None:
     synthetic_conflict = {
         "object_id": "TEST-T-FR-CONFLICT-001",
         "object_type": "TERM",
-        "object_name": "Fast Response",
+        "object_name": "Fast Response visual management",
         "representation": {
             "kind": "OBJECT_FILE",
             "container": "A4.3-SYNTHETIC-CMOC",
@@ -79,7 +79,7 @@ def main() -> None:
         "gate": "A4.3-CONFLICTING-CMOC-DOWNSTREAM-ISOLATION",
         "status": "PASS",
         "tested_passport": "PAS-006",
-        "discovery_value": "Fast Response",
+        "discovery_value": "Fast Response visual management",
         "synthetic_cmoc_object_id": "TEST-T-FR-CONFLICT-001",
         "conflicting_claim": "Fast Response is not visual management",
         "reconciliation_result": pas006["match_result"],
