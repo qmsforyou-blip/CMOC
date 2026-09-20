@@ -2,7 +2,7 @@
 
 **ID:** WORK-PLAN-A5-NEW-SOURCE-001  
 **Дата:** 20-09-2026  
-**Статус:** ACTIVE  
+**Статус:** CLOSED  
 **Область:** CMOC / MACHINE-SOURCE-001 / SUPERAGENT  
 **Основание:** WORK-PLAN-DISCOVERY-RECONCILIATION-001 / A4 CLOSED
 
@@ -137,16 +137,30 @@ A5 считается закрытым, когда:
 - [ ] ограничения зафиксированы;
 - [ ] WORK-PLAN-DISCOVERY-RECONCILIATION-001 синхронизирован.
 
-## 11. Текущий статус
+## 11. Closure
+
+A5 закрыт после прохождения:
+
+- A5.1 — SOURCE isolation — PASS;
+- A5.2 — M01–M08 production pass — PASS;
+- A5.3 — downstream RECONCILIATION — PASS;
+- A5.4 — Evidence — PASS.
+
+Evidence:
+`05 SUPERAGENT/EVIDENCE-A5-NEW-SOURCE-001.md`
+
+Результат A5 подтверждает сохранение границы:
 
 ```
-A4 — CLOSED
- ↓
-A5 — ACTIVE
- ↓
-A5.1 — WAITING FOR SOURCE
+SOURCE → DISCOVERY → DISCOVERY_RESULT → RECONCILIATION → CMOC
 ```
 
-Следующая операция — **утвердить конкретный SOURCE и собрать SOURCE_PACKAGE**.
+Discovery Result не изменяется Reconciliation.
+
+### Ограничения
+
+A5 не доказывает автоматическое определение NEW, conflict resolution, semantic completeness, distributed execution, failure recovery или полноту QUERY.
+
+**STOP-GATE A5: CLOSED**
 
 До этого production run не запускается.
