@@ -1,9 +1,9 @@
 # DISCOVERY-RESULT-CONTRACT-001
 
 **Дата:** 20-09-2026  
-**Статус:** CONTRACT CANDIDATE  
+**Статус:** CONTRACT CANDIDATE — A6 SYNCHRONIZED  
 **Область:** MACHINE-SOURCE-001 / SUPERAGENT  
-**Основание:** WORK-PLAN-DISCOVERY-RECONCILIATION-001, A1–A2
+**Основание:** WORK-PLAN-DISCOVERY-RECONCILIATION-001, A1–A5 + STD-008 v0.9
 
 ---
 
@@ -406,7 +406,7 @@ OBJECT INDEX и QUERY находятся за границей Discovery.
 
 ---
 
-## 18. Текущий статус A2
+## 18. Статус после A5
 
 A2 считается контрактно определённым, если:
 
@@ -421,7 +421,18 @@ A2 считается контрактно определённым, если:
 - [x] M08 явно отнесён к DISCOVERY;
 - [x] shared infrastructure отделена от семантических режимов.
 
-Открытым остаётся A3: точное согласование RECONCILIATION INPUT с фактическим `reconciliation.py` и его текущим словарём результатов.
+A2 подтверждён контрактно.
+
+A5 дополнительно подтвердил контракт на новом SOURCE SRC-003:
+
+- production M01–M08 выполнен;
+- DISCOVERY_RESULT сформирован отдельно;
+- DISCOVERY_RESULT передан в downstream RECONCILIATION;
+- исходный Discovery Result не изменён;
+- OBJECT INDEX не изменён;
+- CMOC write отсутствует.
+
+Контракт не расширяется результатами A5 за пределы уже определённой границы.
 
 ---
 
