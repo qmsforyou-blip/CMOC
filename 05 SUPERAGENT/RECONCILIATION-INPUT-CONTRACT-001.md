@@ -2,9 +2,9 @@
 
 **Версия:** 0.1  
 **Дата:** 20-09-2026  
-**Статус:** CONTRACT CANDIDATE  
+**Статус:** CONTRACT CANDIDATE — A6 SYNCHRONIZED  
 **Область:** MACHINE-SOURCE-001 → RECONCILIATION  
-**Основание:** A2 DISCOVERY RESULT contract + A3-GATE по production M06 SRC-002
+**Основание:** A2 DISCOVERY RESULT contract + A3 implementation gate + A5 SRC-003 downstream validation + STD-008 v0.9
 
 ---
 
@@ -517,19 +517,20 @@ CMOC может влиять только на результат Reconciliation
 
 **CONTRACT CANDIDATE**
 
-A3-GATE завершён на production данных SRC-002.
+A3 implementation gate завершён на production M06 SRC-002. Контракт затем проверен downstream на новом SOURCE SRC-003.
 
-Следующий шаг:
+Подтверждено:
 
-**A3-IMPLEMENTATION GATE** — реализовать минимальный read-only adapter и проверить его на 7 production PASSPORT_RECORDS без запуска QUERY.
+- read-only adapter используется без семантического обогащения;
+- QUERY вызывается только после формирования RECONCILIATION_INPUT;
+- `target_object_type` не выводится автоматически;
+- 16 SRC-003 records прошли downstream Reconciliation;
+- `NO_MATCH` не превращается автоматически в `NEW`;
+- Discovery Result и OBJECT INDEX не мутируются.
 
-До прохождения этого gate:
+Контракт остаётся **CONTRACT CANDIDATE**, поскольку A5 подтверждает интерфейс и его границу, но не вводит новые правила для `NEW`, `CONFLICT`, `RELATED` или mapping `working_class → target_object_type`.
 
-- M01–M08 не изменять;
-- OBJECT INDEX не изменять;
-- QUERY не изменять;
-- reconciliation.py не изменять;
-- новую семантику target_object_type не вводить.
+До отдельного контракта этих правил семантическое расширение запрещено.
 
 ---
 
