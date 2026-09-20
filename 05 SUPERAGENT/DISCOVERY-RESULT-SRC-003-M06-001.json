@@ -1,0 +1,256 @@
+{
+  "status": "ACCEPT",
+  "type": "PASSPORT_RECORDS",
+  "source_id": "SRC-003",
+  "batch_id": "BATCH-SRC-003-M06-006",
+  "records": [
+    {
+      "id": "PAS-001",
+      "candidate_id": "NOM-001",
+      "classification_id": "CLS-001",
+      "term": "Document preparation responsibility",
+      "working_class": "SOURCE_IDENTITY",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ]
+    },
+    {
+      "id": "PAS-002",
+      "candidate_id": "NOM-002",
+      "classification_id": "CLS-002",
+      "term": "Sixth-edition supersession of EN ISO 9001:2015",
+      "working_class": "SOURCE_IDENTITY",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ]
+    },
+    {
+      "id": "PAS-003",
+      "candidate_id": "NOM-003",
+      "classification_id": "CLS-003",
+      "term": "Strategic quality management system adoption",
+      "working_class": "STRATEGY",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-007",
+        "FORM-008",
+        "FORM-009"
+      ]
+    },
+    {
+      "id": "PAS-004",
+      "candidate_id": "NOM-004",
+      "classification_id": "CLS-004",
+      "term": "Consistent provision of conforming products and services",
+      "working_class": "ACTIVITY",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-010",
+        "FORM-011",
+        "FORM-012"
+      ]
+    },
+    {
+      "id": "PAS-005",
+      "candidate_id": "NOM-005",
+      "classification_id": "CLS-005",
+      "term": "Opportunities to enhance customer satisfaction",
+      "working_class": "CONCEPT_MODEL",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-013",
+        "FORM-014",
+        "FORM-015"
+      ]
+    },
+    {
+      "id": "PAS-006",
+      "candidate_id": "NOM-006",
+      "classification_id": "CLS-006",
+      "term": "Addressing context- and objective-related risks and opportunities",
+      "working_class": "ACTIVITY",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-016",
+        "FORM-017",
+        "FORM-018"
+      ]
+    },
+    {
+      "id": "PAS-007",
+      "candidate_id": "NOM-007",
+      "classification_id": "CLS-007",
+      "term": "Demonstration of quality management system conformity",
+      "working_class": "ACTIVITY",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-019",
+        "FORM-020",
+        "FORM-021"
+      ]
+    },
+    {
+      "id": "PAS-008",
+      "candidate_id": "NOM-008",
+      "classification_id": "CLS-008",
+      "term": "Internal and external document use",
+      "working_class": "ACTIVITY",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-022",
+        "FORM-023",
+        "FORM-024"
+      ]
+    },
+    {
+      "id": "PAS-009",
+      "candidate_id": "NOM-009",
+      "classification_id": "CLS-009",
+      "term": "Non-prescription of system structure, documentation alignment, and terminology",
+      "working_class": "DECISION",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-025",
+        "FORM-026",
+        "FORM-027"
+      ]
+    },
+    {
+      "id": "PAS-010",
+      "candidate_id": "NOM-010",
+      "classification_id": "CLS-010",
+      "term": "“Shall” as requirement",
+      "working_class": "STRUCTURAL_DISTINCTION",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-028",
+        "FORM-029",
+        "FORM-030"
+      ]
+    },
+    {
+      "id": "PAS-011",
+      "candidate_id": "NOM-011",
+      "classification_id": "CLS-011",
+      "term": "“Should” as recommendation",
+      "working_class": "STRUCTURAL_DISTINCTION",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-031",
+        "FORM-032",
+        "FORM-033"
+      ]
+    },
+    {
+      "id": "PAS-012",
+      "candidate_id": "NOM-012",
+      "classification_id": "CLS-012",
+      "term": "“May” as permission",
+      "working_class": "STRUCTURAL_DISTINCTION",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-034",
+        "FORM-035",
+        "FORM-036"
+      ]
+    },
+    {
+      "id": "PAS-013",
+      "candidate_id": "NOM-013",
+      "classification_id": "CLS-013",
+      "term": "“Can” as possibility or capability",
+      "working_class": "STRUCTURAL_DISTINCTION",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-037",
+        "FORM-038",
+        "FORM-039"
+      ]
+    },
+    {
+      "id": "PAS-014",
+      "candidate_id": "NOM-014",
+      "classification_id": "CLS-014",
+      "term": "NOTE as non-requirement guidance",
+      "working_class": "STRUCTURAL_DISTINCTION",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-040",
+        "FORM-041",
+        "FORM-042"
+      ]
+    },
+    {
+      "id": "PAS-015",
+      "candidate_id": "NOM-015",
+      "classification_id": "CLS-015",
+      "term": "Informative status of Annex A",
+      "working_class": "STRUCTURAL_DISTINCTION",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-043",
+        "FORM-044",
+        "FORM-045"
+      ]
+    },
+    {
+      "id": "PAS-016",
+      "candidate_id": "NOM-016",
+      "classification_id": "CLS-016",
+      "term": "ISO/CD 9000 quality management principles",
+      "working_class": "COLLECTION",
+      "lifecycle_status": "ЧЕРНОВИК",
+      "epistemic_status": "PROVISIONAL",
+      "object_boundary": "Source-bound working object limited to this candidate term as represented in SRC-003 and supported only by the supplied source basis.",
+      "source_basis": [
+        "FORM-046",
+        "FORM-047",
+        "FORM-048"
+      ]
+    }
+  ],
+  "traceability": {
+    "source_id": "SRC-003",
+    "batch_id": "BATCH-SRC-003-M06-006",
+    "source_package": "SOURCE-003-PACKAGE-001-CONTROLLED-5-6",
+    "discovery_run": "RUN-SRC-003-AUTOMATED-M01-M08-001",
+    "upstream_batch": "BATCH-SRC-003-M05-005"
+  },
+  "ref": "BATCH-SRC-003-M06-006:OUTPUT"
+}
