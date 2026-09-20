@@ -1,10 +1,10 @@
 # STD-008 — MACHINE-SOURCE-001
 ## Машина добычи инженерного знания
 
-**Версия:** v0.8  
+**Версия:** v0.9  
 **Дата:** 20-09-2026  
 **Статус:** Standard  
-**Основание редакции:** v0.7 + production automated M01–M08 run on SRC-002 + controlled M07/M08 NO_RELATION branch.
+**Основание редакции:** v0.8 + A5 controlled new-SOURCE validation on SRC-003 + downstream Reconciliation boundary evidence.
 
 ---
 
@@ -564,3 +564,165 @@ M07 не сформировал relation candidate при отсутствии s
 - семантическая полнота;
 - автоматическая канонизация;
 - автоматическое обнаружение положительных relations на произвольном SOURCE.
+
+
+## 31. Новый SOURCE — SRC-003
+
+В рамках A5 выполнен контролируемый production AUTOMATED RUN на новом Источнике SRC-003.
+
+### SOURCE identity
+
+- **SOURCE_ID:** `SRC-003`
+- **SOURCE_NAME:** `ISO/DIS 9001:2025 — Quality management systems — Requirements`
+- **SOURCE_TYPE:** PDF
+- **SOURCE_VERSION:** `ISO/DIS 9001:2025(en), sixth edition, draft`
+- **SOURCE_PACKAGE:** `SOURCE-003-PACKAGE-001-CONTROLLED-5-6`
+- **SOURCE_PACKAGE_STATUS:** PARTIAL
+- **WORK_SCOPE:** pages 5-6 of 50
+
+Предыдущие результаты ISO-добычи не являются входом данного SOURCE_PACKAGE.
+
+### Production run
+
+Run:
+
+`RUN-SRC-003-AUTOMATED-M01-M08-001`
+
+Подтверждено:
+
+- 8 production BATCH;
+- 7/7 HANDOFF = ACCEPT;
+- M01: 16 records;
+- M02: 16 records;
+- M03: 48 records;
+- M04: 16 records;
+- M05: 16 records;
+- M06: 16 PASSPORT_RECORDS;
+- M07: 1 controlled `NO_RELATION`;
+- M08: 0 DECISION_RECORDS;
+- CMOC access = NONE;
+- QUERY access = NONE.
+
+Evidence:
+
+`05 SUPERAGENT/EVIDENCE-A5-NEW-SOURCE-001.md`
+
+Этот прогон подтверждает сохранение production interface, handoff и traceability при смене SOURCE в пределах указанного SOURCE_PACKAGE и контролируемой relation-negative ветви.
+
+## 32. Граница DISCOVERY → RECONCILIATION
+
+A5 подтвердил отдельность source-derived Discovery Result и downstream Reconciliation.
+
+Рабочая схема:
+
+```
+SOURCE
+  ↓
+DISCOVERY
+  ↓
+DISCOVERY_RESULT
+  ↓
+RECONCILIATION_INPUT
+  ↓
+RECONCILIATION
+  ↓
+CMOC / OBJECT INDEX / QUERY
+```
+
+Discovery Result:
+
+`05 SUPERAGENT/DISCOVERY-RESULT-SRC-003-M06-001.json`
+
+Содержит 16 M06 Passport Records из:
+
+`BATCH-SRC-003-M06-006`
+
+### A5.3 downstream Reconciliation
+
+Для 16 source-bound Passport Records выполнен отдельный downstream pass.
+
+Результат:
+
+- `EXISTING_EQUIVALENT = 0`;
+- `NEEDS_REVIEW = 16`;
+- `NEW = 0`.
+
+Основание результатов:
+
+`NO_MATCH from configured query modes; NEW not yet proven`
+
+Следовательно:
+
+> `NO_MATCH` не является автоматически доказанным `NEW`.
+
+В текущем варианте Reconciliation отсутствие доказанного соответствия сохраняется как `NEEDS_REVIEW`.
+
+### Boundary controls
+
+Подтверждено:
+
+- Discovery Result не изменён;
+- OBJECT INDEX не изменён;
+- CMOC write отсутствует;
+- QUERY используется только downstream;
+- `working_class → target_object_type` mapping не выполнялся;
+- хэши Discovery Result и OBJECT INDEX до/после Reconciliation совпали.
+
+Главный инвариант:
+
+> **CMOC может влиять на результат Reconciliation, но не может влиять на результат Discovery.**
+
+И:
+
+> **DISCOVERY_RESULT может быть прочитан RECONCILIATION, но не может быть изменён RECONCILIATION.**
+
+## 33. Evidence boundary после A5
+
+A5 подтверждает:
+
+- воспроизводимый production pass на новом SOURCE_PACKAGE в указанном scope;
+- сохранение M01–M08 production sequence;
+- сохранение HANDOFF и traceability;
+- независимость Discovery от CMOC и QUERY;
+- передачу Discovery Result в downstream Reconciliation;
+- отсутствие мутации Discovery Result при Reconciliation.
+
+A5 не подтверждает:
+
+- автоматическое определение `NEW`;
+- автоматическое разрешение `CONFLICT`;
+- автоматическое установление `RELATED`;
+- семантическую полноту Discovery;
+- полноту QUERY;
+- distributed execution;
+- failure recovery;
+- автоматическую канонизацию;
+- положительное relation discovery на произвольном SOURCE.
+
+Scope A5 ограничен страницами 5-6 из 50 SOURCE-003.
+
+## 34. Связанные документы A5
+
+- `05 SUPERAGENT/EVIDENCE-A5-NEW-SOURCE-001.md`;
+- `05 SUPERAGENT/DISCOVERY-RESULT-SRC-003-M06-001.json`;
+- `05 SUPERAGENT/run_automated_m01_m08_src003.py`;
+- `05 SUPERAGENT/run_reconciliation_src003_a53.py`;
+- `05 SUPERAGENT/DISCOVERY-RESULT-CONTRACT-001.md`;
+- `05 SUPERAGENT/RECONCILIATION-INPUT-CONTRACT-001.md`;
+- `05 SUPERAGENT/WORK-PLAN-A5-NEW-SOURCE-001.md`.
+
+## 35. Definition of Done v0.9
+
+- [x] production AUTOMATED RUN M01–M08 подтверждён на новом SOURCE SRC-003;
+- [x] source/package identity зафиксированы;
+- [x] 7/7 production HANDOFF = ACCEPT;
+- [x] source traceability сохранена;
+- [x] Discovery Result выделен как отдельный объект;
+- [x] downstream Reconciliation выполнен отдельно от Discovery;
+- [x] Discovery Result не изменён Reconciliation;
+- [x] OBJECT INDEX не изменён Reconciliation;
+- [x] CMOC write отсутствует;
+- [x] `NO_MATCH ≠ NEW` явно зафиксировано;
+- [x] ограничения доказательства зафиксированы;
+- [x] A5 Evidence создано.
+
