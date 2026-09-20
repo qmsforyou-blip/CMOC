@@ -61,8 +61,12 @@ RECONCILIATION
        ↓
 CMOC / OBJECT INDEX / QUERY
        ↓
-NEW / EQUIVALENT / RELATED / CONFLICT / REVIEW
+RECONCILIATION RESULT
 ```
+
+В текущей реализации подтверждены результаты `EXISTING_EQUIVALENT` и `NEEDS_REVIEW`.
+
+`NEW`, `RELATED` и `CONFLICT` остаются архитектурными направлениями для отдельных правил/контрактов и не считаются реализованными текущим `reconciliation.py`.
 
 RECONCILIATION отвечает только на вопрос:
 
