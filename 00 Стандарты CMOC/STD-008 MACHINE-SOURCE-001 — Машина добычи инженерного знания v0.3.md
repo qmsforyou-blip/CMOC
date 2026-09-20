@@ -54,7 +54,7 @@ MACHINE-SOURCE-001 реализует последовательность:
 | M05 | Nomenclature Candidate | рабочая типизация | Classification Record | 1→1 |
 | M06 | Classification Record | сборка паспорта | Passport Record | 1→1 |
 | M07 | Passport Records | выделение отношений | Relation Candidate | N→M |
-| M08 | Passport + Relation | решение о канонизации | Canonization Decision | N→M |
+| M08 | Passport + Relation Candidate where applicable | решение о канонизации | Canonization Decision | N→M |
 
 `*` 1→1 является проверенной схемой полного теста; другие кардинальности M02 требуют отдельной фиксации в конкретном контракте.
 
@@ -383,6 +383,8 @@ M01–M07 показали сопоставимость структуры; M07 
 
 ### Ограничение доказательства
 
+Данное ограничение относится к доказательствам, зафиксированным в редакции v0.3.
+
 Проведённые тесты подтверждают воспроизводимость и управляемость **последовательной технологии**, но не заменяют отдельный AUTOMATED RUN.
 
 ---
@@ -444,7 +446,7 @@ M01–M07 показали сопоставимость структуры; M07 
 
 ## 24. Definition of Done v0.6
 
-- [x] выполнен AUTOMATED-RUN-003 на TXT SOURCE_PACKAGE;
+- [x] выполнен AUTOMATED-RUN-003 на TXT SOURCE_PACKAGE (исторический идентификатор для TXT SOURCE_PACKAGE run);
 - [x] полный M01–M08 SRC-003 закрыт;
 - [x] проверены M07 isolated и multi-object;
 - [x] проверен relation-dependent M08;
