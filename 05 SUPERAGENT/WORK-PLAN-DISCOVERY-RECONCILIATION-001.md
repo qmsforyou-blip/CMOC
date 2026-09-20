@@ -1,0 +1,338 @@
+# WORK-PLAN — DISCOVERY / RECONCILIATION Boundary
+
+**ID:** WORK-PLAN-DISCOVERY-RECONCILIATION-001  
+**Дата:** 20-09-2026  
+**Статус:** ACTIVE  
+**Область:** CMOC / MACHINE-SOURCE-001 / SUPERAGENT  
+**Основание:** STD-008 v0.8 + OBJECT INDEX / QUERY / RECONCILIATION architecture
+
+---
+
+## 1. Цель
+
+Формально разделить два режима работы:
+
+`DISCOVERY` — независимая добыча инженерного знания из SOURCE.
+
+`RECONCILIATION` — сопоставление уже добытого результата с накопленным CMOC.
+
+Главный принцип:
+
+> **Сначала добываем. Потом сопоставляем.**
+
+---
+
+## 2. Архитектурная граница
+
+### MODE A — DISCOVERY
+
+```
+SOURCE
+  ↓
+SOURCE_PACKAGE
+  ↓
+M01 → M02 → M03 → M04 → M05 → M06 → M07 → M08
+  ↓
+DISCOVERY RESULT
+```
+
+DISCOVERY отвечает только на вопрос:
+
+> **Что здесь есть?**
+
+DISCOVERY НЕ использует CMOC для изменения результата добычи.
+
+В частности, DISCOVERY не должен:
+
+- обращаться к OBJECT INDEX для изменения добываемого результата;
+- выполнять QUERY;
+- определять EQUIVALENT относительно CMOC;
+- определять RELATED относительно CMOC;
+- определять CONFLICT относительно CMOC;
+- подменять source evidence накопленным знанием;
+- удалять или изменять результат из-за того, что аналог уже существует в CMOC.
+
+### MODE B — RECONCILIATION
+
+```
+DISCOVERY RESULT
+       ↓
+RECONCILIATION
+       ↓
+CMOC / OBJECT INDEX / QUERY
+       ↓
+NEW / EQUIVALENT / RELATED / CONFLICT / REVIEW
+```
+
+RECONCILIATION отвечает только на вопрос:
+
+> **Что из добытого уже известно в CMOC и как новый результат соотносится с накопленным?**
+
+RECONCILIATION не переписывает исходный DISCOVERY RESULT.
+
+---
+
+## 3. Особое правило M08
+
+M08 относится к DISCOVERY.
+
+```
+M07
+ ↓
+M08
+ ↓
+source-bound decision
+ ↓
+DISCOVERY RESULT
+```
+
+M08 НЕ является RECONCILIATION.
+
+M08 может принимать решение о степени основания объекта/отношения на основании SOURCE, PASSPORT и предусмотренного source-bound evidence.
+
+M08 не должен использовать:
+
+- CMOC;
+- OBJECT INDEX;
+- QUERY;
+- существующие CMOC objects;
+- накопленные ранее результаты как основание для изменения текущего SOURCE-result.
+
+---
+
+## 4. Неизменяемость границы
+
+Результат DISCOVERY является входом RECONCILIATION как отдельный объект результата.
+
+Допустимая схема:
+
+```
+SOURCE
+  ↓
+DISCOVERY
+  ↓
+RESULT-A
+  ↓
+RECONCILIATION
+  ↓
+RESULT-B
+```
+
+Недопустимая схема:
+
+```
+SOURCE
+  ↓
+DISCOVERY
+  ↓
+CMOC lookup
+  ↓
+изменение RESULT-A
+```
+
+RECONCILIATION может добавить собственные поля/решения сопоставления, но не должен молча переписывать source-derived records.
+
+---
+
+## 5. Текущий launcher
+
+`05 SUPERAGENT/run_automated_m01_m08_src002.py`
+
+на текущем этапе трактуется как:
+
+> **контрольный production runner режима DISCOVERY для SRC-002.**
+
+Он не является RECONCILIATION runner.
+
+Его задача:
+
+```
+SOURCE_PACKAGE
+ → M01
+ → M02
+ → M03
+ → M04
+ → M05
+ → M06
+ → M07
+ → M08
+ → DISCOVERY RESULT
+```
+
+---
+
+## 6. План работ
+
+### Этап A1 — Разбор launcher
+
+Проверить `run_automated_m01_m08_src002.py` по каждому элементу:
+
+- SOURCE;
+- SOURCE_PACKAGE;
+- initial input;
+- M01–M08;
+- HANDOFF;
+- BATCH;
+- wrappers;
+- QC;
+- post-run control;
+- audit output.
+
+Для каждого элемента определить:
+
+`DISCOVERY / RECONCILIATION / SHARED INFRASTRUCTURE`.
+
+**STOP-GATE A1:** ни один элемент DISCOVERY launcher не должен зависеть от CMOC для изменения добываемого результата.
+
+---
+
+### Этап A2 — Формализация интерфейса DISCOVERY
+
+Определить минимальный контракт:
+
+```
+SOURCE_PACKAGE
+      ↓
+MACHINE-SOURCE-001
+      ↓
+DISCOVERY_RESULT
+```
+
+Зафиксировать:
+
+- input;
+- output;
+- traceability;
+- status;
+- batch lineage;
+- границу ответственности.
+
+**STOP-GATE A2:** результат DISCOVERY самодостаточен для передачи в RECONCILIATION и не требует обратного обращения к CMOC.
+
+---
+
+### Этап A3 — Формализация интерфейса RECONCILIATION
+
+Определить:
+
+```
+DISCOVERY_RESULT
+       +
+CMOC / OBJECT INDEX
+       ↓
+RECONCILIATION
+       ↓
+RECONCILIATION_RESULT
+```
+
+Проверить существующие:
+
+- OBJECT INDEX;
+- QUERY;
+- reconciliation.py;
+- статусы MATCH / NO_MATCH / CANDIDATE / AMBIGUOUS / SCOPE_INSUFFICIENT;
+- переходы к NEW / EQUIVALENT / RELATED / CONFLICT / REVIEW.
+
+**STOP-GATE A3:** RECONCILIATION получает готовый результат и не участвует в его добыче.
+
+---
+
+### Этап A4 — Negative controls
+
+Обязательно проверить:
+
+1. CMOC содержит эквивалентный объект → DISCOVERY RESULT не меняется.
+2. CMOC содержит похожий объект → DISCOVERY RESULT не меняется.
+3. CMOC содержит конфликтующую информацию → DISCOVERY RESULT не меняется.
+4. QUERY недоступен → DISCOVERY всё равно способен завершить source-bound pass.
+5. RECONCILIATION получает неполный/неоднозначный результат → не переписывает DISCOVERY.
+
+---
+
+### Этап A5 — Новый SOURCE
+
+Только после закрытия A1–A4.
+
+Новый SOURCE используется для проверки:
+
+```
+SOURCE-NEW
+   ↓
+DISCOVERY
+   ↓
+DISCOVERY RESULT
+   ↓
+RECONCILIATION
+```
+
+При этом отдельно оцениваются:
+
+- воспроизводимость DISCOVERY;
+- независимость от CMOC;
+- корректность RECONCILIATION;
+- отсутствие обратной семантической утечки.
+
+---
+
+### Этап A6 — Документирование
+
+После прохождения контрольных точек:
+
+1. обновить соответствующий TASK/runner contract;
+2. при необходимости внести controlled edit в STD-008;
+3. создать evidence;
+4. зафиксировать negative controls;
+5. только после этого считать границу DISCOVERY / RECONCILIATION доказанной.
+
+---
+
+## 7. Запреты на всём этапе
+
+До закрытия этого Work Plan:
+
+- не подключать CMOC к M01–M08;
+- не добавлять QUERY внутрь MACHINE-SOURCE-001;
+- не делать RECONCILIATION частью M08;
+- не менять source-derived результат из-за найденного эквивалента;
+- не считать совпадение термина доказательством эквивалентности;
+- не смешивать DISCOVERY evidence и RECONCILIATION evidence;
+- не объявлять новую SOURCE проверкой воспроизводимости до формализации интерфейса.
+
+---
+
+## 8. Definition of Done
+
+Work Plan считается закрытым, когда:
+
+- [ ] A1 launcher размечен по границе A/B;
+- [ ] A2 DISCOVERY interface зафиксирован;
+- [ ] A3 RECONCILIATION interface зафиксирован;
+- [ ] M08 явно отнесён к DISCOVERY;
+- [ ] OBJECT INDEX / QUERY остаются за границей DISCOVERY;
+- [ ] DISCOVERY RESULT определён как отдельный immutable input для RECONCILIATION;
+- [ ] выполнены negative controls;
+- [ ] проведён тест на новом SOURCE;
+- [ ] создано evidence;
+- [ ] STD-008 и связанные контракты синхронизированы при необходимости.
+
+---
+
+## 9. Рабочее правило проекта
+
+> **Сначала добываем. Потом сопоставляем.**
+
+Или в инженерной форме:
+
+```
+SOURCE
+  ↓
+DISCOVERY
+  ↓
+RESULT
+  ↓
+RECONCILIATION
+  ↓
+CMOC
+```
+
+Никакого обратного потока семантики из CMOC в DISCOVERY.
