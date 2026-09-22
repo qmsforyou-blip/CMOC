@@ -173,12 +173,13 @@ def main() -> None:
         "object_index_unchanged": before.get(str(OBJECT_INDEX)) == after.get(str(OBJECT_INDEX)),
         "discovery_result_unchanged": before.get(str(DISCOVERY_RESULT)) == after.get(str(DISCOVERY_RESULT)),
         "production_runtime_imported": False,
+        "production_runtime_import_blocked": True,
         "approved_does_not_write_cmoc": True,
         "rejected_does_not_write_cmoc": True,
     }
 
     all_pass = all(item["pass"] for item in cases) and all(
-        value is True for key, value in controls.items() if key != "cmoc_write"
+        value is True for key, value in controls.items() if key not in {"cmoc_write", "production_runtime_imported"}
     ) and controls["cmoc_write"] == "NONE"
 
     gate = {
