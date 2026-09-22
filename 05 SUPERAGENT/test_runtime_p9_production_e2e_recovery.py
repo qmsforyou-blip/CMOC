@@ -107,18 +107,23 @@ def main():
             seq += 1
 
         # 03 — P3 registers the first P7 attempt
+        # The four upstream stages emitted STARTED+COMPLETED pairs, so the
+        # next journal sequence number is 10.
+        next_seq = 10
         assert attempts.register(
             RUN_ID, "C2_CMOC_WRITE", "ATT-C2-001",
             "WRITE-RESULT-001", "IDEMP-P9-C2"
         ) == "ACCEPTED"
-        journal.append(ev(6, "EV-006", "C2_CMOC_WRITE", "STAGE_STARTED",
+        next_seq += 1
+        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "C2_CMOC_WRITE", "STAGE_STARTED",
                           "WRITE-RESULT-001", "ATT-C2-001", "STARTED"))
 
         # 04 — injected execution failure is durable
         assert attempts.mark_failed(
             RUN_ID, "C2_CMOC_WRITE", "ATT-C2-001"
         ) == "FAILED_RECORDED"
-        journal.append(ev(7, "EV-007", "C2_CMOC_WRITE", "STAGE_FAILED",
+        next_seq += 1
+        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "C2_CMOC_WRITE", "STAGE_FAILED",
                           "WRITE-FAILED-001", "ATT-C2-001", "FAILED"))
 
         # 05 — fresh restart/recovery controller sees explicit retry requirement
@@ -133,7 +138,8 @@ def main():
         decision = recovery.inspect(RUN_ID)
         assert decision.status == "RETRY_REQUIRED"
 
-        journal.append(ev(8, "EV-008", "RECOVERY", "RETRY_REQUIRED",
+        next_seq += 1
+        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "RECOVERY", "RETRY_REQUIRED",
                           "RECOVERY-001", "ATT-C2-002", "RETRY_REQUIRED"))
 
         # 06 — new attempt identity
@@ -141,7 +147,8 @@ def main():
             RUN_ID, "C2_CMOC_WRITE", "ATT-C2-002",
             "WRITE-RESULT-002", "IDEMP-P9-C2-RETRY"
         ) == "ACCEPTED"
-        journal.append(ev(9, "EV-009", "C2_CMOC_WRITE", "STAGE_STARTED",
+        next_seq += 1
+        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "C2_CMOC_WRITE", "STAGE_STARTED",
                           "WRITE-RESULT-002", "ATT-C2-002", "STARTED"))
 
         # 07 — P5 guards the authoritative retry effect
@@ -164,7 +171,8 @@ def main():
             RUN_ID, "C2_CMOC_WRITE", "ATT-C2-002"
         ) == "COMMITTED"
 
-        journal.append(ev(10, "EV-010", "C2_CMOC_WRITE", "STAGE_COMPLETED",
+        next_seq += 1
+        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "C2_CMOC_WRITE", "STAGE_COMPLETED",
                           "WRITE-RESULT-002", "ATT-C2-002", "COMPLETED"))
 
         # 08 — P8 invokes the real deterministic index builder
@@ -186,12 +194,14 @@ def main():
         sync = index_sync.synchronize(sync_payload)
         assert sync.status == "ALREADY_SYNCHRONIZED"
 
-        journal.append(ev(11, "EV-011", "C3_OBJECT_INDEX_SYNC",
+        next_seq += 1
+        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "C3_OBJECT_INDEX_SYNC",
                           "STAGE_COMPLETED", "INDEX-P9-RT-001",
                           "ATT-C3-001", "COMPLETED"))
 
         # 09 — final RUN completion
-        journal.append(ev(12, "EV-012", "RUN", "RUN_COMPLETED",
+        next_seq += 1
+        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "RUN", "RUN_COMPLETED",
                           "RUN-COMPLETE", "ATT-C2-002", "COMPLETED"))
 
         # 10 — P7 idempotency
@@ -223,7 +233,7 @@ def main():
         assert journal.verify_projection(RUN_ID)
         state = journal.get_state(RUN_ID)
         assert state.run_status == "COMPLETED"
-        assert state.last_event_seq == 12
+        assert state.last_event_seq == next_seq
         assert state.source_id == SOURCE_ID
         assert state.batch_id == BATCH_ID
 
