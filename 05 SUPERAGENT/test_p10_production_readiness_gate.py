@@ -17,7 +17,7 @@ EVIDENCE = [
     "EVIDENCE-R10-NEW-DECISION-RULE-001.md",
     "EVIDENCE-C1-CANONIZATION-BOUNDARY-001.md",
     "EVIDENCE-C2-CMOC-WRITE-BOUNDARY-001.md",
-    "EVIDENCE-C3-OBJECT-INDEX-SYNCHRONIZATION-BOUNDARY-001.md",
+    "EVIDENCE-C3-OBJECT-INDEX-SYNCHRONIZATION-001.md",
     "EVIDENCE-RUN-001-END-TO-END-TRACEABILITY-BOUNDARY-001.md",
     "EVIDENCE-ORCH-001-EXECUTION-ORCHESTRATION-BOUNDARY-001.md",
     "EVIDENCE-REC-001-EXECUTION-RECOVERY-RETRY-RESUME-BOUNDARY-001.md",
@@ -50,43 +50,73 @@ LIMITATIONS = [
     "long-term observability/SLOs",
 ]
 
+
+def accepted(name, statuses):
+    return statuses.get(name) == "PRESENT_ACCEPTED"
+
+
+def all_accepted(names, statuses):
+    return all(accepted(name, statuses) for name in names)
+
+
 def main():
-    present = []
-    missing = []
     statuses = {}
 
     for name in EVIDENCE:
         path = SUPERAGENT / name
-        if path.exists():
-            text = path.read_text(encoding="utf-8")
-            present.append(name)
-            statuses[name] = "PRESENT_ACCEPTED" if "ACCEPTED" in text else "PRESENT_NOT_ACCEPTED"
-        else:
-            missing.append(name)
+        if not path.exists():
             statuses[name] = "MISSING"
+            continue
+        text = path.read_text(encoding="utf-8")
+        statuses[name] = (
+            "PRESENT_ACCEPTED"
+            if "ACCEPTED" in text
+            else "PRESENT_NOT_ACCEPTED"
+        )
 
-    failures = [name for name, status in statuses.items() if status == "PRESENT_NOT_ACCEPTED"]
+    present = [name for name, status in statuses.items()
+               if status != "MISSING"]
+    missing = [name for name, status in statuses.items()
+               if status == "MISSING"]
+    failures = [name for name, status in statuses.items()
+                if status == "PRESENT_NOT_ACCEPTED"]
 
-    if missing or failures:
-        overall = "EVIDENCE_INCOMPLETE"
-    else:
-        overall = "READY_WITH_LIMITATIONS"
+    semantic_names = EVIDENCE[:10]
+    execution_names = [
+        "EVIDENCE-RUN-001-END-TO-END-TRACEABILITY-BOUNDARY-001.md",
+        "EVIDENCE-ORCH-001-EXECUTION-ORCHESTRATION-BOUNDARY-001.md",
+        "EVIDENCE-REC-001-EXECUTION-RECOVERY-RETRY-RESUME-BOUNDARY-001.md",
+        "EVIDENCE-P1-EXECUTION-JOURNAL-MODEL-001.md",
+        "EVIDENCE-P2-PERSISTENT-RUN-STAGE-STATE-MODEL-001.md",
+        "EVIDENCE-P3-ATTEMPT-IDENTITY-IDEMPOTENCY-MODEL-001.md",
+        "EVIDENCE-P4-RESTART-RESUME-BOUNDARY-001.md",
+        "EVIDENCE-P5-TRANSACTION-CONCURRENCY-BOUNDARY-001.md",
+    ]
+    production_names = [
+        "EVIDENCE-P6-PRODUCTION-ADAPTERS-R1-C3-BOUNDARY-001.md",
+        "EVIDENCE-P7-PRODUCTION-CMOC-WRITE-001.md",
+        "EVIDENCE-P8-PRODUCTION-OBJECT-INDEX-SYNCHRONIZATION-001.md",
+    ]
+    e2e_names = [
+        "EVIDENCE-E2E-001-END-TO-END-SYNTHETIC-INTEGRATION-BOUNDARY-001.md",
+        "EVIDENCE-P9-PRODUCTION-E2E-RECOVERY-001.md",
+    ]
 
     semantic = {
-        "status": "PROVEN",
-        "basis": "R1-R10 accepted evidence present; P1-P9 tests explicitly isolate semantic responsibility.",
+        "status": "PROVEN" if all_accepted(semantic_names, statuses) else "NOT_PROVEN",
+        "basis": "R1-R10 accepted evidence is required.",
     }
     execution = {
-        "status": "PROVEN",
-        "basis": "RUN, ORCH, REC and P1-P5 accepted evidence present.",
+        "status": "PROVEN" if all_accepted(execution_names, statuses) else "NOT_PROVEN",
+        "basis": "RUN, ORCH, REC and P1-P5 accepted evidence is required.",
     }
     production_integration = {
-        "status": "PROVEN",
-        "basis": "P6-P8 accepted evidence present; P7 physically persists an isolated repository fixture and P8 invokes the real deterministic index builder.",
+        "status": "PROVEN" if all_accepted(production_names, statuses) else "NOT_PROVEN",
+        "basis": "P6-P8 accepted evidence is required.",
     }
     end_to_end = {
-        "status": "PROVEN",
-        "basis": "P9 accepted evidence demonstrates failure, recovery, retry, physical CMOC write, deterministic index sync and RUN completion.",
+        "status": "PROVEN" if all_accepted(e2e_names, statuses) else "NOT_PROVEN",
+        "basis": "E2E and P9 accepted evidence is required.",
     }
     operational_completeness = {
         "status": "LIMITED",
@@ -94,21 +124,27 @@ def main():
     }
 
     invariants = {
-        "I-01 Semantic responsibility": "PROVEN",
-        "I-02 Identity": "PROVEN",
-        "I-03 History": "PROVEN",
-        "I-04 Recovery": "PROVEN",
-        "I-05 Idempotency": "PROVEN",
-        "I-06 Persistence boundary": "PROVEN",
-        "I-07 Derivation boundary": "PROVEN",
-        "I-08 Reproducibility": "PROVEN",
-        "I-09 Cross-run isolation": "PROVEN",
-        "I-10 Canonical protection": "PROVEN",
-        "I-11 Evidence traceability": "PROVEN" if not missing and not failures else "NOT_PROVEN",
+        "I-01 Semantic responsibility": semantic["status"],
+        "I-02 Identity": execution["status"],
+        "I-03 History": execution["status"],
+        "I-04 Recovery": execution["status"],
+        "I-05 Idempotency": execution["status"],
+        "I-06 Persistence boundary": production_integration["status"],
+        "I-07 Derivation boundary": production_integration["status"],
+        "I-08 Reproducibility": production_integration["status"],
+        "I-09 Cross-run isolation": execution["status"],
+        "I-10 Canonical protection": production_integration["status"],
+        "I-11 Evidence traceability": (
+            "PROVEN" if not missing and not failures else "NOT_PROVEN"
+        ),
     }
 
-    assert all(value in {"PROVEN", "LIMITED"} for value in invariants.values())
-    assert overall == "READY_WITH_LIMITATIONS"
+    if failures:
+        overall = "NOT_READY"
+    elif missing:
+        overall = "EVIDENCE_INCOMPLETE"
+    else:
+        overall = "READY_WITH_LIMITATIONS"
 
     gate = {
         "gate": "P10-PRODUCTION-READINESS",
@@ -118,6 +154,8 @@ def main():
         "evidence_present": len(present),
         "evidence_missing": len(missing),
         "evidence_not_accepted": len(failures),
+        "missing_evidence": missing,
+        "not_accepted_evidence": failures,
         "evidence_status": statuses,
         "dimensions": {
             "semantic_integrity": semantic,
