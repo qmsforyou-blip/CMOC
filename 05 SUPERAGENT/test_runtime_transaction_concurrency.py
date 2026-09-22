@@ -29,7 +29,10 @@ def test_transaction_concurrency():
         assert store.acquire(**base, owner_id="OWNER-B") == "IN_PROGRESS"
 
         # P5-RT-03: commit creates exactly one authoritative effect.
-        assert store.commit(**base, owner_id="OWNER-A") == "COMMITTED"
+        assert store.commit(
+            base["run_id"], base["stage_id"], base["attempt_id"],
+            "OWNER-A", base["result_id"]
+        ) == "COMMITTED"
         record = store.get(base["run_id"], base["stage_id"], base["attempt_id"])
         assert record.committed is True
         assert record.effect_count == 1
@@ -55,7 +58,10 @@ def test_transaction_concurrency():
         rollback_attempt = dict(base, attempt_id="ATT-004", result_id="RES-004",
                                 idempotency_key="KEY-004")
         assert store.acquire(**rollback_attempt, owner_id="OWNER-D") == "LOCK_ACQUIRED"
-        assert store.rollback(**rollback_attempt, owner_id="OWNER-D") == "TRANSACTION_ROLLBACK"
+        assert store.rollback(
+            rollback_attempt["run_id"], rollback_attempt["stage_id"],
+            rollback_attempt["attempt_id"], "OWNER-D"
+        ) == "TRANSACTION_ROLLBACK"
         rolled = store.get(rollback_attempt["run_id"], rollback_attempt["stage_id"],
                            rollback_attempt["attempt_id"])
         assert rolled.committed is False
