@@ -178,13 +178,6 @@ def main() -> None:
     }
 
     all_pass = all(item["pass"] for item in cases) and all(
-        controls.values()
-        if isinstance(value := None, bool)
-        else True
-        for _ in [0]
-    )
-    # Explicitly evaluate boolean controls; string cmoc_write is a declaration.
-    all_pass = all(item["pass"] for item in cases) and all(
         value is True for key, value in controls.items() if key != "cmoc_write"
     ) and controls["cmoc_write"] == "NONE"
 
