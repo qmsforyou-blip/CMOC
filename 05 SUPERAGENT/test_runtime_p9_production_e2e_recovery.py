@@ -84,10 +84,11 @@ def main():
                           "RUN-CREATED", "ATT-RUN-001", "CREATED"))
         assert journal.get_state(RUN_ID).run_status == "ACTIVE"
 
-        # 02 — actual P6 production adapter path consumes upstream semantic results
-        for seq, stage in enumerate(
-            ("DISCOVERY", "RECONCILIATION", "NEW_DECISION", "CANONIZATION"), 2
-        ):
+        # 02 — actual P6 production adapter path consumes upstream semantic results.
+        # Each stage must have an explicit STARTED event before its terminal
+        # event because RuntimeStateStore protects stage transition order.
+        seq = 2
+        for stage in ("DISCOVERY", "RECONCILIATION", "NEW_DECISION", "CANONIZATION"):
             envelope = {
                 "run_id": RUN_ID,
                 "source_id": SOURCE_ID,
@@ -96,10 +97,14 @@ def main():
                 "attempt_id": f"ATT-{stage}-001",
                 "result_id": f"RESULT-{stage}-001",
             }
+            journal.append(ev(seq, f"EV-{seq:03d}", stage, "STAGE_STARTED",
+                              envelope["result_id"], envelope["attempt_id"], "STARTED"))
+            seq += 1
             out = adapters.invoke(envelope, {})
             assert out.status == "PRODUCTION_ADAPTER_ACCEPTED"
             journal.append(ev(seq, f"EV-{seq:03d}", stage, "STAGE_COMPLETED",
                               envelope["result_id"], envelope["attempt_id"], "COMPLETED"))
+            seq += 1
 
         # 03 — P3 registers the first P7 attempt
         assert attempts.register(
