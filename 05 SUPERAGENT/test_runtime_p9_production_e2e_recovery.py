@@ -139,7 +139,7 @@ def main():
         assert decision.status == "RETRY_REQUIRED"
 
         next_seq += 1
-        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "RECOVERY", "RETRY_REQUIRED",
+        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "C2_CMOC_WRITE", "RETRY_REQUIRED",
                           "RECOVERY-001", "ATT-C2-002", "RETRY_REQUIRED"))
 
         # 06 — new attempt identity
