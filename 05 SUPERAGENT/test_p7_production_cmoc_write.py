@@ -38,23 +38,19 @@ def encode(payload):
 
 def write_fixture(payload):
     TEST_ROOT.mkdir(parents=True, exist_ok=True)
-    text = (
-        "# P7 TEST FIXTURE — isolated production CMOC persistence"
-        + chr(10)
-        + "<P7_JSON>"
-        + chr(10)
+    TEST_FILE.write_text(
+        "# P7 TEST FIXTURE — isolated production CMOC persistence\n"
+        "<P7_JSON>\n"
         + encode(payload)
-        + chr(10)
-        + "</P7_JSON>"
-        + chr(10)
+        + "\n</P7_JSON>\n",
+        encoding="utf-8",
     )
-    TEST_FILE.write_text(text, encoding="utf-8")
 
 
 def read_fixture():
     text = TEST_FILE.read_text(encoding="utf-8")
-    start_marker = "<P7_JSON>" + chr(10)
-    end_marker = chr(10) + "</P7_JSON>"
+    start_marker = "<P7_JSON>\n"
+    end_marker = "\n</P7_JSON>"
     start = text.index(start_marker) + len(start_marker)
     end = text.index(end_marker, start)
     return json.loads(text[start:end])
@@ -72,7 +68,7 @@ def production_cmoc_write(payload):
         return {"status": "CMOC_WRITE_REJECTED", "missing": missing}
 
     if payload["status"] != "CANONICALIZATION_READY":
-        return {"status": "CMOC_WRITE_REJECTED", "basis": "invalid entry status"}
+        return {"status": "CMOC_WRITE_REJECTED", "basis": "invalid entry state"}
 
     if payload.get("unsupported_relations"):
         return {"status": "CMOC_WRITE_REJECTED", "basis": "unsupported relations"}
@@ -80,7 +76,10 @@ def production_cmoc_write(payload):
     if TEST_FILE.exists():
         existing = read_fixture()
         if existing == payload:
-            return {"status": "ALREADY_PERSISTED", "object_id": payload["object_id"]}
+            return {
+                "status": "ALREADY_PERSISTED",
+                "object_id": payload["object_id"],
+            }
         return {
             "status": "EXISTING_OBJECT_WRITE_CONFLICT",
             "object_id": payload["object_id"],
@@ -92,7 +91,10 @@ def production_cmoc_write(payload):
     if persisted != payload:
         return {"status": "POST_WRITE_VERIFICATION_FAILED"}
 
-    return {"status": "CMOC_WRITE_ACCEPTED", "object_id": payload["object_id"]}
+    return {
+        "status": "CMOC_WRITE_ACCEPTED",
+        "object_id": payload["object_id"],
+    }
 
 
 def cleanup():
@@ -110,7 +112,10 @@ def main():
         out = production_cmoc_write(payload)
         assert out["status"] == "CMOC_WRITE_ACCEPTED"
         assert TEST_FILE.exists()
-        results.append({"case": "P7-01_REAL_REPOSITORY_WRITE", "result": out})
+        results.append({
+            "case": "P7-01_REAL_REPOSITORY_WRITE",
+            "result": out,
+        })
 
         persisted = read_fixture()
         assert persisted == payload
@@ -132,7 +137,10 @@ def main():
 
         out = production_cmoc_write(payload)
         assert out["status"] == "ALREADY_PERSISTED"
-        results.append({"case": "P7-04_IDEMPOTENT_REPEAT", "result": out})
+        results.append({
+            "case": "P7-04_IDEMPOTENT_REPEAT",
+            "result": out,
+        })
 
         conflict = deepcopy(payload)
         conflict["canonical_representation"] = {
@@ -143,7 +151,10 @@ def main():
         out = production_cmoc_write(conflict)
         assert out["status"] == "EXISTING_OBJECT_WRITE_CONFLICT"
         assert read_fixture() == payload
-        results.append({"case": "P7-05_EXISTING_OBJECT_CONFLICT", "result": out})
+        results.append({
+            "case": "P7-05_EXISTING_OBJECT_CONFLICT",
+            "result": out,
+        })
 
         incomplete = deepcopy(payload)
         incomplete.pop("provenance")
@@ -151,23 +162,28 @@ def main():
         out = production_cmoc_write(incomplete)
         assert out["status"] == "CMOC_WRITE_REJECTED"
         assert not TEST_FILE.exists()
-        results.append({"case": "P7-06_INCOMPLETE_INPUT_REJECTED", "result": out})
+        results.append({
+            "case": "P7-06_INCOMPLETE_INPUT_REJECTED",
+            "result": out,
+        })
 
         assert production_cmoc_write(payload)["status"] == "CMOC_WRITE_ACCEPTED"
 
         invalid_state = deepcopy(payload)
         invalid_state["status"] = "NEW_APPROVED"
+        TEST_FILE.unlink()
         out = production_cmoc_write(invalid_state)
-        assert out["status"] == "EXISTING_OBJECT_WRITE_CONFLICT"
-        assert read_fixture() == payload
+        assert out["status"] == "CMOC_WRITE_REJECTED"
+        assert not TEST_FILE.exists()
         results.append({
-            "case": "P7-07_INVALID_ENTRY_STATE_NOT_OVERWRITTEN",
+            "case": "P7-07_INVALID_ENTRY_STATE_REJECTED",
             "result": out,
         })
 
         relation_mutation = deepcopy(payload)
-        relation_mutation["unsupported_relations"] = [{"relation": "UNSUPPORTED-P7"}]
-        TEST_FILE.unlink()
+        relation_mutation["unsupported_relations"] = [
+            {"relation": "UNSUPPORTED-P7"}
+        ]
         out = production_cmoc_write(relation_mutation)
         assert out["status"] == "CMOC_WRITE_REJECTED"
         assert not TEST_FILE.exists()
