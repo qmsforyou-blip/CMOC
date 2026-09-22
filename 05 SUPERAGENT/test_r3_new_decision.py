@@ -178,9 +178,19 @@ def main() -> None:
         "rejected_does_not_write_cmoc": True,
     }
 
-    all_pass = all(item["pass"] for item in cases) and all(
-        value is True for key, value in controls.items() if key not in {"cmoc_write", "production_runtime_imported"}
-    ) and controls["cmoc_write"] == "NONE"
+    all_pass = (
+        all(item["pass"] for item in cases)
+        and controls["cmoc_write"] == "NONE"
+        and controls["object_id_created"] is False
+        and controls["canonization"] is False
+        and controls["relations_created"] is False
+        and controls["object_index_unchanged"] is True
+        and controls["discovery_result_unchanged"] is True
+        and controls["production_runtime_imported"] is False
+        and controls["production_runtime_import_blocked"] is True
+        and controls["approved_does_not_write_cmoc"] is True
+        and controls["rejected_does_not_write_cmoc"] is True
+    )
 
     gate = {
         "gate": "R3-NEW-DECISION-BOUNDARY",
