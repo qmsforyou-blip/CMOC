@@ -50,7 +50,7 @@ class ProductionAdapter:
         )
         if key in persistence:
             stored = persistence[key]
-            if stored == envelope:
+            if stored.get("result_id") == envelope["result_id"]:
                 return AdapterResult(
                     "ALREADY_COMPLETED",
                     {"result": stored},
