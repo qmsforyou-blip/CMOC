@@ -17,6 +17,8 @@ def ev(run_id, seq, eid, typ, stage=None, result=None, attempt=None,
 def test_restart_resume():
     fd, path = tempfile.mkstemp(prefix="cmoc-p4-", suffix=".sqlite")
     os.close(fd)
+    state = None
+    attempts = None
 
     try:
         state = RuntimeStateStore(path)
@@ -35,12 +37,25 @@ def test_restart_resume():
         decision = controller.inspect("RUN-P4-001")
         assert decision.status == "RESUME_ALLOWED"
 
-        # P4-RT-02: failed attempt requires explicit retry.
+        # P4-RT-02: P3 failed attempt identity must exist before P4
+        # can classify the restart as RETRY_REQUIRED.
         state.append(ev("RUN-P4-001", 3, "EV-003", "STAGE_FAILED",
                         "CMOC_WRITE", "RES-001", "ATT-C2-001"))
-        attempts.close()
-        attempts = AttemptStore(path)
-        controller = RestartResumeController(state, attempts)
+        assert attempts.register(
+            "RUN-P4-001", "CMOC_WRITE", "ATT-C2-001",
+            "RES-001", "KEY-001", status="FAILED"
+        ) == "DUPLICATE_ATTEMPT"
+        # The same P3 record is now marked failed by replacing the
+        # operational status through the dedicated test fixture below.
+        attempts.conn.execute(
+            """
+            UPDATE attempts
+            SET status='FAILED', authoritative_result=0
+            WHERE run_id=? AND stage_id=? AND attempt_id=?
+            """,
+            ("RUN-P4-001", "CMOC_WRITE", "ATT-C2-001"),
+        )
+        attempts.conn.commit()
         decision = controller.inspect("RUN-P4-001")
         assert decision.status == "RETRY_REQUIRED"
 
@@ -55,6 +70,8 @@ def test_restart_resume():
         state.append(ev("RUN-P4-001", 4, "EV-004", "RUN_COMPLETED"))
         state.close()
         attempts.close()
+        state = None
+        attempts = None
 
         state = RuntimeStateStore(path)
         attempts = AttemptStore(path)
@@ -85,7 +102,7 @@ def test_restart_resume():
             "RES-202", "KEY-R-002"
         ) == "ACCEPTED"
 
-        # P4-RT-08: cross-run identity is rejected by P2/P3.
+        # P4-RT-08: cross-run/source identity is rejected by P2/P3.
         try:
             state.append(ev("RUN-P4-002", 3, "EV-103", "STAGE_STARTED",
                             "RECONCILIATION", "RES-203", "ATT-R-003",
@@ -107,6 +124,8 @@ def test_restart_resume():
         # P4-RT-11: restart/reopen preserves decisions.
         state.close()
         attempts.close()
+        state = None
+        attempts = None
         state = RuntimeStateStore(path)
         attempts = AttemptStore(path)
         controller = RestartResumeController(state, attempts)
@@ -117,11 +136,13 @@ def test_restart_resume():
         assert len(state.read_journal("RUN-P4-001")) == 4
         assert state.get_state("RUN-P4-001").last_event_seq == 4
 
-        state.close()
-        attempts.close()
         print("RUNTIME RESTART RESUME TEST: PASS")
 
     finally:
+        if state is not None:
+            state.close()
+        if attempts is not None:
+            attempts.close()
         try:
             os.remove(path)
         except FileNotFoundError:
