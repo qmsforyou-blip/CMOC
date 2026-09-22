@@ -195,6 +195,12 @@ def main():
         assert sync.status == "ALREADY_SYNCHRONIZED"
 
         next_seq += 1
+        # C3 is a new stage, so persist its STARTED transition before completion.
+        next_seq += 1
+        journal.append(ev(next_seq, f"EV-{next_seq:03d}", "C3_OBJECT_INDEX_SYNC",
+                          "STAGE_STARTED", "INDEX-P9-RT-001",
+                          "ATT-C3-001", "STARTED"))
+        next_seq += 1
         journal.append(ev(next_seq, f"EV-{next_seq:03d}", "C3_OBJECT_INDEX_SYNC",
                           "STAGE_COMPLETED", "INDEX-P9-RT-001",
                           "ATT-C3-001", "COMPLETED"))
