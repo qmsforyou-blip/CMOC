@@ -9,15 +9,13 @@ import json
 # C1 — CANONIZATION BOUNDARY
 # ============================================================
 #
-# This is an isolated synthetic boundary test.
+# Isolated synthetic boundary test.
 #
-# C1 responsibility:
-#
-#     NEW_APPROVED
-#          ↓
-#     CANONIZATION
-#          ↓
-#     CANONICALIZATION_READY
+# NEW_APPROVED
+#      ↓
+# CANONIZATION
+#      ↓
+# CANONICALIZATION_READY
 #
 # C1 MUST NOT:
 # - re-decide NEW;
@@ -45,15 +43,17 @@ def stable_hash(value) -> str:
 
 
 def make_valid_input() -> dict:
-    return {
-        "candidate": {
-            "candidate_id": "C1-CAND-001",
-            "value": "Controlled synthetic object",
-            "object_boundary": {
-                "entity": "synthetic management object",
-                "boundary": "controlled fixture",
-            },
+    candidate = {
+        "candidate_id": "C1-CAND-001",
+        "value": "Controlled synthetic object",
+        "object_boundary": {
+            "entity": "synthetic management object",
+            "boundary": "controlled fixture",
         },
+    }
+
+    return {
+        "candidate": candidate,
         "new_decision": {
             "decision_id": "DEC-C1-001",
             "decision": "NEW_APPROVED",
@@ -80,6 +80,9 @@ def make_valid_input() -> dict:
         "decision_context": {
             "rule_version": "R10-C1-SYNTHETIC",
         },
+        "integrity": {
+            "approved_candidate_hash": stable_hash(candidate),
+        },
     }
 
 
@@ -96,6 +99,10 @@ def canonize(inp: dict) -> dict:
     - perform semantic comparison;
     - create relations;
     - write CMOC.
+
+    It DOES verify that the received candidate is identical
+    to the candidate representation approved by NEW DECISION.
+    This is an integrity check, not a semantic comparison.
     """
 
     decision = inp["new_decision"].get("decision")
@@ -118,7 +125,31 @@ def canonize(inp: dict) -> dict:
             "basis": "missing traceability",
         }
 
-    # Preserve the approved semantic content.
+    approved_candidate_hash = (
+        inp.get("integrity", {})
+        .get("approved_candidate_hash")
+    )
+
+    if not approved_candidate_hash:
+        return {
+            "status": "NOT_ELIGIBLE",
+            "basis": "missing approved candidate integrity hash",
+        }
+
+    current_candidate = {
+        "candidate_id": inp["candidate"]["candidate_id"],
+        "value": inp["candidate"]["value"],
+        "object_boundary": inp["candidate"]["object_boundary"],
+    }
+
+    current_hash = stable_hash(current_candidate)
+
+    if current_hash != approved_candidate_hash:
+        return {
+            "status": "REJECT",
+            "basis": "approved candidate integrity hash mismatch",
+        }
+
     candidate = copy.deepcopy(inp["candidate"])
 
     # Canonical object identity is created HERE,
@@ -144,21 +175,6 @@ def canonize(inp: dict) -> dict:
             "status": "NOT_PERFORMED",
         },
     }
-
-
-def assert_no_semantic_redecision(
-    before: dict,
-    after: dict,
-) -> bool:
-    """
-    C1 must preserve the already accepted NEW decision.
-    """
-
-    return (
-        after["new_decision"]["decision"]
-        == before["new_decision"]["decision"]
-        == "NEW_APPROVED"
-    )
 
 
 def run_branch(
@@ -204,14 +220,12 @@ def main() -> None:
     # ========================================================
 
     valid = make_valid_input()
-
     original_valid = copy.deepcopy(valid)
-
     result = canonize(valid)
 
     valid_pass = (
         result["status"] == "CANONICALIZATION_READY"
-        and result["object"]["object_id"]
+        and bool(result["object"]["object_id"])
         and result["cmoc_write"]["status"] == "NOT_PERFORMED"
         and valid == original_valid
     )
@@ -277,48 +291,27 @@ def main() -> None:
     )
 
     # ========================================================
-    # C1-05 — semantic evidence changed
-    # ========================================================
-    #
-    # The C1 function must preserve the approved candidate.
-    # This branch simulates a forbidden mutation attempt.
+    # C1-05 — approved candidate integrity changed
     # ========================================================
 
-    semantic_changed = make_valid_input()
-
-    original_candidate_value = (
-        semantic_changed["candidate"]["value"]
-    )
-
-    semantic_changed["candidate"]["value"] = (
+    integrity_changed = make_valid_input()
+    integrity_changed["candidate"]["value"] = (
         "FORBIDDEN SEMANTIC REWRITE"
     )
 
-    result = canonize(semantic_changed)
+    result = canonize(integrity_changed)
 
-    semantic_preservation_pass = (
-        result["status"] == "CANONICALIZATION_READY"
-        and result["object"]["canonical_name"]
-        == semantic_changed["candidate"]["value"]
-        and result["object"]["canonical_name"]
-        != original_candidate_value
-    )
-
-    # This is deliberately NOT accepted as a valid C1 mutation.
-    # The test reports the attempted semantic change separately.
     branches.append({
-        "branch": "SEMANTIC_EVIDENCE_CHANGED",
+        "branch": "APPROVED_CANDIDATE_INTEGRITY_CHANGED",
         "expected": "REJECT",
-        "actual": (
-            "REJECT"
-            if not semantic_preservation_pass
-            else "FORBIDDEN_MUTATION_DETECTED"
+        "actual": result.get("status"),
+        "basis": result.get("basis"),
+        "pass": (
+            result.get("status") == "REJECT"
+            and result.get("basis")
+            == "approved candidate integrity hash mismatch"
         ),
-        "pass": not semantic_preservation_pass,
-        "note": (
-            "C1 test fixture does not permit semantic mutation; "
-            "production implementation must reject such a change."
-        ),
+        "input_unchanged": True,
     })
 
     # ========================================================
@@ -326,7 +319,6 @@ def main() -> None:
     # ========================================================
 
     enrichment = make_valid_input()
-
     result = canonize(enrichment)
 
     forbidden_fields = {
@@ -338,7 +330,6 @@ def main() -> None:
     }
 
     produced_fields = set(result.keys())
-
     hidden_enrichment = bool(
         forbidden_fields.intersection(produced_fields)
     )
@@ -362,14 +353,10 @@ def main() -> None:
     # ========================================================
 
     mutation_input = make_valid_input()
-
-    # There is intentionally NO existing_object mutation
-    # interface in C1.
     result = canonize(mutation_input)
 
     unauthorized_mutation = (
-        "existing_object_mutation"
-        in result
+        "existing_object_mutation" in result
     )
 
     branches.append({
@@ -388,7 +375,6 @@ def main() -> None:
     # ========================================================
 
     relation_input = make_valid_input()
-
     result = canonize(relation_input)
 
     relations_created = (
@@ -408,10 +394,35 @@ def main() -> None:
     })
 
     # ========================================================
+    # C1-09 — missing integrity hash
+    # ========================================================
+
+    no_integrity = make_valid_input()
+    no_integrity["integrity"] = {}
+
+    branches.append(
+        run_branch(
+            "MISSING_APPROVED_CANDIDATE_INTEGRITY_HASH",
+            no_integrity,
+            "NOT_ELIGIBLE",
+            "missing approved candidate integrity hash",
+        )
+    )
+
+    # ========================================================
     # Global controls
     # ========================================================
 
     valid_result = canonize(make_valid_input())
+
+    integrity_control_input = make_valid_input()
+    integrity_control_input["candidate"]["value"] = (
+        "CHANGED AFTER APPROVAL"
+    )
+
+    integrity_control_result = canonize(
+        integrity_control_input
+    )
 
     controls = {
         "production_runtime_imported": PRODUCTION_RUNTIME_IMPORTED,
@@ -438,6 +449,11 @@ def main() -> None:
             valid_result["cmoc_write"]["status"]
             == "NOT_PERFORMED"
         ),
+        "approved_candidate_integrity_enforced": (
+            integrity_control_result.get("status") == "REJECT"
+            and integrity_control_result.get("basis")
+            == "approved candidate integrity hash mismatch"
+        ),
     }
 
     # ========================================================
@@ -458,6 +474,7 @@ def main() -> None:
         and controls["relations_created"] is False
         and controls["existing_object_mutated"] is False
         and controls["cmoc_write_not_performed"] is True
+        and controls["approved_candidate_integrity_enforced"] is True
     )
 
     overall_pass = all_branch_pass and controls_pass
@@ -470,7 +487,8 @@ def main() -> None:
         "scope_note": (
             "C1 is an isolated synthetic canonization boundary test. "
             "It proves representation-level canonization after "
-            "NEW_APPROVED without CMOC WRITE. It does not establish "
+            "NEW_APPROVED with approved-candidate integrity control "
+            "and without CMOC WRITE. It does not establish "
             "production semantic novelty, production canonization, "
             "or CMOC persistence."
         ),
