@@ -6,45 +6,22 @@ It does not implement semantic decisions, CMOC writes, or OBJECT INDEX writes.
 
 from __future__ import annotations
 
-import json
 import sqlite3
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 
 
 EVENT_TYPES = {
-    "RUN_CREATED",
-    "STAGE_STARTED",
-    "STAGE_COMPLETED",
-    "STAGE_REJECTED",
-    "STAGE_FAILED",
-    "RECOVERY_REQUESTED",
-    "RETRY_REQUIRED",
-    "RESUME_ALLOWED",
-    "RESUME_BLOCKED",
-    "RUN_COMPLETED",
-    "RUN_REJECTED",
-    "RUN_FAILED",
+    "RUN_CREATED", "STAGE_STARTED", "STAGE_COMPLETED", "STAGE_REJECTED",
+    "STAGE_FAILED", "RECOVERY_REQUESTED", "RETRY_REQUIRED", "RESUME_ALLOWED",
+    "RESUME_BLOCKED", "RUN_COMPLETED", "RUN_REJECTED", "RUN_FAILED",
     "RUN_INCOMPLETE",
 }
-
 TERMINAL_STAGE_EVENTS = {
     "STAGE_COMPLETED": "COMPLETED",
     "STAGE_REJECTED": "REJECTED",
     "STAGE_FAILED": "FAILED",
 }
-
-STAGE_TRANSITIONS = {
-    "NOT_REACHED": {"READY"},
-    "READY": {"RUNNING"},
-    "RUNNING": {"COMPLETED", "REJECTED", "FAILED"},
-    "FAILED": {"RECOVERABLE"},
-    "RECOVERABLE": {"READY"},
-    "COMPLETED": set(),
-    "REJECTED": set(),
-    "BLOCKED": set(),
-}
-
 RUN_TERMINAL = {"RUN_COMPLETED", "RUN_REJECTED", "RUN_FAILED"}
 
 
@@ -59,6 +36,8 @@ class JournalEvent:
     attempt_id: str | None
     event_status: str
     traceability: str
+    source_id: str | None = None
+    batch_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -76,7 +55,7 @@ class RunState:
 
 
 class RuntimeStateStore:
-    """SQLite-backed append-only journal + P2 operational projection."""
+    """SQLite-backed append-only journal plus P2 operational projection."""
 
     STATE_VERSION = "P2.1"
 
@@ -104,9 +83,10 @@ class RuntimeStateStore:
                 attempt_id TEXT,
                 event_status TEXT NOT NULL,
                 traceability TEXT NOT NULL,
+                source_id TEXT,
+                batch_id TEXT,
                 PRIMARY KEY (run_id, event_seq)
             );
-
             CREATE TABLE IF NOT EXISTS run_state (
                 run_id TEXT PRIMARY KEY,
                 source_id TEXT,
@@ -126,30 +106,26 @@ class RuntimeStateStore:
     def append(self, event: JournalEvent, source_id: str | None = None,
                batch_id: str | None = None) -> RunState:
         self._validate_event(event)
+        source_id = source_id if source_id is not None else event.source_id
+        batch_id = batch_id if batch_id is not None else event.batch_id
+
         with self.conn:
             latest = self.conn.execute(
-                "SELECT event_seq, event_id FROM journal_events "
+                "SELECT event_seq FROM journal_events "
                 "WHERE run_id = ? ORDER BY event_seq DESC LIMIT 1",
                 (event.run_id,),
             ).fetchone()
-
             if latest and event.event_seq <= latest["event_seq"]:
                 raise ValueError("EVENT_SEQ must be strictly monotonic within RUN_ID")
 
-            existing = self.conn.execute(
-                "SELECT run_id, event_seq FROM journal_events WHERE event_id = ?",
+            if self.conn.execute(
+                "SELECT 1 FROM journal_events WHERE event_id = ?",
                 (event.event_id,),
-            ).fetchone()
-            if existing:
+            ).fetchone():
                 raise ValueError("duplicate EVENT_ID")
 
-            if event.event_type == "RUN_CREATED":
-                existing_run = self.conn.execute(
-                    "SELECT run_id FROM run_state WHERE run_id = ?",
-                    (event.run_id,),
-                ).fetchone()
-                if existing_run:
-                    raise ValueError("RUN_ID already exists")
+            if event.event_type == "RUN_CREATED" and self._load_state(event.run_id):
+                raise ValueError("RUN_ID already exists")
 
             previous = self._load_state(event.run_id)
             next_state = self._reduce_event(
@@ -160,14 +136,16 @@ class RuntimeStateStore:
                 """
                 INSERT INTO journal_events
                 (run_id,event_id,event_seq,timestamp,stage_id,event_type,
-                 stage_result_id,attempt_id,event_status,traceability)
-                VALUES (?,?,?,?,?,?,?,?,?,?)
+                 stage_result_id,attempt_id,event_status,traceability,
+                 source_id,batch_id)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
                 """,
                 (
                     event.run_id, event.event_id, event.event_seq,
                     datetime.now(timezone.utc).isoformat(),
                     event.stage_id, event.event_type, event.stage_result_id,
                     event.attempt_id, event.event_status, event.traceability,
+                    source_id, batch_id,
                 ),
             )
             self._persist_state(next_state)
@@ -209,7 +187,6 @@ class RuntimeStateStore:
 
         if event.event_type == "RUN_CREATED":
             raise ValueError("RUN_CREATED cannot repeat")
-
         if previous.run_status in {"COMPLETED", "REJECTED", "FAILED"}:
             raise ValueError("terminal RUN cannot receive another event")
 
@@ -218,13 +195,17 @@ class RuntimeStateStore:
         current_attempt = previous.current_attempt_id
         run_status = previous.run_status
 
+        if event.source_id is not None and event.source_id != previous.source_id:
+            raise ValueError("SOURCE_ID crosses RUN boundary")
+        if event.batch_id is not None and event.batch_id != previous.batch_id:
+            raise ValueError("BATCH_ID crosses RUN boundary")
+
         if event.event_type == "STAGE_STARTED":
             if not event.stage_id or not event.attempt_id:
                 raise ValueError("STAGE_STARTED requires stage_id and attempt_id")
             current_stage = event.stage_id
             current_result = event.stage_result_id
             current_attempt = event.attempt_id
-
         elif event.event_type in TERMINAL_STAGE_EVENTS:
             if not event.stage_id or not event.attempt_id:
                 raise ValueError("stage terminal event requires stage_id and attempt_id")
@@ -233,14 +214,14 @@ class RuntimeStateStore:
             current_stage = event.stage_id
             current_result = event.stage_result_id
             current_attempt = event.attempt_id
-
-        elif event.event_type in {"RECOVERY_REQUESTED", "RETRY_REQUIRED",
-                                  "RESUME_ALLOWED", "RESUME_BLOCKED"}:
+        elif event.event_type in {
+            "RECOVERY_REQUESTED", "RETRY_REQUIRED",
+            "RESUME_ALLOWED", "RESUME_BLOCKED",
+        }:
             if event.stage_id and current_stage and event.stage_id != current_stage:
                 raise ValueError("recovery event crosses current stage")
             if event.attempt_id:
                 current_attempt = event.attempt_id
-
         elif event.event_type in RUN_TERMINAL:
             run_status = {
                 "RUN_COMPLETED": "COMPLETED",
@@ -248,25 +229,19 @@ class RuntimeStateStore:
                 "RUN_FAILED": "FAILED",
             }[event.event_type]
 
-        if event.event_type == "STAGE_FAILED":
-            # The operational state remains failed until an explicit recovery
-            # disposition moves it toward retry/resume.
-            run_status = "ACTIVE"
-
         return RunState(
-            previous.run_id,
-            previous.source_id,
-            previous.batch_id,
-            run_status,
-            current_stage,
-            current_result,
-            current_attempt,
-            event.event_seq,
-            self.STATE_VERSION,
-            event.traceability,
+            previous.run_id, previous.source_id, previous.batch_id,
+            run_status, current_stage, current_result, current_attempt,
+            event.event_seq, self.STATE_VERSION, event.traceability,
         )
 
     def _persist_state(self, state: RunState):
+        values = (
+            state.run_id, state.source_id, state.batch_id, state.run_status,
+            state.current_stage_id, state.current_stage_result_id,
+            state.current_attempt_id, state.last_event_seq,
+            state.state_version, state.traceability,
+        )
         self.conn.execute(
             """
             INSERT INTO run_state
@@ -285,7 +260,7 @@ class RuntimeStateStore:
               state_version=excluded.state_version,
               traceability=excluded.traceability
             """,
-            asdict(state).values(),
+            values,
         )
 
     def get_state(self, run_id: str) -> RunState | None:
@@ -301,6 +276,7 @@ class RuntimeStateStore:
                 r["run_id"], r["event_id"], r["event_seq"], r["stage_id"],
                 r["event_type"], r["stage_result_id"], r["attempt_id"],
                 r["event_status"], r["traceability"],
+                r["source_id"], r["batch_id"],
             )
             for r in rows
         ]
@@ -310,9 +286,7 @@ class RuntimeStateStore:
         state = None
         for event in events:
             state = self._reduce_event(
-                state, event,
-                source_id=state.source_id if state else None,
-                batch_id=state.batch_id if state else None,
+                state, event, source_id=event.source_id, batch_id=event.batch_id
             )
         return state
 
