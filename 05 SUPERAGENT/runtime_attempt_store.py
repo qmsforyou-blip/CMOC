@@ -106,6 +106,34 @@ class AttemptStore:
         self.conn.commit()
         return "ACCEPTED"
 
+    def mark_failed(self, run_id: str, stage_id: str,
+                    attempt_id: str) -> str:
+        row = self.conn.execute(
+            """
+            SELECT * FROM attempts
+            WHERE run_id=? AND stage_id=? AND attempt_id=?
+            """,
+            (run_id, stage_id, attempt_id),
+        ).fetchone()
+
+        if not row:
+            return "ATTEMPT_NOT_FOUND"
+        if row["authoritative_result"]:
+            return "ALREADY_COMPLETED"
+        if row["status"] == "FAILED":
+            return "ALREADY_FAILED"
+
+        self.conn.execute(
+            """
+            UPDATE attempts
+            SET status='FAILED', authoritative_result=0
+            WHERE run_id=? AND stage_id=? AND attempt_id=?
+            """,
+            (run_id, stage_id, attempt_id),
+        )
+        self.conn.commit()
+        return "FAILED_RECORDED"
+
     def mark_authoritative(self, run_id: str, stage_id: str,
                            attempt_id: str) -> str:
         row = self.conn.execute(
