@@ -37,25 +37,13 @@ def test_restart_resume():
         decision = controller.inspect("RUN-P4-001")
         assert decision.status == "RESUME_ALLOWED"
 
-        # P4-RT-02: P3 failed attempt identity must exist before P4
-        # can classify the restart as RETRY_REQUIRED.
+        # P4-RT-02: STAGE_FAILED in P2 is paired with an explicit
+        # P3 attempt failure transition; P4 may then classify retry.
         state.append(ev("RUN-P4-001", 3, "EV-003", "STAGE_FAILED",
                         "CMOC_WRITE", "RES-001", "ATT-C2-001"))
-        assert attempts.register(
-            "RUN-P4-001", "CMOC_WRITE", "ATT-C2-001",
-            "RES-001", "KEY-001", status="FAILED"
-        ) == "DUPLICATE_ATTEMPT"
-        # The same P3 record is now marked failed by replacing the
-        # operational status through the dedicated test fixture below.
-        attempts.conn.execute(
-            """
-            UPDATE attempts
-            SET status='FAILED', authoritative_result=0
-            WHERE run_id=? AND stage_id=? AND attempt_id=?
-            """,
-            ("RUN-P4-001", "CMOC_WRITE", "ATT-C2-001"),
-        )
-        attempts.conn.commit()
+        assert attempts.mark_failed(
+            "RUN-P4-001", "CMOC_WRITE", "ATT-C2-001"
+        ) == "FAILED_RECORDED"
         decision = controller.inspect("RUN-P4-001")
         assert decision.status == "RETRY_REQUIRED"
 
