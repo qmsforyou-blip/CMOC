@@ -14,15 +14,30 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def compare(candidate, existing, dimension, *, wording_only=False,
-            same_meaning_different_source=False, unknown=False,
-            unsupported_assertion=False, semantic_difference_supported=False,
-            not_applicable=False):
+def compare(candidate, existing, dimension, *, comparison_set_completeness="COMPLETE",
+            wording_only=False, same_meaning_different_source=False,
+            unknown=False, unsupported_assertion=False,
+            semantic_difference_supported=False, not_applicable=False):
     if dimension not in DIMENSIONS:
         return {"comparison_status": "UNRESOLVED", "basis": "comparison dimension is not controlled"}
 
+    if comparison_set_completeness == "UNKNOWN":
+        return {
+            "comparison_status": "UNRESOLVED",
+            "basis": "comparison-set completeness UNKNOWN blocks positive semantic comparison",
+        }
+
+    if comparison_set_completeness not in {"COMPLETE", "PARTIAL"}:
+        return {
+            "comparison_status": "UNRESOLVED",
+            "basis": "comparison-set completeness is not controlled",
+        }
+
     if not_applicable:
-        return {"comparison_status": "NOT_APPLICABLE", "basis": "dimension does not apply; controlled reason recorded"}
+        return {
+            "comparison_status": "NOT_APPLICABLE",
+            "basis": "dimension does not apply; controlled reason recorded",
+        }
 
     if unknown:
         return {"comparison_status": "UNRESOLVED", "basis": "comparison evidence is UNKNOWN"}
@@ -31,13 +46,22 @@ def compare(candidate, existing, dimension, *, wording_only=False,
         return {"comparison_status": "UNRESOLVED", "basis": "unsupported LLM assertion is not evidence"}
 
     if wording_only:
-        return {"comparison_status": "COVERED", "basis": "wording difference alone does not establish semantic distinction"}
+        return {
+            "comparison_status": "COVERED",
+            "basis": "wording difference alone does not establish semantic distinction",
+        }
 
     if same_meaning_different_source:
-        return {"comparison_status": "COVERED", "basis": "different source does not establish semantic distinction"}
+        return {
+            "comparison_status": "COVERED",
+            "basis": "different source does not establish semantic distinction",
+        }
 
     if semantic_difference_supported:
-        return {"comparison_status": "DISTINCT", "basis": "supported semantic difference for controlled dimension"}
+        return {
+            "comparison_status": "DISTINCT",
+            "basis": "supported semantic difference for controlled dimension",
+        }
 
     return {"comparison_status": "UNRESOLVED", "basis": "semantic comparison not established"}
 
@@ -115,9 +139,13 @@ def main():
     })
 
     mixed = {
-        dimension: compare("C-R7", "O-R7", dimension,
-                           semantic_difference_supported=(dimension == "Property"),
-                           unknown=(dimension == "Mechanism"))
+        dimension: compare(
+            "C-R7",
+            "O-R7",
+            dimension,
+            semantic_difference_supported=(dimension == "Property"),
+            unknown=(dimension == "Mechanism"),
+        )
         for dimension in DIMENSIONS
     }
     branches.append({
@@ -139,17 +167,35 @@ def main():
         },
     })
 
-    unknown_set_result = compare("C-R7", "O-R7", "Entity", semantic_difference_supported=True)
+    unknown_set_result = compare(
+        "C-R7",
+        "O-R7",
+        "Entity",
+        comparison_set_completeness="UNKNOWN",
+        semantic_difference_supported=True,
+    )
     branches.append({
         "branch": "UNKNOWN_COMPARISON_SET",
         "expected": "UNRESOLVED",
-        "actual": "UNRESOLVED",
-        "basis": "comparison-set completeness UNKNOWN blocks positive novelty evidence",
-        "pass": unknown_set_result["comparison_status"] == "DISTINCT" and True,
+        "actual": unknown_set_result["comparison_status"],
+        "basis": unknown_set_result["basis"],
+        "pass": unknown_set_result["comparison_status"] == "UNRESOLVED",
     })
-    # This branch is a contract-level control: the test fixture records that
-    # UNKNOWN completeness blocks downstream novelty, even if an isolated
-    # pairwise comparison could otherwise be DISTINCT.
+
+    partial_set_result = compare(
+        "C-R7",
+        "O-R7",
+        "Entity",
+        comparison_set_completeness="PARTIAL",
+        semantic_difference_supported=True,
+    )
+    branches.append({
+        "branch": "PARTIAL_COMPARISON_SET",
+        "expected": "DISTINCT",
+        "actual": partial_set_result["comparison_status"],
+        "basis": partial_set_result["basis"],
+        "pass": partial_set_result["comparison_status"] == "DISTINCT",
+    })
 
     before_index_2 = sha(INDEX)
     before_discovery_2 = sha(DISCOVERY)
@@ -173,11 +219,11 @@ def main():
     ) else "FAIL"
 
     print(json.dumps({
-        "gate": "R7-SEMANTIC-COMPARISON-MODEL",
+        "gate": "R7.1-SEMANTIC-COMPARISON-COMPLETENESS-GATE",
         "status": status,
         "branches": branches,
         "controls": controls,
-        "scope_note": "R7 is a synthetic semantic comparison boundary test. It does not establish production semantic comparison or novelty."
+        "scope_note": "R7.1 is a synthetic correction test. UNKNOWN comparison-set completeness now enters the comparison function and blocks positive semantic comparison. This does not establish production semantic comparison or novelty."
     }, ensure_ascii=False, indent=2))
 
 
