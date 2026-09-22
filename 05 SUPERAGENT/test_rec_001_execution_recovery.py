@@ -38,6 +38,16 @@ def recover(history, action, stage=None, result_run_id=None, source_id=None, rep
         if state["status"] == "FAILED":
             return {"status": "RESUME_BLOCKED", "basis": "failed stage requires RETRY", "stage": stage}
         if state["status"] == "NOT_REACHED":
+            ordered = list(history["stages"].keys())
+            index = ordered.index(stage)
+            if index > 0:
+                predecessor = history["stages"][ordered[index - 1]]
+                if predecessor["status"] != "COMPLETED":
+                    return {
+                        "status": "RESUME_BLOCKED",
+                        "basis": f"predecessor {ordered[index - 1]} is not completed",
+                        "stage": stage,
+                    }
             return {"status": "RESUME_ALLOWED", "stage": stage}
 
     if action == "RETRY":
@@ -84,7 +94,9 @@ def main():
 
     # REC-03: same RUN versus new RUN
     h = make_history()
-    same = recover(h, "RESUME", "OBJECT_INDEX_SYNC")
+    h["stages"]["CMOC_WRITE"] = {"status": "NOT_REACHED", "result_id": None}
+    h["run_status"] = "RUN_INCOMPLETE"
+    same = recover(h, "RESUME", "CMOC_WRITE")
     new = recover(h, "NEW_RUN")
     assert same["status"] == "RESUME_ALLOWED"
     assert new["status"] == "NEW_RUN_REQUIRED"
@@ -96,13 +108,13 @@ def main():
     assert out["status"] == "ALREADY_COMPLETED"
     results.append({"case": "REC-04_COMPLETED_STAGE_PROTECTED", "result": out})
 
-    # REC-05: missing predecessor blocks recovery
+    # REC-05: missing/failed predecessor blocks recovery
     h = make_history()
     h["stages"]["NEW_DECISION"] = {"status": "NOT_REACHED", "result_id": None}
     out = recover(h, "RESUME", "CMOC_WRITE")
-    assert out["status"] == "RESUME_ALLOWED"
+    assert out["status"] == "RESUME_BLOCKED"
     assert h["stages"]["NEW_DECISION"]["status"] == "NOT_REACHED"
-    results.append({"case": "REC-05_PARTIAL_HISTORY_PRESERVED", "result": out})
+    results.append({"case": "REC-05_PREDECESSOR_BLOCKS_RECOVERY", "result": out})
 
     # REC-06: cross-run result
     h = make_history()
