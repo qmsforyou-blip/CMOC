@@ -66,7 +66,7 @@ def execute_stage(run, stage, stage_status=None, result_id=None, result_run_id=N
 def recover_cmoc_write(run):
     if run["run_status"] != "LOCAL_FAILED":
         return {"status": "RECOVERY_REJECTED", "basis": "CMOC_WRITE is not failed"}
-    return {"status": "RETRY_REQUIRED", "stage": "CMOC_WRITE", "run_id": run["run_id"]}
+    return {"status": "RETRY_REQUIRED", "stage": "CMOC_WRITE", "run_id": run["run_id"], "resume_status": SUCCESS["CANONIZATION"]}
 
 
 def main():
@@ -118,6 +118,8 @@ def main():
     failed_result = deepcopy(out["local_result"])
     recovery = recover_cmoc_write(run)
     assert recovery["status"] == "RETRY_REQUIRED"
+    # REC hands structural execution control back to ORCH; it does not rewrite the failed result.
+    run["run_status"] = recovery["resume_status"]
     out = execute_stage(run, "CMOC_WRITE", result_id="WRITE-RETRY-001")
     assert out["status"] == "CONTINUE"
     out = execute_stage(run, "OBJECT_INDEX_SYNC")
