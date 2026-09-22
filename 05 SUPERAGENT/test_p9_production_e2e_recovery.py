@@ -90,6 +90,7 @@ def index_build():
 
 def append_event(event_seq, stage_id, event_type, stage_result_id,
                  attempt_id, status, traceability):
+    CMOC_DIR.mkdir(parents=True, exist_ok=True)
     events = []
     if JOURNAL_FILE.exists():
         events = json.loads(JOURNAL_FILE.read_text(encoding="utf-8"))
@@ -112,6 +113,7 @@ def append_event(event_seq, stage_id, event_type, stage_result_id,
 
 
 def save_state(state):
+    CMOC_DIR.mkdir(parents=True, exist_ok=True)
     STATE_FILE.write_text(
         json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True),
         encoding="utf-8",
@@ -129,7 +131,6 @@ def main():
     original = deepcopy(data)
 
     try:
-        # 1. RUN + semantic predecessor results are recorded as consumed outputs.
         append_event(
             1, "DISCOVERY", "STAGE_COMPLETED", "DISC-P9-001",
             "ATT-P9-DISC-001", "COMPLETED",
@@ -161,7 +162,6 @@ def main():
             },
         })
 
-        # 2. P2-like operational state projection.
         state = {
             "run_id": RUN_ID,
             "source_id": "SRC-P9-001",
@@ -180,7 +180,6 @@ def main():
             "result": {"run_status": state["run_status"], "state_version": state["state_version"]},
         })
 
-        # 3. Simulated real persistence failure: result is persisted as failure.
         append_event(
             5, "C2_CMOC_WRITE", "STAGE_FAILED", "WRITE-P9-FAIL-001",
             "ATT-P9-C2-001", "FAILED",
@@ -200,7 +199,6 @@ def main():
             },
         })
 
-        # 4. REC determines retry; ORCH receives control.
         retry_attempt = "ATT-P9-C2-002"
         append_event(
             6, "RECOVERY", "RETRY_REQUIRED", "REC-P9-001",
@@ -220,7 +218,6 @@ def main():
             },
         })
 
-        # 5. P7 production persistence succeeds on retry.
         data["attempt_id"] = retry_attempt
         data["result_id"] = "CANON-P9-RETRY-001"
         data["cmoc_write_id"] = "CMOC-WRITE-P9-RETRY-001"
@@ -239,7 +236,6 @@ def main():
             "result": out,
         })
 
-        # 6. P8 deterministic synchronization.
         completed = index_build()
         assert completed.returncode == 0
         index_before_repeat = INDEX.read_bytes()
@@ -265,7 +261,6 @@ def main():
             },
         })
 
-        # 7. Final RUN completion and lineage.
         append_event(
             9, "RUN", "RUN_COMPLETED", "RUN-P9-COMPLETE",
             retry_attempt, "COMPLETED",
@@ -303,7 +298,6 @@ def main():
             },
         })
 
-        # 8. Idempotent completed persistence.
         repeat = cmoc_write(data)
         assert repeat["status"] == "ALREADY_PERSISTED"
         results.append({
@@ -311,7 +305,6 @@ def main():
             "result": repeat,
         })
 
-        # 9. Restart/resume boundary: completed RUN is protected.
         restarted = load_state()
         assert restarted["run_status"] == "COMPLETED"
         results.append({
@@ -319,7 +312,6 @@ def main():
             "result": {"status": "ALREADY_COMPLETED"},
         })
 
-        # 10. Cross-run result cannot enter this RUN.
         foreign = deepcopy(data)
         foreign["run_id"] = "RUN-FOREIGN"
         assert foreign["run_id"] != RUN_ID
@@ -328,7 +320,6 @@ def main():
             "result": {"status": "RUN_REJECTED", "foreign_run": foreign["run_id"]},
         })
 
-        # 11. Semantic responsibility remains upstream.
         controls = {
             "new_decision_performed_by_p9": False,
             "semantic_comparison_performed_by_p9": False,
@@ -346,7 +337,6 @@ def main():
             "result": controls,
         })
 
-        # 12. Input remains structurally intact except the explicit retry identity.
         assert data["run_id"] == original["run_id"]
         assert data["source_id"] == original["source_id"]
         assert data["object_id"] == original["object_id"]
