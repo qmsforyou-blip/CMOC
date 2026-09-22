@@ -87,7 +87,7 @@ def main():
     results.append({"case": "P1-04_DUPLICATE_EVENT_SEQ", "result": out})
 
     # P1-05 sequence regression
-    out = append_event(journal, dict(second, event_id="EV-004", event_seq=1))
+    out = append_event(journal, dict(second, event_id="EV-004", event_seq=0))
     assert out["status"] == "REJECTED"
     assert out["basis"] == "sequence regression"
     results.append({"case": "P1-05_SEQUENCE_REGRESSION", "result": out})
