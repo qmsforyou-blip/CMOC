@@ -12,3 +12,7 @@ Desktop.ini
 # Generated CMOC inventory/index
 05 SUPERAGENT/cmoc_inventory.json
 05 SUPERAGENT/cmoc_object_index.json
+
+# Python cache
+__pycache__/
+*.py[cod]
