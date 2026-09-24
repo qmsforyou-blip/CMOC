@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Acceptance tests for ARCHITECTURE LOOKUP v0.2."""
+"""Acceptance tests for ARCHITECTURE LOOKUP v0.4."""
 
 from __future__ import annotations
 
@@ -39,7 +39,8 @@ def test_p10_positive_resolution() -> None:
         assert result["gaps"] == []
         assert result["summary"]["realization_mode"] == "GATE"
         assert result["summary"]["evidence_count"] == 1
-        assert result["artifacts"]["contract"][0]["observed_results"] == ("READY_WITH_LIMITATIONS",)
+        # An unlabelled state is not proof of an actual gate result.
+        assert result["artifacts"]["contract"][0]["observed_results"] == ()
 
 def test_p7_multiple_evidence_is_allowed() -> None:
     with tempfile.TemporaryDirectory() as td:
@@ -99,10 +100,54 @@ def test_read_only_and_deterministic_shape() -> None:
         assert first["artifacts"] == second["artifacts"]
         assert first["gaps"] == second["gaps"]
 
+def test_realistic_ownership_and_modes() -> None:
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        _write(root, "P7-WRITE-BOUNDARY.md", "# P7 write\n**Status:** DESIGN / ARCHITECTURE CANDIDATE\nP10 is a readiness gate.")
+        _write(root, "P9-RECOVERY-BOUNDARY.md", "# P9 recovery\n**Status:** ACCEPTED\nP9 binds the following previously accepted boundaries:\n- P7\n- P8")
+        _write(root, "P9.1-INTEGRATION-BOUNDARY.md", "# P9.1\nRealization mode: GATE")
+        _write(root, "P10-READINESS-GATE.md", "# P10 — PRODUCTION READINESS GATE\n**Status:** DESIGN / ARCHITECTURE CANDIDATE\n## States\n- READY_WITH_LIMITATIONS\n- NOT_READY")
+        _write(root, "PROD-001-RUNTIME-BOUNDARY.md", "# PROD-001\nP7 is a readiness gate.\nP9 is a readiness gate.")
+        _write(root, "POST-P10-ARCHITECTURE-REVIEW.md", "# POST-P10\nRealization mode: COMPOSITE")
+        _write(root, "production_cmoc_writer.py", '\"\"\"P7 production CMOC writer.\"\"\"\nclass Result:\n    status: str\n')
+        _write(root, "unrelated.py", 'x = 1\n# P7 implementation\n')
+        for subject, expected in (("P7", "DIRECT"), ("P9", "COMPOSITE"), ("P10", "GATE")):
+            result = lookup(subject, root)
+            assert result["summary"]["realization_mode"] == expected
+            assert result["summary"]["contract_count"] == 1
+        assert _paths(lookup("P7", root), "implementation") == ["production_cmoc_writer.py"]
+        assert lookup("P7", root)["artifacts"]["implementation"][0]["status"] == ()
+        assert lookup("P10", root)["artifacts"]["contract"][0]["observed_results"] == ()
+
+
+def test_exact_status_and_actual_results() -> None:
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        _write(root, "EVIDENCE-P10-001.md", "# Evidence\n**Status:** TESTED / NOT ACCEPTED\n**Result:** READY_WITH_LIMITATIONS\n## Possible states\n- NOT_READY\n- EVIDENCE_INCOMPLETE\n## Example\n```text\nStatus: ACCEPTED\nResult: NOT_READY\n```\n")
+        item = lookup("P10", root)["artifacts"]["evidence"][0]
+        assert item["status"] == ("TESTED / NOT ACCEPTED",)
+        assert item["observed_results"] == ("READY_WITH_LIMITATIONS",)
+        _write(root, "EVIDENCE-RUNTIME-P10-002.md", "# Evidence\n**Status:** ACCEPTED\n## 1. Result\n```text\nstatus: READY_WITH_LIMITATIONS\n```\nEvidence status: ACCEPTED.\n")
+        items = lookup("P10", root)["artifacts"]["evidence"]
+        assert all(item["observed_results"] == ("READY_WITH_LIMITATIONS",) for item in items)
+        assert items[1]["status"] == ("ACCEPTED",)
+
+
+def test_ambiguities_are_not_hidden() -> None:
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        _write(root, "P9-A-BOUNDARY.md", "# P9\nStatus: ACCEPTED\nStatus: DESIGN / ARCHITECTURE CANDIDATE\nRealization mode: GATE")
+        _write(root, "P9-B-BOUNDARY.md", "# P9\nRealization mode: COMPOSITE")
+        result = lookup("P9", root)
+        assert result["summary"]["realization_mode"] is None
+        assert "AMBIGUOUS_CONTRACT" in result["gaps"]
+        assert "AMBIGUOUS_STATUS" in result["gaps"]
+        assert "MISSING_IMPLEMENTATION" in result["gaps"]
+        assert "SCOPE_INSUFFICIENT" in lookup("P99", root)["gaps"]
+
+
 if __name__ == "__main__":
-    test_p9_positive_resolution()
-    test_p10_positive_resolution()
-    test_p7_multiple_evidence_is_allowed()
-    test_missing_role_is_reported_without_inference()
-    test_read_only_and_deterministic_shape()
-    print("ARCHITECTURE LOOKUP ACCEPTANCE: PASS")
+    tests = [value for name, value in sorted(globals().items()) if name.startswith("test_") and callable(value)]
+    for test in tests:
+        test()
+    print(f"ARCHITECTURE LOOKUP ACCEPTANCE: PASS ({len(tests)} tests)")

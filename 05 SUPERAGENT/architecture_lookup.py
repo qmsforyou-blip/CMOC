@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import re
 from dataclasses import asdict, dataclass
@@ -43,27 +44,28 @@ def _subject_tokens(subject_key: str) -> tuple[str, ...]:
 
 
 def _filename_subject_match(path: Path, subject_key: str) -> bool:
-    subject = re.escape(subject_key.lower())
-    name = path.name.lower()
-    return re.search(r"(?<![a-z0-9.])" + subject + r"(?![a-z0-9.])", name) is not None
+    # Strip role prefixes, never arbitrary prefixes such as POST- or PROD-.
+    name = re.sub(r"^(?:test[-_](?:runtime[-_])?|evidence[-_](?:runtime[-_])?)", "", path.stem, flags=re.I)
+    return re.match(re.escape(subject_key) + r"(?=$|[-_ ])", name, re.I) is not None
 
 
 def _explicit_subject_anchor(text: str, subject_key: str) -> bool:
-    """Resolve body references only when they occur in an explicit subject anchor."""
-    subject = re.escape(subject_key.lower())
-    lines = text[:6000].lower().splitlines()
-    anchor = re.compile(
-        r"^\s*(?:#+\s*)?" + subject
-        + r"(?:\s*(?:[-—:]|is|=)|\s+(?:production|runtime|implementation|test|evidence|gate|boundary|writer|synchronization|readiness))",
-        re.IGNORECASE,
-    )
-    return any(anchor.search(line) for line in lines)
+    """Only the module's opening declaration establishes executable ownership."""
+    try:
+        description = ast.get_docstring(ast.parse(text)) or ""
+    except SyntaxError:
+        description = ""
+    if not description:
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        lines = [line for line in lines if not line.startswith("#!")]
+        description = lines[0].lstrip("# ") if lines and lines[0].startswith("#") else ""
+    return re.match(re.escape(subject_key) + r"\s+(?:production|runtime|implementation|test|evidence|writer)\b", description, re.I) is not None
 
 
 def _subject_matches(path: Path, subject_key: str, text: str) -> tuple[bool, str]:
     if _filename_subject_match(path, subject_key):
         return True, "filename"
-    if _explicit_subject_anchor(text, subject_key):
+    if path.suffix.lower() == ".py" and _explicit_subject_anchor(text, subject_key):
         return True, "explicit-subject-anchor"
     return False, ""
 
@@ -89,34 +91,36 @@ def _role(path: Path, text: str) -> str | None:
     return None
 
 
-def _statuses(text: str) -> tuple[str, ...]:
-    """Read lifecycle status only from explicit status fields."""
-    found: list[str] = []
-    for line in text[:12000].splitlines():
-        match = re.search(r"^\s*(?:\*\*)?status(?:\*\*)?\s*:\s*(.+?)\s*$", line, re.IGNORECASE)
-        if not match:
-            match = re.search(r"^\s*(?:\*\*)?evidence status(?:\*\*)?\s*:\s*(.+?)\s*$", line, re.IGNORECASE)
-        if not match:
+OBSERVED_RESULTS = ("READY_WITH_LIMITATIONS", "READY_FOR_NEXT_PRODUCTION_PHASE", "NOT_READY", "EVIDENCE_INCOMPLETE")
+
+
+def _fields(text: str, include_result_blocks: bool = False):
+    fenced = False
+    section = ""
+    for line in text.splitlines():
+        if line.lstrip().startswith(("```", "~~~")):
+            fenced = not fenced
             continue
-        value = match.group(1).strip().strip("*").upper()
-        for status in LIFECYCLE_STATUSES:
-            if status in value and status not in found:
-                found.append(status)
-    return tuple(found)
+        if not fenced and line.startswith("#"):
+            section = _norm(line)
+        if fenced and not (include_result_blocks and re.fullmatch(r"\d*\s*(?:gate )?(?:result|observed result|actual result)", section)):
+            continue
+        clean = line.replace("**", "").replace("`", "").strip()
+        match = re.fullmatch(r"(Status|Evidence status|Result|Observed result|Gate result|Realization mode):\s*(.+)", clean, re.I)
+        if match:
+            yield match[1].lower(), match[2].strip().rstrip(".").upper()
+
+
+def _statuses(text: str) -> tuple[str, ...]:
+    # Preserve complete declared values; NOT ACCEPTED must never become ACCEPTED.
+    return tuple(dict.fromkeys(value for key, value in _fields(text)
+                               if key in {"status", "evidence status"} and value not in OBSERVED_RESULTS))
 
 
 def _observed_results(text: str) -> tuple[str, ...]:
-    found: list[str] = []
-    upper = text.upper()
-    for observed in (
-        "READY_WITH_LIMITATIONS",
-        "READY_FOR_NEXT_PRODUCTION_PHASE",
-        "NOT_READY",
-        "EVIDENCE_INCOMPLETE",
-    ):
-        if observed in upper and observed not in found:
-            found.append(observed)
-    return tuple(found)
+    return tuple(dict.fromkeys(value for key, value in _fields(text, True)
+                               if key in {"status", "result", "observed result", "gate result"}
+                               and value in OBSERVED_RESULTS))
 
 
 def _iter_files(root: Path) -> Iterable[Path]:
@@ -126,14 +130,27 @@ def _iter_files(root: Path) -> Iterable[Path]:
             yield path
 
 
-def _infer_realization_mode(subject_key: str, contracts: list[Artifact], contract_texts: list[str]) -> str:
-    """Infer only from explicit contract wording; never infer from absence alone."""
-    corpus = " ".join(contract_texts).upper()
-    if "READINESS GATE" in corpus or "READINESS-GATE" in corpus:
-        return "GATE"
-    if "INTEGRATION" in corpus or "COMPOSITE" in corpus or "COMPOSITION" in corpus:
-        return "COMPOSITE"
-    return "DIRECT"
+def _infer_realization_mode(subject_key: str, contracts: list[Artifact], contract_texts: list[str]) -> str | None:
+    modes = set()
+    subject = re.escape(subject_key)
+    for text in contract_texts:
+        explicit = {v for k, v in _fields(text) if k == "realization mode" and v in REALIZATION_MODES}
+        if explicit:
+            modes.update(explicit)
+            continue
+        title = next((line for line in text.splitlines() if line.startswith("# ")), "")
+        if re.search(r"readiness[ -]gate", title, re.I):
+            modes.add("GATE")
+        for line in text.splitlines():
+            clean = line.replace("**", "")
+            if re.match(r"\s*" + subject + r"\s+(?:is|binds|integrates|composes)\b", clean, re.I):
+                if re.search(r"audit/gate|readiness[ -]gate", clean, re.I):
+                    modes.add("GATE")
+                if re.search(r"\bbinds the following previously accepted boundaries|\bintegrates\b|\bcomposes\b|\bis (?:an? |the )?(?:integration|composite)\b", clean, re.I):
+                    modes.add("COMPOSITE")
+            if re.match(r"This is an integration boundary composed from existing", clean, re.I):
+                modes.add("COMPOSITE")
+    return next(iter(modes)) if len(modes) == 1 else (None if modes or not contracts else "DIRECT")
 
 
 def lookup(subject_key: str, repository_root: str | Path) -> dict:
@@ -158,11 +175,17 @@ def lookup(subject_key: str, repository_root: str | Path) -> dict:
         if not subject_match:
             continue
         rel = path.relative_to(root).as_posix()
+        metadata = text
+        if path.suffix.lower() == ".py":
+            try:
+                metadata = ast.get_docstring(ast.parse(text)) or ""
+            except SyntaxError:
+                metadata = ""
         artifact = Artifact(
             path=rel,
             role=role,
-            status=_statuses(text),
-            observed_results=_observed_results(text),
+            status=_statuses(metadata),
+            observed_results=_observed_results(metadata),
             resolution_basis=resolution_basis,
         )
         grouped[role].append(artifact)
@@ -177,6 +200,12 @@ def lookup(subject_key: str, repository_root: str | Path) -> dict:
     )
 
     gaps: list[str] = []
+    if realization_mode is None:
+        gaps.append("AMBIGUOUS_CONTRACT" if grouped["contract"] else "SCOPE_INSUFFICIENT")
+    if any(len(item.status) > 1 for items in grouped.values() for item in items):
+        gaps.append("AMBIGUOUS_STATUS")
+    if any(len(item.observed_results) > 1 for items in grouped.values() for item in items):
+        gaps.append("AMBIGUOUS_OBSERVED_RESULT")
     for role in ("contract", "test", "evidence"):
         if not grouped[role]:
             gaps.append(f"MISSING_{role.upper()}")
@@ -184,12 +213,12 @@ def lookup(subject_key: str, repository_root: str | Path) -> dict:
     # Implementation absence is a gap only for a DIRECT realization.
     # COMPOSITE and GATE subjects are explicitly realized by existing
     # architectural composition or gate/test infrastructure.
-    if realization_mode == "DIRECT" and not grouped["implementation"]:
+    if realization_mode in {"DIRECT", None} and not grouped["implementation"]:
         gaps.append("MISSING_IMPLEMENTATION")
 
     return {
         "schema": "ARCHITECTURE-LOOKUP-RESULT-001",
-        "version": "0.3",
+        "version": "0.4",
         "subject_key": subject_key,
         "repository_root": str(root),
         "resolved_at": datetime.now(timezone.utc).isoformat(),
@@ -202,11 +231,17 @@ def lookup(subject_key: str, repository_root: str | Path) -> dict:
             "artifacts": [asdict(item) for item in grouped["implementation"]],
             "basis": (
                 "explicit contract wording"
-                if realization_mode != "DIRECT"
-                else "default direct realization rule"
+                if realization_mode in {"GATE", "COMPOSITE"}
+                else ("default direct realization rule" if realization_mode == "DIRECT" else "unresolved contract scope")
             ),
         },
         "gaps": gaps,
+        "gap_details": [
+            {"code": code, "path": item.path, "values": list(values)}
+            for items in grouped.values() for item in items
+            for code, values in (("AMBIGUOUS_STATUS", item.status), ("AMBIGUOUS_OBSERVED_RESULT", item.observed_results))
+            if len(values) > 1
+        ],
         "summary": {
             "contract_count": len(grouped["contract"]),
             "implementation_count": len(grouped["implementation"]),

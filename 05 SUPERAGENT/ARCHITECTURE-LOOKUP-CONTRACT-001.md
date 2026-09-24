@@ -1,7 +1,7 @@
 # ARCHITECTURE LOOKUP CONTRACT — 001
 
 Status: DESIGN / CONTRACT CANDIDATE
-Version: 0.3
+Version: 0.4
 Date: 24-09-2026
 Layer: CMOC / Superagent engineering process
 
@@ -28,8 +28,9 @@ subject_key
 repository_root
 resolved_at
 artifacts
-status_observations
+implementation_realization
 gaps
+gap_details
 summary
 
 Artifacts are grouped by role:
@@ -55,6 +56,8 @@ Implementation is not assumed to be one file per subject. The resolver reports o
 
 The mode may be inferred only from explicit contract wording. Absence of an implementation file is not sufficient to infer COMPOSITE or GATE.
 
+Only subject-owned contracts contribute to mode resolution. Recognized declarations are an explicit `Realization mode:` field, a readiness-gate title, or subject-led declarations of readiness/audit gate or composition of existing boundaries. A generic occurrence of `integration` or `gate` is insufficient. Consistent multiple contracts are allowed. Conflicting mode declarations return a null mode and AMBIGUOUS_CONTRACT; no contract returns a null mode and SCOPE_INSUFFICIENT. DIRECT remains the default obligation for an owned contract without a recognized non-direct declaration, and does not itself prove that an implementation exists.
+
 ## 5. Resolution roles
 
 CONTRACT: boundary, contract, standard, profile, review or gate defining the declared responsibility.
@@ -77,6 +80,10 @@ Gate/result states such as `READY_WITH_LIMITATIONS` are reported separately as o
 
 The resolver must not invent a status.
 
+Complete field values are preserved in uppercase, with Markdown emphasis and a terminal period removed. In particular, TESTED / NOT ACCEPTED must not also produce ACCEPTED. Distinct lifecycle values within one artifact produce AMBIGUOUS_STATUS and path-specific gap_details; statuses of separate artifacts are not merged. Executable metadata is read only from its module docstring, never from code annotations or string fixtures.
+
+Observed results require a Result, Observed result, Gate result, or Status field whose whole value is a recognized result state. A fenced output block is eligible only in a Result / Gate result / Observed result / Actual result section (optionally numbered). Other fenced examples and unlabelled state lists are ignored. Multiple distinct results in one artifact produce AMBIGUOUS_OBSERVED_RESULT; no chronological winner is inferred.
+
 Canonical lookup status classes:
 ACCEPTED
 IMPLEMENTATION PROVEN
@@ -92,13 +99,15 @@ Gate/result states such as READY_WITH_LIMITATIONS are observed results, not repl
 
 Subject ownership is resolved in this order:
 
-1. filename subject match — strongest basis;
-2. explicit subject anchor in the opening artifact content — allowed for executable/implementation artifacts whose filename does not carry the subject key;
+1. filename begins with the exact subject key, optionally after a test/test_runtime or evidence/evidence-runtime role prefix;
+2. a Python module docstring's opening subject declaration (or first leading comment when no docstring exists) — allowed for executable artifacts whose filename does not carry the subject key;
 3. ordinary body mention — not sufficient for subject ownership.
 
 The resolver must not treat a document as belonging to a subject merely because it mentions that subject somewhere in the body.
 
 Subject matching must also distinguish a subject such as `P9` from a different subject such as `P9.1`.
+
+POST-P10 reviews and PROD-001 boundaries are not owned P10/P7/P9 contracts. Their mentions do not establish ownership. This bounded resolver reports owned artifacts only; it does not claim to enumerate all related documents or follow arbitrary references. It does not pick a primary contract by filename ranking or silently discard other owned contracts.
 
 ## 8. Gaps
 
@@ -108,6 +117,11 @@ MISSING_IMPLEMENTATION
 MISSING_TEST
 MISSING_EVIDENCE
 AMBIGUOUS_CONTRACT
+AMBIGUOUS_STATUS
+AMBIGUOUS_OBSERVED_RESULT
+SCOPE_INSUFFICIENT
+
+An empty gap list means no gap under these bounded lookup rules; it does not prove operational readiness or acceptance of the entire capability. Component-level proof of a COMPOSITE realization remains outside this resolver's scope.
 
 The resolver must not convert NO_MATCH into a semantic NEW decision.
 
