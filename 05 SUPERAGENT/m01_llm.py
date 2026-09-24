@@ -16,7 +16,13 @@ from __future__ import annotations
 import json
 import os
 import urllib.request
+import ssl
 from typing import Any, Dict, List
+
+
+_TLS_CONTEXT = ssl.create_default_context()
+_TLS_CONTEXT.minimum_version = ssl.TLSVersion.TLSv1_2
+_TLS_CONTEXT.maximum_version = ssl.TLSVersion.TLSv1_2
 
 
 M01_SYSTEM_PROMPT = """You are MACHINE-SOURCE-001 executing TASK M01 EXTRACTION.
@@ -64,7 +70,7 @@ def _request_json(payload: Dict[str, Any], timeout: int = 120) -> Dict[str, Any]
         method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as response:
+        with urllib.request.urlopen(req, context=_TLS_CONTEXT, timeout=timeout) as response:
             return json.loads(response.read().decode("utf-8"))
     except Exception as exc:
         raise M01LLMError(f"LLM request failed: {exc}") from exc
