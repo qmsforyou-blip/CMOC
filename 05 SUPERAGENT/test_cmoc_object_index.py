@@ -1,5 +1,6 @@
 import json
 import unittest
+from collections import Counter
 from pathlib import Path
 
 BASE = Path(__file__).parent
@@ -25,23 +26,24 @@ class TestCMOCObjectIndexV02(unittest.TestCase):
     def test_schema_and_version(self):
         self.assertEqual(self.data["schema"], "CMOC-OBJECT-INDEX-001")
         self.assertEqual(self.data["version"], "0.2")
-        self.assertEqual(self.data["source_inventory"], "CMOC-INVENTORY-001@2026-09-18")
+        self.assertEqual(self.data["source_inventory"], f'{self.inventory["schema"]}@{self.inventory["generated_at"]}')
+        for key in ("repository", "branch", "source_commit", "generated_at"):
+            self.assertEqual(self.data[key], self.inventory[key])
 
     def test_representation_count(self):
         self.assertEqual(
             self.data["representation_record_count"],
             len(self.data["records"]),
         )
-        self.assertEqual(
-            self.data["representation_kind_counts"]["OBJECT_FILE"], 732
-        )
-        self.assertEqual(
-            self.data["representation_kind_counts"]["REGISTRY_RECORD"], 1222
-        )
-        self.assertEqual(
-            self.data["representation_kind_counts"]["OTHER_ADDRESSABLE"], 0
-        )
-        self.assertEqual(self.data["representation_record_count"], 1954)
+        records = self.data["records"]
+        expected = Counter(r["representation"]["kind"] for r in records)
+        self.assertEqual(self.data["representation_kind_counts"], {
+            kind: expected[kind] for kind in ("OBJECT_FILE", "REGISTRY_RECORD", "OTHER_ADDRESSABLE")
+        })
+        expected_paths = {r["path"] for r in self.inventory["records"] if r.get("object_type")}
+        indexed_paths = {r["representation"]["container"] for r in records if r["representation"]["kind"] == "OBJECT_FILE"}
+        self.assertEqual(indexed_paths, expected_paths)
+        self.assertEqual(expected["OBJECT_FILE"], len(expected_paths))
 
     def test_expected_object_classes(self):
         expected = {
@@ -52,20 +54,19 @@ class TestCMOCObjectIndexV02(unittest.TestCase):
         self.assertTrue(expected.issubset(self.data["object_type_counts"]))
 
     def test_count_views(self):
-        expected = {
-            "TERM": {"representations": 235, "object_files": 125, "registry_records": 110, "unique_object_ids": 125},
-            "DISTINCTION": {"representations": 1167, "object_files": 544, "registry_records": 623, "unique_object_ids": 544},
-            "GM_FORMULATION": {"representations": 49, "object_files": 49, "registry_records": 0, "unique_object_ids": 49},
-            "MACHINE": {"representations": 8, "object_files": 8, "registry_records": 0, "unique_object_ids": 8},
-            "PATTERN": {"representations": 1, "object_files": 1, "registry_records": 0, "unique_object_ids": 1},
-            "CHAIN": {"representations": 2, "object_files": 2, "registry_records": 0, "unique_object_ids": 2},
-            "LAW": {"representations": 1, "object_files": 1, "registry_records": 0, "unique_object_ids": 1},
-            "OBSERVATION": {"representations": 1, "object_files": 1, "registry_records": 0, "unique_object_ids": 1},
-            "ORGANIZATIONAL_CONSTRUCTION": {"representations": 479, "object_files": 1, "registry_records": 478, "unique_object_ids": 479},
-            "INVARIANT": {"representations": 11, "object_files": 0, "registry_records": 11, "unique_object_ids": 11},
-        }
+        records = self.data["records"]
+        expected = {}
+        for object_type in {r["object_type"] for r in records}:
+            selected = [r for r in records if r["object_type"] == object_type]
+            expected[object_type] = {
+                "representations": len(selected),
+                "object_files": sum(r["representation"]["kind"] == "OBJECT_FILE" for r in selected),
+                "registry_records": sum(r["representation"]["kind"] == "REGISTRY_RECORD" for r in selected),
+                "unique_object_ids": len({r["object_id"] for r in selected}),
+            }
         self.assertEqual(self.data["count_views"]["by_object_type"], expected)
-        self.assertEqual(self.data["count_views"]["unique_object_ids"], 1221)
+        self.assertEqual(self.data["object_type_counts"], dict(Counter(r["object_type"] for r in records)))
+        self.assertEqual(self.data["count_views"]["unique_object_ids"], len({r["object_id"] for r in records}))
 
     def test_registry_container_counts(self):
         counts = {}
