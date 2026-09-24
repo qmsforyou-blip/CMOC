@@ -7,14 +7,15 @@ mutation are performed.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from pathlib import Path
 from typing import Any
 
 
-BUILDER_VERSION = "INVENTORY-BUILDER-001-v0.2"
-CLASSIFICATION_RULES_VERSION = "INVENTORY-CLASSIFICATION-RULES-001-v0.1"
+BUILDER_VERSION = "INVENTORY-BUILDER-001-v0.3"
+CLASSIFICATION_RULES_VERSION = "INVENTORY-CLASSIFICATION-RULES-001-v0.2"
 
 CLASS_TO_TYPE = {
     "TERM_FILE": "TERM",
@@ -86,6 +87,22 @@ def _explicit_object_id(text: str, path: str) -> str | None:
     return None
 
 
+def _git_blob_sha(data: bytes) -> str:
+    header = f"blob {len(data)}\0".encode("utf-8")
+    return hashlib.sha1(header + data).hexdigest()
+
+
+def _base_record(root: Path, rel: str, object_class: str) -> dict[str, Any]:
+    data = (root / rel).read_bytes()
+    return {
+        "path": rel,
+        "type": "file",
+        "class": object_class,
+        "size_bytes": len(data),
+        "git_sha": _git_blob_sha(data),
+    }
+
+
 def _classify_path(rel: str) -> str:
     """Classify by explicit repository structure, not semantic content."""
     if rel in NON_OBJECT_PATHS:
@@ -102,6 +119,9 @@ def _classify_path(rel: str) -> str:
 
     if rel.startswith("05 SUPERAGENT/"):
         return "SUPERAGENT"
+
+    if rel.startswith("02 Машинки/"):
+        return "MACHINE_RUNTIME"
 
     if rel.startswith("000 База/01 Термины/"):
         return "TERM_FILE"
@@ -140,7 +160,8 @@ def _object_record(
     object_class: str,
 ) -> dict[str, Any]:
     full = root / path
-    text = full.read_text(encoding="utf-8")
+    data = full.read_bytes()
+    text = data.decode("utf-8")
     fm = _frontmatter(text)
     object_id = _explicit_object_id(text, path)
 
@@ -148,12 +169,9 @@ def _object_record(
         raise ValueError(f"UNRESOLVED_OBJECT_ID: {path}")
 
     return {
-        "schema": "CMOC-INVENTORY-RECORD",
-        "version": "0.2",
+        **_base_record(root, path, object_class),
         "object_id": object_id,
         "object_type": object_type,
-        "class": object_class,
-        "path": path,
         "representation": {
             "kind": "OBJECT_FILE",
             "container": path,
@@ -163,12 +181,9 @@ def _object_record(
     }
 
 
-def _registry_record(path: str) -> dict[str, Any]:
+def _registry_record(root: Path, path: str) -> dict[str, Any]:
     return {
-        "schema": "CMOC-INVENTORY-RECORD",
-        "version": "0.2",
-        "class": "CMOC_CORE_REGISTRY",
-        "path": path,
+        **_base_record(root, path, "CMOC_CORE_REGISTRY"),
         "representation": {
             "kind": "REGISTRY_CONTAINER",
             "container": path,
@@ -204,19 +219,21 @@ def build_inventory(
         object_class = _classify_path(rel)
 
         if object_class == "EXCLUDED":
-            records.append({"path": rel, "class": "EXCLUDED"})
+            records.append({**_base_record(root, rel, "EXCLUDED")})
             continue
 
         if object_class == "CMOC_CORE_REGISTRY":
-            records.append(_registry_record(rel))
+            records.append(_registry_record(root, rel))
             continue
 
-        if object_class == "REPOSITORY_OTHER":
-            records.append({"path": rel, "class": object_class})
-            continue
-
-        if object_class in {"STANDARD", "PATCH", "SUPERAGENT"}:
-            records.append({"path": rel, "class": object_class})
+        if object_class in {
+            "REPOSITORY_OTHER",
+            "STANDARD",
+            "PATCH",
+            "SUPERAGENT",
+            "MACHINE_RUNTIME",
+        }:
+            records.append(_base_record(root, rel, object_class))
             continue
 
         if object_class not in CLASS_TO_TYPE:
@@ -252,8 +269,6 @@ def build_inventory(
         records.append(record)
 
     records.sort(key=lambda r: (
-        r.get("representation", {}).get("kind", r.get("class", "")),
-        r.get("object_id", ""),
         r.get("path", ""),
     ))
 
@@ -269,7 +284,7 @@ def build_inventory(
 
     return {
         "schema": "CMOC-INVENTORY-001",
-        "version": "0.2",
+        "version": "0.3",
         "generated_at": generated_at,
         "repository": repository,
         "branch": state,
