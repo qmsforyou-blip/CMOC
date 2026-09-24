@@ -65,7 +65,10 @@ class ProductionAdapter:
         except Exception as exc:
             return AdapterResult(
                 "ADAPTER_EXECUTION_FAILED",
-                {"error_type": type(exc).__name__},
+                {
+                    "error_type": type(exc).__name__,
+                    "error_message": str(exc)[:1000],
+                },
             )
 
         if not isinstance(output, dict):
