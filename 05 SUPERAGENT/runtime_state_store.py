@@ -222,6 +222,8 @@ class RuntimeStateStore:
                 raise ValueError("recovery event crosses current stage")
             if event.attempt_id:
                 current_attempt = event.attempt_id
+        elif event.event_type == "RUN_INCOMPLETE":
+            run_status = "INCOMPLETE"
         elif event.event_type in RUN_TERMINAL:
             run_status = {
                 "RUN_COMPLETED": "COMPLETED",
@@ -265,6 +267,10 @@ class RuntimeStateStore:
 
     def get_state(self, run_id: str) -> RunState | None:
         return self._load_state(run_id)
+
+    def next_event_seq(self, run_id: str) -> int:
+        state = self._load_state(run_id)
+        return 1 if state is None else state.last_event_seq + 1
 
     def read_journal(self, run_id: str) -> list[JournalEvent]:
         rows = self.conn.execute(
