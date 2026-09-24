@@ -229,6 +229,8 @@ def build_inventory(
             continue
 
         rel = relative.as_posix()
+        if rel in DERIVED_OUTPUT_PATHS:
+            continue
         object_class = _classify_path(rel)
 
         if object_class == "EXCLUDED":
