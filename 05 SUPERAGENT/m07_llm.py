@@ -7,7 +7,13 @@ Output: source-bound Relation Candidates / explicit NO_RELATION / NEEDS_EVIDENCE
 import json
 import os
 import urllib.request
+import ssl
 from typing import Any, Dict, List
+
+
+_TLS_CONTEXT = ssl.create_default_context()
+_TLS_CONTEXT.minimum_version = ssl.TLSVersion.TLSv1_2
+_TLS_CONTEXT.maximum_version = ssl.TLSVersion.TLSv1_2
 
 
 class M07LLMError(RuntimeError):
@@ -101,7 +107,7 @@ def _request_json(payload: Dict[str, Any]) -> Dict[str, Any]:
     )
 
     try:
-        with urllib.request.urlopen(req, timeout=120) as response:
+        with urllib.request.urlopen(req, context=_TLS_CONTEXT, timeout=120) as response:
             raw = response.read().decode("utf-8")
     except Exception as exc:
         raise M07LLMError(f"LLM request failed: {exc}") from exc
