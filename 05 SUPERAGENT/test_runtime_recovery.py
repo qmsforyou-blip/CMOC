@@ -95,7 +95,7 @@ def main() -> None:
             resume=True,
         )
         assert out["status"] == "PIPELINE_COMPLETED"
-        assert calls == ["ATTEMPT-DISCOVERY-RUN-RECOVERY-001"]
+        assert calls == ["ATTEMPT-DISCOVERY-RUN-RECOVERY-001-RESUME-006"]
         
         store = RuntimeStateStore(str(db_path))
         events = store.read_journal("RUN-RECOVERY-001")
@@ -118,10 +118,10 @@ def main() -> None:
         key = (
             "RUN-RECOVERY-001",
             "DISCOVERY",
-            "ATTEMPT-DISCOVERY-RUN-RECOVERY-001",
+            "ATTEMPT-DISCOVERY-RUN-RECOVERY-001-RESUME-006",
         )
         assert key in persistence
-        assert persistence[key]["result_id"] == "RESULT-DISCOVERY-RUN-RECOVERY-001"
+        assert persistence[key]["result_id"] == "RESULT-DISCOVERY-RUN-RECOVERY-001-RESUME-006"
         store.close()
 
     print("RUNTIME RECOVERY TEST: PASS")
