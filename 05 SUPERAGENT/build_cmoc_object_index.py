@@ -149,7 +149,7 @@ def distinction_records(text, container, sha, repository="UNKNOWN", inventory_sn
     for n, line in enumerate(text.splitlines(), 1):
         m = re.match(r"^\|\s*\*{0,2}(DIS-\d+)\*{0,2}\s*\|", line)
         if m:
-            out.append(registry_record(m.group(1), "DISTINCTION", container, n, None, ["id"], sha=sha))
+            out.append(registry_record(m.group(1), "DISTINCTION", container, n, None, ["id"], sha=sha, repository=repository, inventory_snapshot=inventory_snapshot))
     return out
 
 def invariant_records(text, container, sha, repository="UNKNOWN", inventory_snapshot="UNKNOWN"):
@@ -173,7 +173,7 @@ def invariant_records(text, container, sha, repository="UNKNOWN", inventory_snap
                 break
     out = []
     for oid, (line, name) in sorted(found.items(), key=lambda x: x[1][0]):
-        out.append(registry_record(oid, "INVARIANT", container, line, name, ["id"], sha=sha))
+        out.append(registry_record(oid, "INVARIANT", container, line, name, ["id"], sha=sha, repository=repository, inventory_snapshot=inventory_snapshot))
     return out
 
 def organizational_records(text, container, sha, repository="UNKNOWN", inventory_snapshot="UNKNOWN"):
@@ -181,7 +181,7 @@ def organizational_records(text, container, sha, repository="UNKNOWN", inventory
     for n, line in enumerate(text.splitlines(), 1):
         m = re.match(r"^\|\s*(C-\d{4})\s*\|\s*([^|]+?)\s*\|", line)
         if m:
-            out.append(registry_record(m.group(1), "ORGANIZATIONAL_CONSTRUCTION", container, n, m.group(2).strip(), ["id", "construction"], sha=sha))
+            out.append(registry_record(m.group(1), "ORGANIZATIONAL_CONSTRUCTION", container, n, m.group(2).strip(), ["id", "construction"], sha=sha, repository=repository, inventory_snapshot=inventory_snapshot))
     return out
 
 def build(repository_root=None, inventory_path=None):
