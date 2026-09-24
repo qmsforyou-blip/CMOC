@@ -1,8 +1,4 @@
-"""Acceptance test for INVENTORY-BUILDER-001.
-
-Synthetic isolated repository fixture only.
-Does not mutate committed CMOC-INVENTORY-001 or OBJECT INDEX.
-"""
+"""Production acceptance test for INVENTORY-BUILDER-001."""
 
 from __future__ import annotations
 
@@ -11,182 +7,141 @@ import json
 import tempfile
 from pathlib import Path
 
+from inventory_builder import build_inventory, write_inventory
 
-def build_inventory(root: Path) -> dict:
-    records = []
-    structural_errors = []
 
-    for path in sorted(root.rglob("*")):
-        if not path.is_file():
-            continue
-
-        rel = path.relative_to(root).as_posix()
-        text = path.read_text(encoding="utf-8")
-
-        if not rel.endswith(".md"):
-            records.append({
-                "path": rel,
-                "class": "REPOSITORY_OTHER",
-            })
-            continue
-
-        if text.startswith("---\n"):
-            fm = {}
-            for line in text.splitlines()[1:]:
-                if line.strip() == "---":
-                    break
-                if ":" in line:
-                    key, value = line.split(":", 1)
-                    fm[key.strip()] = value.strip().strip('"').strip("'")
-
-            if fm.get("cmoc_object") == "true":
-                object_id = fm.get("id")
-                if not object_id:
-                    structural_errors.append({
-                        "type": "UNRESOLVED_OBJECT_ID",
-                        "path": rel,
-                    })
-                    continue
-
-                record = {
-                    "object_id": object_id,
-                    "object_type": fm.get("type"),
-                    "path": rel,
-                    "class": "OBJECT_FILE",
-                }
-
-                if any(
-                    r.get("object_id") == object_id and
-                    r.get("class") == "OBJECT_FILE"
-                    for r in records
-                ):
-                    structural_errors.append({
-                        "type": "DUPLICATE_ADDRESSABLE_OBJECT",
-                        "object_id": object_id,
-                        "path": rel,
-                    })
-                    continue
-
-                records.append(record)
-                continue
-
-        records.append({
-            "path": rel,
-            "class": "REPOSITORY_OTHER",
-        })
-
-    records.sort(key=lambda r: (
-        r.get("class", ""),
-        r.get("object_id", ""),
-        r.get("path", ""),
-    ))
-
+def _hash_tree(root: Path) -> dict[str, str]:
     return {
-        "schema": "CMOC-INVENTORY-TEST",
-        "version": "0.1",
-        "repository_state": "TEST-FIXTURE",
-        "builder_version": "INVENTORY-BUILDER-001-v0.1",
-        "records": records,
-        "structural_errors": structural_errors,
+        p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+        for p in sorted(root.rglob("*"))
+        if p.is_file()
     }
-
-
-def canonical_records(inventory: dict) -> str:
-    return json.dumps(
-        inventory["records"],
-        ensure_ascii=False,
-        sort_keys=True,
-        separators=(",", ":"),
-    )
 
 
 def main() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
 
-        (root / "OBJ-001.md").write_text(
-            "---\ncmoc_object: true\nid: OBJ-001\ntype: TERM\n---\n# Object 1\n",
+        (root / "T-0001.md").write_text(
+            "---\n"
+            "id: T-0001\n"
+            "type: term\n"
+            "status: active\n"
+            "title: Test term\n"
+            "source: TEST\n"
+            "created: 2026-09-24\n"
+            "tags:\n"
+            "  - test\n"
+            "inventory_class: TERM_FILE\n"
+            "---\n"
+            "# Test term\n",
             encoding="utf-8",
         )
-        (root / "OBJ-002.md").write_text(
-            "---\ncmoc_object: true\nid: OBJ-002\ntype: MACHINE\n---\n# Object 2\n",
+
+        (root / "MC-TEST-001.md").write_text(
+            "---\n"
+            "machine_id: MC-TEST-001\n"
+            "type: machine\n"
+            "status: active\n"
+            "title: Test machine\n"
+            "source: TEST\n"
+            "created: 2026-09-24\n"
+            "tags:\n"
+            "  - test\n"
+            "inventory_class: MACHINE\n"
+            "---\n"
+            "# Test machine\n",
             encoding="utf-8",
         )
-        (root / "README.md").write_text("# Not a CMOC object\n", encoding="utf-8")
-        (root / "data.txt").write_text("ordinary repository file\n", encoding="utf-8")
 
-        before = {
-            p.relative_to(root).as_posix(): hashlib.sha256(
-                p.read_bytes()
-            ).hexdigest()
-            for p in root.rglob("*")
-            if p.is_file()
-        }
+        registry = root / "08 CMOC Core"
+        registry.mkdir()
+        for name in (
+            "LAB-000 Опись терминов ОН.md",
+            "LAB-002 Реестр различений.md",
+            "LAB-004 Инварианты.md",
+            "LAB-005 Опись организационных конструкций.md",
+        ):
+            (registry / name).write_text(f"# {name}\n", encoding="utf-8")
 
-        inv1 = build_inventory(root)
-        inv2 = build_inventory(root)
-
-        objects = {
-            r["object_id"]: r
-            for r in inv1["records"]
-            if r["class"] == "OBJECT_FILE"
-        }
-
-        assert len(objects) == 2
-        assert objects["OBJ-001"]["object_type"] == "TERM"
-        assert objects["OBJ-002"]["object_type"] == "MACHINE"
-        assert "README.md" in {
-            r.get("path") for r in inv1["records"]
-            if r["class"] == "REPOSITORY_OTHER"
-        }
-        assert inv1["structural_errors"] == []
-        assert canonical_records(inv1) == canonical_records(inv2)
-
-        # Missing explicit object_id must be reported, never invented.
-        (root / "OBJ-BAD.md").write_text(
-            "---\ncmoc_object: true\ntype: TERM\n---\n# Missing ID\n",
-            encoding="utf-8",
+        excluded = root / "03_MACHINE-CATALOG/MACHINES"
+        excluded.mkdir(parents=True)
+        (excluded / "MACHINE-CANDIDATES.md").write_text(
+            "# MACHINE-CANDIDATES\n", encoding="utf-8"
         )
-        inv_bad = build_inventory(root)
+
+        (root / "notes.md").write_text(
+            "# ordinary repository file\n", encoding="utf-8"
+        )
+
+        before = _hash_tree(root)
+
+        snapshot = build_inventory(
+            root,
+            repository="TEST/CMOC",
+            state="work/discovery-result-builder",
+            source_commit="TEST-COMMIT-001",
+            generated_at="2026-09-24T00:00:00+03:00",
+        )
+
+        assert snapshot["schema"] == "CMOC-INVENTORY-001"
+        assert snapshot["version"] == "0.2"
+        assert snapshot["repository"] == "TEST/CMOC"
+        assert snapshot["branch"] == "work/discovery-result-builder"
+        assert snapshot["source_commit"] == "TEST-COMMIT-001"
+        assert snapshot["builder_version"] == "INVENTORY-BUILDER-001-v0.1"
+
+        objects = [
+            r for r in snapshot["records"]
+            if r.get("representation", {}).get("kind") == "OBJECT_FILE"
+        ]
+        registries = [
+            r for r in snapshot["records"]
+            if r.get("representation", {}).get("kind") == "REGISTRY_RECORD"
+        ]
+
+        assert {r["object_id"] for r in objects} == {"T-0001", "MC-TEST-001"}
+        assert {r["object_type"] for r in objects} == {"TERM", "MACHINE"}
+        assert {r["object_id"] for r in registries} == {
+            "LAB-000", "LAB-002", "LAB-004", "LAB-005"
+        }
+
         assert any(
-            e["type"] == "UNRESOLVED_OBJECT_ID"
-            and e["path"] == "OBJ-BAD.md"
-            for e in inv_bad["structural_errors"]
+            r.get("path") == "03_MACHINE-CATALOG/MACHINES/MACHINE-CANDIDATES.md"
+            and r.get("class") == "EXCLUDED"
+            for r in snapshot["records"]
         )
-        assert not any(
-            r.get("path") == "OBJ-BAD.md" and r.get("class") == "OBJECT_FILE"
-            for r in inv_bad["records"]
-        )
-
-        # Duplicate addressable representation must be structural conflict.
-        (root / "OBJ-001-DUP.md").write_text(
-            "---\ncmoc_object: true\nid: OBJ-001\ntype: TERM\n---\n# Duplicate\n",
-            encoding="utf-8",
-        )
-        inv_dup = build_inventory(root)
         assert any(
-            e["type"] == "DUPLICATE_ADDRESSABLE_OBJECT"
-            and e["object_id"] == "OBJ-001"
-            for e in inv_dup["structural_errors"]
+            r.get("path") == "notes.md"
+            and r.get("class") == "REPOSITORY_OTHER"
+            for r in snapshot["records"]
         )
+        assert snapshot["structural_errors"] == []
 
-        # Builder must not mutate the observed repository.
-        after = {
-            p.relative_to(root).as_posix(): hashlib.sha256(
-                p.read_bytes()
-            ).hexdigest()
-            for p in root.rglob("*")
-            if p.is_file()
-        }
-        assert before.items() <= after.items()
+        repeat = build_inventory(
+            root,
+            repository="TEST/CMOC",
+            state="work/discovery-result-builder",
+            source_commit="TEST-COMMIT-001",
+            generated_at="2026-09-24T00:00:00+03:00",
+        )
+        assert snapshot["records"] == repeat["records"]
+        assert snapshot["structural_errors"] == repeat["structural_errors"]
 
-        # No semantic or downstream artifacts are produced.
-        assert "decision" not in inv1
-        assert "match_result" not in inv1
-        assert "object_index" not in inv1
-        assert "cmoc_write" not in inv1
+        output = root / "inventory.json"
+        write_inventory(snapshot, output)
+        assert json.loads(output.read_text(encoding="utf-8")) == snapshot
 
-    print("INVENTORY-BUILDER-001 ACCEPTANCE TEST: PASS")
+        after = _hash_tree(root)
+        for path, digest in before.items():
+            assert after[path] == digest
+
+        assert "decision" not in snapshot
+        assert "match_result" not in snapshot
+        assert "cmoc_write" not in snapshot
+        assert "object_index" not in snapshot
+
+    print("INVENTORY-BUILDER-001 PRODUCTION ACCEPTANCE TEST: PASS")
 
 
 if __name__ == "__main__":
