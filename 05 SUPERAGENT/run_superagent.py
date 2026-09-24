@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from discovery_production_adapter import run_discovery_adapter
+from durable_adapter_persistence import DurableAdapterPersistence
 from production_adapter_runtime import ProductionAdapter, ProductionAdapterRegistry
 from runtime_state_store import JournalEvent, RuntimeStateStore
 
@@ -52,38 +53,59 @@ def start_run(
     db_path: str,
     run_id: str,
     registry: ProductionAdapterRegistry,
+    resume: bool = False,
 ) -> dict[str, Any]:
     source_package = load_source_package(source_package_path)
     store = RuntimeStateStore(db_path)
     try:
-        if store.get_state(run_id) is not None:
-            return {
-                "status": "RUN_ALREADY_EXISTS",
-                "run_id": run_id,
-            }
+        existing = store.get_state(run_id)
+        recovery = False
+        if existing is not None:
+            if not resume or existing.run_status in {"COMPLETED", "REJECTED", "FAILED"}:
+                return {"status": "RUN_ALREADY_EXISTS", "run_id": run_id}
+            if existing.current_stage_id != "DISCOVERY":
+                return {"status": "RESUME_BLOCKED", "run_id": run_id, "reason": "no resumable DISCOVERY stage"}
+            recovery = True
 
         trace = (
             f"RUN_ID={run_id};"
             f"SOURCE_ID={source_package['source_id']};"
             f"SOURCE_PACKAGE_ID={source_package['package_id']}"
         )
-        store.append(
-            JournalEvent(
-                run_id=run_id,
-                event_id=f"EVENT-{run_id}-001",
-                event_seq=1,
-                stage_id="RUN",
-                event_type="RUN_CREATED",
-                stage_result_id=f"RUN-RESULT-{run_id}",
-                attempt_id=f"ATTEMPT-RUN-{run_id}",
-                event_status="ACTIVE",
-                traceability=trace,
+        if not recovery:
+            store.append(
+                JournalEvent(
+                    run_id=run_id,
+                    event_id=f"EVENT-{run_id}-001",
+                    event_seq=1,
+                    stage_id="RUN",
+                    event_type="RUN_CREATED",
+                    stage_result_id=f"RUN-RESULT-{run_id}",
+                    attempt_id=f"ATTEMPT-RUN-{run_id}",
+                    event_status="ACTIVE",
+                    traceability=trace,
+                    source_id=source_package["source_id"],
+                    batch_id=source_package["package_id"],
+                ),
                 source_id=source_package["source_id"],
                 batch_id=source_package["package_id"],
-            ),
-            source_id=source_package["source_id"],
-            batch_id=source_package["package_id"],
-        )
+            )
+        else:
+            for event_type, status in (("RUN_INCOMPLETE", "INCOMPLETE"), ("RECOVERY_REQUESTED", "REQUESTED"), ("RESUME_ALLOWED", "ALLOWED")):
+                seq = store.next_event_seq(run_id)
+                store.append(JournalEvent(
+                    run_id=run_id,
+                    event_id=f"EVENT-{run_id}-{seq:03d}",
+                    event_seq=seq,
+                    stage_id="DISCOVERY",
+                    event_type=event_type,
+                    stage_result_id=existing.current_stage_result_id,
+                    attempt_id=existing.current_attempt_id,
+                    event_status=status,
+                    traceability=trace,
+                    source_id=source_package["source_id"],
+                    batch_id=source_package["package_id"],
+                ), source_id=source_package["source_id"], batch_id=source_package["package_id"])
 
         batches = split_batches(source_package)
 
