@@ -39,9 +39,9 @@ class TestDecisionContract001(unittest.TestCase):
             decision_type="HUMAN",
             decision_result=result,
             reconciliation_record=reconciliation_record,
-            basis="TEST_BASIS",
-            decided_by="TEST_OPERATOR",
-            decided_at="2026-09-24T15:00:00+05:00",
+            basis=kwargs.pop("basis", "TEST_BASIS"),
+            decided_by=kwargs.pop("decided_by", "TEST_OPERATOR"),
+            decided_at=kwargs.pop("decided_at", "2026-09-24T15:00:00+05:00"),
             **kwargs,
         )
 
@@ -110,10 +110,11 @@ class TestDecisionContract001(unittest.TestCase):
                         )
                 else:
                     record[field] = None
-                    if field == "match_id":
-                        record["match_id"] = None
                     with self.assertRaises(DecisionContractError):
-                        self.build("REJECT", record)
+                        if field == "basis":
+                            self.build("REJECT", record, basis=None)
+                        else:
+                            self.build("REJECT", record)
 
     def test_human_requires_decided_by_and_decided_at(self):
         with self.assertRaises(DecisionContractError):
