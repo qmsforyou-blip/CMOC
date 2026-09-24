@@ -41,6 +41,11 @@ ID_PATTERNS = (
     re.compile(r"\bOC-\d+\b"),
 )
 
+DERIVED_OUTPUT_PATHS = {
+    "05 SUPERAGENT/cmoc_inventory.json",
+    "05 SUPERAGENT/cmoc_object_index.json",
+}
+
 NON_OBJECT_PATHS = {
     "000 База/01 Термины/01 База Термины.base",
     "000 База/02 Различения/02 база различения.base",
