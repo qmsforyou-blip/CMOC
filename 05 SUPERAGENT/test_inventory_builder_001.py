@@ -206,6 +206,7 @@ def main() -> None:
         assert json.loads(output.read_text(encoding="utf-8")) == snapshot
 
         after = _hash_tree(root)
+        after.pop("inventory.json", None)
         for path, digest in before.items():
             assert after[path] == digest
 
