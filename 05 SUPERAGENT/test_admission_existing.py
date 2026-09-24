@@ -130,3 +130,44 @@ def test_admit_new_requires_explicit_decision():
         assert str(exc) == "ADMIT_NEW_DECISION_REQUIRED"
     else:
         raise AssertionError("non-ADMIT_NEW decision must be rejected")
+
+
+def test_admit_new_to_c1_boundary():
+    from admission import execute_c1_from_admission
+
+    decision = _decision()
+    decision["decision"]["decision_result"] = "ADMIT_NEW"
+    decision["decision"]["cmoc_object_id"] = None
+
+    admission = admit_new(decision)
+    approved_candidate = {
+        "decision_result": "NEW_APPROVED",
+        "candidate": {"record_id": "REC-001", "value": "Approved object"},
+        "provenance": {"source_id": "SRC-003"},
+        "traceability": {"source_id": "SRC-003", "match_id": "MAT-001"},
+        "approved_candidate_hash": "HASH-001",
+    }
+
+    c1_input = execute_c1_from_admission(admission, approved_candidate)
+
+    assert c1_input["decision_result"] == "NEW_APPROVED"
+    assert c1_input["admission_id"] == admission["admission"]["admission_id"]
+    assert c1_input["decision_id"] == "DEC-001"
+    assert c1_input["match_id"] == "MAT-001"
+    assert c1_input["source_id"] == "SRC-003"
+
+
+def test_admit_new_c1_requires_pending_state():
+    from admission import execute_c1_from_admission
+
+    decision = _decision()
+    decision["decision"]["decision_result"] = "ADMIT_NEW"
+    admission = admit_new(decision)
+    admission["admission"]["pipeline_status"] = "COMPLETED"
+
+    try:
+        execute_c1_from_admission(admission, {"decision_result": "NEW_APPROVED"})
+    except AdmissionError as exc:
+        assert str(exc) == "ADMISSION_NOT_PENDING_C1"
+    else:
+        raise AssertionError("non-pending Admission must not enter C1")
