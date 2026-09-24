@@ -95,6 +95,13 @@ def main() -> None:
             "# ordinary repository file\n", encoding="utf-8"
         )
 
+        (root / "05 SUPERAGENT/cmoc_inventory.json").write_text(
+            "{}\n", encoding="utf-8"
+        )
+        (root / "05 SUPERAGENT/cmoc_object_index.json").write_text(
+            "{}\n", encoding="utf-8"
+        )
+
         before = _hash_tree(root)
 
         snapshot = build_inventory(
@@ -164,6 +171,13 @@ def main() -> None:
             for r in snapshot["records"]
         )
         assert snapshot["structural_errors"] == []
+        assert not any(
+            r.get("path") in {
+                "05 SUPERAGENT/cmoc_inventory.json",
+                "05 SUPERAGENT/cmoc_object_index.json",
+            }
+            for r in snapshot["records"]
+        )
 
         repeat = build_inventory(
             root,
