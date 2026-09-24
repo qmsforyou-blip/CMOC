@@ -1,6 +1,6 @@
 # PROD-PROFILE-002 — TARGET PRODUCTION DEPLOYMENT PROFILE
 
-**Status:** DESIGN / TARGET PROFILE  
+**Status:** CONFIRMED TARGET PROFILE  
 **Date:** 24-09-2026  
 **Predecessor:** POST-P10-ARCHITECTURE-REVIEW-001  
 **Purpose:** define the first concrete target production profile for CMOC/Superagent before selecting further operational engineering work.
@@ -17,11 +17,32 @@ The profile is a target for the next operationalization phase. It is not a claim
 
 The governing rule is:
 
-> **First define the environment in which CMOC/Superagent must reliably work; only then derive the infrastructure required to support it.**
+> **Не проектировать инфраструктуру под гипотетический масштаб. Проектировать её под реальный режим использования, а следующий уровень сложности вводить только тогда, когда появляется конкретное требование.**
 
 ---
 
-## 2. Intended system
+## 2. Confirmed use profile
+
+The target profile is explicitly fixed as:
+
+| Question | Confirmed decision |
+|---|---|
+| User | **we ourselves / single expert user** |
+| Environment | **Windows + Obsidian + local runtime** |
+| CMOC | **Git repository** |
+| SOURCE | **manual input; automatically split into packages** |
+| Superagent start | **manual** |
+| Automation | **the entire contracted pipeline** |
+| Human participation | **NEW / conflict / review / publication** |
+| Scale | **dozens of sources** |
+
+“Everything is automated” means that the contracted deterministic/operational pipeline executes automatically after a manual start. It does not mean that runtime infrastructure bypasses the established human semantic authority.
+
+Human participation remains at the explicit decision boundaries: NEW, conflict, review and publication.
+
+---
+
+## 3. Intended system
 
 CMOC/Superagent is treated as an engineering knowledge system for:
 
@@ -52,9 +73,9 @@ Operational infrastructure must not acquire semantic authority.
 
 ---
 
-## 3. Initial deployment profile
+## 4. Initial deployment profile
 
-### 3.1 Deployment topology
+### 4.1 Deployment topology
 
 **Target:** single-host controlled deployment.
 
@@ -68,9 +89,9 @@ The initial production-realization target does not require:
 
 These remain outside the first profile unless an actual use case makes them necessary.
 
-### 3.2 Host environment
+### 4.2 Host environment
 
-The current engineering environment is:
+The confirmed host environment is:
 
 - Windows workstation;
 - local CMOC working tree;
@@ -80,7 +101,7 @@ The current engineering environment is:
 
 The profile should remain portable enough that the runtime can later be moved to a dedicated host without changing semantic contracts.
 
-### 3.3 CMOC persistence
+### 4.3 CMOC persistence
 
 For the first profile:
 
@@ -98,7 +119,7 @@ Git provides:
 
 A separate external database is not required for the first target profile.
 
-### 3.4 OBJECT INDEX
+### 4.4 OBJECT INDEX
 
 OBJECT INDEX remains a deterministic derived representation.
 
@@ -117,7 +138,7 @@ CMOC ↔ independently editable index.
 
 ---
 
-## 4. Source ingestion
+## 5. Source ingestion
 
 ### Target mode
 
@@ -133,17 +154,17 @@ SOURCE_ID
 → PASS
 → OUTPUT
 
-Source ingestion is initially initiated explicitly rather than continuously monitored.
+SOURCE is introduced manually. After introduction, the system automatically performs the contracted package handling, including source splitting into SOURCE_PACKAGE/BATCH units.
 
 Automatic discovery of arbitrary external sources is outside this first profile.
 
 ---
 
-## 5. Superagent execution
+## 6. Superagent execution
 
 ### Initial mode
 
-Controlled execution initiated from the engineering environment.
+Superagent is started manually from the Windows engineering environment. After start, the contracted pipeline is intended to execute automatically, subject to the established semantic and human-review boundaries.
 
 The runtime must preserve:
 
@@ -166,9 +187,9 @@ The runtime must not silently convert execution failures into semantic results.
 
 ---
 
-## 6. Human participation
+## 7. Human participation
 
-The first profile assumes **human-supervised engineering knowledge extraction**.
+The first profile assumes **human-supervised engineering knowledge extraction**, with human intervention at explicit decision boundaries.
 
 Human review remains available where the established architecture produces:
 
@@ -187,9 +208,9 @@ It must not bypass the contracted semantic decision boundary merely to obtain a 
 
 ---
 
-## 7. Automation target
+## 8. Automation target
 
-The first operationalization target is automation of the **controlled execution path**, not removal of human semantic authority.
+The first operationalization target is automation of the **entire contracted pipeline**, not removal of human semantic authority.
 
 Target automation:
 
@@ -216,9 +237,9 @@ Not automatically delegated to infrastructure:
 
 ---
 
-## 8. Expected scale
+## 9. Expected scale
 
-The first profile is intentionally **engineering-scale**, not high-volume SaaS scale.
+The first profile is intentionally **engineering-scale**. The target scale is **dozens of sources**, not high-volume SaaS.
 
 The profile does not yet establish numerical throughput or concurrency targets.
 
@@ -237,7 +258,7 @@ No high-volume claim is made.
 
 ---
 
-## 9. Persistence model
+## 10. Persistence model
 
 The first profile requires durable local persistence for:
 
@@ -261,7 +282,7 @@ The execution history must not be confused with CMOC semantic truth.
 
 ---
 
-## 10. Security profile
+## 11. Security profile
 
 The first profile is a controlled engineering environment.
 
@@ -277,7 +298,7 @@ Full enterprise IAM, SSO, multi-tenant authorization and distributed secret-mana
 
 ---
 
-## 11. Backup and recovery profile
+## 12. Backup and recovery profile
 
 At the first profile level:
 
@@ -300,7 +321,7 @@ The following remain OPEN:
 
 ---
 
-## 12. Observability
+## 13. Observability
 
 The first profile requires sufficient observability to answer:
 
@@ -326,7 +347,7 @@ Advanced SLO dashboards are outside the first profile until actual service behav
 
 ---
 
-## 13. Failure model
+## 14. Failure model
 
 The first profile must explicitly preserve:
 
@@ -346,7 +367,7 @@ A completed authoritative result must not be duplicated by recovery.
 
 ---
 
-## 14. Deployment model
+## 15. Deployment model
 
 Initial deployment is controlled and versioned.
 
@@ -362,7 +383,7 @@ Automated CI/CD is not required for the first profile, but the architecture shou
 
 ---
 
-## 15. Operational acceptance criteria
+## 16. Operational acceptance criteria
 
 The first profile becomes operationally meaningful only when evidence exists for:
 
@@ -408,7 +429,7 @@ The intended workload has measured, rather than assumed, resource requirements.
 
 ---
 
-## 16. Explicit non-goals
+## 17. Explicit non-goals
 
 The first target profile does not require:
 
@@ -428,7 +449,7 @@ These may become requirements later, but they are not justified by the current p
 
 ---
 
-## 17. Architectural boundary
+## 18. Architectural boundary
 
 The following remains immutable unless a new explicit architecture review proves otherwise:
 
@@ -458,7 +479,7 @@ It does not become semantic authority.
 
 ---
 
-## 18. Open decisions before implementation
+## 19. Open decisions before implementation
 
 The following decisions should be resolved against the actual intended workload before building additional infrastructure:
 
@@ -477,7 +498,7 @@ These are implementation decisions, not reasons to create new semantic layers.
 
 ---
 
-## 19. First operationalization backlog
+## 20. First operationalization backlog
 
 The next engineering work should be selected from this profile in approximately this order:
 
@@ -493,7 +514,7 @@ Each item should be closed by implementation evidence.
 
 ---
 
-## 20. Governing rule
+## 21. Governing rule
 
 > **Сначала добываем. Потом сопоставляем.**
 >
@@ -507,7 +528,7 @@ Each item should be closed by implementation evidence.
 
 ---
 
-## 21. Status
+## 22. Status
 
 **PROD-PROFILE-002:** DESIGN / TARGET PROFILE
 
