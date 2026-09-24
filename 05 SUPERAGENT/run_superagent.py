@@ -119,8 +119,13 @@ def start_run(
                 "batches": batches,
             }
 
-        attempt_id = f"ATTEMPT-DISCOVERY-{run_id}"
-        result_id = f"RESULT-DISCOVERY-{run_id}"
+        if recovery:
+            recovery_seq = store.next_event_seq(run_id)
+            attempt_id = f"ATTEMPT-DISCOVERY-{run_id}-RESUME-{recovery_seq:03d}"
+            result_id = f"RESULT-DISCOVERY-{run_id}-RESUME-{recovery_seq:03d}"
+        else:
+            attempt_id = f"ATTEMPT-DISCOVERY-{run_id}"
+            result_id = f"RESULT-DISCOVERY-{run_id}"
         stage_trace = (
             f"RUN_ID={run_id};"
             f"SOURCE_ID={source_package['source_id']};"
