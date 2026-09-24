@@ -65,3 +65,50 @@ def admit_existing(decision: Dict[str, Any]) -> Dict[str, Any]:
             "object_index_write": "NONE",
         },
     }
+
+
+def admit_new(decision: Dict[str, Any]) -> Dict[str, Any]:
+    """Register an ADMIT_NEW admission intent without executing C1/C2/C3."""
+    if not isinstance(decision, dict) or decision.get("type") != "DECISION":
+        raise AdmissionError("DECISION_ARTIFACT_REQUIRED")
+
+    body = decision.get("decision")
+    if not isinstance(body, dict):
+        raise AdmissionError("DECISION_BODY_MISSING")
+
+    for field in ("decision_id", "decision_result", "match_id", "source_id",
+                  "traceability", "basis"):
+        if not body.get(field):
+            raise AdmissionError(f"MISSING_DECISION_FIELD: {field}")
+
+    if body["decision_result"] != "ADMIT_NEW":
+        raise AdmissionError("ADMIT_NEW_DECISION_REQUIRED")
+
+    admission_id = _admission_id(
+        body["decision_id"], body["match_id"], "NEW"
+    )
+
+    return {
+        "type": "ADMISSION",
+        "admission": {
+            "admission_id": admission_id,
+            "decision_id": body["decision_id"],
+            "match_id": body["match_id"],
+            "source_id": body["source_id"],
+            "source_lineage": deepcopy(body["traceability"]),
+            "admission_result": "ADMIT_NEW",
+            "target_cmoc_object_id": None,
+            "timestamp": body.get("decided_at"),
+            "traceability": deepcopy(body["traceability"]),
+            "pipeline_status": "PENDING_C1",
+        },
+        "boundary": {
+            "origin": "ADMISSION",
+            "decision_mutation": "NONE",
+            "reconciliation_mutation": "NONE",
+            "cmoc_write": "NONE",
+            "object_index_write": "NONE",
+            "canonization_execution": "NOT_PERFORMED",
+            "c1_c2_c3_execution": "NOT_PERFORMED",
+        },
+    }
