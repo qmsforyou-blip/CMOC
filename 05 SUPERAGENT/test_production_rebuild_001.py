@@ -54,6 +54,13 @@ def main() -> None:
             "| C-0001 | Registry construction |\n",
         )
         _write(root / "notes.md", "# clean repository\n")
+        _write(
+            root / ".gitignore",
+            "05 SUPERAGENT/cmoc_inventory.json\n"
+            "05 SUPERAGENT/cmoc_object_index.json\n"
+            "__pycache__/\n"
+            "*.py[cod]\n",
+        )
 
         _git(root, "init")
         _git(root, "config", "user.email", "test@example.invalid")
