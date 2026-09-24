@@ -19,6 +19,7 @@ from pathlib import Path
 from cmoc_query import load_object_index
 from reconciliation import reconcile
 from reconciliation_input_adapter import build_reconciliation_input
+from reconciliation_result import build_reconciliation_result
 
 BASE = Path(__file__).parent
 FIXTURE = BASE / "DISCOVERY-RESULT-SRC-003-M06-001.json"
@@ -57,6 +58,15 @@ def main() -> None:
         reconciliation_input["query_scope"],
     )
 
+    reconciliation_result = build_reconciliation_result(
+        source_id=reconciliation_input["source_id"],
+        discovery_run=discovery["traceability"]["discovery_run"],
+        input_batch_id=reconciliation_input["input_batch_id"],
+        input_output_type=reconciliation_input["input_output_type"],
+        query_scope=reconciliation_input["query_scope"],
+        records=results,
+    )
+
     fixture_bytes_after = FIXTURE.read_bytes()
     index_bytes_after = INDEX.read_bytes()
 
@@ -81,7 +91,7 @@ def main() -> None:
         "query_scope": QUERY_SCOPE,
         "target_object_type_inference": "NONE",
         "result_summary": summary,
-        "results": results,
+        "reconciliation_result": reconciliation_result,
         "controls": {
             "discovery_result_memory_mutation": "NONE",
             "discovery_result_file_mutation": "NONE",
