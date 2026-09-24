@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from admission import AdmissionError, admit_existing  # noqa: E402
+from admission import AdmissionError, admit_existing, admit_new  # noqa: E402
 
 
 def _decision():
@@ -106,3 +106,27 @@ if __name__ == "__main__":
     for test in tests:
         test()
     print("ADMISSION ADMIT_EXISTING TEST: PASS")
+
+
+def test_admit_new_registers_pending_pipeline_only():
+    decision = _decision()
+    decision["decision"]["decision_result"] = "ADMIT_NEW"
+    decision["decision"]["cmoc_object_id"] = None
+    out = admit_new(decision)
+    assert out["admission"]["admission_result"] == "ADMIT_NEW"
+    assert out["admission"]["pipeline_status"] == "PENDING_C1"
+    assert out["admission"]["target_cmoc_object_id"] is None
+    assert out["boundary"]["cmoc_write"] == "NONE"
+    assert out["boundary"]["canonization_execution"] == "NOT_PERFORMED"
+    assert out["boundary"]["c1_c2_c3_execution"] == "NOT_PERFORMED"
+
+
+def test_admit_new_requires_explicit_decision():
+    decision = _decision()
+    decision["decision"]["decision_result"] = "DEFER"
+    try:
+        admit_new(decision)
+    except AdmissionError as exc:
+        assert str(exc) == "ADMIT_NEW_DECISION_REQUIRED"
+    else:
+        raise AssertionError("non-ADMIT_NEW decision must be rejected")
