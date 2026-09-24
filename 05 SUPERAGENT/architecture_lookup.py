@@ -14,7 +14,7 @@ from typing import Iterable
 ROLE_ORDER = ("contract", "implementation", "test", "evidence")
 REALIZATION_MODES = ("DIRECT", "COMPOSITE", "GATE")
 
-STATUS_PATTERNS = (
+LIFECYCLE_STATUSES = (
     "ACCEPTED",
     "IMPLEMENTATION PROVEN",
     "DESIGN / ARCHITECTURE CANDIDATE",
@@ -30,6 +30,7 @@ class Artifact:
     path: str
     role: str
     status: tuple[str, ...]
+    observed_results: tuple[str, ...]
     resolution_basis: str
 
 
@@ -41,18 +42,30 @@ def _subject_tokens(subject_key: str) -> tuple[str, ...]:
     return tuple(x.lower() for x in re.split(r"[^A-Za-z0-9]+", subject_key) if x)
 
 
-def _subject_matches(path: Path, subject_key: str, text: str) -> bool:
-    tokens = _subject_tokens(subject_key)
-    if not tokens:
-        return False
-    filename_tokens = _norm(path.name).split()
-    if all(token in filename_tokens for token in tokens):
-        return True
-    body = _norm(text[:12000])
-    return re.search(
-        r"(?<![a-z0-9])" + re.escape(subject_key.lower()) + r"(?![a-z0-9])",
-        body,
-    ) is not None
+def _filename_subject_match(path: Path, subject_key: str) -> bool:
+    subject = re.escape(subject_key.lower())
+    name = path.name.lower()
+    return re.search(r"(?<![a-z0-9.])" + subject + r"(?![a-z0-9.])", name) is not None
+
+
+def _explicit_subject_anchor(text: str, subject_key: str) -> bool:
+    """Resolve body references only when they occur in an explicit subject anchor."""
+    subject = re.escape(subject_key.lower())
+    lines = text[:6000].lower().splitlines()
+    anchor = re.compile(
+        r"^\s*(?:#+\s*)?" + subject
+        + r"(?:\s*(?:[-—:]|is|=)|\s+(?:production|runtime|implementation|test|evidence|gate|boundary|writer|synchronization|readiness))",
+        re.IGNORECASE,
+    )
+    return any(anchor.search(line) for line in lines)
+
+
+def _subject_matches(path: Path, subject_key: str, text: str) -> tuple[bool, str]:
+    if _filename_subject_match(path, subject_key):
+        return True, "filename"
+    if _explicit_subject_anchor(text, subject_key):
+        return True, "explicit-subject-anchor"
+    return False, ""
 
 
 def _role(path: Path, text: str) -> str | None:
@@ -77,11 +90,24 @@ def _role(path: Path, text: str) -> str | None:
 
 
 def _statuses(text: str) -> tuple[str, ...]:
+    """Read lifecycle status only from explicit status fields."""
+    found: list[str] = []
+    for line in text[:12000].splitlines():
+        match = re.search(r"^\s*(?:\*\*)?status(?:\*\*)?\s*:\s*(.+?)\s*$", line, re.IGNORECASE)
+        if not match:
+            match = re.search(r"^\s*(?:\*\*)?evidence status(?:\*\*)?\s*:\s*(.+?)\s*$", line, re.IGNORECASE)
+        if not match:
+            continue
+        value = match.group(1).strip().strip("*").upper()
+        for status in LIFECYCLE_STATUSES:
+            if status in value and status not in found:
+                found.append(status)
+    return tuple(found)
+
+
+def _observed_results(text: str) -> tuple[str, ...]:
     found: list[str] = []
     upper = text.upper()
-    for status in STATUS_PATTERNS:
-        if status in upper and status not in found:
-            found.append(status)
     for observed in (
         "READY_WITH_LIMITATIONS",
         "READY_FOR_NEXT_PRODUCTION_PHASE",
@@ -126,17 +152,18 @@ def lookup(subject_key: str, repository_root: str | Path) -> dict:
         except OSError:
             continue
         role = _role(path, text)
-        if role is None or not _subject_matches(path, subject_key, text):
+        if role is None:
+            continue
+        subject_match, resolution_basis = _subject_matches(path, subject_key, text)
+        if not subject_match:
             continue
         rel = path.relative_to(root).as_posix()
-        filename_match = all(
-            token in _norm(path.name).split() for token in _subject_tokens(subject_key)
-        )
         artifact = Artifact(
             path=rel,
             role=role,
             status=_statuses(text),
-            resolution_basis="filename" if filename_match else "explicit-subject-reference",
+            observed_results=_observed_results(text),
+            resolution_basis=resolution_basis,
         )
         grouped[role].append(artifact)
         if role == "contract":
@@ -162,7 +189,7 @@ def lookup(subject_key: str, repository_root: str | Path) -> dict:
 
     return {
         "schema": "ARCHITECTURE-LOOKUP-RESULT-001",
-        "version": "0.2",
+        "version": "0.3",
         "subject_key": subject_key,
         "repository_root": str(root),
         "resolved_at": datetime.now(timezone.utc).isoformat(),
