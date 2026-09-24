@@ -46,6 +46,10 @@ def build_reconciliation_result(
     if not isinstance(records, list):
         raise ReconciliationResultError("RECORDS_NOT_LIST")
 
+    reconciliation_id = _stable_id(
+        source_id, discovery_run, input_batch_id
+    )
+
     out = []
     for i, record in enumerate(records, start=1):
         if not isinstance(record, dict):
@@ -89,7 +93,10 @@ def build_reconciliation_result(
         if record["match_result"] == "NEEDS_REVIEW" and record["cmoc_object_id"] == "":
             raise ReconciliationResultError(f"INVALID_EMPTY_CMOC_OBJECT: {i}")
 
-        out.append(deepcopy(record))
+        record_copy = deepcopy(record)
+        record_copy["traceability"] = deepcopy(record["traceability"])
+        record_copy["traceability"]["reconciliation_id"] = reconciliation_id
+        out.append(record_copy)
 
     existing = sum(
         r["match_result"] == "EXISTING_EQUIVALENT" for r in out
