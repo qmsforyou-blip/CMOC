@@ -1,6 +1,6 @@
 # P8 — PRODUCTION OBJECT INDEX SYNCHRONIZATION BOUNDARY
 
-**Status:** DESIGN / ARCHITECTURE CANDIDATE  
+**Status:** ACCEPTED  
 **Layer:** production runtime realization  
 **Predecessor:** P7 / C2 — production CMOC WRITE  
 **Successor:** production RUN completion
