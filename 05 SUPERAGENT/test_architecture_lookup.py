@@ -19,12 +19,13 @@ def _paths(result: dict, role: str) -> list[str]:
 def test_p9_positive_resolution() -> None:
     with tempfile.TemporaryDirectory() as td:
         root = Path(td)
-        _write(root, "05 SUPERAGENT/P9-PRODUCTION-E2E-RECOVERY-BOUNDARY-001.md", "# P9\nStatus: ACCEPTED")
+        _write(root, "05 SUPERAGENT/P9-PRODUCTION-E2E-RECOVERY-BOUNDARY-001.md", "# P9\nStatus: ACCEPTED\nThis is an integration boundary composed from existing runtime components.")
         _write(root, "05 SUPERAGENT/test_runtime_p9_production_e2e_recovery.py", "# P9 test")
         _write(root, "05 SUPERAGENT/p9_runtime.py", "# P9 implementation")
         _write(root, "05 SUPERAGENT/EVIDENCE-RUNTIME-P9-PRODUCTION-E2E-RECOVERY-001.md", "# Evidence\nStatus: ACCEPTED")
         result = lookup("P9", root)
         assert result["gaps"] == []
+        assert result["summary"]["realization_mode"] == "COMPOSITE"
         assert all(_paths(result, role) for role in ("contract", "implementation", "test", "evidence"))
 
 def test_p10_positive_resolution() -> None:
@@ -36,6 +37,7 @@ def test_p10_positive_resolution() -> None:
         _write(root, "05 SUPERAGENT/EVIDENCE-RUNTIME-P10-PRODUCTION-READINESS-GATE-001.md", "# Evidence\nStatus: ACCEPTED")
         result = lookup("P10", root)
         assert result["gaps"] == []
+        assert result["summary"]["realization_mode"] == "GATE"
         assert result["summary"]["evidence_count"] == 1
 
 def test_p7_multiple_evidence_is_allowed() -> None:
