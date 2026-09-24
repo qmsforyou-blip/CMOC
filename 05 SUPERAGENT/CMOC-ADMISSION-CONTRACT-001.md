@@ -45,13 +45,19 @@ DECISION ≠ ADMISSION
 
 Реализация решения заключается в установлении/сохранении связи кандидата с уже существующим CMOC object.
 
+Admission фиксирует принятую связь source candidate с существующим CMOC object через Admission record, содержащий `target CMOC object` и полную traceability.
+
 Не создаётся второй объект только потому, что пришёл новый source record.
+
+Если DECISION не разрешает отдельное изменение существующего объекта, `cmoc_write = NONE` и `object_index_write = NONE`.
 
 ### ADMIT_NEW
 
 Реализация решения создаёт новый CMOC object в соответствии с действующим контрактом объекта.
 
 Создание нового объекта должно сохранять происхождение от source candidate и DECISION.
+
+Для `ADMIT_NEW` Admission разрешает отдельный pipeline физического создания объекта; текущая реализация этого pipeline остаётся C1 → C2/P7 → C3/P8.
 
 ### REJECT
 
@@ -124,18 +130,35 @@ Admission не должен:
 
 ## Минимальная цепочка
 
+Для `ADMIT_EXISTING`:
+
+DECISION
+→ ADMISSION RECORD
+→ существующий CMOC OBJECT
+
+Для `ADMIT_NEW`:
+
 DECISION
 → ADMISSION
-→ CMOC OBJECT
-→ OBJECT INDEX
+→ C1
+→ C2/P7
+→ C3/P8
+
+Для `REJECT/DEFER`:
+
+DECISION
+→ ADMISSION RECORD
+→ без CMOC write
 
 ## Открытые вопросы
 
-1. Какой контракт определяет физический формат CMOC object?
-2. Где выполняется канонизация?
-3. Как обновляется OBJECT INDEX?
-4. Как обрабатывается конфликт при ADMIT_EXISTING?
+1. Какой контракт определяет физический формат CMOC object для `ADMIT_NEW`?
+2. Где выполняется канонизация внутри `ADMIT_NEW` pipeline?
+3. Как обновляется OBJECT INDEX после создания нового объекта?
+4. Требуется ли отдельный контракт для `UPDATE_EXISTING`?
 5. Как обеспечивается идемпотентность Admission?
 6. Что является успешным результатом ADMISSION?
 
-До ответа на эти вопросы CMOC Admission остаётся контрактной границей, а не реализованным runtime-компонентом.
+Для `ADMIT_EXISTING` физическая форма минимально определена: идемпотентный Admission record с `target CMOC object` и traceability.
+
+Для `ADMIT_NEW` Admission остаётся контрактной границей до реализации и acceptance runtime pipeline.
