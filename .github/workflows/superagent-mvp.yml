@@ -17,51 +17,34 @@ jobs:
   test:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            05 SUPERAGENT
-            000 База/01 Термины
-            000 База/02 Различения
-            000 База/03 GM-формулировки
-            03_MACHINE-CATALOG/MACHINES
-            03_MACHINE-CATALOG/CHAINS
-            03_MACHINE-CATALOG/PATTERNS
-            07 К/LAW
-            07 К/OBS
-            07 К/OC
-            08 CMOC Core
-          sparse-checkout-cone-mode: true
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
-      - name: Generate OBJECT INDEX v0.2
-        run: python "05 SUPERAGENT/build_cmoc_object_index.py"
+      - name: Generate Inventory and OBJECT INDEX
+        run: python "05 SUPERAGENT/rebuild_inventory_object_index.py"
+
+      - name: Check OBJECT INDEX reproducibility
+        run: python "05 SUPERAGENT/build_cmoc_object_index.py" --check
 
       - name: Run MVP runner tests
         working-directory: 05 SUPERAGENT
         run: python -m unittest discover -s . -p "test_*.py" -v
 
-      - name: Commit generated OBJECT INDEX
+      - name: Run Inventory and Lookup acceptance tests
+        working-directory: 05 SUPERAGENT
         run: |
-          if git diff --quiet -- "05 SUPERAGENT/cmoc_object_index.json"; then
-            echo "OBJECT INDEX already matches deterministic builder output"
-          else
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add "05 SUPERAGENT/cmoc_object_index.json"
-            git commit -m "Regenerate CMOC OBJECT INDEX v0.2"
-            git push
-          fi
+          python test_inventory_builder_001.py
+          python test_inventory_object_index_compatibility_001.py
+          python test_architecture_lookup.py
 
-      - name: Check committed OBJECT INDEX is reproducible
-        run: git diff --exit-code -- "05 SUPERAGENT/cmoc_object_index.json"
-
-      - name: Upload generated OBJECT INDEX
+      - name: Upload generated Inventory and OBJECT INDEX
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cmoc-object-index-control-run
-          path: 05 SUPERAGENT/cmoc_object_index.json
+          name: cmoc-inventory-object-index-control-run
+          path: |
+            05 SUPERAGENT/cmoc_inventory.json
+            05 SUPERAGENT/cmoc_object_index.json
