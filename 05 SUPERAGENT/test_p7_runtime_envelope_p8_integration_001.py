@@ -1,5 +1,4 @@
 import copy
-import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -43,6 +42,13 @@ def canonical_payload():
 
 
 def build_p8_envelope(canonical, p7_result):
+    if p7_result.status != "CMOC_WRITE_ACCEPTED":
+        raise ValueError(
+            "P8 envelope may be constructed only from CMOC_WRITE_ACCEPTED"
+        )
+    if not p7_result.object_id:
+        raise ValueError("accepted P7 result must contain object_id")
+
     return {
         "status": p7_result.status,
         "run_id": canonical["run_id"],
@@ -99,12 +105,10 @@ class TestP7RuntimeEnvelopeP8Integration001(unittest.TestCase):
 
             p7 = writer.write(invalid)
             self.assertEqual(p7.status, "CMOC_WRITE_REJECTED")
+            self.assertIsNone(p7.object_id)
 
-            envelope = build_p8_envelope(invalid, p7)
-            sync = ProductionObjectIndexSynchronizer(ROOT)
-            p8 = sync.synchronize(envelope)
-
-            self.assertEqual(p8.status, "INDEX_REJECTED")
+            with self.assertRaises(ValueError):
+                build_p8_envelope(invalid, p7)
 
     def test_p8_requires_p7_write_verification(self):
         canonical = canonical_payload()
