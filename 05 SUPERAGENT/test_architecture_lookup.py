@@ -39,6 +39,7 @@ def test_p10_positive_resolution() -> None:
         assert result["gaps"] == []
         assert result["summary"]["realization_mode"] == "GATE"
         assert result["summary"]["evidence_count"] == 1
+        assert result["artifacts"]["contract"][0]["observed_results"] == ("READY_WITH_LIMITATIONS",)
 
 def test_p7_multiple_evidence_is_allowed() -> None:
     with tempfile.TemporaryDirectory() as td:
@@ -60,6 +61,31 @@ def test_missing_role_is_reported_without_inference() -> None:
         assert "MISSING_IMPLEMENTATION" in result["gaps"]
         assert "MISSING_TEST" in result["gaps"]
         assert "MISSING_EVIDENCE" in result["gaps"]
+
+def test_subject_scope_rejects_cross_references() -> None:
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        _write(root, "05 SUPERAGENT/P7-PRODUCTION-CMOC-WRITE-BOUNDARY-001.md", "# P7 — PRODUCTION CMOC WRITE BOUNDARY\nStatus: DESIGN / ARCHITECTURE CANDIDATE")
+        _write(root, "05 SUPERAGENT/P9-PRODUCTION-E2E-RECOVERY-BOUNDARY-001.md", "# P9\nThis references P7 as an upstream component.")
+        _write(root, "05 SUPERAGENT/P9.1-RUNTIME-PRODUCTION-E2E-INTEGRATION-BOUNDARY-001.md", "# P9.1\nThis references P7.")
+        _write(root, "05 SUPERAGENT/unrelated_review.md", "# Review\nP7 is mentioned here but is not the subject.")
+        result = lookup("P7", root)
+        paths = _paths(result, "contract")
+        assert "05 SUPERAGENT/P7-PRODUCTION-CMOC-WRITE-BOUNDARY-001.md" in paths
+        assert "05 SUPERAGENT/P9-PRODUCTION-E2E-RECOVERY-BOUNDARY-001.md" not in paths
+        assert "05 SUPERAGENT/P9.1-RUNTIME-PRODUCTION-E2E-INTEGRATION-BOUNDARY-001.md" not in paths
+        assert "05 SUPERAGENT/unrelated_review.md" not in paths
+
+
+def test_status_is_not_collected_from_body_mentions() -> None:
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        _write(root, "05 SUPERAGENT/P7-PRODUCTION-CMOC-WRITE-BOUNDARY-001.md", "# P7\nStatus: DESIGN / ARCHITECTURE CANDIDATE\nThe evidence is NOT ACCEPTED in another scenario.\nMISSING is not the current state.")
+        result = lookup("P7", root)
+        artifact = result["artifacts"]["contract"][0]
+        assert artifact["status"] == ("DESIGN / ARCHITECTURE CANDIDATE",)
+        assert artifact["observed_results"] == ()
+
 
 def test_read_only_and_deterministic_shape() -> None:
     with tempfile.TemporaryDirectory() as td:
