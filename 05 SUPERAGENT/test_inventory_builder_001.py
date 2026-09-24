@@ -84,6 +84,13 @@ def main() -> None:
             "runtime\n", encoding="utf-8"
         )
 
+        (root / "02 Машинки/runtime.py").parent.mkdir(
+            parents=True, exist_ok=True
+        )
+        (root / "02 Машинки/runtime.py").write_text(
+            "runtime\n", encoding="utf-8"
+        )
+
         (root / "notes.md").write_text(
             "# ordinary repository file\n", encoding="utf-8"
         )
