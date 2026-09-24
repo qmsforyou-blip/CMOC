@@ -220,7 +220,11 @@ def build_inventory(
         if not path.is_file():
             continue
 
-        rel = path.relative_to(root).as_posix()
+        relative = path.relative_to(root)
+        if ".git" in relative.parts:
+            continue
+
+        rel = relative.as_posix()
         object_class = _classify_path(rel)
 
         if object_class == "EXCLUDED":
