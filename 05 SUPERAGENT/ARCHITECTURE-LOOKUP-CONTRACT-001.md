@@ -1,7 +1,7 @@
 # ARCHITECTURE LOOKUP CONTRACT — 001
 
 Status: DESIGN / CONTRACT CANDIDATE
-Version: 0.2
+Version: 0.3
 Date: 24-09-2026
 Layer: CMOC / Superagent engineering process
 
@@ -42,6 +42,7 @@ Each artifact contains:
 path
 role
 status[]
+observed_results[]
 resolution_basis
 
 ## 4. Realization model
@@ -68,7 +69,11 @@ A subject may legitimately have multiple artifacts in any role.
 
 ## 6. Status
 
-Status is reported per artifact from explicit repository content where available.
+Status is reported per artifact only from explicit lifecycle status fields such as `Status:` or `Evidence status:`.
+
+Body mentions of status words do not establish artifact status.
+
+Gate/result states such as `READY_WITH_LIMITATIONS` are reported separately as observed results.
 
 The resolver must not invent a status.
 
@@ -83,7 +88,19 @@ NOT_REQUIRED
 
 Gate/result states such as READY_WITH_LIMITATIONS are observed results, not replacements for lifecycle status.
 
-## 7. Gaps
+## 7. Subject scope
+
+Subject ownership is resolved in this order:
+
+1. filename subject match — strongest basis;
+2. explicit subject anchor in the opening artifact content — allowed for executable/implementation artifacts whose filename does not carry the subject key;
+3. ordinary body mention — not sufficient for subject ownership.
+
+The resolver must not treat a document as belonging to a subject merely because it mentions that subject somewhere in the body.
+
+Subject matching must also distinguish a subject such as `P9` from a different subject such as `P9.1`.
+
+## 8. Gaps
 
 Only observable lookup gaps are reported:
 MISSING_CONTRACT
@@ -94,14 +111,14 @@ AMBIGUOUS_CONTRACT
 
 The resolver must not convert NO_MATCH into a semantic NEW decision.
 
-## 8. Determinism
+## 9. Determinism
 
 For the same repository state and input, lookup must produce the same artifact set and ordering. Artifacts are ordered by normalized repository path.
 
-## 9. Read-only boundary
+## 10. Read-only boundary
 
 Architecture Lookup may read repository files and inspect explicit metadata/status text. It must not modify CMOC, OBJECT INDEX or source evidence; create decisions; perform reconciliation; or perform canonization.
 
-## 10. Acceptance
+## 11. Acceptance
 
 The first implementation is accepted only after an executable test demonstrates deterministic read-only resolution for P7, P9 and P10, including DIRECT, COMPOSITE and GATE realization handling and explicit missing-role reporting.
