@@ -15,7 +15,7 @@ payload = {
     "messages": [
         {"role": "user", "content": "Reply with exactly: OK"}
     ],
-    "max_tokens": 10,
+    "max_completion_tokens": 10,
 }
 
 request = urllib.request.Request(
