@@ -14,7 +14,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from production_adapter_runtime import ProductionAdapterRegistry
+from discovery_production_adapter import run_discovery_adapter
+from production_adapter_runtime import ProductionAdapter, ProductionAdapterRegistry
 from runtime_state_store import JournalEvent, RuntimeStateStore
 
 
@@ -86,8 +87,6 @@ def start_run(
 
         batches = split_batches(source_package)
 
-        # The first gate checks the next required production boundary without
-        # inventing a semantic result when the adapter is absent.
         probe = registry.get("DISCOVERY")
         if probe is None:
             return {
@@ -98,12 +97,122 @@ def start_run(
                 "batches": batches,
             }
 
+        attempt_id = f"ATTEMPT-DISCOVERY-{run_id}"
+        result_id = f"RESULT-DISCOVERY-{run_id}"
+        stage_trace = (
+            f"RUN_ID={run_id};"
+            f"SOURCE_ID={source_package['source_id']};"
+            f"SOURCE_PACKAGE_ID={source_package['package_id']};"
+            f"STAGE_ID=DISCOVERY"
+        )
+        store.append(
+            JournalEvent(
+                run_id=run_id,
+                event_id=f"EVENT-{run_id}-002",
+                event_seq=2,
+                stage_id="DISCOVERY",
+                event_type="STAGE_STARTED",
+                stage_result_id=result_id,
+                attempt_id=attempt_id,
+                event_status="ACTIVE",
+                traceability=stage_trace,
+                source_id=source_package["source_id"],
+                batch_id=source_package["package_id"],
+            ),
+            source_id=source_package["source_id"],
+            batch_id=source_package["package_id"],
+        )
+
+        envelope = {
+            "run_id": run_id,
+            "source_id": source_package["source_id"],
+            "batch_id": source_package["package_id"],
+            "stage_id": "DISCOVERY",
+            "attempt_id": attempt_id,
+            "result_id": result_id,
+            "source_package": source_package,
+            "discovery_run_id": f"{run_id}-DISCOVERY",
+        }
+
+        adapter_persistence: dict[tuple[str, str, str], dict[str, Any]] = {}
+        adapter_result = registry.invoke(envelope, adapter_persistence)
+        if adapter_result.status not in {
+            "PRODUCTION_ADAPTER_ACCEPTED",
+            "ALREADY_COMPLETED",
+        }:
+            event_type = (
+                "STAGE_REJECTED"
+                if adapter_result.status.endswith("REJECTED")
+                else "STAGE_FAILED"
+            )
+            store.append(
+                JournalEvent(
+                    run_id=run_id,
+                    event_id=f"EVENT-{run_id}-003",
+                    event_seq=3,
+                    stage_id="DISCOVERY",
+                    event_type=event_type,
+                    stage_result_id=result_id,
+                    attempt_id=attempt_id,
+                    event_status=adapter_result.status,
+                    traceability=stage_trace,
+                    source_id=source_package["source_id"],
+                    batch_id=source_package["package_id"],
+                ),
+                source_id=source_package["source_id"],
+                batch_id=source_package["package_id"],
+            )
+            return {
+                "status": adapter_result.status,
+                "run_id": run_id,
+                "source_id": source_package["source_id"],
+                "source_package_id": source_package["package_id"],
+                "batches": batches,
+                "adapter": adapter_result.payload,
+            }
+
+        store.append(
+            JournalEvent(
+                run_id=run_id,
+                event_id=f"EVENT-{run_id}-003",
+                event_seq=3,
+                stage_id="DISCOVERY",
+                event_type="STAGE_COMPLETED",
+                stage_result_id=result_id,
+                attempt_id=attempt_id,
+                event_status="COMPLETED",
+                traceability=stage_trace,
+                source_id=source_package["source_id"],
+                batch_id=source_package["package_id"],
+            ),
+            source_id=source_package["source_id"],
+            batch_id=source_package["package_id"],
+        )
+        store.append(
+            JournalEvent(
+                run_id=run_id,
+                event_id=f"EVENT-{run_id}-004",
+                event_seq=4,
+                stage_id="DISCOVERY",
+                event_type="RUN_COMPLETED",
+                stage_result_id=result_id,
+                attempt_id=attempt_id,
+                event_status="COMPLETED",
+                traceability=stage_trace,
+                source_id=source_package["source_id"],
+                batch_id=source_package["package_id"],
+            ),
+            source_id=source_package["source_id"],
+            batch_id=source_package["package_id"],
+        )
+
         return {
-            "status": "PIPELINE_READY",
+            "status": "PIPELINE_COMPLETED",
             "run_id": run_id,
             "source_id": source_package["source_id"],
             "source_package_id": source_package["package_id"],
             "batches": batches,
+            "adapter": adapter_result.payload,
         }
     finally:
         store.close()
@@ -119,11 +228,18 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
+        registry = ProductionAdapterRegistry()
+        registry.register(
+            ProductionAdapter(
+                stage_id="DISCOVERY",
+                implementation=run_discovery_adapter,
+            )
+        )
         out = start_run(
             args.source_package,
             args.db,
             args.run_id,
-            ProductionAdapterRegistry(),
+            registry,
         )
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(json.dumps({
@@ -133,7 +249,11 @@ def main() -> int:
         return 2
 
     print(json.dumps(out, ensure_ascii=False, indent=2))
-    return 0 if out["status"] in {"PIPELINE_READY", "PRODUCTION_ADAPTER_UNAVAILABLE"} else 1
+    return 0 if out["status"] in {
+        "PIPELINE_COMPLETED",
+        "PIPELINE_READY",
+        "PRODUCTION_ADAPTER_UNAVAILABLE",
+    } else 1
 
 
 if __name__ == "__main__":
