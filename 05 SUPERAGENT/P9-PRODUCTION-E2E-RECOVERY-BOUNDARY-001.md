@@ -1,6 +1,6 @@
 # P9 — PRODUCTION END-TO-END RECOVERY BOUNDARY
 
-**Status:** DESIGN / ARCHITECTURE CANDIDATE  
+**Status:** ACCEPTED  
 **Layer:** production runtime realization  
 **Scope:** RUN + ORCH + REC + R1-R10 + C1 + P7/C2 + P8/C3
 
