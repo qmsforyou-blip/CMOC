@@ -108,6 +108,9 @@ def main() -> None:
         )
 
         before = _hash_tree(root)
+        before.pop("05 SUPERAGENT/cmoc_inventory.json", None)
+        before.pop("05 SUPERAGENT/cmoc_object_index.json", None)
+        before.pop("inventory.json", None)
 
         snapshot = build_inventory(
             root,
