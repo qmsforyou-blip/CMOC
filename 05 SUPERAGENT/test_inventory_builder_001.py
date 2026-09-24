@@ -102,6 +102,11 @@ def main() -> None:
             "{}\n", encoding="utf-8"
         )
 
+        (root / ".git/config").parent.mkdir(parents=True, exist_ok=True)
+        (root / ".git/config").write_text(
+            "[core]\n	repositoryformatversion = 0\n", encoding="utf-8"
+        )
+
         before = _hash_tree(root)
 
         snapshot = build_inventory(
@@ -176,6 +181,10 @@ def main() -> None:
                 "05 SUPERAGENT/cmoc_inventory.json",
                 "05 SUPERAGENT/cmoc_object_index.json",
             }
+            for r in snapshot["records"]
+        )
+        assert not any(
+            r.get("path", "").startswith(".git/")
             for r in snapshot["records"]
         )
 
