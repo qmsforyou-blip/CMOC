@@ -162,6 +162,23 @@ def start_run(
                 source_id=source_package["source_id"],
                 batch_id=source_package["package_id"],
             )
+            store.append(
+                JournalEvent(
+                    run_id=run_id,
+                    event_id=f"EVENT-{run_id}-004",
+                    event_seq=4,
+                    stage_id="DISCOVERY",
+                    event_type="RUN_FAILED",
+                    stage_result_id=result_id,
+                    attempt_id=attempt_id,
+                    event_status=adapter_result.status,
+                    traceability=stage_trace,
+                    source_id=source_package["source_id"],
+                    batch_id=source_package["package_id"],
+                ),
+                source_id=source_package["source_id"],
+                batch_id=source_package["package_id"],
+            )
             return {
                 "status": adapter_result.status,
                 "run_id": run_id,
