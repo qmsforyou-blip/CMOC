@@ -117,6 +117,10 @@ def build_decision(
             "decision_result": decision_result,
             "match_id": reconciliation_record["match_id"],
             "basis": basis,
+            "cmoc_object_id": (
+                reconciliation_record["cmoc_object_id"]
+                if decision_result == "ADMIT_EXISTING" else None
+            ),
             "source_id": reconciliation_record["source_id"],
             "traceability": traceability,
             "decided_by": decided_by,
