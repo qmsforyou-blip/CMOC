@@ -7,7 +7,12 @@ import json
 import tempfile
 from pathlib import Path
 
-from inventory_builder import build_inventory, write_inventory
+from inventory_builder import (
+    BUILDER_VERSION,
+    CLASSIFICATION_RULES_VERSION,
+    build_inventory,
+    write_inventory,
+)
 
 
 def _hash_tree(root: Path) -> dict[str, str]:
@@ -18,40 +23,31 @@ def _hash_tree(root: Path) -> dict[str, str]:
     }
 
 
+def _write_object(path: Path, identity_key: str, identity: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        "---\n"
+        f"{identity_key}: {identity}\n"
+        "source: TEST\n"
+        "---\n"
+        "# Test object\n",
+        encoding="utf-8",
+    )
+
+
 def main() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
 
-        (root / "T-0001.md").write_text(
-            "---\n"
-            "id: T-0001\n"
-            "type: term\n"
-            "status: active\n"
-            "title: Test term\n"
-            "source: TEST\n"
-            "created: 2026-09-24\n"
-            "tags:\n"
-            "  - test\n"
-            "inventory_class: TERM_FILE\n"
-            "---\n"
-            "# Test term\n",
-            encoding="utf-8",
+        _write_object(
+            root / "000 База/01 Термины/T-0001 Test term.md",
+            "id",
+            "T-0001",
         )
-
-        (root / "MC-TEST-001.md").write_text(
-            "---\n"
-            "machine_id: MC-TEST-001\n"
-            "type: machine\n"
-            "status: active\n"
-            "title: Test machine\n"
-            "source: TEST\n"
-            "created: 2026-09-24\n"
-            "tags:\n"
-            "  - test\n"
-            "inventory_class: MACHINE\n"
-            "---\n"
-            "# Test machine\n",
-            encoding="utf-8",
+        _write_object(
+            root / "03_MACHINE-CATALOG/MACHINES/MC-TEST-001 Test machine.md",
+            "machine_id",
+            "MC-TEST-001",
         )
 
         registry = root / "08 CMOC Core"
@@ -65,9 +61,27 @@ def main() -> None:
             (registry / name).write_text(f"# {name}\n", encoding="utf-8")
 
         excluded = root / "03_MACHINE-CATALOG/MACHINES"
-        excluded.mkdir(parents=True)
         (excluded / "MACHINE-CANDIDATES.md").write_text(
             "# MACHINE-CANDIDATES\n", encoding="utf-8"
+        )
+
+        (root / "00 Стандарты CMOC/STD-TEST.md").parent.mkdir(
+            parents=True, exist_ok=True
+        )
+        (root / "00 Стандарты CMOC/STD-TEST.md").write_text(
+            "# standard\n", encoding="utf-8"
+        )
+        (root / "04 PATCH/PATCH-TEST.md").parent.mkdir(
+            parents=True, exist_ok=True
+        )
+        (root / "04 PATCH/PATCH-TEST.md").write_text(
+            "# patch\n", encoding="utf-8"
+        )
+        (root / "05 SUPERAGENT/test.txt").parent.mkdir(
+            parents=True, exist_ok=True
+        )
+        (root / "05 SUPERAGENT/test.txt").write_text(
+            "runtime\n", encoding="utf-8"
         )
 
         (root / "notes.md").write_text(
@@ -89,7 +103,8 @@ def main() -> None:
         assert snapshot["repository"] == "TEST/CMOC"
         assert snapshot["branch"] == "work/discovery-result-builder"
         assert snapshot["source_commit"] == "TEST-COMMIT-001"
-        assert snapshot["builder_version"] == "INVENTORY-BUILDER-001-v0.1"
+        assert snapshot["builder_version"] == BUILDER_VERSION
+        assert snapshot["classification_rules_version"] == CLASSIFICATION_RULES_VERSION
 
         objects = [
             r for r in snapshot["records"]
@@ -97,18 +112,36 @@ def main() -> None:
         ]
         registries = [
             r for r in snapshot["records"]
-            if r.get("representation", {}).get("kind") == "REGISTRY_RECORD"
+            if r.get("representation", {}).get("kind") == "REGISTRY_CONTAINER"
         ]
 
         assert {r["object_id"] for r in objects} == {"T-0001", "MC-TEST-001"}
         assert {r["object_type"] for r in objects} == {"TERM", "MACHINE"}
-        assert {r["object_id"] for r in registries} == {
-            "LAB-000", "LAB-002", "LAB-004", "LAB-005"
+        assert {r["path"] for r in registries} == {
+            "08 CMOC Core/LAB-000 Опись терминов ОН.md",
+            "08 CMOC Core/LAB-002 Реестр различений.md",
+            "08 CMOC Core/LAB-004 Инварианты.md",
+            "08 CMOC Core/LAB-005 Опись организационных конструкций.md",
         }
 
         assert any(
             r.get("path") == "03_MACHINE-CATALOG/MACHINES/MACHINE-CANDIDATES.md"
             and r.get("class") == "EXCLUDED"
+            for r in snapshot["records"]
+        )
+        assert any(
+            r.get("path") == "00 Стандарты CMOC/STD-TEST.md"
+            and r.get("class") == "STANDARD"
+            for r in snapshot["records"]
+        )
+        assert any(
+            r.get("path") == "04 PATCH/PATCH-TEST.md"
+            and r.get("class") == "PATCH"
+            for r in snapshot["records"]
+        )
+        assert any(
+            r.get("path") == "05 SUPERAGENT/test.txt"
+            and r.get("class") == "SUPERAGENT"
             for r in snapshot["records"]
         )
         assert any(
@@ -123,7 +156,7 @@ def main() -> None:
             repository="TEST/CMOC",
             state="work/discovery-result-builder",
             source_commit="TEST-COMMIT-001",
-            generated_at="2026-09-24T00:00:00+03:00",
+            generated_at="2026-09-25T00:00:00+03:00",
         )
         assert snapshot["records"] == repeat["records"]
         assert snapshot["structural_errors"] == repeat["structural_errors"]
