@@ -61,7 +61,7 @@ def start_run(
         existing = store.get_state(run_id)
         recovery = False
         if existing is not None:
-            if not resume or existing.run_status in {"COMPLETED", "REJECTED", "FAILED"}:
+            if not resume or existing.run_status in {"COMPLETED", "REJECTED"}:
                 return {"status": "RUN_ALREADY_EXISTS", "run_id": run_id}
             if existing.current_stage_id != "DISCOVERY":
                 return {"status": "RESUME_BLOCKED", "run_id": run_id, "reason": "no resumable DISCOVERY stage"}
@@ -142,6 +142,7 @@ def start_run(
         else:
             attempt_id = f"ATTEMPT-DISCOVERY-{run_id}"
             result_id = f"RESULT-DISCOVERY-{run_id}"
+
         stage_trace = (
             f"RUN_ID={run_id};"
             f"SOURCE_ID={source_package['source_id']};"
@@ -288,7 +289,7 @@ def main() -> int:
     parser.add_argument(
         "--resume",
         action="store_true",
-        help="Resume an incomplete DISCOVERY RUN from durable runtime state.",
+        help="Resume an incomplete or failed DISCOVERY RUN from durable runtime state.",
     )
     args = parser.parse_args()
 
