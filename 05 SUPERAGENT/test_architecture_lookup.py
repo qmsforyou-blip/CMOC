@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Acceptance tests for ARCHITECTURE LOOKUP v0.1."""
+"""Acceptance tests for ARCHITECTURE LOOKUP v0.2."""
 
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ def test_p9_positive_resolution() -> None:
 def test_p10_positive_resolution() -> None:
     with tempfile.TemporaryDirectory() as td:
         root = Path(td)
-        _write(root, "05 SUPERAGENT/P10-PRODUCTION-READINESS-GATE-001.md", "# P10\nStatus: ACCEPTED\nREADY_WITH_LIMITATIONS")
+        _write(root, "05 SUPERAGENT/P10-PRODUCTION-READINESS-GATE-001.md", "# P10 — PRODUCTION READINESS GATE\nStatus: ACCEPTED\nP10 is the final production-readiness gate.\nP10 is therefore an audit/gate, not another execution stage.\nREADY_WITH_LIMITATIONS")
         _write(root, "05 SUPERAGENT/test_p10_production_readiness_gate.py", "# P10 test")
         _write(root, "05 SUPERAGENT/p10_gate.py", "# P10 implementation")
         _write(root, "05 SUPERAGENT/EVIDENCE-RUNTIME-P10-PRODUCTION-READINESS-GATE-001.md", "# Evidence\nStatus: ACCEPTED")
