@@ -307,16 +307,48 @@ Production Builder может считаться принятым только �
 
 ---
 
-## 11. Следующий шаг
 
-Следующий артефакт после принятия этого контракта:
+## 12. Production rebuild boundary
 
-**переписать `05 SUPERAGENT/inventory_builder.py` так, чтобы он не имитировал неизвестный исторический классификатор, а реализовывал только явно зафиксированные structural rules.**
+Для production rebuild вводится отдельная операция:
 
-После этого:
+Repository state → INVENTORY-BUILDER-001 → CMOC-INVENTORY-001 → OBJECT INDEX BUILDER
 
-`INVENTORY-BUILDER-001 ACCEPTANCE TEST`
+Production rebuild должен использовать один и тот же зафиксированный Repository state.
+Поэтому runner обязан получить и передать в Inventory provenance:
 
-и только после PASS — подключение Builder к production chain.
+- current branch/state;
+- current Git HEAD commit;
+- builder version;
+- classification rules version.
 
-**До этого момента текущий `inventory_builder.py` считать экспериментальной реализацией, а не production Builder.**
+Если Repository имеет незакоммиченные изменения, runner не должен выдавать такой результат за snapshot конкретного commit. Production rebuild в этом случае останавливается до фиксации состояния.
+
+### 12.1. Derived-output boundary
+
+cmoc_inventory.json и cmoc_object_index.json являются производными артефактами данной цепочки и не должны становиться входными объектами собственного Inventory.
+
+Иначе следующий rebuild изменял бы сам Inventory только потому, что предыдущий Inventory уже существует, а Object Index создавал бы циклическую зависимость.
+
+Поэтому эти пути являются explicit derived-output exclusions для Inventory Builder:
+
+- 05 SUPERAGENT/cmoc_inventory.json
+- 05 SUPERAGENT/cmoc_object_index.json
+
+Это структурное исключение, а не semantic classification.
+
+### 12.2. Production rebuild acceptance
+
+Production rebuild считается принятым, если:
+
+1. runner получает branch и HEAD непосредственно из Git;
+2. runner останавливается на dirty worktree;
+3. Builder не индексирует собственный cmoc_inventory.json;
+4. Builder не индексирует производный cmoc_object_index.json;
+5. Inventory записывается только после успешного построения;
+6. Object Index строится из этого же Inventory;
+7. provenance Inventory и Object Index согласован;
+8. повторный rebuild на неизменённом commit даёт одинаковый structural Inventory records.
+
+generated_at может изменяться и не считается частью structural identity snapshot.
+
