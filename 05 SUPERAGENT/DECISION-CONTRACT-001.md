@@ -54,6 +54,7 @@ decision:
     ADMIT_EXISTING | ADMIT_NEW | REJECT | DEFER
 
   match_id:
+  cmoc_object_id: null
 
   basis:
 
@@ -152,7 +153,7 @@ DECISION не должен:
 - превращать `NO_MATCH` непосредственно в `NEW` без соответствующего отдельного основания;
 - изменять source-bound records.
 
-Для `ADMIT_EXISTING` Decision должен опираться на конкретный `cmoc_object_id`, полученный из RECONCILIATION_RESULT.
+Для `ADMIT_EXISTING` Decision должен содержать конкретный `cmoc_object_id`, полученный из RECONCILIATION_RESULT.
 
 Для `ADMIT_NEW` Decision должен содержать основание, достаточное для принятого решения о новом объекте. Само отсутствие эквивалента автоматически достаточным основанием не считается.
 
