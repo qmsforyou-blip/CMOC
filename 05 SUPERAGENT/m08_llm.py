@@ -9,7 +9,13 @@ from __future__ import annotations
 import json
 import os
 import urllib.request
+import ssl
 from typing import Any, Dict, List, Optional
+
+
+_TLS_CONTEXT = ssl.create_default_context()
+_TLS_CONTEXT.minimum_version = ssl.TLSVersion.TLSv1_2
+_TLS_CONTEXT.maximum_version = ssl.TLSVersion.TLSv1_2
 
 
 class M08LLMError(RuntimeError):
@@ -96,7 +102,7 @@ def _request_json(payload: Dict[str, Any]) -> Dict[str, Any]:
     )
 
     try:
-        with urllib.request.urlopen(req, timeout=120) as response:
+        with urllib.request.urlopen(req, context=_TLS_CONTEXT, timeout=120) as response:
             raw = response.read().decode("utf-8")
     except Exception as exc:
         raise M08LLMError(f"M08 API request failed: {exc}") from exc
