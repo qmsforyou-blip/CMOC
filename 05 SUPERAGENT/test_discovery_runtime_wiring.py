@@ -76,10 +76,11 @@ def main():
                 "RUN_CREATED",
                 "STAGE_STARTED",
                 "STAGE_FAILED",
+                "RUN_FAILED",
             ]
             state = store.get_state("RUN-DISCOVERY-WIRING-001")
             assert state is not None
-            assert state.run_status == "ACTIVE"
+            assert state.run_status == "FAILED"
             assert state.current_stage_id == "DISCOVERY"
             store.close()
 
