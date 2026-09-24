@@ -99,12 +99,14 @@ def main() -> None:
         )
 
         assert snapshot["schema"] == "CMOC-INVENTORY-001"
-        assert snapshot["version"] == "0.2"
+        assert snapshot["version"] == "0.3"
         assert snapshot["repository"] == "TEST/CMOC"
         assert snapshot["branch"] == "work/discovery-result-builder"
         assert snapshot["source_commit"] == "TEST-COMMIT-001"
         assert snapshot["builder_version"] == BUILDER_VERSION
         assert snapshot["classification_rules_version"] == CLASSIFICATION_RULES_VERSION
+
+        assert all("git_sha" in r and "size_bytes" in r and r["type"] == "file" for r in snapshot["records"])
 
         objects = [
             r for r in snapshot["records"]
@@ -142,6 +144,11 @@ def main() -> None:
         assert any(
             r.get("path") == "05 SUPERAGENT/test.txt"
             and r.get("class") == "SUPERAGENT"
+            for r in snapshot["records"]
+        )
+        assert any(
+            r.get("path") == "02 Машинки/runtime.py"
+            and r.get("class") == "MACHINE_RUNTIME"
             for r in snapshot["records"]
         )
         assert any(
