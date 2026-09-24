@@ -23,6 +23,10 @@ TERMINAL_STAGE_EVENTS = {
     "STAGE_FAILED": "FAILED",
 }
 RUN_TERMINAL = {"RUN_COMPLETED", "RUN_REJECTED", "RUN_FAILED"}
+RECOVERY_EVENTS = {
+    "RUN_INCOMPLETE", "RECOVERY_REQUESTED", "RETRY_REQUIRED",
+    "RESUME_ALLOWED", "RESUME_BLOCKED",
+}
 
 
 @dataclass(frozen=True)
@@ -187,7 +191,7 @@ class RuntimeStateStore:
 
         if event.event_type == "RUN_CREATED":
             raise ValueError("RUN_CREATED cannot repeat")
-        if previous.run_status in {"COMPLETED", "REJECTED", "FAILED"}:
+        if previous.run_status in RUN_TERMINAL and event.event_type not in RECOVERY_EVENTS:
             raise ValueError("terminal RUN cannot receive another event")
 
         current_stage = previous.current_stage_id
