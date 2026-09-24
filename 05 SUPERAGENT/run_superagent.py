@@ -130,8 +130,8 @@ def start_run(
         store.append(
             JournalEvent(
                 run_id=run_id,
-                event_id=f"EVENT-{run_id}-002",
-                event_seq=2,
+                event_id=f"EVENT-{run_id}-{store.next_event_seq(run_id):03d}",
+                event_seq=store.next_event_seq(run_id),
                 stage_id="DISCOVERY",
                 event_type="STAGE_STARTED",
                 stage_result_id=result_id,
@@ -156,7 +156,7 @@ def start_run(
             "discovery_run_id": f"{run_id}-DISCOVERY",
         }
 
-        adapter_persistence: dict[tuple[str, str, str], dict[str, Any]] = {}
+        adapter_persistence = DurableAdapterPersistence(store.conn)
         adapter_result = registry.invoke(envelope, adapter_persistence)
         if adapter_result.status not in {
             "PRODUCTION_ADAPTER_ACCEPTED",
@@ -264,6 +264,11 @@ def main() -> int:
     parser.add_argument("--source-package", required=True)
     parser.add_argument("--db", default="05 SUPERAGENT/runtime.sqlite")
     parser.add_argument("--run-id", required=True)
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Resume an incomplete DISCOVERY RUN from durable runtime state.",
+    )
     args = parser.parse_args()
 
     try:
@@ -279,6 +284,7 @@ def main() -> int:
             args.db,
             args.run_id,
             registry,
+            resume=args.resume,
         )
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(json.dumps({
