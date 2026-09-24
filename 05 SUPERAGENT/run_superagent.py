@@ -119,10 +119,26 @@ def start_run(
                 "batches": batches,
             }
 
+        adapter_persistence = DurableAdapterPersistence(store.conn)
+        persisted_recovery = False
         if recovery:
-            recovery_seq = store.next_event_seq(run_id)
-            attempt_id = f"ATTEMPT-DISCOVERY-{run_id}-RESUME-{recovery_seq:03d}"
-            result_id = f"RESULT-DISCOVERY-{run_id}-RESUME-{recovery_seq:03d}"
+            existing_key = (
+                run_id,
+                "DISCOVERY",
+                existing.current_attempt_id or "",
+            )
+            if (
+                existing.current_attempt_id
+                and existing.current_stage_result_id
+                and existing_key in adapter_persistence
+            ):
+                attempt_id = existing.current_attempt_id
+                result_id = existing.current_stage_result_id
+                persisted_recovery = True
+            else:
+                recovery_seq = store.next_event_seq(run_id)
+                attempt_id = f"ATTEMPT-DISCOVERY-{run_id}-RESUME-{recovery_seq:03d}"
+                result_id = f"RESULT-DISCOVERY-{run_id}-RESUME-{recovery_seq:03d}"
         else:
             attempt_id = f"ATTEMPT-DISCOVERY-{run_id}"
             result_id = f"RESULT-DISCOVERY-{run_id}"
@@ -132,23 +148,24 @@ def start_run(
             f"SOURCE_PACKAGE_ID={source_package['package_id']};"
             f"STAGE_ID=DISCOVERY"
         )
-        store.append(
-            JournalEvent(
-                run_id=run_id,
-                event_id=f"EVENT-{run_id}-{store.next_event_seq(run_id):03d}",
-                event_seq=store.next_event_seq(run_id),
-                stage_id="DISCOVERY",
-                event_type="STAGE_STARTED",
-                stage_result_id=result_id,
-                attempt_id=attempt_id,
-                event_status="ACTIVE",
-                traceability=stage_trace,
+        if not persisted_recovery:
+            store.append(
+                JournalEvent(
+                    run_id=run_id,
+                    event_id=f"EVENT-{run_id}-{store.next_event_seq(run_id):03d}",
+                    event_seq=store.next_event_seq(run_id),
+                    stage_id="DISCOVERY",
+                    event_type="STAGE_STARTED",
+                    stage_result_id=result_id,
+                    attempt_id=attempt_id,
+                    event_status="ACTIVE",
+                    traceability=stage_trace,
+                    source_id=source_package["source_id"],
+                    batch_id=source_package["package_id"],
+                ),
                 source_id=source_package["source_id"],
                 batch_id=source_package["package_id"],
-            ),
-            source_id=source_package["source_id"],
-            batch_id=source_package["package_id"],
-        )
+            )
 
         envelope = {
             "run_id": run_id,
@@ -161,7 +178,6 @@ def start_run(
             "discovery_run_id": f"{run_id}-DISCOVERY",
         }
 
-        adapter_persistence = DurableAdapterPersistence(store.conn)
         adapter_result = registry.invoke(envelope, adapter_persistence)
         if adapter_result.status not in {
             "PRODUCTION_ADAPTER_ACCEPTED",
