@@ -1,6 +1,7 @@
 # ARCHITECTURE LOOKUP CONTRACT — 001
 
 Status: DESIGN / CONTRACT CANDIDATE
+Version: 0.2
 Date: 24-09-2026
 Layer: CMOC / Superagent engineering process
 
@@ -43,7 +44,17 @@ role
 status[]
 resolution_basis
 
-## 4. Resolution roles
+## 4. Realization model
+
+Implementation is not assumed to be one file per subject. The resolver reports one of three explicit realization modes:
+
+- DIRECT — a directly identifiable executable implementation exists;
+- COMPOSITE — the subject is explicitly realized by composition/integration of existing architectural components;
+- GATE — the subject is explicitly a gate/readiness realization rather than a standalone executable capability.
+
+The mode may be inferred only from explicit contract wording. Absence of an implementation file is not sufficient to infer COMPOSITE or GATE.
+
+## 5. Resolution roles
 
 CONTRACT: boundary, contract, standard, profile, review or gate defining the declared responsibility.
 
@@ -55,7 +66,7 @@ EVIDENCE: evidence, accepted review or readiness result recording an observed re
 
 A subject may legitimately have multiple artifacts in any role.
 
-## 5. Status
+## 6. Status
 
 Status is reported per artifact from explicit repository content where available.
 
@@ -72,7 +83,7 @@ NOT_REQUIRED
 
 Gate/result states such as READY_WITH_LIMITATIONS are observed results, not replacements for lifecycle status.
 
-## 6. Gaps
+## 7. Gaps
 
 Only observable lookup gaps are reported:
 MISSING_CONTRACT
@@ -83,14 +94,14 @@ AMBIGUOUS_CONTRACT
 
 The resolver must not convert NO_MATCH into a semantic NEW decision.
 
-## 7. Determinism
+## 8. Determinism
 
 For the same repository state and input, lookup must produce the same artifact set and ordering. Artifacts are ordered by normalized repository path.
 
-## 8. Read-only boundary
+## 9. Read-only boundary
 
 Architecture Lookup may read repository files and inspect explicit metadata/status text. It must not modify CMOC, OBJECT INDEX or source evidence; create decisions; perform reconciliation; or perform canonization.
 
-## 9. Acceptance
+## 10. Acceptance
 
-The first implementation is accepted only after an executable test demonstrates deterministic read-only resolution for P7, P9 and P10, including positive resolution and explicit missing-role reporting.
+The first implementation is accepted only after an executable test demonstrates deterministic read-only resolution for P7, P9 and P10, including DIRECT, COMPOSITE and GATE realization handling and explicit missing-role reporting.
