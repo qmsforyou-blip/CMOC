@@ -25,6 +25,7 @@ from m05_llm import classify
 from m06_llm import build_passports
 from m07_llm import build_relation_candidates
 from m08_llm import decide
+from discovery_result import build_discovery_result
 
 SOURCE_ID = "SRC-003"
 RUN_ID = "RUN-SRC-003-AUTOMATED-M01-M08-001"
@@ -167,6 +168,13 @@ initial = {
 TASKS = ["M01","M02","M03","M04","M05","M06","M07","M08"]
 result = runner.run_chain(RUN_ID, SOURCE, initial, TASKS)
 results = result.get("results", [])
+discovery_result = None
+if result.get("status") == "ACCEPT":
+    discovery_result = build_discovery_result(
+        run_id=RUN_ID,
+        source=SOURCE,
+        results=results,
+    )
 m07_result = results[6] if len(results) > 6 else None
 m08_result = results[7] if len(results) > 7 else None
 
@@ -192,6 +200,7 @@ audit = {
     "m07_output": m07_result,
     "m08_output": m08_result,
     "machine_ids": MACHINE_IDS,
+    "discovery_result": discovery_result,
     "control": {
         "relation_evidence_supplied_to_m07": False,
         "cmoc_access": "NONE",
