@@ -111,11 +111,20 @@ class TestCMOCQueryV03(unittest.TestCase):
             self.assertIn(key, result)
 
     def test_load_rejects_wrong_index(self):
-        with tempfile.NamedTemporaryFile("w", suffix=".json", encoding="utf-8") as f:
+        with tempfile.NamedTemporaryFile(
+            "w",
+            suffix=".json",
+            encoding="utf-8",
+            delete=False,
+        ) as f:
             json.dump({"objects": []}, f)
-            f.flush()
+            path = f.name
+
+        try:
             with self.assertRaises(ValueError):
-                load_object_index(f.name)
+                load_object_index(path)
+        finally:
+            Path(path).unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
