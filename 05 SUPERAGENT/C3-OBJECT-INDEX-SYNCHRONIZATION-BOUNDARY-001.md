@@ -2,7 +2,7 @@
 
 **ID:** C3-OBJECT-INDEX-SYNCHRONIZATION-BOUNDARY-001  
 **Date:** 22-09-2026  
-**Status:** DESIGN / ARCHITECTURE CANDIDATE  
+**Status:** ACCEPTED / ARCHITECTURE BASELINE  
 **Scope:** CMOC WRITE → OBJECT INDEX  
 **Basis:** C2 CMOC WRITE boundary + SPEC-004 CMOC OBJECT INDEX v0.2
 
@@ -245,8 +245,16 @@ The test establishes the boundary contract, not production synchronization infra
 
 ## 28. Current status
 
-DESIGN / ARCHITECTURE CANDIDATE.
+ACCEPTED / ARCHITECTURE BASELINE.
 
-This contract does not establish a production synchronization engine.
+The synthetic C3 boundary test is PASS, and the production P8 implementation has been checked against the C3 contract with:
 
-Next step: implement the isolated synthetic C3 test and verify the boundary before considering production integration.
+```
+C3 CONTRACT -> P8 PRODUCTION ALIGNMENT: PASS
+```
+
+This establishes the architectural boundary and its alignment with the existing production OBJECT INDEX synchronization runtime.
+
+C3 remains a boundary/contract, not a new semantic machine and not a second OBJECT INDEX implementation.
+
+No further C3-specific semantic layer is required for the current MVP.
