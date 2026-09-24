@@ -175,8 +175,8 @@ def start_run(
             store.append(
                 JournalEvent(
                     run_id=run_id,
-                    event_id=f"EVENT-{run_id}-003",
-                    event_seq=3,
+                    event_id=f"EVENT-{run_id}-{store.next_event_seq(run_id):03d}",
+                    event_seq=store.next_event_seq(run_id),
                     stage_id="DISCOVERY",
                     event_type=event_type,
                     stage_result_id=result_id,
@@ -192,8 +192,8 @@ def start_run(
             store.append(
                 JournalEvent(
                     run_id=run_id,
-                    event_id=f"EVENT-{run_id}-004",
-                    event_seq=4,
+                    event_id=f"EVENT-{run_id}-{store.next_event_seq(run_id):03d}",
+                    event_seq=store.next_event_seq(run_id),
                     stage_id="DISCOVERY",
                     event_type="RUN_FAILED",
                     stage_result_id=result_id,
