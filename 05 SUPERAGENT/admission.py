@@ -112,3 +112,32 @@ def admit_new(decision: Dict[str, Any]) -> Dict[str, Any]:
             "c1_c2_c3_execution": "NOT_PERFORMED",
         },
     }
+
+
+def execute_c1_from_admission(admission: Dict[str, Any], approved_candidate: Dict[str, Any]) -> Dict[str, Any]:
+    """Cross the explicit ADMIT_NEW -> C1 boundary.
+
+    Admission authorizes entry; C1 still owns canonization. This adapter
+    does not perform NEW decision, CMOC write, or index synchronization.
+    """
+    if not isinstance(admission, dict) or admission.get("type") != "ADMISSION":
+        raise AdmissionError("ADMISSION_ARTIFACT_REQUIRED")
+    body = admission.get("admission")
+    if not isinstance(body, dict):
+        raise AdmissionError("ADMISSION_BODY_MISSING")
+    if body.get("admission_result") != "ADMIT_NEW":
+        raise AdmissionError("ADMIT_NEW_ADMISSION_REQUIRED")
+    if body.get("pipeline_status") != "PENDING_C1":
+        raise AdmissionError("ADMISSION_NOT_PENDING_C1")
+    if not isinstance(approved_candidate, dict):
+        raise AdmissionError("APPROVED_CANDIDATE_REQUIRED")
+    if approved_candidate.get("decision_result") != "NEW_APPROVED":
+        raise AdmissionError("NEW_APPROVED_REQUIRED")
+
+    c1_input = deepcopy(approved_candidate)
+    c1_input.setdefault("admission_id", body["admission_id"])
+    c1_input.setdefault("decision_id", body["decision_id"])
+    c1_input.setdefault("match_id", body["match_id"])
+    c1_input.setdefault("source_id", body["source_id"])
+
+    return c1_input
