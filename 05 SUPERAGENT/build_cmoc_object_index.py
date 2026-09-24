@@ -6,9 +6,6 @@ ROOT = Path(__file__).resolve().parents[1]
 INVENTORY = ROOT / "05 SUPERAGENT" / "cmoc_inventory.json"
 OUTPUT = ROOT / "05 SUPERAGENT" / "cmoc_object_index.json"
 
-INVENTORY_SNAPSHOT = "CMOC-INVENTORY-001@2026-09-18"
-INVENTORY_COMMIT = "fd12c417358723b97205730084b87e9068a37854"
-REPOSITORY = "qmsforyou-blip/CMOC"
 
 CLASS_TO_TYPE = {
     "TERM_FILE": "TERM",
@@ -83,7 +80,7 @@ def explicit_object_id(text, path):
                 return m.group(0)
     return None
 
-def object_record(inv, root):
+def object_record(inv, root, repository, inventory_snapshot):
     path = inv["path"]
     text = read_text(root / path)
     fm = frontmatter(text)
@@ -100,9 +97,9 @@ def object_record(inv, root):
         "indexed_attributes": {},
         "structure": structure(text),
         "provenance": {
-            "repository": REPOSITORY,
+            "repository": repository,
             "git_sha": inv["git_sha"],
-            "inventory_snapshot": f"{INVENTORY_SNAPSHOT}/{INVENTORY_COMMIT}",
+            "inventory_snapshot": inventory_snapshot,
         },
         "traceability": {
             "source": fm.get("source", "UNKNOWN"),
@@ -112,7 +109,7 @@ def object_record(inv, root):
         "count_basis": "OBJECT_FILE",
     }
 
-def registry_record(oid, otype, container, line, name=None, fields=None, sections=None, source="UNKNOWN", sha=None):
+def registry_record(oid, otype, container, line, name=None, fields=None, sections=None, source="UNKNOWN", sha=None, repository="UNKNOWN", inventory_snapshot="UNKNOWN"):
     return {
         "schema": "CMOC-OBJECT-INDEX-RECORD",
         "version": "0.2",
@@ -130,24 +127,24 @@ def registry_record(oid, otype, container, line, name=None, fields=None, section
             "sections_present": sections or [],
         },
         "provenance": {
-            "repository": REPOSITORY,
+            "repository": repository,
             "git_sha": sha,
-            "inventory_snapshot": f"{INVENTORY_SNAPSHOT}/{INVENTORY_COMMIT}",
+            "inventory_snapshot": inventory_snapshot,
         },
         "traceability": {"source": source, "registry": container},
         "discovery": {"basis": "mechanical identifier discovery in registry"},
         "count_basis": "REGISTRY_RECORD",
     }
 
-def term_records(text, container, sha):
+def term_records(text, container, sha, repository="UNKNOWN", inventory_snapshot="UNKNOWN"):
     out = []
     for n, line in enumerate(text.splitlines(), 1):
         m = re.match(r"^\s*(T-\d{4})\s+(.+?)\s*$", line)
         if m:
-            out.append(registry_record(m.group(1), "TERM", container, n, m.group(2).strip(), ["id", "name"], sha=sha))
+            out.append(registry_record(m.group(1), "TERM", container, n, m.group(2).strip(), ["id", "name"], sha=sha, repository=repository, inventory_snapshot=inventory_snapshot))
     return out
 
-def distinction_records(text, container, sha):
+def distinction_records(text, container, sha, repository="UNKNOWN", inventory_snapshot="UNKNOWN"):
     out = []
     for n, line in enumerate(text.splitlines(), 1):
         m = re.match(r"^\|\s*\*{0,2}(DIS-\d+)\*{0,2}\s*\|", line)
@@ -155,7 +152,7 @@ def distinction_records(text, container, sha):
             out.append(registry_record(m.group(1), "DISTINCTION", container, n, None, ["id"], sha=sha))
     return out
 
-def invariant_records(text, container, sha):
+def invariant_records(text, container, sha, repository="UNKNOWN", inventory_snapshot="UNKNOWN"):
     lines = text.splitlines()
     found = {}
     for n, line in enumerate(lines, 1):
@@ -179,7 +176,7 @@ def invariant_records(text, container, sha):
         out.append(registry_record(oid, "INVARIANT", container, line, name, ["id"], sha=sha))
     return out
 
-def organizational_records(text, container, sha):
+def organizational_records(text, container, sha, repository="UNKNOWN", inventory_snapshot="UNKNOWN"):
     out = []
     for n, line in enumerate(text.splitlines(), 1):
         m = re.match(r"^\|\s*(C-\d{4})\s*\|\s*([^|]+?)\s*\|", line)
@@ -187,12 +184,20 @@ def organizational_records(text, container, sha):
             out.append(registry_record(m.group(1), "ORGANIZATIONAL_CONSTRUCTION", container, n, m.group(2).strip(), ["id", "construction"], sha=sha))
     return out
 
-def build():
-    inv = json.loads(read_text(INVENTORY))
+def build(repository_root=None, inventory_path=None):
+    root = Path(repository_root) if repository_root is not None else ROOT
+    inventory_file = Path(inventory_path) if inventory_path is not None else INVENTORY
+    inv = json.loads(read_text(inventory_file))
+    required = ("schema", "version", "generated_at", "repository", "branch", "source_commit")
+    missing = [key for key in required if key not in inv]
+    if missing:
+        raise RuntimeError(f"Inventory provenance is incomplete: missing {missing}")
+    repository = inv["repository"]
+    inventory_snapshot = f'{inv["schema"]}@{inv["generated_at"]}/{inv["source_commit"]}'
     records = []
     for item in inv["records"]:
         if item["class"] in CLASS_TO_TYPE and item["path"] not in NON_OBJECT_PATHS:
-            records.append(object_record(item, ROOT))
+            records.append(object_record(item, root, repository, inventory_snapshot))
 
     containers = {
         "LAB-000": ("08 CMOC Core/LAB-000 Опись терминов ОН.md", "TERM", term_records),
@@ -202,7 +207,7 @@ def build():
     }
     by_path = {x["path"]: x["git_sha"] for x in inv["records"]}
     for _, (path, _, parser) in containers.items():
-        records.extend(parser(read_text(ROOT / path), path, by_path[path]))
+        records.extend(parser(read_text(root / path), path, by_path[path], repository=repository, inventory_snapshot=inventory_snapshot))
 
     for r in records:
         if r["object_id"] is None:
@@ -227,11 +232,11 @@ def build():
     data = {
         "schema": "CMOC-OBJECT-INDEX-001",
         "version": "0.2",
-        "generated_at": "2026-09-19",
-        "repository": REPOSITORY,
-        "branch": "main",
-        "source_inventory": INVENTORY_SNAPSHOT,
-        "source_commit": INVENTORY_COMMIT,
+        "generated_at": inv["generated_at"],
+        "repository": repository,
+        "branch": inv["branch"],
+        "source_inventory": f'{inv["schema"]}@{inv["generated_at"]}',
+        "source_commit": inv["source_commit"],
         "purpose": "Read-only structural/addressable index. No semantic reconciliation or CMOC mutation.",
         "record_model": "One record per discovered representation; the same object_id may therefore occur more than once.",
         "representation_record_count": len(records),
