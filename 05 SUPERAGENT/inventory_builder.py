@@ -45,6 +45,10 @@ DERIVED_OUTPUT_PATHS = {
     "05 SUPERAGENT/cmoc_inventory.json",
     "05 SUPERAGENT/cmoc_object_index.json",
 }
+NON_INVENTORY_DIRS = {
+    ".git",
+    "__pycache__",
+}
 
 NON_OBJECT_PATHS = {
     "000 База/01 Термины/01 База Термины.base",
@@ -221,7 +225,7 @@ def build_inventory(
             continue
 
         relative = path.relative_to(root)
-        if ".git" in relative.parts:
+        if any(part in NON_INVENTORY_DIRS for part in relative.parts):
             continue
 
         rel = relative.as_posix()
