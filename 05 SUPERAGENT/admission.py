@@ -38,7 +38,7 @@ def admit_existing(decision: Dict[str, Any]) -> Dict[str, Any]:
         raise AdmissionError("ADMIT_EXISTING_DECISION_REQUIRED")
 
     traceability = deepcopy(body["traceability"])
-    target = traceability.get("cmoc_object_id") or body.get("cmoc_object_id")
+    target = body.get("cmoc_object_id")
     if not target:
         raise AdmissionError("TARGET_CMOC_OBJECT_REQUIRED")
 
