@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Сопоставить PAS-004 с ранее выделенными категориями и различением DIS-009 в разборе SRC-002; граница единого объекта и его новизна не доказаны",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-27T14:50:35+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-001-SRC-002-MAT-PAS-004",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-004",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-004",
+      "classification_id": "CLS-004",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-004",
+      "object_boundary": "Limited to the concept model denoted by \"QSB common principles, methods, processes, and global language\" as represented in source SRC-002 and supported by the supplied basis references; no identity or scope beyond this source is asserted.",
+      "passport_id": "PAS-004",
+      "reconciliation_id": "RECON-3b7c35a893c9a680",
+      "source_basis": [
+        "FORM-010",
+        "FORM-011",
+        "FORM-012"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-001-CONTROLLED-1-6",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
