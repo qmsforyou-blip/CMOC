@@ -65,8 +65,12 @@ Return JSON only:
 }
 
 Preserve supplied IDs and basis references exactly.
-For the controlled relation-dependent branch, evaluate the supplied relation
-candidate and return one decision for it.
+If relation_candidates are supplied, return exactly one decision for EACH
+relation candidate, in the supplied order, using its id as target_id and
+target_kind RELATION_CANDIDATE. Do not return passport decisions in this case.
+Otherwise return exactly one decision for EACH passport, in the supplied
+order, using its id as target_id and target_kind PASSPORT.
+Never collapse multiple targets into a single summary decision.
 """
 
 
@@ -147,6 +151,10 @@ def decide(
         raise M08LLMError(
             "Mixed NO_RELATION and relation records require explicit branch handling"
         )
+
+    targets = relation_candidates if relation_candidates else passports
+    payload["required_target_ids_in_order"] = [r.get("id") for r in targets]
+    payload["required_decision_count"] = len(targets)
 
     result = _request_json(payload)
     records = result.get("records")
