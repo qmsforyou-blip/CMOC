@@ -73,7 +73,36 @@ def main() -> None:
         assert store.get_state(run_id).run_status == "WAITING_HUMAN_REVIEW"
         assert store.verify_projection(run_id)
         store.close()
-        print("PILOT-001 RECORDED M06 WIRING: PASS; 7 NEEDS_REVIEW; durable WAITING_HUMAN_REVIEW")
+
+        # An upstream request failure can resume the same RUN after recovery.
+        failed_once = {"value": True}
+
+        def transient_discovery(envelope):
+            if failed_once["value"]:
+                failed_once["value"] = False
+                raise RuntimeError("SIMULATED_M01_HTTP_429")
+            return recorded_discovery(envelope)
+
+        retry_registry = ProductionAdapterRegistry()
+        retry_registry.register(ProductionAdapter("DISCOVERY", transient_discovery))
+        retry_registry.register(ProductionAdapter(
+            "RECONCILIATION",
+            lambda envelope: run_reconciliation_adapter({
+                **envelope, "index_path": str(index_path),
+            }),
+        ))
+        retry_run_id = "RUN-PILOT-001-RETRY-M01"
+        first = start_run(str(source_path), str(db_path), retry_run_id, retry_registry)
+        assert first["status"] == "ADAPTER_EXECUTION_FAILED", first
+        resumed = start_run(
+            str(source_path), str(db_path), retry_run_id, retry_registry, resume=True,
+        )
+        assert resumed["status"] == "HUMAN_REVIEW_REQUIRED", resumed
+        store = RuntimeStateStore(str(db_path))
+        assert store.get_state(retry_run_id).run_status == "WAITING_HUMAN_REVIEW"
+        assert store.verify_projection(retry_run_id)
+        store.close()
+        print("PILOT-001 RECORDED M06 WIRING: PASS; 7 NEEDS_REVIEW; durable WAITING_HUMAN_REVIEW; retry PASS")
 
 
 if __name__ == "__main__":
