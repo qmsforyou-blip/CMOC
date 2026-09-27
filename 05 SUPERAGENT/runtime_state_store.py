@@ -15,7 +15,7 @@ EVENT_TYPES = {
     "RUN_CREATED", "STAGE_STARTED", "STAGE_COMPLETED", "STAGE_REJECTED",
     "STAGE_FAILED", "RECOVERY_REQUESTED", "RETRY_REQUIRED", "RESUME_ALLOWED",
     "RESUME_BLOCKED", "RUN_COMPLETED", "RUN_REJECTED", "RUN_FAILED",
-    "RUN_INCOMPLETE",
+    "RUN_INCOMPLETE", "HUMAN_REVIEW_REQUIRED", "HUMAN_DECISION_RECORDED",
 }
 TERMINAL_STAGE_EVENTS = {
     "STAGE_COMPLETED": "COMPLETED",
@@ -25,7 +25,8 @@ TERMINAL_STAGE_EVENTS = {
 RUN_TERMINAL = {"RUN_COMPLETED", "RUN_REJECTED", "RUN_FAILED"}
 RECOVERY_EVENTS = {
     "RUN_INCOMPLETE", "RECOVERY_REQUESTED", "RETRY_REQUIRED",
-    "RESUME_ALLOWED", "RESUME_BLOCKED",
+    "RESUME_ALLOWED", "RESUME_BLOCKED", "HUMAN_REVIEW_REQUIRED",
+    "HUMAN_DECISION_RECORDED",
 }
 
 
@@ -226,6 +227,21 @@ class RuntimeStateStore:
                 raise ValueError("recovery event crosses current stage")
             if event.attempt_id:
                 current_attempt = event.attempt_id
+        elif event.event_type == "HUMAN_REVIEW_REQUIRED":
+            if not event.stage_id or not event.stage_result_id:
+                raise ValueError("HUMAN_REVIEW_REQUIRED requires stage_id and stage_result_id")
+            current_stage = event.stage_id
+            current_result = event.stage_result_id
+            current_attempt = event.attempt_id
+            run_status = "WAITING_HUMAN_REVIEW"
+        elif event.event_type == "HUMAN_DECISION_RECORDED":
+            if previous.run_status != "WAITING_HUMAN_REVIEW":
+                raise ValueError("HUMAN_DECISION_RECORDED requires waiting review state")
+            if event.stage_id and current_stage and event.stage_id != current_stage:
+                raise ValueError("human decision crosses review stage")
+            current_result = event.stage_result_id
+            current_attempt = event.attempt_id or current_attempt
+            run_status = "ACTIVE"
         elif event.event_type == "RUN_INCOMPLETE":
             run_status = "INCOMPLETE"
         elif event.event_type in RUN_TERMINAL:
