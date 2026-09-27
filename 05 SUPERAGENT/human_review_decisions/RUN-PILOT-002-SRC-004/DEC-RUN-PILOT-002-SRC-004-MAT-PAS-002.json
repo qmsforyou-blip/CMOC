@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Сопоставить проверку организационного решения по внутреннему продукту с T-0008 и DIS-0114; определить отличие критерия продукта от проверки изменения реальности; тождество и новизна не доказаны",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-27T15:26:50+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-002-SRC-004-MAT-PAS-002",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-002",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-004",
+    "traceability": {
+      "candidate_id": "NOM-002",
+      "classification_id": "CLS-002",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-004-M06-006",
+      "match_id": "MAT-PAS-002",
+      "object_boundary": "Рабочий объект ограничен термином «Проверка организационного решения по внутреннему продукту» в пределах источника SRC-004.",
+      "passport_id": "PAS-002",
+      "reconciliation_id": "RECON-b15cb1043c208dba",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ],
+      "source_id": "SRC-004",
+      "source_package": "SOURCE-004-PACKAGE-001-CONTROLLED-II-1-6",
+      "upstream_batch": "BATCH-SRC-004-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
