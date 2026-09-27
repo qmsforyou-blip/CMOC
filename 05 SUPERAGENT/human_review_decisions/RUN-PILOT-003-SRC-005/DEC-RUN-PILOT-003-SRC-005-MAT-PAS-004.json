@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Разбор текущих проблем и улучшений является компонентом кандидата Value Stream Performance Review в PATCH-IMA-013 §013.3; самостоятельная граница и новизна не доказаны",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-27T15:39:26+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-003-SRC-005-MAT-PAS-004",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-004",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-005",
+    "traceability": {
+      "candidate_id": "NOM-004",
+      "classification_id": "CLS-004",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-005-M06-006",
+      "match_id": "MAT-PAS-004",
+      "object_boundary": "Source-bound candidate object limited to the formulation and basis references supplied for CLS-004 in SRC-005.",
+      "passport_id": "PAS-004",
+      "reconciliation_id": "RECON-f2889cdd60be96df",
+      "source_basis": [
+        "FORM-010",
+        "FORM-011",
+        "FORM-012"
+      ],
+      "source_id": "SRC-005",
+      "source_package": "SOURCE-005-PACKAGE-001-CONTROLLED-CH13-P6",
+      "upstream_batch": "BATCH-SRC-005-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
