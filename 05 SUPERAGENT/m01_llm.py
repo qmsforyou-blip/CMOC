@@ -82,6 +82,10 @@ def extract(source_package: Dict[str, Any]) -> List[Dict[str, Any]]:
     if not fragments:
         raise M01LLMError("SOURCE_PACKAGE has no fragments")
 
+    model = os.environ.get("LLM_MODEL")
+    if not model:
+        raise M01LLMError("LLM_MODEL is not set")
+
     user_payload = {
         "source_id": source_package["source_id"],
         "source_name": source_package.get("source_name", ""),
@@ -90,7 +94,7 @@ def extract(source_package: Dict[str, Any]) -> List[Dict[str, Any]]:
     }
 
     response = _request_json({
-        "model": os.environ["LLM_MODEL"],
+        "model": model,
         "messages": [
             {"role": "system", "content": M01_SYSTEM_PROMPT},
             {"role": "user", "content": json.dumps(user_payload, ensure_ascii=False)},
