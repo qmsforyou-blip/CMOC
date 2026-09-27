@@ -1,0 +1,25 @@
+{
+  "package_id": "SOURCE-004-PACKAGE-001-CONTROLLED-II-1-6",
+  "source_id": "SRC-004",
+  "source_name": "СТАНДАРТ ОРГАНИЗАЦИОННОГО ИНЖЕНЕРА",
+  "source_type": "DOCX",
+  "source_version": "filename v0.4; internal heading v0.3 (MVP); discrepancy unresolved",
+  "source_package_status": "PARTIAL",
+  "work_scope": "section II, items 1 and 6 only",
+  "source_file_library": "СТАНДАРТ_ОРГАНИЗАЦИОННОГО_ИНЖЕНЕРА_v0_4.docx",
+  "fragments": [
+    {
+      "location": "section II, item 1",
+      "text": "1. Сначала определить внутренний продукт, и только затем проектировать способы его устойчивого получения."
+    },
+    {
+      "location": "section II, item 6",
+      "text": "6. Проверять каждое организационное решение вопросом: Какой внутренний продукт оно обеспечивает?"
+    }
+  ],
+  "traceability": {
+    "source_id": "SRC-004",
+    "source_package_id": "SOURCE-004-PACKAGE-001-CONTROLLED-II-1-6",
+    "library_file_id": "libfile_ca4e59a50a688191802dec554d4a858c"
+  }
+}
