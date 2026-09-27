@@ -18,6 +18,7 @@ from discovery_production_adapter import run_discovery_adapter
 from durable_adapter_persistence import DurableAdapterPersistence
 from production_adapter_runtime import ProductionAdapter, ProductionAdapterRegistry
 from reconciliation_production_adapter import run_reconciliation_adapter
+from pilot_001_orchestration import continue_to_reconciliation
 from runtime_state_store import JournalEvent, RuntimeStateStore
 
 
@@ -250,32 +251,18 @@ def start_run(
             source_id=source_package["source_id"],
             batch_id=source_package["package_id"],
         )
-        store.append(
-            JournalEvent(
-                run_id=run_id,
-                event_id=f"EVENT-{run_id}-{store.next_event_seq(run_id):03d}",
-                event_seq=store.next_event_seq(run_id),
-                stage_id="DISCOVERY",
-                event_type="RUN_COMPLETED",
-                stage_result_id=result_id,
-                attempt_id=attempt_id,
-                event_status="COMPLETED",
-                traceability=stage_trace,
-                source_id=source_package["source_id"],
-                batch_id=source_package["package_id"],
-            ),
-            source_id=source_package["source_id"],
-            batch_id=source_package["package_id"],
-        )
+        discovery_payload = adapter_result.payload.get("result")
+        if not discovery_payload:
+            return {"status": "RECONCILIATION_INPUT_MISSING", "run_id": run_id}
 
-        return {
-            "status": "PIPELINE_COMPLETED",
-            "run_id": run_id,
-            "source_id": source_package["source_id"],
-            "source_package_id": source_package["package_id"],
-            "batches": batches,
-            "adapter": adapter_result.payload,
-        }
+        return continue_to_reconciliation(
+            store=store,
+            registry=registry,
+            adapter_persistence=adapter_persistence,
+            run_id=run_id,
+            source_package=source_package,
+            discovery_payload=discovery_payload.get("discovery", discovery_payload),
+        )
     finally:
         store.close()
 
@@ -320,6 +307,8 @@ def main() -> int:
     print(json.dumps(out, ensure_ascii=False, indent=2))
     return 0 if out["status"] in {
         "PIPELINE_COMPLETED",
+        "RECONCILIATION_COMPLETED",
+        "HUMAN_REVIEW_REQUIRED",
         "PIPELINE_READY",
         "PRODUCTION_ADAPTER_UNAVAILABLE",
     } else 1
