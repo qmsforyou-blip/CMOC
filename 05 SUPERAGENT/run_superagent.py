@@ -17,6 +17,7 @@ from typing import Any
 from discovery_production_adapter import run_discovery_adapter
 from durable_adapter_persistence import DurableAdapterPersistence
 from production_adapter_runtime import ProductionAdapter, ProductionAdapterRegistry
+from reconciliation_production_adapter import run_reconciliation_adapter
 from runtime_state_store import JournalEvent, RuntimeStateStore
 
 
@@ -301,6 +302,7 @@ def main() -> int:
                 implementation=run_discovery_adapter,
             )
         )
+        registry.register(ProductionAdapter(stage_id="RECONCILIATION", implementation=run_reconciliation_adapter))
         out = start_run(
             args.source_package,
             args.db,
