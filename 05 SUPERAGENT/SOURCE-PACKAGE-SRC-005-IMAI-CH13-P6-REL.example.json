@@ -1,0 +1,54 @@
+{
+  "package_id": "SOURCE-005-PACKAGE-002-CONTROLLED-CH13-P6-REL",
+  "source_id": "SRC-005",
+  "source_name": "Имаи Масааки — Гемба кайдзен. Путь к снижению затрат и повышению качества",
+  "source_type": "DOCX",
+  "source_version": "2014 Russian edition; chapter 13 extract file; bibliographic details not independently verified",
+  "source_package_status": "PARTIAL",
+  "work_scope": "chapter 13, extract page 6, Wiremold value stream review passage only; controlled relation evidence",
+  "source_file_library": "Имаи Масааки 3-Гемба кайдзен.Путь к снижению затрат и повышению качества глава 13 плюс.docx",
+  "fragments": [
+    {
+      "location": "chapter 13, extract page 6",
+      "text": "Source paraphrase: Wiremold assigned a manager to each of six product-family value streams. Byrne's team met these managers weekly; each reported progress through five groups of measures, with the discussion focused on current problems and improvement."
+    }
+  ],
+  "relation_evidence": [
+    {
+      "evidence_id": "EVID-IMA-CH13-P6-MANAGER-MEETING",
+      "location": "chapter 13, extract page 6",
+      "text": "Source paraphrase: Wiremold assigned a manager to each of six product-family value streams. Byrne's team met these managers weekly; each reported progress through five groups of measures, with the discussion focused on current problems and improvement.",
+      "supports_terms": [
+        "One manager per product-family value stream",
+        "Weekly team–value-stream manager meetings"
+      ]
+    },
+    {
+      "evidence_id": "EVID-IMA-CH13-P6-MEETING-MEASURES",
+      "location": "chapter 13, extract page 6",
+      "text": "Source paraphrase: Wiremold assigned a manager to each of six product-family value streams. Byrne's team met these managers weekly; each reported progress through five groups of measures, with the discussion focused on current problems and improvement.",
+      "supports_terms": [
+        "Weekly team–value-stream manager meetings",
+        "Five-group progress reporting"
+      ]
+    },
+    {
+      "evidence_id": "EVID-IMA-CH13-P6-MEETING-PROBLEMS",
+      "location": "chapter 13, extract page 6",
+      "text": "Source paraphrase: Wiremold assigned a manager to each of six product-family value streams. Byrne's team met these managers weekly; each reported progress through five groups of measures, with the discussion focused on current problems and improvement.",
+      "supports_terms": [
+        "Weekly team–value-stream manager meetings",
+        "Current-problem-and-improvement-focused weekly discussion"
+      ]
+    }
+  ],
+  "traceability": {
+    "source_id": "SRC-005",
+    "source_package_id": "SOURCE-005-PACKAGE-002-CONTROLLED-CH13-P6-REL",
+    "library_file_id": "libfile_86b6ddaf6d248191ac1db580948aa902",
+    "prior_analysis": "04 PATCH/PATCH-IMA-013-CEO-KAIZEN-v1.md, section 013.3",
+    "prior_run": "RUN-PILOT-003-SRC-005",
+    "prior_status": "Four DEFER decisions; no CMOC admission"
+  },
+  "boundary": "Evidence names current-run passport terms for source-supported pairs only; it does not assert relation type, machine identity, equivalence, or NEW."
+}
