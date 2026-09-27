@@ -150,7 +150,7 @@ def build_relation_candidates(
         )
 
     passport_ids = set(expected_scope)
-    evidence_ids = {e.get("evidence_id") for e in evidence}
+    evidence_by_id = {e.get("evidence_id"): e for e in evidence}
 
     for record in records:
         status = record.get("status")
@@ -172,8 +172,14 @@ def build_relation_candidates(
             basis_refs = record.get("basis_refs")
             if not isinstance(basis_refs, list) or not basis_refs:
                 raise M07LLMError("Relation candidate requires basis_refs")
-            if evidence_ids and not set(basis_refs).issubset(evidence_ids):
+            if not set(basis_refs).issubset(evidence_by_id):
                 raise M07LLMError("Relation candidate cites unavailable evidence")
+            endpoints = {record["from_passport_id"], record["to_passport_id"]}
+            if not any(
+                endpoints.issubset(set(evidence_by_id[ref].get("supports", [])))
+                for ref in basis_refs
+            ):
+                raise M07LLMError("Relation evidence does not support both endpoints")
             if record.get("evidence_gap") not in (None, ""):
                 raise M07LLMError("Accepted relation candidate must not carry evidence_gap")
 
