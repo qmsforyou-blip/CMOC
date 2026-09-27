@@ -16,6 +16,7 @@ from __future__ import annotations
 import json
 import os
 import urllib.request
+import urllib.error
 import ssl
 from typing import Any, Dict, List
 
@@ -72,6 +73,22 @@ def _request_json(payload: Dict[str, Any], timeout: int = 120) -> Dict[str, Any]
     try:
         with urllib.request.urlopen(req, context=_TLS_CONTEXT, timeout=timeout) as response:
             return json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        try:
+            error = json.loads(exc.read(4096)).get("error", {})
+        except (ValueError, UnicodeDecodeError):
+            error = {}
+        code = error.get("code") if isinstance(error, dict) else None
+        error_type = error.get("type") if isinstance(error, dict) else None
+        retry_after = exc.headers.get("Retry-After") if exc.headers else None
+        details = [f"HTTP {exc.code}"]
+        if isinstance(code, str):
+            details.append(f"code={code}")
+        if isinstance(error_type, str):
+            details.append(f"type={error_type}")
+        if retry_after:
+            details.append(f"retry_after={retry_after}")
+        raise M01LLMError("LLM request failed: " + "; ".join(details)) from exc
     except Exception as exc:
         raise M01LLMError(f"LLM request failed: {exc}") from exc
 
