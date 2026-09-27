@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Сопоставить набор одиннадцати стратегий QSB с DIS-0534, LAB-0051 и DIS-007 в разборе SRC-002; определить границу коллекции и её элементов; тождество и новизна не доказаны",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-27T14:55:21+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-001-SRC-002-MAT-PAS-001",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-001",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-001",
+      "classification_id": "CLS-001",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-001",
+      "object_boundary": "Limited to the collection denoted by \"Eleven QSB strategies\" as represented in source SRC-002 and supported by the supplied basis references; no identity or scope beyond this source is asserted.",
+      "passport_id": "PAS-001",
+      "reconciliation_id": "RECON-3b7c35a893c9a680",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-001-CONTROLLED-1-6",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
