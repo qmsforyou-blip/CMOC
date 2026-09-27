@@ -1,0 +1,24 @@
+{
+  "package_id": "SOURCE-005-PACKAGE-001-CONTROLLED-CH13-P6",
+  "source_id": "SRC-005",
+  "source_name": "Имаи Масааки — Гемба кайдзен. Путь к снижению затрат и повышению качества",
+  "source_type": "DOCX",
+  "source_version": "2014 Russian edition; chapter 13 extract file; bibliographic details not independently verified",
+  "source_package_status": "PARTIAL",
+  "work_scope": "chapter 13, extract page 6, Wiremold value stream review passage only",
+  "source_file_library": "Имаи Масааки 3-Гемба кайдзен.Путь к снижению затрат и повышению качества глава 13 плюс.docx",
+  "fragments": [
+    {
+      "location": "chapter 13, extract page 6",
+      "text": "Source paraphrase: Wiremold assigned a manager to each of six product-family value streams. Byrne's team met these managers weekly; each reported progress through five groups of measures, with the discussion focused on current problems and improvement."
+    }
+  ],
+  "traceability": {
+    "source_id": "SRC-005",
+    "source_package_id": "SOURCE-005-PACKAGE-001-CONTROLLED-CH13-P6",
+    "library_file_id": "libfile_86b6ddaf6d248191ac1db580948aa902",
+    "prior_analysis": "04 PATCH/PATCH-IMA-013-CEO-KAIZEN-v1.md, section 013.3",
+    "prior_status": "SINGLE-SOURCE / STRONG CANDIDATE; no CMOC admission asserted"
+  },
+  "boundary": "The fragment is a source paraphrase for discovery, not an admission decision or a direct quotation."
+}
