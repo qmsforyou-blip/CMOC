@@ -19,7 +19,8 @@
     "library_file_id": "libfile_86b6ddaf6d248191ac1db580948aa902",
     "prior_analysis": "04 PATCH/PATCH-IMA-013-CEO-KAIZEN-v1.md, sections 013.3a–f",
     "prior_run": "RUN-PILOT-003-SRC-005",
-    "prior_status": "Four component passports DEFER; no whole passport or CMOC admission"
+    "prior_status": "Four component passports DEFER; no whole passport or CMOC admission",
+    "change_notice": "0213+280926"
   },
   "boundary": "Controlled source paraphrase for potential separate Discovery. This package does not assert a machine, organizational-construction target type, equivalence, novelty, or admission. Prior RUN remains unchanged."
 }
