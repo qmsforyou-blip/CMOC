@@ -39,6 +39,10 @@ class PersistedRelationProbeTest(unittest.TestCase):
             self.assertEqual(m07.call_args.args[1][0]["supports"], ["PAS-001", "PAS-002"])
             self.assertEqual(output["status"], "READ_ONLY_RELATION_PROBE")
             self.assertEqual(db.read_bytes(), before)
+            with patch("pilot_003_relation_probe.build_relation_candidates") as no_llm:
+                checked = inspect(db, "RUN-003", original, controlled, binding, validate_only=True)
+            no_llm.assert_not_called()
+            self.assertEqual(checked["status"], "RUN_BINDING_VALIDATED")
 
             for changed in (
                 {**binding, "run_id": "OTHER-RUN"},
