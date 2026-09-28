@@ -34,3 +34,9 @@ Before a live admission attempt, identify a stable whole-object boundary and tar
 Проверен `DISCOVERY-RESULT-CONTRACT-001`: готовый source-bound DISCOVERY_RESULT передаётся в Reconciliation, а адаптация Reconciliation не вправе добавлять новый смысл добычи или решение NEW. `pilot_001_record_review.py` допускает ручное решение только для уникального `match_id` из сохранённого RECONCILIATION_RESULT. В RUN-003 имеются PAS-001…004, но нет паспорта и `match_id` для целого Value Stream Performance Review.
 
 Следовательно, аналитический кандидат §013.3 PATCH нельзя задним числом добавить в RUN-003 через M07/M08 или оформить как его human decision. Для формального решения о целом потребуется отдельный контролируемый вход Discovery и собственная цепочка PAS → Reconciliation → human review; подготовка такого входа не изменяет исходный RUN-003. Пока тип и выход целого не доказаны, эта новая добыча не запускается автоматически. Протоколы двух read-only relation diagnostics остаются доказательством только их ограниченного охвата.
+
+## Извещение на изменение — `0212+280926`: тип целого и контракт M05
+
+Проверка `m05_llm.py` показала разрешённые source-bound `working_class`: `SOURCE_IDENTITY`, `COLLECTION`, `DECISION`, `ACTIVITY`, `CONCEPT_MODEL`, `STRATEGY`, `STRUCTURAL_DISTINCTION`. Класса `ORGANIZATIONAL_CONSTRUCTION` в M05 нет. По `RECONCILIATION-INPUT-CONTRACT-001` рабочий класс паспорта **не отображается автоматически** в целевой тип CMOC; отдельного mapping для этого случая здесь не установлено.
+
+Поэтому предварительное аналитическое описание §013.3 как организационной практики не является готовым M05-классом или паспортом `ORGANIZATIONAL_CONSTRUCTION`. Запуск нового полного RUN ради присвоения этого типа без отдельного решения о границе и mapping дал бы ложное ощущение готовности. Текущий результат — выявленный контрактный пробел для целого; никакого изменения классификатора, RUN или индексируемого объекта.
