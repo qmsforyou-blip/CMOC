@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Формулировка объединяет несколько способностей системы: удерживать требования, видеть состояние, принимать решения и сохранять последствия решений. Пока не определено, является ли это единым объектом CMOC, составной моделью управляемости или набором самостоятельных механизмов. Требуется разделить составляющие и установить границу объекта. Отсутствие совпадения в текущем Query не доказывает новизну.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-28T14:49:07+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-008-SRC-008-LAB003-T0001-MAT-PAS-005",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-005",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-008",
+    "traceability": {
+      "candidate_id": "NOM-005",
+      "classification_id": "CLS-005",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-008-M06-006",
+      "match_id": "MAT-PAS-005",
+      "object_boundary": "Объект ограничен совокупностью, обозначенной как «Способности удерживать требования, видеть состояние, принимать решения и сохранять их последствия», в источнике SRC-008 и основаниями FORM-013, FORM-014, FORM-015.",
+      "passport_id": "PAS-005",
+      "reconciliation_id": "RECON-cea8b31a5730efb8",
+      "source_basis": [
+        "FORM-013",
+        "FORM-014",
+        "FORM-015"
+      ],
+      "source_id": "SRC-008",
+      "source_package": "SOURCE-008-PACKAGE-001-CONTROLLED-LAB003-T0001",
+      "upstream_batch": "BATCH-SRC-008-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
