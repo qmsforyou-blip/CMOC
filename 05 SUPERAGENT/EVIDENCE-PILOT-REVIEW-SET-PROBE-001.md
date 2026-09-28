@@ -25,3 +25,22 @@
 **Название файла:** `05 SUPERAGENT/EVIDENCE-PILOT-REVIEW-SET-PROBE-001.md`
 
 После fast-forward ветки пользователь выполнил probe на `pilot_007.sqlite`. Результат: `REVIEW_SET_COMPLETE_NO_ADMISSION`, `expected_count=4`, `decision_count=4`, `decision_results={DEFER:3, REJECT:1}`, `missing_match_ids=[]`, `errors=[]`. Проекция RUN остаётся `WAITING_HUMAN_REVIEW`. Команда не вызывала LLM и не писала в журнал/CMOC/индекс. Этим доказана read-only проверка комплектности **одного живого набора**; не доказаны агрегированное завершение RUN и физический Admission.
+
+## Проверка шести живых наборов
+
+**Извещение на изменение:** `0233+280926`  
+**Название файла:** `05 SUPERAGENT/EVIDENCE-PILOT-REVIEW-SET-PROBE-001.md`
+
+Пользователь выполнил тот же read-only probe на ещё пяти сохранённых базах. Все результаты — `REVIEW_SET_COMPLETE_NO_ADMISSION`, `missing_match_ids=[]`, `errors=[]`, `run_status=WAITING_HUMAN_REVIEW`.
+
+| RUN | Ожидалось / найдено | DEFER | REJECT |
+|---|---:|---:|---:|
+| PILOT-001 SRC-002 | 6 / 6 | 6 | 0 |
+| PILOT-002 SRC-004 | 2 / 2 | 2 | 0 |
+| PILOT-003 SRC-005 | 4 / 4 | 4 | 0 |
+| PILOT-005 SRC-005-WHOLE | 5 / 5 | 4 | 1 |
+| PILOT-006 SRC-002-ASSIGNMENT | 2 / 2 | 1 | 1 |
+| PILOT-007 SRC-002-PERFORMANCE | 4 / 4 | 3 | 1 |
+| **Всего** | **23 / 23** | **20** | **3** |
+
+Доказана структурная комплектность решений относительно сохранённых Reconciliation во всех шести живых RUN. Никакое решение о `NEW`, Admission или CMOC write из этой сводки не следует. Поскольку скрипт не посылает событие в журнал, все шесть RUN корректно сохраняют `WAITING_HUMAN_REVIEW`; термин `REVIEW_SET_COMPLETE` относится к набору JSON решений, а не к жизненному циклу RUN.
