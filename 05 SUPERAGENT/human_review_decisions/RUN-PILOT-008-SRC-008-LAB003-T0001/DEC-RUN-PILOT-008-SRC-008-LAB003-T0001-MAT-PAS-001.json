@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Формулировка «Управляемость как свойство системы» является базовым понятием CMOC. Требуется проверить её тождество и границу относительно T-0001, LAB-001, DIS-* и других существующих объектов. Отсутствие совпадения в текущем Query не доказывает новизну. До завершения проверки решение ADMIT_NEW не принимается.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-28T14:43:44+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-008-SRC-008-LAB003-T0001-MAT-PAS-001",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-001",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-008",
+    "traceability": {
+      "candidate_id": "NOM-001",
+      "classification_id": "CLS-001",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-008-M06-006",
+      "match_id": "MAT-PAS-001",
+      "object_boundary": "Объект ограничен представлением «Управляемость как свойство системы» в источнике SRC-008 и основаниями FORM-001, FORM-002, FORM-003.",
+      "passport_id": "PAS-001",
+      "reconciliation_id": "RECON-cea8b31a5730efb8",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ],
+      "source_id": "SRC-008",
+      "source_package": "SOURCE-008-PACKAGE-001-CONTROLLED-LAB003-T0001",
+      "upstream_batch": "BATCH-SRC-008-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
