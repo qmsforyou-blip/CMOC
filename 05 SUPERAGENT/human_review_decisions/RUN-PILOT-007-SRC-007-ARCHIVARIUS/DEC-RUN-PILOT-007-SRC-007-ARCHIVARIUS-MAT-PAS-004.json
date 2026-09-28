@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Формулировка описывает разные представления одного онтологического ядра — книгу, диагностику, Академию, AI и консалтинг. Пока не определено, является ли это самостоятельным объектом, отношением представления, архитектурным принципом или правилом проекции. Требуется уточнить тип конструкции и её границу. Тождество и новизна пока не доказаны.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-28T14:02:31+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-007-SRC-007-ARCHIVARIUS-MAT-PAS-004",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-004",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-007",
+    "traceability": {
+      "candidate_id": "NOM-004",
+      "classification_id": "CLS-004",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-007-M06-006",
+      "match_id": "MAT-PAS-004",
+      "object_boundary": "Только употребление термина «Представления одного онтологического ядра», представленное в источнике SRC-007 и ограниченное основаниями FORM-010, FORM-011 и FORM-012; тождество с объектами вне этого источника не устанавливается.",
+      "passport_id": "PAS-004",
+      "reconciliation_id": "RECON-7607cea6c559de20",
+      "source_basis": [
+        "FORM-010",
+        "FORM-011",
+        "FORM-012"
+      ],
+      "source_id": "SRC-007",
+      "source_package": "SOURCE-007-PACKAGE-001-CONTROLLED-ARCHIVARIUS",
+      "upstream_batch": "BATCH-SRC-007-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
