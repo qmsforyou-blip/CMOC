@@ -34,6 +34,11 @@ def load_source_package(path: str) -> dict[str, Any]:
         "COMPLETE", "PARTIAL", "UNKNOWN"
     }:
         raise ValueError("SOURCE_PACKAGE_INVALID: invalid status")
+    if "relation_evidence" in payload:
+        raise ValueError(
+            "SOURCE_PACKAGE_RELATION_EVIDENCE_REQUIRES_PERSISTED_RUN: "
+            "use a controlled RUN-bound M07 continuation"
+        )
     return payload
 
 
