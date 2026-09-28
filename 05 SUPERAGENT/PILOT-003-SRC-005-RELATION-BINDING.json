@@ -1,0 +1,57 @@
+{
+  "type": "CONTROLLED_RELATION_BINDING",
+  "status": "HUMAN_REVIEW_CANDIDATE",
+  "run_id": "RUN-PILOT-003-SRC-005",
+  "source_id": "SRC-005",
+  "source_package_id": "SOURCE-005-PACKAGE-001-CONTROLLED-CH13-P6",
+  "evidence_package_id": "SOURCE-005-PACKAGE-002-CONTROLLED-CH13-P6-REL",
+  "passports": {
+    "PAS-001": {
+      "working_class": "STRUCTURAL_DISTINCTION",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ]
+    },
+    "PAS-002": {
+      "working_class": "ACTIVITY",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ]
+    },
+    "PAS-003": {
+      "working_class": "ACTIVITY",
+      "source_basis": [
+        "FORM-007",
+        "FORM-008",
+        "FORM-009"
+      ]
+    },
+    "PAS-004": {
+      "working_class": "ACTIVITY",
+      "source_basis": [
+        "FORM-010",
+        "FORM-011",
+        "FORM-012"
+      ]
+    }
+  },
+  "evidence_pairs": {
+    "EVID-IMA-CH13-P6-MANAGER-MEETING": [
+      "PAS-001",
+      "PAS-002"
+    ],
+    "EVID-IMA-CH13-P6-MEETING-MEASURES": [
+      "PAS-002",
+      "PAS-003"
+    ],
+    "EVID-IMA-CH13-P6-MEETING-PROBLEMS": [
+      "PAS-002",
+      "PAS-004"
+    ]
+  },
+  "boundary": "Source-supported pair selection for read-only M07; no relation type, M08 decision, Admission, or CMOC write is approved."
+}
