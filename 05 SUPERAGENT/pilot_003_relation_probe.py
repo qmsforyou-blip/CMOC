@@ -49,7 +49,8 @@ def bind_evidence(run_id: str, original: dict, controlled: dict, passports: list
     return evidence
 
 
-def inspect(db_path: Path, run_id: str, original: dict, controlled: dict, binding: dict) -> dict:
+def inspect(db_path: Path, run_id: str, original: dict, controlled: dict, binding: dict,
+            validate_only: bool = False) -> dict:
     if original["source_id"] != controlled["source_id"] or original["fragments"] != controlled["fragments"]:
         raise ValueError("SOURCE_MISMATCH: controlled evidence must use identical source fragments")
     with sqlite3.connect(f"file:{db_path.resolve()}?mode=ro", uri=True) as db:
@@ -67,15 +68,16 @@ def inspect(db_path: Path, run_id: str, original: dict, controlled: dict, bindin
     if m06 is None or m06["source_id"] != original["source_id"]:
         raise ValueError("M06_PASSPORT_RECORDS_NOT_FOUND")
     evidence = bind_evidence(run_id, original, controlled, m06["records"], binding)
-    records = build_relation_candidates(m06["records"], evidence)
+    records = [] if validate_only else build_relation_candidates(m06["records"], evidence)
     return {
-        "status": "READ_ONLY_RELATION_PROBE",
+        "status": "RUN_BINDING_VALIDATED" if validate_only else "READ_ONLY_RELATION_PROBE",
         "run_id": run_id,
         "source_package_id": original["package_id"],
         "evidence_package_id": controlled["package_id"],
         "relation_evidence": evidence,
         "records": records,
-        "boundary": "M07 diagnostic only; no RUN, decisions, CMOC, or OBJECT INDEX write",
+        "boundary": "No LLM call; no writes" if validate_only else
+                    "M07 diagnostic only; no RUN, decisions, CMOC, or OBJECT INDEX write",
     }
 
 
@@ -87,11 +89,13 @@ def main() -> None:
     parser.add_argument("--original", type=Path, default=here / "SOURCE-PACKAGE-SRC-005-IMAI-CH13-P6.example.json")
     parser.add_argument("--evidence", type=Path, default=here / "SOURCE-PACKAGE-SRC-005-IMAI-CH13-P6-REL.example.json")
     parser.add_argument("--binding", type=Path, default=here / "PILOT-003-SRC-005-RELATION-BINDING.json")
+    parser.add_argument("--validate-only", action="store_true")
     args = parser.parse_args()
     original = json.loads(args.original.read_text(encoding="utf-8"))
     controlled = json.loads(args.evidence.read_text(encoding="utf-8"))
     binding = json.loads(args.binding.read_text(encoding="utf-8"))
-    print(json.dumps(inspect(args.db, args.run_id, original, controlled, binding), ensure_ascii=False, indent=2))
+    print(json.dumps(inspect(args.db, args.run_id, original, controlled, binding,
+                             validate_only=args.validate_only), ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
