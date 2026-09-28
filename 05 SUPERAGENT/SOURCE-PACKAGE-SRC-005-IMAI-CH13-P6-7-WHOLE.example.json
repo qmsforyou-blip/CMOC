@@ -10,7 +10,7 @@
   "fragments": [
     {
       "location": "chapter 13, extract pages 6–7",
-      "text": "Source paraphrase: Wiremold organized six value streams by product family, each with a manager. Byrne and his team met those managers weekly. Each manager presented progress using five groups of forward-looking measures: customer service, productivity, quality, inventory turnover, and 5S/visual control. The discussion focused on current issues, with short speaking times. The passage also describes improvement targets and separate defect-reduction work; it does not explicitly say that the weekly meeting assigned actions, owners, due dates, or follow-up checks. The bounded subject for analysis is the weekly review practice as a whole, while its individual manager, meeting, reporting, and discussion components were already extracted in RUN-PILOT-003-SRC-005."
+      "text": "Source paraphrase: Wiremold organized six value streams by product family, each with a manager. Byrne and his team met those managers weekly. Each manager presented progress using five groups of forward-looking measures: customer service, productivity, quality, inventory turnover, and 5S/visual control. The discussion focused on current issues, with short speaking times. The chapter also describes improvement targets and separate defect-reduction work."
     }
   ],
   "traceability": {
@@ -22,5 +22,5 @@
     "prior_status": "Four component passports DEFER; no whole passport or CMOC admission",
     "change_notice": "0213+280926"
   },
-  "boundary": "Controlled source paraphrase for potential separate Discovery. This package does not assert a machine, organizational-construction target type, equivalence, novelty, or admission. Prior RUN remains unchanged."
+  "boundary": "Controlled source paraphrase for potential separate Discovery of the weekly review practice as a whole. The supplied passage does not establish that this meeting assigned actions, owners, due dates, or follow-up checks. This package does not assert a machine, organizational-construction target type, equivalence, novelty, or admission. Prior RUN remains unchanged."
 }
