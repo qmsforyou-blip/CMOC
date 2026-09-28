@@ -17,4 +17,11 @@
 
 ## Граница
 
-`REVIEW_SET_COMPLETE_NO_ADMISSION` означает только полноту и структурную согласованность сохранённых решений относительно конкретного Reconciliation. Это не переводит RUN в `COMPLETED`, не посылает `HUMAN_DECISION_RECORDED`, не подтверждает семантическую обоснованность решений и не создаёт Admission. `REVIEW_SET_COMPLETE_ADMISSION_PENDING` также не является разрешением физической записи: для `ADMIT_NEW/EXISTING` нужны отдельные контрактные проверки. Живые базы RUN-001…007 этим тестом ещё не проверены.
+`REVIEW_SET_COMPLETE_NO_ADMISSION` означает только полноту и структурную согласованность сохранённых решений относительно конкретного Reconciliation. Это не переводит RUN в `COMPLETED`, не посылает `HUMAN_DECISION_RECORDED`, не подтверждает семантическую обоснованность решений и не создаёт Admission. `REVIEW_SET_COMPLETE_ADMISSION_PENDING` также не является разрешением физической записи: для `ADMIT_NEW/EXISTING` нужны отдельные контрактные проверки. На момент первой фиксации живые базы RUN-001…007 ещё не проверялись этим скриптом; ниже приведён последующий живой результат RUN-007.
+
+## Живое свидетельство RUN-007
+
+**Извещение на изменение:** `0232+280926`  
+**Название файла:** `05 SUPERAGENT/EVIDENCE-PILOT-REVIEW-SET-PROBE-001.md`
+
+После fast-forward ветки пользователь выполнил probe на `pilot_007.sqlite`. Результат: `REVIEW_SET_COMPLETE_NO_ADMISSION`, `expected_count=4`, `decision_count=4`, `decision_results={DEFER:3, REJECT:1}`, `missing_match_ids=[]`, `errors=[]`. Проекция RUN остаётся `WAITING_HUMAN_REVIEW`. Команда не вызывала LLM и не писала в журнал/CMOC/индекс. Этим доказана read-only проверка комплектности **одного живого набора**; не доказаны агрегированное завершение RUN и физический Admission.
