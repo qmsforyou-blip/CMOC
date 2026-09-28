@@ -1,0 +1,42 @@
+{
+  "type": "CONTROLLED_M07_DIAGNOSTIC_TRANSCRIPT",
+  "status": "PROVISIONAL_SOURCE_REVIEW",
+  "provenance": "Manually transcribed from read-only M07 output for RUN-PILOT-003-SRC-005 on 27-09-2026; not a persisted M07 RUN result",
+  "run_id": "RUN-PILOT-003-SRC-005",
+  "source_id": "SRC-005",
+  "source_package_id": "SOURCE-005-PACKAGE-001-CONTROLLED-CH13-P6",
+  "evidence_package_id": "SOURCE-005-PACKAGE-002-CONTROLLED-CH13-P6-REL",
+  "excluded_relation": {
+    "id": "REL-001",
+    "reason": "PAS-001 working_class STRUCTURAL_DISTINCTION does not establish ROLE_PARTICIPATES_IN_ACTIVITY; relation type unresolved"
+  },
+  "records": [
+    {
+      "id": "REL-002",
+      "source_id": "SRC-005",
+      "from_passport_id": "PAS-003",
+      "to_passport_id": "PAS-002",
+      "relation_type": "ACTIVITY_OCCURS_WITHIN_ACTIVITY",
+      "status": "RELATION_CANDIDATE",
+      "epistemic_status": "PROVISIONAL",
+      "basis_refs": [
+        "EVID-IMA-CH13-P6-MEETING-MEASURES"
+      ],
+      "evidence_gap": null
+    },
+    {
+      "id": "REL-003",
+      "source_id": "SRC-005",
+      "from_passport_id": "PAS-004",
+      "to_passport_id": "PAS-002",
+      "relation_type": "ACTIVITY_OCCURS_WITHIN_ACTIVITY",
+      "status": "RELATION_CANDIDATE",
+      "epistemic_status": "PROVISIONAL",
+      "basis_refs": [
+        "EVID-IMA-CH13-P6-MEETING-PROBLEMS"
+      ],
+      "evidence_gap": null
+    }
+  ],
+  "boundary": "Read-only M08 diagnostic input only; no canonicalization criterion, human admission decision, or CMOC write"
+}
