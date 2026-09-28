@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат о графиках как примерах возник из служебного ограничения SOURCE PACKAGE 003, а не из самостоятельного объекта на странице 100 GM",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-28T06:02:22+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-007-SRC-002-PERFORMANCE-MAT-PAS-004",
+    "decision_result": "REJECT",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-004",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-004",
+      "classification_id": "CLS-004",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-004",
+      "object_boundary": "Bound exclusively to the collection expressed by this candidate term in SRC-002; no scope beyond the supplied source basis is asserted.",
+      "passport_id": "PAS-004",
+      "reconciliation_id": "RECON-2e43efc2ff910f0c",
+      "source_basis": [
+        "FORM-010",
+        "FORM-011",
+        "FORM-012"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-003-CONTROLLED-P100-PERFORMANCE",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
