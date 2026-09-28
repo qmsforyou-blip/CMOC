@@ -86,13 +86,13 @@ ASSIGNMENT GIVEN
   ↓
 CAPTURE IN ASSIGNMENT ACTION SHEET
   ↓
-TIME PASSES / WORK IS PERFORMED
+TIME PASSES / COMPLETION NOT ASSUMED
   ↓
 NEXT MEETING
   ↓
 REVIEW ASSIGNMENT
   ↓
-STATUS / FURTHER ACTION
+REVIEWED ASSIGNMENT (OUTCOME NOT SPECIFIED)
 ```
 
 ## 7. REL — ОТНОШЕНИЯ
@@ -115,7 +115,8 @@ Roadblock / Resource Need
 ```text
 Assignment
 → Review at Next Meeting
-→ Further Action / Status
+
+Further Action / Status: not specified by this page
 ```
 
 ## 8. MECHANISM — МЕХАНИЗМ
@@ -164,7 +165,7 @@ ASSIGNMENT ACTION SHEET
         ↓
 [ NEXT MEETING REVIEW ]
         ↓
-STATUS / FURTHER ACTION
+REVIEWED ASSIGNMENT (OUTCOME NOT SPECIFIED)
 ```
 
 Инженерный тест:
@@ -244,7 +245,7 @@ CAPTURE
  ↓
 NEXT REVIEW
  ↓
-STATUS / FURTHER ACTION
+REVIEWED ASSIGNMENT (OUTCOME NOT SPECIFIED)
 ```
 
 ## 16. FIXATION
@@ -252,3 +253,14 @@ STATUS / FURTHER ACTION
 PATCH зарегистрирован непосредственно в GitHub.
 
 CORE, каталоги, LAB и предыдущие PATCH не изменялись.
+
+## 17. Уточнение по графической форме и границе вывода
+
+**Извещение на изменение:** `0226+280926`  
+**Название файла:** `04 PATCH/GM-042-Assignment-Action-Sheet.md`
+
+Визуальная проверка исходной страницы 96 показывает в образце формы графы `Shift`, `Assign to`, `Task Name`, `Start Date`, `Expected Completion Date`, `Actual Completion Date`. Поэтому лист фиксирует исполнителя, задачу и плановую дату завершения; он также допускает запись фактической даты завершения. Эти графы отсутствовали в извлечённом тексте PDF и не были отражены в исходной версии PATCH.
+
+Прямое правило GM требует рассмотреть выданное поручение на следующей встрече. Оно не утверждает, что работа обязательно была выполнена между встречами, что к следующему Review заполнена фактическая дата, или что Review непременно породит новое действие. Упоминания `status / further action` в прежних схемах являлись инженерной гипотезой; в схемах разделов 6, 7, 11 и 15 они заменены границей, подтверждённой p. 96. Описание способности и эффекта в разделах 8–14 остаётся CMOC-интерпретацией со статусом кандидата.
+
+Контур в пределах источника: вопрос на встрече → поручение → запись в листе с исполнителем, задачей и сроком → рассмотрение на следующей встрече. Возможность записи фактического завершения не является доказательством исполнения каждого поручения. Канонизация и типизация живого `PAS-001` этим уточнением не выполняются.
