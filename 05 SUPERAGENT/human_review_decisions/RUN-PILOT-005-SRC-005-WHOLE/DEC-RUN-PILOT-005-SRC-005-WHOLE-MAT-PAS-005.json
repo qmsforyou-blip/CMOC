@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Разделение целей улучшения и работы по дефектам не подтверждено страницами 6–7 Имаи; оно возникло из формулировки пересказа SOURCE PACKAGE 003",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-28T04:22:31+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-005-SRC-005-WHOLE-MAT-PAS-005",
+    "decision_result": "REJECT",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-005",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-005",
+    "traceability": {
+      "candidate_id": "NOM-005",
+      "classification_id": "CLS-005",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-005-M06-006",
+      "match_id": "MAT-PAS-005",
+      "object_boundary": "Bound exclusively to the candidate term as represented in SRC-005 and supported by the supplied basis references; no scope beyond this source is asserted.",
+      "passport_id": "PAS-005",
+      "reconciliation_id": "RECON-b909c8338efbf9c1",
+      "source_basis": [
+        "FORM-013",
+        "FORM-014",
+        "FORM-015"
+      ],
+      "source_id": "SRC-005",
+      "source_package": "SOURCE-005-PACKAGE-003-CONTROLLED-CH13-P6-7-WHOLE",
+      "upstream_batch": "BATCH-SRC-005-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
