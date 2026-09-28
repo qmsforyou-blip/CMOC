@@ -28,3 +28,9 @@ Both decision records preserved `target_kind: RELATION_CANDIDATE`, `epistemic_st
 This demonstrates that a controlled M08 diagnostic can evaluate two reviewed M07 relation candidates against the saved M06 passports without repeating Discovery. It does **not** persist M07/M08 results in the RUN journal or supersede the four human `DEFER` decisions. It does not establish a passport for the whole `Value Stream Performance Review` construction in `PATCH-IMA-013-CEO-KAIZEN-v1.md`, semantic NEW, Admission, C1/C2/C3, or a CMOC/index write.
 
 Before a live admission attempt, identify a stable whole-object boundary and target type, compare it semantically against accumulated CMOC objects, and obtain an explicit human decision. No automatic promotion follows from `PROVISIONAL`.
+
+## Извещение на изменение — `0211+280926`: граница целого кандидата
+
+Проверен `DISCOVERY-RESULT-CONTRACT-001`: готовый source-bound DISCOVERY_RESULT передаётся в Reconciliation, а адаптация Reconciliation не вправе добавлять новый смысл добычи или решение NEW. `pilot_001_record_review.py` допускает ручное решение только для уникального `match_id` из сохранённого RECONCILIATION_RESULT. В RUN-003 имеются PAS-001…004, но нет паспорта и `match_id` для целого Value Stream Performance Review.
+
+Следовательно, аналитический кандидат §013.3 PATCH нельзя задним числом добавить в RUN-003 через M07/M08 или оформить как его human decision. Для формального решения о целом потребуется отдельный контролируемый вход Discovery и собственная цепочка PAS → Reconciliation → human review; подготовка такого входа не изменяет исходный RUN-003. Пока тип и выход целого не доказаны, эта новая добыча не запускается автоматически. Протоколы двух read-only relation diagnostics остаются доказательством только их ограниченного охвата.
