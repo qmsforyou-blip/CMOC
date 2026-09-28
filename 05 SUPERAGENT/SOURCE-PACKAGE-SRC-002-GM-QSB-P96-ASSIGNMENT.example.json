@@ -1,0 +1,25 @@
+{
+  "package_id": "SOURCE-002-PACKAGE-002-CONTROLLED-P96-ASSIGNMENT",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_type": "PDF",
+  "source_version": "Quality Systems Basics rev March 2009",
+  "source_package_status": "PARTIAL",
+  "work_scope": "p. 96, section 3.3 Verification Station / Leadership Support; Assignment Action Sheet example and its stated use only",
+  "source_file_library": "GM Quality System Basics Overview Supplier Audit(1).pdf",
+  "fragments": [
+    {
+      "location": "PDF p. 96, Assignment Action Sheet (Example)",
+      "text": "Source paraphrase: Issues arise during the daily Verification Station or weekly Problem Solving report-out meeting. Assignments made there are entered in an Assignment Action Sheet and reviewed at the next meeting. Examples of issues include material presentation, delivery, and support needed for work."
+    }
+  ],
+  "traceability": {
+    "source_id": "SRC-002",
+    "source_package_id": "SOURCE-002-PACKAGE-002-CONTROLLED-P96-ASSIGNMENT",
+    "library_file_id": "libfile_4e1c771338608191b6d57ffb162294b2",
+    "prior_analysis": "04 PATCH/GM-042-Assignment-Action-Sheet.md",
+    "prior_status": "CANDIDATE / SINGLE-SOURCE; no CMOC admission asserted",
+    "change_notice": "0219+280926"
+  },
+  "boundary": "This controlled paraphrase describes assignment capture and review at the next meeting. The sheet is an example artifact; the source does not prove that every assignment is completed or a universal mechanism across contexts. No working class, CMOC target type, equivalence, NEW, or admission is assigned."
+}
