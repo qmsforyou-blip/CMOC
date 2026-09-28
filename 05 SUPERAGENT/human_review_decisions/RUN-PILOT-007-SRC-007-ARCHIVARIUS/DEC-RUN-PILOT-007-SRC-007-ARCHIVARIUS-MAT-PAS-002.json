@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "CMOC Repository описан как организованное пространство хранения, развития и прослеживаемого изменения онтологии управляемости. Пока не определено, является ли это самостоятельным объектом CMOC, архитектурным контейнером, репозиторием или техническим представлением онтологии. Требуется уточнить границу и тип конструкции. Тождество и новизна пока не доказаны.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-28T13:58:14+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-007-SRC-007-ARCHIVARIUS-MAT-PAS-002",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-002",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-007",
+    "traceability": {
+      "candidate_id": "NOM-002",
+      "classification_id": "CLS-002",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-007-M06-006",
+      "match_id": "MAT-PAS-002",
+      "object_boundary": "Только употребление термина «Архивариус», представленное в источнике SRC-007 и ограниченное основаниями FORM-004, FORM-005 и FORM-006; тождество с объектами вне этого источника не устанавливается.",
+      "passport_id": "PAS-002",
+      "reconciliation_id": "RECON-7607cea6c559de20",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ],
+      "source_id": "SRC-007",
+      "source_package": "SOURCE-007-PACKAGE-001-CONTROLLED-ARCHIVARIUS",
+      "upstream_batch": "BATCH-SRC-007-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
