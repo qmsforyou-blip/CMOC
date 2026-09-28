@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Формулировка описывает связь LAB-001 как производственного реестра и LAB-003 как пространства накопления формулировок. Пока не определено, является ли это самостоятельным объектом CMOC, отношением между реестрами, архитектурным принципом организации знаний или описанием процесса накопления. Требуется проверить границу и тождество относительно существующих LAB-, DIS- и REG-объектов. Отсутствие совпадения в текущем Query не доказывает новизну.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-28T14:56:32+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-008-SRC-008-LAB003-T0001-MAT-PAS-011",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-011",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-008",
+    "traceability": {
+      "candidate_id": "NOM-011",
+      "classification_id": "CLS-011",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-008-M06-006",
+      "match_id": "MAT-PAS-011",
+      "object_boundary": "Объект ограничен совокупностью, обозначенной как «Назначения LAB-001 и LAB-003», в источнике SRC-008 и основаниями FORM-031, FORM-032, FORM-033.",
+      "passport_id": "PAS-011",
+      "reconciliation_id": "RECON-cea8b31a5730efb8",
+      "source_basis": [
+        "FORM-031",
+        "FORM-032",
+        "FORM-033"
+      ],
+      "source_id": "SRC-008",
+      "source_package": "SOURCE-008-PACKAGE-001-CONTROLLED-LAB003-T0001",
+      "upstream_batch": "BATCH-SRC-008-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
