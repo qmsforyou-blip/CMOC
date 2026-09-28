@@ -26,59 +26,9 @@ TASKS = ("M01", "M02", "M03", "M04", "M05", "M06", "M07", "M08")
 class MachineSource001Superagent(Superagent):
     """Production Discovery orchestrator with deterministic batch IDs."""
 
-    def __init__(self, source_package: dict[str, Any]):
-        self.source_package = source_package
-        super().__init__(
-            CONTRACTS, {**HANDLERS, "M07": self._m07_with_evidence}, MACHINE_IDS
-        )
+    def __init__(self):
+        super().__init__(CONTRACTS, HANDLERS, MACHINE_IDS)
         self._production_seq = 0
-
-    def _m07_with_evidence(self, inp: dict[str, Any], batch: Batch) -> dict[str, Any]:
-        evidence = bind_relation_evidence(self.source_package, inp["records"])
-        records = build_relation_candidates(inp["records"], evidence)
-        return _wrap_output(
-            batch, "RELATION_CANDIDATES", records, inp,
-            passports=inp["records"],
-            evaluated_passport_ids=[p["id"] for p in inp["records"]],
-            relation_evidence=evidence,
-        )
-
-
-def bind_relation_evidence(
-    source_package: dict[str, Any], passports: list[dict[str, Any]]
-) -> list[dict[str, Any]]:
-    """Bind manually supplied source evidence to unique current-run passports."""
-    templates = source_package.get("relation_evidence", [])
-    if not isinstance(templates, list):
-        raise ValueError("RELATION_EVIDENCE_INVALID: expected list")
-    fragments = {f.get("location"): f.get("text") for f in source_package["fragments"]}
-    by_term: dict[str, list[str]] = {}
-    for passport in passports:
-        by_term.setdefault(passport["term"], []).append(passport["id"])
-    bound = []
-    seen = set()
-    for template in templates:
-        if not isinstance(template, dict):
-            raise ValueError("RELATION_EVIDENCE_INVALID: expected object")
-        evidence_id = template.get("evidence_id")
-        location = template.get("location")
-        terms = template.get("supports_terms")
-        if not isinstance(evidence_id, str) or not evidence_id or evidence_id in seen:
-            raise ValueError("RELATION_EVIDENCE_INVALID: missing or duplicate evidence_id")
-        if location not in fragments or template.get("text") != fragments[location]:
-            raise ValueError("RELATION_EVIDENCE_INVALID: text must equal source fragment")
-        if not isinstance(terms, list) or len(terms) != 2 or terms[0] == terms[1]:
-            raise ValueError("RELATION_EVIDENCE_INVALID: two distinct terms required")
-        if any(len(by_term.get(term, [])) != 1 for term in terms):
-            raise ValueError("RELATION_EVIDENCE_INVALID: terms must bind uniquely")
-        seen.add(evidence_id)
-        bound.append({
-            "evidence_id": evidence_id,
-            "locations": [location],
-            "text": template["text"],
-            "supports": [by_term[term][0] for term in terms],
-        })
-    return bound
 
     def new_batch(
         self,
@@ -257,7 +207,7 @@ def run_discovery(
         "ref": source_package["package_id"],
     }
 
-    runner = MachineSource001Superagent(source_package)
+    runner = MachineSource001Superagent()
     result = runner.run_chain(run_id, source_package, initial, list(TASKS))
 
     if result.get("status") != "ACCEPT":
