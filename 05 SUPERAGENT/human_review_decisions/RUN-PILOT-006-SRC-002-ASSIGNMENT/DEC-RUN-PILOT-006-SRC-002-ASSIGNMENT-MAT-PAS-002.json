@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Страница 96 GM приводит примеры возможных вопросов, но не устанавливает самостоятельную модель их типов; кандидат NOM-002 расширяет смысл источника",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-28T04:37:36+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-006-SRC-002-ASSIGNMENT-MAT-PAS-002",
+    "decision_result": "REJECT",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-002",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-002",
+      "classification_id": "CLS-002",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-002",
+      "object_boundary": "Source-bound to SRC-002: the concept model denoted by the candidate term \"Material presentation, delivery, and work-support issue types\" as supported only by FORM-004, FORM-005, and FORM-006.",
+      "passport_id": "PAS-002",
+      "reconciliation_id": "RECON-040ac33bd282b233",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-002-CONTROLLED-P96-ASSIGNMENT",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
