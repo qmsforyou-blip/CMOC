@@ -1,0 +1,25 @@
+{
+  "package_id": "SOURCE-005-PACKAGE-003-CONTROLLED-CH13-P6-7-WHOLE",
+  "source_id": "SRC-005",
+  "source_name": "Имаи Масааки — Гемба кайдзен. Путь к снижению затрат и повышению качества",
+  "source_type": "DOCX",
+  "source_version": "2014 Russian edition; chapter 13 extract file; bibliographic details not independently verified",
+  "source_package_status": "PARTIAL",
+  "work_scope": "chapter 13 extract pages 6–7; Wiremold weekly value-stream review as one bounded practice; output and CMOC target type unresolved",
+  "source_file_library": "Имаи Масааки 3-Гемба кайдзен.Путь к снижению затрат и повышению качества глава 13 плюс.docx",
+  "fragments": [
+    {
+      "location": "chapter 13, extract pages 6–7",
+      "text": "Source paraphrase: Wiremold organized six value streams by product family, each with a manager. Byrne and his team met those managers weekly. Each manager presented progress using five groups of forward-looking measures: customer service, productivity, quality, inventory turnover, and 5S/visual control. The discussion focused on current issues, with short speaking times. The passage also describes improvement targets and separate defect-reduction work; it does not explicitly say that the weekly meeting assigned actions, owners, due dates, or follow-up checks. The bounded subject for analysis is the weekly review practice as a whole, while its individual manager, meeting, reporting, and discussion components were already extracted in RUN-PILOT-003-SRC-005."
+    }
+  ],
+  "traceability": {
+    "source_id": "SRC-005",
+    "source_package_id": "SOURCE-005-PACKAGE-003-CONTROLLED-CH13-P6-7-WHOLE",
+    "library_file_id": "libfile_86b6ddaf6d248191ac1db580948aa902",
+    "prior_analysis": "04 PATCH/PATCH-IMA-013-CEO-KAIZEN-v1.md, sections 013.3a–f",
+    "prior_run": "RUN-PILOT-003-SRC-005",
+    "prior_status": "Four component passports DEFER; no whole passport or CMOC admission"
+  },
+  "boundary": "Controlled source paraphrase for potential separate Discovery. This package does not assert a machine, organizational-construction target type, equivalence, novelty, or admission. Prior RUN remains unchanged."
+}
