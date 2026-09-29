@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Формулировка утверждает, что организация сохраняется благодаря воспроизводимости внутренних связей. Вероятна связь с существующими объектами CMOC, организационной системой, организационной конструкцией и воспроизводимостью способностей, но подтверждённый CMOC object ID не найден. Нельзя считать запись новой или существующей без установления точного соответствия и границы объекта. Требуется проверить связь с OBJECT INDEX и существующими объектами организации и организационной системы.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-29T03:04:33+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-010-SRC-010-LAB003-T0002-T0005-R2-MAT-PAS-003",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-003",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-010",
+    "traceability": {
+      "candidate_id": "NOM-003",
+      "classification_id": "CLS-003",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-010-M06-006",
+      "match_id": "MAT-PAS-003",
+      "object_boundary": "Только понятие «Воспроизводимость внутренних связей организации» в границах источника SRC-010 и указанного source_basis.",
+      "passport_id": "PAS-003",
+      "reconciliation_id": "RECON-06142d1abe881a99",
+      "source_basis": [
+        "FORM-007",
+        "FORM-008",
+        "FORM-009"
+      ],
+      "source_id": "SRC-010",
+      "source_package": "SOURCE-010-PACKAGE-001-CONTROLLED-LAB003-T0002-T0005",
+      "upstream_batch": "BATCH-SRC-010-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
