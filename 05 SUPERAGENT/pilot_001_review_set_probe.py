@@ -37,7 +37,14 @@ def inspect_review_set(db_path: Path, run_id: str, output_root: Path) -> dict:
     if len(expected) != len(records):
         raise ValueError("RECONCILIATION_MATCH_ID_NOT_UNIQUE")
     folder = output_root / run_id
-    files = sorted(folder.glob("DEC-*.json")) if folder.is_dir() else []
+    files = (
+        sorted(
+            folder.glob("DEC-*.json"),
+            key=lambda p: (p.name.startswith("DEC-AMEND-"), p.name),
+        )
+        if folder.is_dir()
+        else []
+    )
     seen: dict[str, str] = {}
     errors: list[str] = []
     for path in files:
