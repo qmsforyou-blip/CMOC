@@ -1,0 +1,58 @@
+{
+  "admission": {
+    "admission_id": "ADM-9923187002376c6e",
+    "admission_result": "ADMIT_NEW",
+    "decision_id": "DEC-AMEND-RUN-PILOT-010-SRC-010-LAB003-T0002-T0005-R2-MAT-PAS-021-002",
+    "match_id": "MAT-PAS-021",
+    "pipeline_status": "PENDING_C1",
+    "source_id": "SRC-010",
+    "source_lineage": {
+      "candidate_id": "NOM-021",
+      "classification_id": "CLS-021",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-010-M06-006",
+      "match_id": "MAT-PAS-021",
+      "object_boundary": "Только понятие «Независимость организационной конструкции от состава исполнителей» в границах источника SRC-010 и указанного source_basis.",
+      "passport_id": "PAS-021",
+      "reconciliation_id": "RECON-06142d1abe881a99",
+      "source_basis": [
+        "FORM-061",
+        "FORM-062",
+        "FORM-063"
+      ],
+      "source_id": "SRC-010",
+      "source_package": "SOURCE-010-PACKAGE-001-CONTROLLED-LAB003-T0002-T0005",
+      "upstream_batch": "BATCH-SRC-010-M05-005"
+    },
+    "target_cmoc_object_id": null,
+    "timestamp": "2026-09-29T04:10:40+00:00",
+    "traceability": {
+      "candidate_id": "NOM-021",
+      "classification_id": "CLS-021",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-010-M06-006",
+      "match_id": "MAT-PAS-021",
+      "object_boundary": "Только понятие «Независимость организационной конструкции от состава исполнителей» в границах источника SRC-010 и указанного source_basis.",
+      "passport_id": "PAS-021",
+      "reconciliation_id": "RECON-06142d1abe881a99",
+      "source_basis": [
+        "FORM-061",
+        "FORM-062",
+        "FORM-063"
+      ],
+      "source_id": "SRC-010",
+      "source_package": "SOURCE-010-PACKAGE-001-CONTROLLED-LAB003-T0002-T0005",
+      "upstream_batch": "BATCH-SRC-010-M05-005"
+    }
+  },
+  "boundary": {
+    "c1_c2_c3_execution": "NOT_PERFORMED",
+    "canonization_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "decision_mutation": "NONE",
+    "object_index_write": "NONE",
+    "origin": "ADMISSION",
+    "reconciliation_mutation": "NONE"
+  },
+  "type": "ADMISSION"
+}
