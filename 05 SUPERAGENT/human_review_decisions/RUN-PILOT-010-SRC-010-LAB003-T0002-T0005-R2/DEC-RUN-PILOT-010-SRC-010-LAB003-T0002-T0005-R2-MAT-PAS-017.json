@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Формулировка утверждает, что без организационной системы невозможно построить инженерную дисциплину полного жизненного цикла. Вероятна связь с существующими объектами CMOC, организационной системой, жизненным циклом и организационной инженерией, но подтверждённый CMOC object ID не найден. Нельзя считать запись новой или существующей без установления точного соответствия и границы объекта. Требуется проверить связь с OBJECT INDEX и существующими объектами организационной системы и полного жизненного цикла.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-09-29T03:14:29+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-010-SRC-010-LAB003-T0002-T0005-R2-MAT-PAS-017",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-017",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-010",
+    "traceability": {
+      "candidate_id": "NOM-017",
+      "classification_id": "CLS-017",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-010-M06-006",
+      "match_id": "MAT-PAS-017",
+      "object_boundary": "Только понятие «Определение свойств организации организационной конструкцией» в границах источника SRC-010 и указанного source_basis.",
+      "passport_id": "PAS-017",
+      "reconciliation_id": "RECON-06142d1abe881a99",
+      "source_basis": [
+        "FORM-049",
+        "FORM-050",
+        "FORM-051"
+      ],
+      "source_id": "SRC-010",
+      "source_package": "SOURCE-010-PACKAGE-001-CONTROLLED-LAB003-T0002-T0005",
+      "upstream_batch": "BATCH-SRC-010-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
