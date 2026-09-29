@@ -39,8 +39,8 @@ def inspect_review_set(db_path: Path, run_id: str, output_root: Path) -> dict:
     folder = output_root / run_id
     files = (
         sorted(
-            folder.glob("DEC-*.json"),
-            key=lambda p: (p.name.startswith("DEC-AMEND-"), p.name),
+            p for p in folder.glob("DEC-*.json")
+            if not p.name.startswith("DEC-AMEND-")
         )
         if folder.is_dir()
         else []
