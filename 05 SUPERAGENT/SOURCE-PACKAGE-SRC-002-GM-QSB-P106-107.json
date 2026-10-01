@@ -1,0 +1,65 @@
+{
+  "type": "SOURCE_PACKAGE",
+  "package_id": "SOURCE-002-PACKAGE-006-CONTROLLED-P106-107",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_title": "GM Quality System Basics Overview - Supplier Audit",
+  "source_revision": "March 2009",
+  "scope": {
+    "pages": [106, 107],
+    "section": "4.0 STANDARDIZED OPERATIONS",
+    "boundary": "Workplace Organization-5S; Standardized Work; Operator Instructions; Manufacturing Gage Control"
+  },
+  "fragments": [
+    {
+      "fragment_id": "FRAG-SRC002-P106-001",
+      "page": 106,
+      "title": "Standardized Operations",
+      "text": "Раздел 4.0 посвящён стандартизированным операциям и включает Workplace Organization-5S, Standardized Work (SOS), Operator Instructions (JES) и Manufacturing Gage Control.",
+      "candidate_scope": "структура системы стандартизированных операций"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P107-001",
+      "page": 107,
+      "title": "Standardized Operations outline",
+      "text": "Раздел включает введение, назначение, область применения и ответственность; преимущества стандартизированных операций; семь видов потерь и Workplace Organization-5S; Standardized Work; Standard Operation; Operator Instructions; Manufacturing Gage Control; итоговые требования и обязательства.",
+      "candidate_scope": "архитектура и состав стандартизированных операций"
+    }
+  ],
+  "provisional_candidates": [
+    {
+      "candidate_id": "CAND-SRC002-P106-001",
+      "title": "Standardized Operations system",
+      "object_type": "MANAGEMENT_MECHANISM",
+      "basis": "P106-P107",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P106-107-002",
+      "title": "Workplace Organization-5S",
+      "object_type": "MANAGEMENT_MECHANISM",
+      "basis": "P106-P107",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P106-107-003",
+      "title": "Standardized Work and Operator Instructions",
+      "object_type": "MANAGEMENT_MECHANISM",
+      "basis": "P106-P107",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P106-107-004",
+      "title": "Manufacturing Gage Control",
+      "object_type": "CONTROL_MECHANISM",
+      "basis": "P106-P107",
+      "status": "PROVISIONAL"
+    }
+  ],
+  "processing_boundary": {
+    "semantic_decision": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "human_review_required": true
+  }
+}
