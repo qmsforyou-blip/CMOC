@@ -1,0 +1,86 @@
+{
+  "type": "SOURCE_PACKAGE",
+  "package_id": "SOURCE-002-PACKAGE-008-CONTROLLED-P113-117",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_title": "GM Quality System Basics Overview - Supplier Audit",
+  "source_revision": "March 2009",
+  "scope": {
+    "pages": [113, 114, 115, 116, 117],
+    "section": "4.4 STANDARDIZED WORK",
+    "boundary": "Standard Operation; Standardized Work elements; Operator Instructions"
+  },
+  "fragments": [
+    {
+      "fragment_id": "FRAG-SRC002-P113-001",
+      "page": 113,
+      "title": "Standardized Work",
+      "text": "Стандартная работа задаёт согласованный способ выполнения операции и служит основой для устойчивого выполнения процесса.",
+      "candidate_scope": "механизм установления стандартного способа работы"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P114-001",
+      "page": 114,
+      "title": "Standard Operation",
+      "text": "Standard Operation описывает последовательность и условия выполнения операции в установленном рабочем процессе.",
+      "candidate_scope": "структура стандартной операции"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P115-001",
+      "page": 115,
+      "title": "Standardized Work elements",
+      "text": "Элементы стандартизированной работы связывают порядок действий, условия процесса и ожидаемый результат выполнения.",
+      "candidate_scope": "состав и границы стандартизированной работы"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P116-001",
+      "page": 116,
+      "title": "Operator Instructions",
+      "text": "Operator Instructions предназначены для передачи исполнителю установленного способа выполнения операции.",
+      "candidate_scope": "механизм инструктажа и передачи способа работы"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P117-001",
+      "page": 117,
+      "title": "Standardized Work application",
+      "text": "Стандартизированная работа применяется как основа выполнения, обучения, проверки и последующего улучшения процесса.",
+      "candidate_scope": "применение стандартизированной работы"
+    }
+  ],
+  "provisional_candidates": [
+    {
+      "candidate_id": "CAND-SRC002-P113-001",
+      "title": "Standardized Work",
+      "object_type": "MANAGEMENT_MECHANISM",
+      "basis": "P113-P117",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P114-001",
+      "title": "Standard Operation",
+      "object_type": "PROCESS_CONSTRUCTION",
+      "basis": "P114",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P116-001",
+      "title": "Operator Instructions",
+      "object_type": "DOCUMENTED_INSTRUCTION",
+      "basis": "P116",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P117-001",
+      "title": "Standardized Work as training and improvement basis",
+      "object_type": "ORGANIZATIONAL_CAPABILITY",
+      "basis": "P117",
+      "status": "PROVISIONAL"
+    }
+  ],
+  "processing_boundary": {
+    "semantic_decision": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "human_review_required": true
+  }
+}
