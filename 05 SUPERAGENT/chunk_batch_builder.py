@@ -14,6 +14,12 @@ def chunk_number(path: Path) -> int:
     return int(match.group(1))
 
 
+def stable_chunk_id(path: Path) -> str:
+    number = chunk_number(path)
+    suffix = re.sub(r"[^A-Za-z0-9]+", "", path.stem.split("-", 2)[-1]).upper()
+    return f"GM-{number:03d}" if not suffix else f"GM-{number:03d}-{suffix}"
+
+
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
@@ -40,7 +46,7 @@ def build_package(
     if not files:
         raise ValueError("NO_GM_CHUNKS_SELECTED")
 
-    # Наличие пропусков фиксируется в scope, но не блокирует сборку.
+    # РќР°Р»РёС‡РёРµ РїСЂРѕРїСѓСЃРєРѕРІ С„РёРєСЃРёСЂСѓРµС‚СЃСЏ РІ scope, РЅРѕ РЅРµ Р±Р»РѕРєРёСЂСѓРµС‚ СЃР±РѕСЂРєСѓ.
 
     fragments = []
     candidates = []
@@ -51,7 +57,7 @@ def build_package(
 
         fragments.append({
             "fragment_id": f"FRAG-SRC002-GM-{number:03d}",
-            "chunk_id": f"GM-{number:03d}",
+            "chunk_id": chunk_id,
             "source_file": path.name,
             "title": path.stem,
             "text": text,
@@ -60,8 +66,8 @@ def build_package(
         })
 
         candidates.append({
-            "candidate_id": f"CAND-SRC002-GM-{number:03d}",
-            "chunk_id": f"GM-{number:03d}",
+            "candidate_id": f"CAND-SRC002-{chunk_id}",
+            "chunk_id": chunk_id,
             "title": path.stem,
             "object_type": "SOURCE_BOUND_CANDIDATE",
             "basis": path.name,
