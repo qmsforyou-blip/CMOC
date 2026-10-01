@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат относится к связанному блоку Verification Station / Problem Solving / C.A.R.E. и представляет потенциально полезную практику управления качеством. Однако пока не установлено, является ли он самостоятельным объектом CMOC, частью общего механизма Verification Station, правилом, формой, показателем или элементом эскалации. Требуется сопоставление с существующими объектами CMOC и разделение границ связанных кандидатов. Новизна отдельного объекта CMOC пока не доказана.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-01T14:06:03+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-014-SRC-002-GM-P101-103-MAT-PAS-013",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-013",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-013",
+      "classification_id": "CLS-013",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-013",
+      "object_boundary": "Bound exclusively to the representation of this candidate term in SRC-002 as supported by the supplied source_basis; no scope beyond that source is asserted.",
+      "passport_id": "PAS-013",
+      "reconciliation_id": "RECON-6e59479f78a7a78e",
+      "source_basis": [
+        "FORM-037",
+        "FORM-038",
+        "FORM-039"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-005-CONTROLLED-P101-103",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
