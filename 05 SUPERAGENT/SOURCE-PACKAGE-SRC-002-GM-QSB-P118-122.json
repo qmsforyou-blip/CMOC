@@ -1,0 +1,79 @@
+{
+  "type": "SOURCE_PACKAGE",
+  "package_id": "SOURCE-002-PACKAGE-009-CONTROLLED-P118-122",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_title": "GM Quality System Basics Overview - Supplier Audit",
+  "source_revision": "March 2009",
+  "scope": {
+    "pages": [118, 119, 120, 121, 122],
+    "section": "4.4.2 OPERATOR INSTRUCTIONS; 4.5 MANUFACTURING GAGE CONTROL",
+    "boundary": "Operator Instructions (JES); Manufacturing Gage Control"
+  },
+  "fragments": [
+    {
+      "fragment_id": "FRAG-SRC002-P118-001",
+      "page": 118,
+      "title": "Operator Instructions (JES)",
+      "text": "Operator Instructions описывают установленный способ выполнения операции и обеспечивают передачу исполнителю требований к выполнению работы.",
+      "candidate_scope": "документированная инструкция оператора"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P119-001",
+      "page": 119,
+      "title": "Operator instruction content",
+      "text": "Инструкция оператора связывает требования процесса, последовательность действий и ожидаемый результат выполнения операции.",
+      "candidate_scope": "содержание инструкции оператора"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P120-001",
+      "page": 120,
+      "title": "Manufacturing Gage Control",
+      "text": "Manufacturing Gage Control относится к управлению измерительными средствами, применяемыми для контроля производственного процесса.",
+      "candidate_scope": "механизм управления производственными измерительными средствами"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P121-001",
+      "page": 121,
+      "title": "Gage control application",
+      "text": "Контроль измерительных средств обеспечивает пригодность и управляемость измерений, используемых при выполнении и проверке операций.",
+      "candidate_scope": "обеспечение пригодности измерений"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P122-001",
+      "page": 122,
+      "title": "Standardized Operations summary",
+      "text": "Operator Instructions и Manufacturing Gage Control рассматриваются как связанные элементы системы стандартизированных операций.",
+      "candidate_scope": "связь инструкций и контроля измерений с системой стандартизации"
+    }
+  ],
+  "provisional_candidates": [
+    {
+      "candidate_id": "CAND-SRC002-P118-119-001",
+      "title": "Operator Instructions (JES)",
+      "object_type": "DOCUMENTED_INSTRUCTION",
+      "basis": "P118-P119",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P120-121-001",
+      "title": "Manufacturing Gage Control",
+      "object_type": "CONTROL_MECHANISM",
+      "basis": "P120-P121",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P122-001",
+      "title": "Standardized Operations integration",
+      "object_type": "MANAGEMENT_MECHANISM",
+      "basis": "P122",
+      "status": "PROVISIONAL"
+    }
+  ],
+  "processing_boundary": {
+    "semantic_decision": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "human_review_required": true
+  }
+}
