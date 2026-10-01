@@ -1,0 +1,47 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION_AMENDMENT",
+    "original_decision_mutation": "NONE",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "amendment": {
+      "amendment_type": "HUMAN_DECISION_CORRECTION",
+      "previous_decision_result": "DEFER",
+      "supersedes_decision_id": "DEC-RUN-PILOT-012-SRC-012-LAB005-DEPENDENCE-PEOPLE-MAT-PAS-009"
+    },
+    "basis": "СГ изменяет ранее принятое решение DEFER после дополнительного рассмотрения границы объекта. MAT-PAS-009 принимается как новый объект CMOC в фактической границе: создание организационных способностей предприятия, позволяющих сохранять устойчивость независимо от отдельных сотрудников и кадровых изменений. Решение относится только к данной формулировке и не распространяется на организационные способности вообще. Точное тождество с существующим объектом не подтверждено; решение о новизне принимает человек СГ. Автоматическое решение NEW не выполнялось.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-01T08:34:30+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-AMEND-RUN-PILOT-012-SRC-012-LAB005-DEPENDENCE-PEOPLE-MAT-PAS-009-001",
+    "decision_result": "ADMIT_NEW",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-009",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-012",
+    "traceability": {
+      "candidate_id": "NOM-009",
+      "classification_id": "CLS-009",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-012-M06-006",
+      "match_id": "MAT-PAS-009",
+      "object_boundary": "Только деятельность, выраженная данным кандидатом термина в пределах источника SRC-012 и оснований FORM-025, FORM-026, FORM-027.",
+      "passport_id": "PAS-009",
+      "reconciliation_id": "RECON-5ac3eaa4180a87aa",
+      "source_basis": [
+        "FORM-025",
+        "FORM-026",
+        "FORM-027"
+      ],
+      "source_id": "SRC-012",
+      "source_package": "SOURCE-012-PACKAGE-001-CONTROLLED-LAB005-DEPENDENCE-PEOPLE",
+      "upstream_batch": "BATCH-SRC-012-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
