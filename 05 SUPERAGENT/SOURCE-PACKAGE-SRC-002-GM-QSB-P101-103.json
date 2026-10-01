@@ -1,0 +1,42 @@
+{
+  "type": "SOURCE_PACKAGE",
+  "package_id": "SOURCE-002-PACKAGE-005-CONTROLLED-P101-103",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_title": "GM Quality System Basics Overview - Supplier Audit",
+  "source_revision": "March 2009",
+  "scope": {
+    "pages": [101, 102, 103],
+    "section": "Verification Station 3.5-3.7",
+    "boundary": "Problem Solving; Process Diagram; C.A.R.E.; Summary / Shalls"
+  },
+  "fragments": [
+    {
+      "fragment_id": "FRAG-SRC002-P101-001",
+      "page": 101,
+      "title": "Verification Station Problem Solving",
+      "text": "Leadership shall support team problem solving based on Verification Station data. Defects are prioritized using Pareto analysis, problems are assigned to the team, status is reviewed weekly, the team uses a standard internal problem-solving form, and leadership identifies when escalation to a higher level of problem solving is needed.",
+      "candidate_scope": "team problem-solving and escalation mechanism based on Verification Station data"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P102-001",
+      "page": 102,
+      "title": "Verification Station Process Diagram",
+      "text": "Verification Stations can be placed anywhere in the process. Feed Forward and Feed Back connect operations, suppliers, customer-related checks, warranty and liaison activities. Alarm and escalation should be applied to each process step.",
+      "candidate_scope": "distributed process control and feedback architecture"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P103-001",
+      "page": 103,
+      "title": "C.A.R.E. and Verification Station Summary",
+      "text": "C.A.R.E. protects the customer from non-conforming product, discrepancies and labeling errors, verifies process controls, uses an alarm limit of one, reports non-conforming data to Fast Response, and adds root cause and corrective action to the Layered Process Audit. Verification Station requirements include daily meetings, documented responses to calls for help, immediate action at alarm limits, escalation and weekly problem-solving review.",
+      "candidate_scope": "customer acceptance review and mandatory Verification Station rules"
+    }
+  ],
+  "processing_boundary": {
+    "semantic_decision": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "human_review_required": true
+  }
+}
