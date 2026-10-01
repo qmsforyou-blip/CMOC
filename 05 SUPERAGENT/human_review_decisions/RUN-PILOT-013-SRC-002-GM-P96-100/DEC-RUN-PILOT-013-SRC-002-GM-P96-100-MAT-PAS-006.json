@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат описывает проверку того, что Verification Station выполняет свою функцию и возвращает качество в процесс. Граница объекта пока не установлена: это может быть контрольный вопрос, механизм проверки, часть Verification Station или элемент цикла улучшения. Требуется дополнительное сопоставление с GM-045 и существующими объектами CMOC.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-01T13:51:57+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-013-SRC-002-GM-P96-100-MAT-PAS-006",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-006",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-006",
+      "classification_id": "CLS-006",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-006",
+      "object_boundary": "Source-bound to candidate term NOM-006 as classified in CLS-006 within SRC-002; no scope beyond the supplied source basis is asserted.",
+      "passport_id": "PAS-006",
+      "reconciliation_id": "RECON-eb24ee29a4b186b2",
+      "source_basis": [
+        "FORM-016",
+        "FORM-017",
+        "FORM-018"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-004-CONTROLLED-P96-100",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
