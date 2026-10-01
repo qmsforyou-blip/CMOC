@@ -1,78 +1,85 @@
 {
-  "type": "SOURCE_PACKAGE",
-  "package_id": "SOURCE-002-PACKAGE-004-CONTROLLED-P96-100",
-  "source_id": "SRC-002",
-  "source_title": "GM Quality System Basics Overview - Supplier Audit",
-  "source_revision": "March 2009",
-  "scope": {
-    "pages": [96, 97, 98, 99, 100],
-    "section": "Verification Station 3.3-3.4",
-    "boundary": "Assignment Action Sheet; Quality Feedback/Feed Forward; Performance Metrics"
-  },
-  "fragments": [
-    {
-      "fragment_id": "FRAG-SRC002-P96-001",
-      "page": 96,
-      "title": "Assignment Action Sheet",
-      "text": "Issues arising at the daily Verification Station or weekly Problem Solving report-out meeting are captured as assignments and reviewed at the next meeting. Issues may concern material presentation, delivery, or support needed to perform work better, faster, or more accurately.",
-      "candidate_scope": "mechanism for recording and reviewing assignments"
-    },
-    {
-      "fragment_id": "FRAG-SRC002-P97-001",
-      "page": 97,
-      "title": "Quality Feedback / Feed Forward",
-      "text": "Quality expectations and results are communicated between customers and suppliers through standardized communication pathways so information reaches those who need it.",
-      "candidate_scope": "standardized quality communication mechanism"
-    },
-    {
-      "fragment_id": "FRAG-SRC002-P98-001",
-      "page": 98,
-      "title": "Verification Station effectiveness question",
-      "text": "How do we know that the Verification Station is doing its job and driving quality back into the station?",
-      "candidate_scope": "control question for effectiveness of the feedback loop"
-    },
-    {
-      "fragment_id": "FRAG-SRC002-P99-001",
-      "page": 99,
-      "title": "Quality feedback paths",
-      "text": "Feedback includes defects found through internal audit or containment checks, issues caught through supplier contact, and issues that escaped to the customer and were found by the customer.",
-      "candidate_scope": "classification of feedback and escape paths"
-    },
-    {
-      "fragment_id": "FRAG-SRC002-P100-001",
-      "page": 100,
-      "title": "Performance Metrics",
-      "text": "The check portion of implementing a Verification Station is measuring effectiveness and seeing results. This can use a line graph for the number of red days for each upstream customer and internal metrics such as scrap, direct run, internal ppm, efficiency, and uptime.",
-      "candidate_scope": "effectiveness measurement practice and metric set"
-    }
-  ],
-  "provisional_candidates": [
-    {
-      "candidate_id": "CAND-SRC002-P96-001",
-      "title": "Assignment Action Sheet",
-      "object_type": "MECHANISM",
-      "basis": "P96",
-      "status": "PROVISIONAL"
-    },
-    {
-      "candidate_id": "CAND-SRC002-P97-100-001",
-      "title": "Verification Station quality feedback loop",
-      "object_type": "MECHANISM",
-      "basis": "P97-P99",
-      "status": "PROVISIONAL"
-    },
-    {
-      "candidate_id": "CAND-SRC002-P100-001",
-      "title": "Verification Station effectiveness measurement",
-      "object_type": "ORGANIZATIONAL_CAPABILITY",
-      "basis": "P98-P100",
-      "status": "PROVISIONAL"
-    }
-  ],
-  "processing_boundary": {
-    "semantic_decision": "NOT_PERFORMED",
-    "cmoc_write": "NONE",
-    "object_index_write": "NONE",
-    "human_review_required": true
-  }
+    "type":  "SOURCE_PACKAGE",
+    "package_id":  "SOURCE-002-PACKAGE-004-CONTROLLED-P96-100",
+    "source_id":  "SRC-002",
+    "source_title":  "GM Quality System Basics Overview - Supplier Audit",
+    "source_revision":  "March 2009",
+    "scope":  {
+                  "pages":  [
+                                96,
+                                97,
+                                98,
+                                99,
+                                100
+                            ],
+                  "section":  "Verification Station 3.3-3.4",
+                  "boundary":  "Assignment Action Sheet; Quality Feedback/Feed Forward; Performance Metrics"
+              },
+    "fragments":  [
+                      {
+                          "fragment_id":  "FRAG-SRC002-P96-001",
+                          "page":  96,
+                          "title":  "Assignment Action Sheet",
+                          "text":  "Issues arising at the daily Verification Station or weekly Problem Solving report-out meeting are captured as assignments and reviewed at the next meeting. Issues may concern material presentation, delivery, or support needed to perform work better, faster, or more accurately.",
+                          "candidate_scope":  "mechanism for recording and reviewing assignments"
+                      },
+                      {
+                          "fragment_id":  "FRAG-SRC002-P97-001",
+                          "page":  97,
+                          "title":  "Quality Feedback / Feed Forward",
+                          "text":  "Quality expectations and results are communicated between customers and suppliers through standardized communication pathways so information reaches those who need it.",
+                          "candidate_scope":  "standardized quality communication mechanism"
+                      },
+                      {
+                          "fragment_id":  "FRAG-SRC002-P98-001",
+                          "page":  98,
+                          "title":  "Verification Station effectiveness question",
+                          "text":  "How do we know that the Verification Station is doing its job and driving quality back into the station?",
+                          "candidate_scope":  "control question for effectiveness of the feedback loop"
+                      },
+                      {
+                          "fragment_id":  "FRAG-SRC002-P99-001",
+                          "page":  99,
+                          "title":  "Quality feedback paths",
+                          "text":  "Feedback includes defects found through internal audit or containment checks, issues caught through supplier contact, and issues that escaped to the customer and were found by the customer.",
+                          "candidate_scope":  "classification of feedback and escape paths"
+                      },
+                      {
+                          "fragment_id":  "FRAG-SRC002-P100-001",
+                          "page":  100,
+                          "title":  "Performance Metrics",
+                          "text":  "The check portion of implementing a Verification Station is measuring effectiveness and seeing results. This can use a line graph for the number of red days for each upstream customer and internal metrics such as scrap, direct run, internal ppm, efficiency, and uptime.",
+                          "candidate_scope":  "effectiveness measurement practice and metric set"
+                      }
+                  ],
+    "provisional_candidates":  [
+                                   {
+                                       "candidate_id":  "CAND-SRC002-P96-001",
+                                       "title":  "Assignment Action Sheet",
+                                       "object_type":  "MECHANISM",
+                                       "basis":  "P96",
+                                       "status":  "PROVISIONAL"
+                                   },
+                                   {
+                                       "candidate_id":  "CAND-SRC002-P97-100-001",
+                                       "title":  "Verification Station quality feedback loop",
+                                       "object_type":  "MECHANISM",
+                                       "basis":  "P97-P99",
+                                       "status":  "PROVISIONAL"
+                                   },
+                                   {
+                                       "candidate_id":  "CAND-SRC002-P100-001",
+                                       "title":  "Verification Station effectiveness measurement",
+                                       "object_type":  "ORGANIZATIONAL_CAPABILITY",
+                                       "basis":  "P98-P100",
+                                       "status":  "PROVISIONAL"
+                                   }
+                               ],
+    "processing_boundary":  {
+                                "semantic_decision":  "NOT_PERFORMED",
+                                "cmoc_write":  "NONE",
+                                "object_index_write":  "NONE",
+                                "human_review_required":  true
+                            },
+    "source_name":  "GM Quality System Basics Overview Supplier Audit"
 }
