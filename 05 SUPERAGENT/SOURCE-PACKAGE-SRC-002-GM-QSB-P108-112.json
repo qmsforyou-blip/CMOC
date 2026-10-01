@@ -1,0 +1,86 @@
+{
+  "type": "SOURCE_PACKAGE",
+  "package_id": "SOURCE-002-PACKAGE-007-CONTROLLED-P108-112",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_title": "GM Quality System Basics Overview - Supplier Audit",
+  "source_revision": "March 2009",
+  "scope": {
+    "pages": [108, 109, 110, 111, 112],
+    "section": "4.0 STANDARDIZED OPERATIONS",
+    "boundary": "Introduction; Benefits; Seven Types of Waste; Workplace Organization-5S; Standardized Work"
+  },
+  "fragments": [
+    {
+      "fragment_id": "FRAG-SRC002-P108-001",
+      "page": 108,
+      "title": "Standardized Operations introduction",
+      "text": "Введение в раздел Standardized Operations определяет назначение, область применения и ответственность за стандартизированные операции.",
+      "candidate_scope": "назначение и границы стандартизированных операций"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P109-001",
+      "page": 109,
+      "title": "Benefits of Standardized Operations",
+      "text": "Стандартизированные операции рассматриваются как средство повышения устойчивости выполнения работы, прозрачности процесса и управляемости отклонений.",
+      "candidate_scope": "эффекты и преимущества стандартизации"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P110-001",
+      "page": 110,
+      "title": "Seven Types of Waste",
+      "text": "Раздел рассматривает семь типов потерь как основу для выявления и устранения действий, не создающих ценности.",
+      "candidate_scope": "классификация потерь"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P111-001",
+      "page": 111,
+      "title": "Workplace Organization-5S",
+      "text": "Workplace Organization-5S представлена как организованный способ поддержания рабочего места и условий выполнения стандартизированной работы.",
+      "candidate_scope": "механизм организации рабочего места"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P112-001",
+      "page": 112,
+      "title": "Standardized Work",
+      "text": "Standardized Work рассматривается как отдельное направление раздела Standardized Operations, связанное с установлением и поддержанием стандартного способа выполнения работы.",
+      "candidate_scope": "механизм стандартизации выполнения работы"
+    }
+  ],
+  "provisional_candidates": [
+    {
+      "candidate_id": "CAND-SRC002-P108-109-001",
+      "title": "Standardized Operations purpose and responsibility",
+      "object_type": "MANAGEMENT_MECHANISM",
+      "basis": "P108-P109",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P110-001",
+      "title": "Seven Types of Waste",
+      "object_type": "DISTINCTION",
+      "basis": "P110",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P111-001",
+      "title": "Workplace Organization-5S",
+      "object_type": "MANAGEMENT_MECHANISM",
+      "basis": "P111",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P112-001",
+      "title": "Standardized Work",
+      "object_type": "MANAGEMENT_MECHANISM",
+      "basis": "P112",
+      "status": "PROVISIONAL"
+    }
+  ],
+  "processing_boundary": {
+    "semantic_decision": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "human_review_required": true
+  }
+}
