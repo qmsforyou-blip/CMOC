@@ -1,0 +1,17 @@
+py "05 SUPERAGENT\pilot_001_pipeline_runner.py" `
+  --admission "05 SUPERAGENT\admissions\RUN-PILOT-012-SRC-012-LAB005-DEPENDENCE-PEOPLE\ADM-72d2104b8d548846.json" `
+  --output "05 SUPERAGENT\c1_outputs\TEST-GENERIC-MAT-PAS-009.json" `
+  --record-id "PAS-009" `
+  --value "Создание незаменимых организационных способностей предприятия" `
+  --object-type "ORGANIZATIONAL_CAPABILITY" `
+  --canonical-name "Создание незаменимых организационных способностей предприятия" `
+  --source-id "SRC-012" `
+  --reconciliation-id "RECON-5ac3eaa4180a87aa" `
+  --match-id "MAT-PAS-009" `
+  --passport-id "PAS-009" `
+  --new-evidence-ref "PAS-009-FORM-025-027" `
+  --c2-target "05 SUPERAGENT\cmoc_write_targets\TEST-GENERIC-MAT-PAS-009" `
+  --run-id "RUN-TEST-GENERIC-MAT-PAS-009" `
+  --batch-id "BATCH-TEST-GENERIC-001" `
+  --attempt-id "ATTEMPT-TEST-GENERIC-C2-001" `
+  --result-id "RESULT-TEST-GENERIC-C2-001"
