@@ -1,0 +1,16 @@
+{
+    "package_id":  "SOURCE-011-PACKAGE-001-CONTROLLED-LAB004-ORG-MECHANISMS",
+    "source_id":  "SRC-011",
+    "source_name":  "Книга 4 «Архитектура требований» (3)",
+    "source_type":  "AUTHOR_MANUSCRIPT",
+    "source_origin":  "USER_AUTHORED",
+    "source_status":  "EXTERNAL_TO_CMOC",
+    "source_version":  "3",
+    "work_scope":  "Фрагмент «Из чего состоит управляемость»: строки 587–697; организационный механизм",
+    "fragments":  [
+                      {
+                          "location":  "Книга 4 / «Из чего состоит управляемость» / строки 587–697",
+                          "text":  ""
+                      }
+                  ]
+}
