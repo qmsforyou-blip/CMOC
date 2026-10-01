@@ -46,7 +46,7 @@ def build_package(
     if not files:
         raise ValueError("NO_GM_CHUNKS_SELECTED")
 
-    # РќР°Р»РёС‡РёРµ РїСЂРѕРїСѓСЃРєРѕРІ С„РёРєСЃРёСЂСѓРµС‚СЃСЏ РІ scope, РЅРѕ РЅРµ Р±Р»РѕРєРёСЂСѓРµС‚ СЃР±РѕСЂРєСѓ.
+    # Р СњР В°Р В»Р С‘РЎвЂЎР С‘Р Вµ Р С—РЎР‚Р С•Р С—РЎС“РЎРѓР С”Р С•Р Р† РЎвЂћР С‘Р С”РЎРѓР С‘РЎР‚РЎС“Р ВµРЎвЂљРЎРѓРЎРЏ Р Р† scope, Р Р…Р С• Р Р…Р Вµ Р В±Р В»Р С•Р С”Р С‘РЎР‚РЎС“Р ВµРЎвЂљ РЎРѓР В±Р С•РЎР‚Р С”РЎС“.
 
     fragments = []
     candidates = []
@@ -54,6 +54,8 @@ def build_package(
     for path in files:
         number = chunk_number(path)
         text = path.read_text(encoding="utf-8")
+
+        chunk_id = stable_chunk_id(path)
 
         fragments.append({
             "fragment_id": f"FRAG-SRC002-GM-{number:03d}",
