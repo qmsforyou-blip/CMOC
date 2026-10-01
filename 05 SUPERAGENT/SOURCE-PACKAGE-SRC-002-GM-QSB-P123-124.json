@@ -1,0 +1,65 @@
+{
+  "type": "SOURCE_PACKAGE",
+  "package_id": "SOURCE-002-PACKAGE-010-CONTROLLED-P123-124",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_title": "GM Quality System Basics Overview - Supplier Audit",
+  "source_revision": "March 2009",
+  "scope": {
+    "pages": [123, 124],
+    "section": "4.6 SUMMARY / SHALLS",
+    "boundary": "Standardized Operations final requirements and obligations"
+  },
+  "fragments": [
+    {
+      "fragment_id": "FRAG-SRC002-P123-001",
+      "page": 123,
+      "title": "Standardized Operations summary",
+      "text": "Итоговый раздел связывает организацию рабочего места, стандартную работу, инструкции оператора и контроль измерительных средств в единую систему стандартизированных операций.",
+      "candidate_scope": "сводная архитектура стандартизированных операций"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P123-002",
+      "page": 123,
+      "title": "Standardized Operations requirements",
+      "text": "Итоговые требования определяют необходимость поддерживать стандартизированный способ выполнения работы, доступные инструкции и управляемые условия контроля процесса.",
+      "candidate_scope": "обязательные требования к стандартизированным операциям"
+    },
+    {
+      "fragment_id": "FRAG-SRC002-P124-001",
+      "page": 124,
+      "title": "Standardized Operations shalls",
+      "text": "Раздел завершается перечнем обязательств, предназначенных для проверки наличия и применения элементов стандартизированных операций.",
+      "candidate_scope": "проверяемые обязательства и критерии применения"
+    }
+  ],
+  "provisional_candidates": [
+    {
+      "candidate_id": "CAND-SRC002-P123-001",
+      "title": "Standardized Operations integrated system",
+      "object_type": "MANAGEMENT_MECHANISM",
+      "basis": "P123",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P123-002",
+      "title": "Standardized Operations requirements",
+      "object_type": "REQUIREMENT",
+      "basis": "P123",
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-P124-001",
+      "title": "Standardized Operations shalls",
+      "object_type": "CONTROL_CRITERION",
+      "basis": "P124",
+      "status": "PROVISIONAL"
+    }
+  ],
+  "processing_boundary": {
+    "semantic_decision": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "human_review_required": true
+  }
+}
