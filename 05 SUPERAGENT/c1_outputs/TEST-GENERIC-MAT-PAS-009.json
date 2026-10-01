@@ -1,0 +1,33 @@
+{
+  "status": "CANONICALIZATION_READY",
+  "object_id": "OBJ-09da182f4bfeb8d4",
+  "object_type": "ORGANIZATIONAL_CAPABILITY",
+  "canonical_name": "Создание незаменимых организационных способностей предприятия",
+  "canonical_representation": {
+    "record_id": "PAS-009",
+    "value": "Создание незаменимых организационных способностей предприятия",
+    "object_type": "ORGANIZATIONAL_CAPABILITY",
+    "canonical_name": "Создание незаменимых организационных способностей предприятия"
+  },
+  "provenance": {
+    "source_id": "SRC-012",
+    "reconciliation_id": "RECON-5ac3eaa4180a87aa",
+    "match_id": "MAT-PAS-009"
+  },
+  "traceability": {
+    "source_id": "SRC-012",
+    "match_id": "MAT-PAS-009",
+    "passport_id": "PAS-009"
+  },
+  "new_evidence_ref": "PAS-009-FORM-025-027",
+  "approved_candidate_hash": "853f395d286925a83c92fd2df40c5c03155c4e64d12c8a8d2bb6a6240987e8f1",
+  "boundary": {
+    "canonization": "PERFORMED",
+    "new_decision": "NOT_PERFORMED",
+    "semantic_comparison": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "existing_object_mutation": "NONE",
+    "relations_created": "NONE"
+  }
+}
