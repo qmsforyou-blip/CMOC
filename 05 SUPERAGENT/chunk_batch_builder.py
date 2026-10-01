@@ -40,10 +40,7 @@ def build_package(
     if not files:
         raise ValueError("NO_GM_CHUNKS_SELECTED")
 
-    if missing:
-        raise ValueError(
-            "GM_CHUNKS_MISSING: " + ", ".join(f"GM-{n:03d}" for n in missing)
-        )
+    # Наличие пропусков фиксируется в scope, но не блокирует сборку.
 
     fragments = []
     candidates = []
@@ -82,6 +79,7 @@ def build_package(
             "chunk_start": f"GM-{start:03d}",
             "chunk_end": f"GM-{end:03d}",
             "chunk_count": len(files),
+            "missing_chunks": [f"GM-{number:03d}" for number in missing],
             "source_directory": str(patch_root),
         },
         "fragments": fragments,
