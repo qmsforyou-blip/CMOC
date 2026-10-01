@@ -28,7 +28,7 @@ def build_package(
         (
             path
             for path in patch_root.glob("GM-*.md")
-            if start <= chunk_number(path) <= end
+            if re.match(r"GM-\d+-", path.name) and start <= chunk_number(path) <= end
         ),
         key=chunk_number,
     )
