@@ -1,0 +1,11 @@
+{
+  "run_id": "RUN-PILOT-040-SRC-002-GM-096-MACHINE-PASSPORT-BASIS",
+  "status": "WAITING_LLM",
+  "stage": "DISCOVERY",
+  "adapter": "M03",
+  "progress": 35,
+  "total": 100,
+  "elapsed_seconds": 0,
+  "last_activity": "2026-10-02T17:00:23.362968+05:00",
+  "message": "LLM request is still running: 0 seconds elapsed"
+}
