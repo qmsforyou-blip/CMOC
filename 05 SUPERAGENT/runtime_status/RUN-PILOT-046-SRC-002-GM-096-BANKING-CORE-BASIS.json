@@ -1,0 +1,11 @@
+{
+  "run_id": "RUN-PILOT-046-SRC-002-GM-096-BANKING-CORE-BASIS",
+  "status": "WAITING_LLM",
+  "stage": "DISCOVERY",
+  "adapter": "M03",
+  "progress": 35,
+  "total": 100,
+  "elapsed_seconds": 45,
+  "last_activity": "2026-10-02T17:48:56.976481+05:00",
+  "message": "LLM request is still running: 45 seconds elapsed"
+}
