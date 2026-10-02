@@ -1,4 +1,4 @@
-"""PROD-ENTRY-001 — local manual-start runtime entry point.
+"""PROD-ENTRY-001 вЂ” local manual-start runtime entry point.
 
 The CLI establishes a durable RUN and structurally splits the supplied
 SOURCE_PACKAGE. It then checks the production-adapter boundary.
@@ -21,6 +21,86 @@ from reconciliation_production_adapter import run_reconciliation_adapter
 from pilot_001_orchestration import continue_to_reconciliation
 from runtime_state_store import JournalEvent, RuntimeStateStore
 
+
+
+def write_runtime_status(
+    db_path: str,
+    run_id: str,
+    status: str,
+    stage: str,
+    adapter: str,
+    progress: int,
+    total: int,
+    started_at: float,
+    message: str,
+) -> None:
+    root = Path(db_path).resolve().parent / "runtime_status"
+    root.mkdir(parents=True, exist_ok=True)
+
+    payload = {
+        "run_id": run_id,
+        "status": status,
+        "stage": stage,
+        "adapter": adapter,
+        "progress": progress,
+        "total": total,
+        "elapsed_seconds": int(time.time() - started_at),
+        "last_activity": datetime.now(timezone.utc).astimezone().isoformat(),
+        "message": message,
+    }
+
+    target = root / f"{run_id}.json"
+    target.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def start_runtime_heartbeat(
+    db_path: str,
+    run_id: str,
+    stage: str,
+    adapter: str,
+    started_at: float,
+) -> tuple[threading.Event, threading.Thread]:
+    stop_event = threading.Event()
+
+    def heartbeat() -> None:
+        while not stop_event.is_set():
+            elapsed = int(time.time() - started_at)
+            message = (
+                f"LLM request is still running: "
+                f"{elapsed} seconds elapsed"
+            )
+
+            write_runtime_status(
+                db_path=db_path,
+                run_id=run_id,
+                status="WAITING_LLM",
+                stage=stage,
+                adapter=adapter,
+                progress=35,
+                total=100,
+                started_at=started_at,
+                message=message,
+            )
+
+            print(
+                f"[HEARTBEAT] {run_id} | "
+                f"{stage} | {adapter} | "
+                f"{elapsed}s | waiting",
+                flush=True,
+            )
+
+            stop_event.wait(5)
+
+    thread = threading.Thread(
+        target=heartbeat,
+        name=f"heartbeat-{run_id}",
+        daemon=True,
+    )
+    thread.start()
+    return stop_event, thread
 
 def load_source_package(path: str) -> dict[str, Any]:
     payload = json.loads(Path(path).read_text(encoding="utf-8"))
@@ -186,7 +266,72 @@ def start_run(
             "discovery_run_id": f"{run_id}-DISCOVERY",
         }
 
-        adapter_result = registry.invoke(envelope, adapter_persistence)
+        started_at = time.time()
+
+        write_runtime_status(
+            db_path=db_path,
+            run_id=run_id,
+            status="DISCOVERY_REQUEST_SENT",
+            stage="DISCOVERY",
+            adapter="M03",
+            progress=30,
+            total=100,
+            started_at=started_at,
+            message="Discovery request sent to production adapter",
+        )
+
+        print(
+            f"[START] {run_id} | DISCOVERY | M03 | request sent",
+            flush=True,
+        )
+
+        heartbeat_stop, heartbeat_thread = start_runtime_heartbeat(
+            db_path=db_path,
+            run_id=run_id,
+            stage="DISCOVERY",
+            adapter="M03",
+            started_at=started_at,
+        )
+
+        try:
+            adapter_result = registry.invoke(
+                envelope,
+                adapter_persistence,
+            )
+        except Exception as exc:
+            write_runtime_status(
+                db_path=db_path,
+                run_id=run_id,
+                status="FAILED",
+                stage="DISCOVERY",
+                adapter="M03",
+                progress=0,
+                total=100,
+                started_at=started_at,
+                message=f"Discovery adapter exception: {exc}",
+            )
+            raise
+        finally:
+            heartbeat_stop.set()
+            heartbeat_thread.join(timeout=1)
+
+        write_runtime_status(
+            db_path=db_path,
+            run_id=run_id,
+            status="DISCOVERY_RESPONSE_RECEIVED",
+            stage="DISCOVERY",
+            adapter="M03",
+            progress=60,
+            total=100,
+            started_at=started_at,
+            message="Discovery adapter response received",
+        )
+
+        print(
+            f"[DONE] {run_id} | DISCOVERY | M03 | "
+            f"{int(time.time() - started_at)}s",
+            flush=True,
+        )
         if adapter_result.status not in {
             "PRODUCTION_ADAPTER_ACCEPTED",
             "ALREADY_COMPLETED",
