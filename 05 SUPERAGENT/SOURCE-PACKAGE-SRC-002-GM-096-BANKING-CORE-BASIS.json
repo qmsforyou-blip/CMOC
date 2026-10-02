@@ -1,0 +1,79 @@
+{
+  "type": "SOURCE_PACKAGE",
+  "package_id": "SOURCE-002-PACKAGE-024-GM096-BANKING-CORE-BASIS",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_title": "GM Quality System Basics Overview - Supplier Audit",
+  "source_revision": "March 2009",
+  "scope": {
+    "chunk_start": "GM-096",
+    "chunk_end": "GM-096",
+    "chunk_count": 2,
+    "missing_chunks": [],
+    "source_directory": "04 PATCH"
+  },
+  "fragments": [
+    {
+      "fragment_id": "FRAG-SRC002-GM-096-BANKINGPASSPORTCROSSCHECK",
+      "chunk_id": "GM-096-BANKINGPASSPORTCROSSCHECK",
+      "source_file": "GM-096-Banking-Passport-CrossCheck.md",
+      "title": "GM-096-Banking-Passport-CrossCheck",
+      "text": "# GM-096 — Banking Process: Passport → Cross-Check\n\n**Извещение на изменение:** `0133+170926`\n\n## 1. Назначение\n\nПровести PASSPORT → CROSS-CHECK для кандидата **Banking Process**, выделенного\nиз GM Quality System Basics rev March 2009, Managing Change, pp. 336–339.\n\nПроверка отвечает на вопрос: является ли Banking Process самостоятельной\nспециализированной Machine или лишь комбинацией механизмов управления\nматериалом в состоянии extended storage.\n\n---\n\n## 2. Source Basis\n\nGM QSB описывает Banking Process как систему идентификации, защиты и retrieval\nparts, находящихся на extended storage.\n\nВ рассмотренных страницах явно заданы:\n\n- случаи применения: business transfers, engineering changes, tool refurbishments,\n  planned shutdowns;\n- роли Material Manager, Operations Manager, Quality Manager;\n- approved racks / dunnage;\n- clear date / lot tags;\n- FIFO;\n- защита от rust, contamination, mold, distortion;\n- protected material;\n- weekly LPA;\n- corrective actions;\n- quality requirements before shipment.\n\nИсточник тем самым описывает не отдельный приём хранения, а связанный набор\nуправляемых действий вокруг специального состояния материала.\n\n---\n\n## 3. Identity Test\n\n### 3.1 Bounded problem\n\nДа.\n\nBanking возникает при чётко определённом состоянии: материал длительно\nнаходится вне нормального производственного потока.\n\n### 3.2 Bounded trigger\n\nДа.\n\nТриггером является необходимость extended storage в предусмотренных GM\nситуациях.\n\n### 3.3 Reproducible construction\n\nДа.\n\nПоследовательность воспроизводима:\n\n`identify → store/protect → tag → FIFO → periodically verify → correct → verify quality → release`\n\n### 3.4 Defined output\n\nДа.\n\nМатериал остаётся идентифицированным, защищённым и проверенным до его\nиспользования или shipment.\n\n### 3.5 Defined roles / artifacts\n\nДа.\n\nИсточник задаёт ответственные роли и набор управленческих артефактов / следов:\nмаркировка, LPA, corrective actions, quality verification.\n\n**Вывод:** Identity Test пройден.\n\n---\n\n## 4. Boundary Test\n\n### FIFO\n\nНе отдельная Machine в рамках Banking.\n\nFIFO является одним из механизмов управления запасом внутри Banking.\n\n### Identification / Traceability\n\nНе отдельная Banking Machine.\n\nИдентификация обеспечивает сохранение связи материала с date / lot и его\nконтролируемым состоянием.\n\n### Preservation / Contamination Control\n\nСильное пересечение.\n\nОднако рассмотренный Banking включает не только физическую защиту материала,\nно также идентификацию, размещение, FIFO, периодическую LPA, corrective action\nи проверку качества перед shipment.\n\nПоэтому в текущем cross-check preservation рассматривается как capability /\nmechanism внутри Banking, а не как достаточная замена всей конструкции.\n\n### LPA / Audit\n\nLPA — механизм периодической проверки Banking.\n\nСвязь с существующим `MC-009-15 Audit` — **NEW PROVENANCE**, а не новая\nсамостоятельная Audit Machine.\n\n### Corrective Action\n\nМеханизм реакции на обнаруженное отклонение.\n\nНе самостоятельная Banking Machine.\n\n### Quarantine\n\nВ рассмотренных страницах нет основания отождествлять Banking с quarantine.\n\nBanking — длительное управляемое хранение; quarantine требует отдельного\nсостояния и отдельной цели блокировки / решения о статусе.\n\n**Вывод:** Banking имеет собственную bounded identity, несмотря на составность.\n\n---\n\n## 5. Machine / Mechanism / Assembly Test\n\n### Machine\n\n**Да, как специализированный кандидат.**\n\nПричина: конструкция имеет собственный trigger, специальное состояние,\nпоследовательность действий, роли, контрольные точки и определённый выход\nв виде управляемого материала, готового к дальнейшему решению.\n\n### Mechanism\n\nОтдельные элементы Banking являются механизмами:\n\n- identification;\n- FIFO;\n- preservation;\n- LPA;\n- corrective action;\n- quality verification.\n\nНо их композиция в Banking образует более широкую воспроизводимую конструкцию.\n\n### Assembly\n\nBanking действительно **composes** несколько механизмов, однако сама\nкомпозиция имеет устойчивую предметную границу: extended-storage material.\nПоэтому на текущем уровне она не сводится к произвольной Assembly.\n\n---\n\n## 6. Duplicate Test against Current CMOC\n\n### `MC-009-15 Audit`\n\nНет дубликата.\n\nAudit / LPA проверяет состояние; Banking управляет состоянием материала.\n\n### `MP-002 Response to Abnormality`\n\nНет дубликата.\n\nBanking не является реакцией на abnormality; extended storage может быть\nплановым состоянием.\n\n### `MP-003 Problem Solving`\n\nНет дубликата.\n\nCorrective action внутри Banking не превращает Banking в Problem Solving Machine.\n\n### Contamination Control architecture\n\nЕсть частичное пересечение по physical protection, но Banking шире и имеет\nсобственную bounded state.\n\n**Вывод:** прямого дубликата среди проверенных текущих конструкций не найдено.\n\n---\n\n## 7. Architectural Position\n\nBanking следует размещать в CMOC как специализированную Machine для\nуправления материалом в состоянии extended storage.\n\nУпрощённая цепочка:\n\n`Material → Extended Storage → Identification / Protection → Periodic Verification → Correction → Quality Verification → Release`\n\nПри этом Banking не следует трактовать как универсальную Machine хранения\nили сохранения материальных объектов.\n\n---\n\n## 8. Passport Verdict\n\n**STATUS:** `SPECIALIZED-CANDIDATE / NON-CANON`\n\n**EVIDENCE LEVEL:** `SINGLE-SOURCE`\n\n**BOUNDARY:** extended-storage material\n\n**TYPE:** `MATERIAL STATE CONTROL / PRESERVATION`\n\n**MACHINE TEST:** PASS\n\n**DUPLICATE TEST:** PASS — прямого дубликата не выявлено\n\n**GENERALIZATION:** НЕ ДОПУСКАТЬ до независимой проверки аналогичных конструкций\n\n---\n\n## 9. CMOC Decisions\n\n### NEW SPECIALIZED MACHINE CANDIDATE\n\n- `MC-CAND-096-03 Banking Process`\n\n### EXISTING MACHINE / NEW PROVENANCE\n\n- LPA → `MC-009-15 Audit`\n\n### MECHANISMS / COMPONENTS\n\n- Identification\n- FIFO\n- Preservation\n- Contamination Control\n- Periodic Verification / LPA\n- Corrective Action\n- Quality Verification\n\n### ASSEMBLY ASPECT\n\nBanking composes several mechanisms, but its bounded extended-storage state\nsupports retaining Machine-candidate identity.\n\n---\n\n## 10. REG-001 / Canon / Catalog Impact\n\n- **REG-001:** NO CHANGE\n- **Canon:** NO CHANGE\n- **MACHINE-CATALOG:** NO direct catalog promotion\n- **Passport:** CREATED\n- **Status:** NON-CANON\n\nThis patch records the passport and cross-check only.\n\n---\n\n## 11. Next Evidence\n\nСледующий обязательный cross-check — независимые конструкции:\n\n- Material Preservation;\n- Controlled Storage;\n- Quarantine / Hold;\n- Inventory / FIFO control.\n\nЦель — проверить, сохраняется ли отличительная граница Banking как\nспециализированной Machine или она должна быть понижена до Assembly / Mechanism.\n\n**VERDICT:** Banking Process имеет достаточную bounded identity для статуса\n**SPECIALIZED-CANDIDATE**, но остаётся `NON-CANON` до multi-source confirmation.\n",
+      "text_sha256": "5141f08ee71d3a15f2297d0436dbdbd86a7cd32776270822cc726115e6b2972e",
+      "candidate_scope": "source-bound content from one prepared GM chunk",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ]
+    },
+    {
+      "fragment_id": "FRAG-SRC002-GM-096-BANKINGPROCESSCROSSCHECK",
+      "chunk_id": "GM-096-BANKINGPROCESSCROSSCHECK",
+      "source_file": "GM-096-Banking-Process-CrossCheck.md",
+      "title": "GM-096-Banking-Process-CrossCheck",
+      "text": "# GM-096 — Banking Process — Cross-Check\n\n## Извещение на изменение\n\n**0127+170926**\n\n---\n\n## 1. OBJECT OF CHECK\n\nGM-096, section **11.4 Banking Process**, pp. 336–339.\n\nВопрос:\n\n> является ли Banking Process самостоятельной Machine, либо набором требований к хранению материала?\n\n**Working verdict:** `SPECIALIZED MACHINE CANDIDATE / NON-CANON`.\n\n---\n\n## 2. SOURCE-DERIVED PURPOSE\n\nGM требует от поставщика процедуру для **identification, protection and retrieval of parts when stored for extended periods of time**.\n\nИсточник приводит случаи:\n\n- Business transfers / BTAB Tool moves;\n- Engineering changes;\n- Tool refurbishments;\n- Planned shutdowns.\n\nОтветственность разделена:\n\n- Material Manager — implementation, execution, traceability;\n- Operations Manager — protective packaging and storage;\n- Quality Manager — quality control process.\n\nfileciteturn557file0L12-L24\n\n---\n\n## 3. SOURCE-DERIVED CONTROL LOGIC\n\nМинимальная логика:\n\n```text\nNEED FOR EXTENDED STORAGE\n        ↓\nIDENTIFY MATERIAL\n        ↓\nCONTROLLED STORAGE\n        ↓\nPROTECT MATERIAL\n        ↓\nMONITOR STORAGE CONDITIONS\n        ↓\nRETRIEVE / RELEASE\n        ↓\nQUALITY REQUIREMENTS BEFORE SHIPMENT\n```\n\nGM задаёт конкретные controls:\n\n- approved racking / dunnage;\n- clear tagging: date, lot etc.;\n- FIFO;\n- защита от воды, масла, влажности, температуры и других факторов, способных вызвать rust, contamination, mold, distortion;\n- protection of banked material;\n- weekly LPA;\n- documentation of LPA issues and corrective actions;\n- quality requirements before shipment.\n\nfileciteturn557file1L172-L183\n\n---\n\n## 4. DISTINCTIONS\n\n### D-01\n\n**Banking ≠ ordinary storage**\n\nSource defines Banking specifically for material held for extended periods and associates it with defined preservation, identification and retrieval controls.\n\n### D-02\n\n**Storage ≠ Preservation**\n\nНаличие места хранения само по себе не обеспечивает защиту материала от факторов деградации.\n\n### D-03\n\n**Identification ≠ Traceability ≠ Protection**\n\nTagging, traceability и preservation выполняют разные функции внутри одного процесса.\n\n### D-04\n\n**FIFO ≠ Quality Release**\n\nFIFO управляет очередностью использования, но не заменяет проверку quality requirements перед shipment.\n\n### D-05\n\n**LPA ≠ Banking Process**\n\nWeekly LPA является механизмом проверки соблюдения Banking Process, а не самим процессом.\n\n### D-06\n\n**Banking ≠ Change Control**\n\nChange Control управляет изменением процесса; Banking управляет материалом, который необходимо сохранить во время длительного хранения.\n\n---\n\n## 5. MACHINE TEST\n\n| Test | Result |\n|---|---|\n| Explicit trigger / use condition | YES |\n| Defined object | YES — banked material |\n| Defined roles | YES |\n| Defined controls | YES |\n| Identification / traceability | YES |\n| Preservation requirements | YES |\n| Monitoring / audit | YES |\n| Retrieval / release logic | YES |\n| Reusable procedure | YES |\n| Source explicitly requires procedure | YES |\n\n**Result:** sufficient basis for a specialized Machine candidate.\n\n---\n\n## 6. CMOC CLASSIFICATION\n\n**Banking Process:** `SPECIALIZED MACHINE CANDIDATE`\n\nНе Canon.\n\nНе следует автоматически дробить на отдельные Machines:\n\n- Storage;\n- Tagging;\n- FIFO;\n- LPA;\n- Packaging.\n\nВ source они образуют составные элементы единого Banking Process.\n\n---\n\n## 7. ARCHITECTURAL VALUE\n\nBanking Process показывает важную связку:\n\n```text\nMATERIAL\n   ↓\nIDENTITY\n   ↓\nLOCATION / STORAGE STATE\n   ↓\nPROTECTION\n   ↓\nMONITORING\n   ↓\nRETRIEVAL\n   ↓\nQUALITY RELEASE\n```\n\nТо есть управляемость здесь возникает не из факта хранения, а из **контролируемого жизненного цикла материала вне обычного производственного потока**.\n\n---\n\n## 8. RELATION TO OTHER MACHINES\n\n```text\nPlant Process Change Control\n          ↓\n      may trigger\n          ↓\n     Banking Process\n          ↓\n preservation / traceability\n          ↓\n    Quality Release\n```\n\nBanking может быть вызвано Engineering Change, Tool Move, Tool Refurbishment или Planned Shutdown, но не является самой машиной изменения.\n\n---\n\n## 9. FINAL WORKING VERDICT\n\n> **Banking Process — самостоятельный специализированный Machine candidate, управляющий идентификацией, сохранностью, контролем и возвратом материала после длительного хранения. Отдельные controls (FIFO, tagging, LPA, packaging) являются компонентами машины, а не самостоятельными Machines.**\n\n**STATUS:** `SPECIALIZED MACHINE CANDIDATE / NON-CANON`\n\n---\n\n## 10. DECISION RECORD\n\n- New Top-Level Machine: NO.\n- Specialized Machine candidate: YES — `Banking Process`.\n- Existing CMOC duplication found: NO.\n- REG-001: unchanged.\n- Canon: unchanged.\n- Source provenance preserved.\n\n**Next check:** `Production Trial Run (PTR)` — pp. 333–335, если не закрыт отдельным PATCH; затем финальная сверка всего блока Managing Change.\n",
+      "text_sha256": "3bf3286b2816f0c46e673c8cbce870963bc7e25704bec1cc5c6f446cbf0fdd5a",
+      "candidate_scope": "source-bound content from one prepared GM chunk",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ]
+    }
+  ],
+  "provisional_candidates": [
+    {
+      "candidate_id": "CAND-SRC002-GM-096-BANKINGPASSPORTCROSSCHECK",
+      "chunk_id": "GM-096-BANKINGPASSPORTCROSSCHECK",
+      "title": "GM-096-Banking-Passport-CrossCheck",
+      "object_type": "SOURCE_BOUND_CANDIDATE",
+      "basis": "GM-096-Banking-Passport-CrossCheck.md",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ],
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-GM-096-BANKINGPROCESSCROSSCHECK",
+      "chunk_id": "GM-096-BANKINGPROCESSCROSSCHECK",
+      "title": "GM-096-Banking-Process-CrossCheck",
+      "object_type": "SOURCE_BOUND_CANDIDATE",
+      "basis": "GM-096-Banking-Process-CrossCheck.md",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ],
+      "status": "PROVISIONAL"
+    }
+  ],
+  "processing_boundary": {
+    "semantic_decision": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "human_review_required": true
+  }
+}
