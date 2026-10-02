@@ -1,11 +1,11 @@
 {
   "run_id": "RUN-PILOT-058-SRC-002-GM-096-RISK-SUPPLIER-SYSTEMIC-BASIS",
-  "status": "WAITING_LLM",
+  "status": "DISCOVERY_RESPONSE_RECEIVED",
   "stage": "DISCOVERY",
   "adapter": "M03",
-  "progress": 35,
+  "progress": 60,
   "total": 100,
-  "elapsed_seconds": 80,
-  "last_activity": "2026-10-02T20:15:15.244022+05:00",
-  "message": "LLM request is still running: 80 seconds elapsed"
+  "elapsed_seconds": 121,
+  "last_activity": "2026-10-02T20:15:56.223108+05:00",
+  "message": "Discovery adapter response received"
 }
