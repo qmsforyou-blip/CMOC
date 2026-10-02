@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат относится к LPA, измерению и преобразованию результата в действие, остаточным управленческим конструкциям или decision gate. Однако граница самостоятельного объекта CMOC пока не установлена: кандидат может быть элементом аудита, последовательностью действий, условием принятия решения или частью уже существующей управленческой конструкции. Требуется сопоставление с действующими объектами CMOC. Новизна отдельного объекта пока не доказана.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-02T15:47:36+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-061-SRC-002-GM-096-FINAL-REMAINDER-BASIS-MAT-PAS-008",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-008",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-008",
+      "classification_id": "CLS-008",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-008",
+      "object_boundary": "Bound exclusively to the representation of “LPA verification output” in SRC-002 as supported by the supplied source basis.",
+      "passport_id": "PAS-008",
+      "reconciliation_id": "RECON-493397f45f0e50a4",
+      "source_basis": [
+        "FORM-022",
+        "FORM-023",
+        "FORM-024"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-033-GM096-FINAL-REMAINDER-BASIS",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
