@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат относится к Machine Passport, Supplier Capability Assessment, аудиту, контролю несоответствующей продукции, bypass, Fast Response, Production Trial Run или связанной проверке состояния оборудования. Однако граница самостоятельного объекта CMOC пока не установлена: кандидат может быть паспортом, процессом, контрольной точкой, решением, доказательством, методом проверки или частью общей архитектуры управления изменениями и способностью поставщика. Требуется сопоставление с существующими объектами CMOC и разделение связанных конструкций. Новизна отдельного объекта CMOC пока не доказана.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-02T12:08:37+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-040-SRC-002-GM-096-MACHINE-PASSPORT-BASIS-MAT-PAS-007",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-007",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-007",
+      "classification_id": "CLS-007",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-007",
+      "object_boundary": "Limited to the candidate term \"Re-verification Role\" as classified within SRC-002 and supported only by the supplied source basis.",
+      "passport_id": "PAS-007",
+      "reconciliation_id": "RECON-b968420def0affbe",
+      "source_basis": [
+        "FORM-019",
+        "FORM-020",
+        "FORM-021"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-020-GM096-MACHINE-PASSPORT-BASIS",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
