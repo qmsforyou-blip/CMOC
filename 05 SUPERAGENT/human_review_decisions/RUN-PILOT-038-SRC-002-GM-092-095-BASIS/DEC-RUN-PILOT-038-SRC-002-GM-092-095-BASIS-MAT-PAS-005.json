@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат относится к практикам Error Proofing, Verification, регистрации результатов, визуализации состояния, управлению реакцией на несоответствия или переходу к Layered Process Audits. Однако граница самостоятельного объекта CMOC пока не установлена: кандидат может быть методом предотвращения ошибок, требованием проверки, формой записи, механизмом реакции, элементом анализа или частью общей архитектуры управления качеством. Требуется сопоставление с существующими объектами CMOC и разделение связанных кандидатов. Новизна отдельного объекта CMOC пока не доказана.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-02T11:02:25+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-038-SRC-002-GM-092-095-BASIS-MAT-PAS-005",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-005",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-005",
+      "classification_id": "CLS-005",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-005",
+      "object_boundary": "Limited to the source-bound candidate term in SRC-002 as supported by the supplied basis references.",
+      "passport_id": "PAS-005",
+      "reconciliation_id": "RECON-f6af985246b2a3c5",
+      "source_basis": [
+        "FORM-013",
+        "FORM-014",
+        "FORM-015"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-018-CHUNKS-GM092-GM095-BASIS",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
