@@ -1,0 +1,106 @@
+{
+  "type": "SOURCE_PACKAGE",
+  "package_id": "SOURCE-002-PACKAGE-032-GM096-WORKSHOP-BASIS",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_title": "GM Quality System Basics Overview - Supplier Audit",
+  "source_revision": "March 2009",
+  "scope": {
+    "chunk_start": "GM-096",
+    "chunk_end": "GM-096",
+    "chunk_count": 3,
+    "missing_chunks": [],
+    "source_directory": "04 PATCH"
+  },
+  "fragments": [
+    {
+      "fragment_id": "FRAG-SRC002-GM-096-MEASUREMENTTOACTIONLPAWORKSHOPCROSSCHECK",
+      "chunk_id": "GM-096-MEASUREMENTTOACTIONLPAWORKSHOPCROSSCHECK",
+      "source_file": "GM-096-Measurement-to-Action-LPA-Workshop-CrossCheck.md",
+      "title": "GM-096-Measurement-to-Action-LPA-Workshop-CrossCheck",
+      "text": "# GM-096 — Measurement-to-Action / LPA / Workshop — Cross-Check\n\n**Извещение на изменение:** 0134+170926\n\n## 1. Цель\n\nПроверить три связанные конструкции GM-096 по границе Pattern / Mechanism /\nAssembly и не создавать новые Machine без достаточного bounded identity.\n\n## 2. Measurement-to-Action\n\n### Классификация\n\n**FUNDAMENTAL PATTERN / NON-CANON**\n\nОбщая форма:\n\n`Measurement / Finding → Interpretation → Action → Verification`\n\nMeasurement-to-Action не задаёт самостоятельного полного lifecycle с\nсобственными ролями, состоянием объекта и отдельным выходом. Это повторяемая\nлогика преобразования результата измерения / проверки в действие.\n\nОна может быть встроена в:\n- LPA / Audit;\n- Bypass Process Control;\n- PTR;\n- Problem Solving;\n- Fast Response.\n\n**Решение:** не Machine, не отдельный Mechanism; сохранить как\nfundamental Pattern.\n\n## 3. LPA\n\n### Классификация\n\n**EXISTING MACHINE / NEW PROVENANCE**\n\nТекущая CMOC-конструкция:\n`MC-009-15 Audit`\n\nВ GM-096 LPA является средством периодической проверки активного bypass.\nНо LPA не получает здесь самостоятельной identity относительно уже\nсуществующей Audit construction.\n\n**Решение:** новая Machine не создаётся. GM-096 добавляет provenance и\nконкретный application context для существующей Audit architecture.\n\n## 4. Workshop / Action-Plan Conversion\n\n### Классификация\n\n**ASSEMBLY / PATTERN / NON-CANON**\n\nФункция:\n\n`Finding → Problem Framing → Actions → Owner → Due Date → Follow-up`\n\nЭто композиция нескольких механизмов и паттернов, а не одна bounded Machine.\n\nВозможные составные элементы:\n- Measurement-to-Action;\n- Problem Solving;\n- Decision / Authorization;\n- Responsibility assignment;\n- Follow-up / verification.\n\n**Решение:** Assembly / Pattern. Новая Machine не создаётся.\n\n## 5. Boundary Test\n\n| Конструкция | CMOC-класс | Причина |\n|---|---|---|\n| Measurement-to-Action | Pattern | универсальная логика преобразования evidence в action |\n| LPA | Existing Machine / provenance | совпадает с существующей Audit construction |\n| Workshop / Action-Plan Conversion | Assembly / Pattern | композиция нескольких механизмов |\n\n## 6. Архитектурный вывод\n\nСвязка GM-096 здесь выглядит как:\n\n`Evidence / Finding`\n→ `Measurement-to-Action`\n→ `Action / Problem Solving`\n→ `Follow-up / Verification`\n\nА LPA является одним из источников evidence.\n\nТо есть GM QSB не требует размножать каталог по каждому названию практики:\nодна и та же управленческая способность может быть реализована различными\nMachine и Assembly.\n\n## 7. Решение CMOC\n\n**NEW MACHINE:** none.\n\n**PATTERN:** Measurement-to-Action.\n\n**EXISTING MACHINE / NEW PROVENANCE:** LPA → MC-009-15 Audit.\n\n**ASSEMBLY:** Workshop / Action-Plan Conversion.\n\n**REG-001:** unchanged.\n\n**Canon:** unchanged.\n\n**MACHINE-CATALOG:** unchanged.\n\n## 8. Verdict\n\n**GM-096 не добавляет новую Machine в этой тройке. Он усиливает provenance\nсуществующей Audit Machine, выделяет Measurement-to-Action как фундаментальный\nPattern и подтверждает Workshop / Action-Plan Conversion как Assembly.**\n\nСледующая проверка: системно закрыть оставшиеся GM-096 конструкции\n`Systemic Problem Resolution`, `Error-Proofing Verification`, `Process Verification`,\n`Contamination Control`, `Fast Response` и `Decision Gate` и затем собрать\nитоговую карту GM-096 → CMOC.\n",
+      "text_sha256": "5069a5e2c26442ecea6ed47f632c32514a26a16467648847480dfae0e0848242",
+      "candidate_scope": "source-bound content from one prepared GM chunk",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ]
+    },
+    {
+      "fragment_id": "FRAG-SRC002-GM-096-WORKSHOPCROSSCHECK",
+      "chunk_id": "GM-096-WORKSHOPCROSSCHECK",
+      "source_file": "GM-096-Workshop-CrossCheck.md",
+      "title": "GM-096-Workshop-CrossCheck",
+      "text": "# GM-096 — Workshop / Action-Plan Conversion — Cross-Check\n\n**Date:** 30-08-2026\n**Source:** GM Quality Systems Basics rev. March 2009, pp. 346–350\n**Status:** SOURCE-DERIVED / CROSS-CHECK / NON-CANON\n\n## 1. Question\n\nIs **Workshop / Action-Plan Conversion** a new CMOC Machine, or is it an assembly/pattern over existing CMOC mechanisms?\n\n## 2. Source-derived architecture\n\nThe GM Workshop material establishes a sequence in which cross-functional teams examine SHALL requirements, current status and gaps, develop proposals, define forms/tracking and management review, and transfer unfinished items into the QSB Action Plan.\n\nCompact form:\n\n`SHALL → Current Status → Gap → Proposal → Tracking/Form → Management Review → Action Plan → Implementation`\n\nThe Workshop therefore has a recognizable operational boundary, but its output is primarily an **Action Plan** and its operation combines several mechanisms already identified in CMOC.\n\n## 3. Comparison with existing CMOC architecture\n\nThe current CMOC architecture already treats a gap as an object that requires:\n\n`Problem/Gap → Decision → Action → Responsibility → Due Date → Status → Evidence → Closure`\n\nIt also distinguishes diagnosis from the subsequent implementation of corrective/development actions.\n\nTherefore the GM Workshop does not justify creating a generic new Machine merely because it packages these activities as a Workshop.\n\n## 4. What GM adds\n\nGM provides a strong source example of an **action-oriented collective review mechanism**:\n\n- requirements are reviewed by cross-functional participants;\n- current status is made explicit;\n- gaps are identified;\n- proposed changes/actions are developed;\n- management is involved;\n- unfinished work is transferred into a tracked Action Plan.\n\nThe source therefore adds provenance and operational evidence for a CMOC pattern already present in diagnostic/development architecture.\n\n## 5. Important distinction\n\n### Workshop ≠ Training\n\nThe Workshop is not exhausted by knowledge transfer. Its explicit deliverable is connected to proposals, action items and the QSB Action Plan.\n\n### Workshop ≠ Diagnosis\n\nDiagnosis identifies current state and gap. The Workshop additionally converts the identified gap into a managed development path.\n\n### Action Plan ≠ List of Problems\n\nAn Action Plan is a management object containing actions and ownership/tracking, not merely a register of deficiencies.\n\n### Action Plan ≠ Implementation\n\nThe plan defines and tracks intended action. Actual implementation remains a subsequent event requiring evidence.\n\n## 6. Machine decision\n\n**Decision: NO NEW TOP-LEVEL MACHINE at this stage.**\n\nThe strongest interpretation is:\n\n> **Workshop / Action-Plan Conversion is a composite mechanism / Assembly pattern that orchestrates existing CMOC mechanisms for collective transition from requirement/gap to managed development action.**\n\n## 7. Possible Assembly\n\nA future CMOC Assembly may use:\n\n`Requirement Assessment + Gap Identification + Cross-functional Review + Decision + Action Planning + Responsibility + Tracking + Management Review`\n\nThe GM Workshop is useful as a source-derived realization of this Assembly.\n\n## 8. Candidate Mechanisms involved\n\n- Requirement Operationalization\n- State Representation / Statusing\n- Measurement/Verification where applicable\n- Decision Gate where a decision is required\n- Action-Plan Conversion\n- Management Review\n- Controlled Implementation\n- Closure / Acceptance\n\nNo new Machine is required merely to package these mechanisms as a Workshop.\n\n## 9. CMOC significance\n\nThe most valuable source-derived contribution is the explicit transition:\n\n`DIAGNOSIS → DEVELOPMENT OBJECT → ACTION PLAN`\n\nThis strengthens the architecture of CMOC diagnostic products: a diagnostic output should not terminate at a finding/report; a material gap can become a managed development object with action, responsibility, tracking and review.\n\n## 10. Candidate distinction for later Canon consideration\n\n> **Identified Gap ≠ Managed Development Object**\n\nA gap becomes a managed development object when it acquires an action, responsibility, tracking and a route to review/closure.\n\n**Status:** candidate distinction, not yet canonical.\n\n## 11. Provenance\n\n`GM QSB 2009 → SOURCE-FINAL-GM-QSB-2009.md → GM-096-Distinctions.md → GM-096-Mechanisms.md → GM-096-Machine-Candidates.md → this Cross-Check`\n\n## 12. Decision record\n\n- No new Machine created.\n- No existing Machine modified.\n- No REG-001 modification.\n- No Canon modification.\n- Preserve GM Workshop as source evidence and possible future Assembly provenance.\n\n**Next step:** resolve remaining Tier B candidates, then consolidate the GM-derived candidate set before any Canon promotion.",
+      "text_sha256": "56d776f65c6f1858cb34c2235ba157ac26a9bfc1dbc42fb0c79f428c9fff2bde",
+      "candidate_scope": "source-bound content from one prepared GM chunk",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ]
+    },
+    {
+      "fragment_id": "FRAG-SRC002-GM-096-WORKSHOPHISTORY20260830",
+      "chunk_id": "GM-096-WORKSHOPHISTORY20260830",
+      "source_file": "GM-096-Workshop-History-2026-08-30.md",
+      "title": "GM-096-Workshop-History-2026-08-30",
+      "text": "# GM-096 — Workshop / Historical Analytical Record\n\n**Date:** 30-08-2026\n**Source pages:** 346–350\n\n## Purpose\n\nThis file preserves the intermediate analytical result from the page-by-page work on the GM Quality Systems Basics source. It is intentionally retained separately from SOURCE-FINAL so that the reasoning and discoveries made during the working pass are not lost when the source is later canonicalized.\n\n## Historical extraction\n\nThe Workshop section shows a mechanism for translating QSB requirements and identified gaps into organizational action.\n\nThe Workshop is organized around cross-functional teams. Team composition is aligned with the strategy and the competencies needed to change the relevant process. Results are presented to Top Management. The presentation is a starting point for further development rather than the final implementation itself.\n\nUnfinished items at the closing meeting are transferred into the QSB Action Plan. Thus an unresolved gap does not disappear when the Workshop ends; it receives a further management path.\n\nThe team is expected to examine each SHALL not merely as a statement, but through its implementation architecture:\n\n`SHALL → Current Status → Form/Record → Tracking → Analysis → Management Review → Communication → Action Plan`\n\nThe Workshop therefore operates as a conversion mechanism:\n\n`Requirement → Assessment → Status/Gap → Proposal → Action → Responsibility → Tracking → Management Review → Closure`\n\n## Historical analytical conclusion\n\nThe key conclusion reached during the working session was:\n\n> **Workshop is a mechanism for collective transition from a requirement and identified gap to a controlled organizational action.**\n\nAnd:\n\n> **A diagnosis or review is not complete merely because a gap has been identified; the gap must acquire an action, responsibility and tracking mechanism.**\n\n## CMOC significance\n\nThis is not to be canonized automatically as a Machine. It is better treated initially as a mechanism / control pattern for converting requirements and diagnostic findings into managed action.\n\nThe finding is particularly relevant to CMOC diagnostic architecture and to the future design of diagnostic products, because it provides a source-derived industrial example of the chain:\n\n`Requirement → Assessment → Gap → Action → Responsibility → Tracking → Management Review`\n\n## Relationship to SOURCE-FINAL\n\nThe compact final extraction is stored in `04 PATCH/SOURCE-FINAL-GM-QSB-2009.md`. This file remains as the historical working record so that the intermediate reasoning is preserved rather than silently discarded during finalization.\n\n**Status:** Historical analytical record. No REG-001 modification.\n",
+      "text_sha256": "bf5ed23a193d8e15b70c88d3ebd06852c198f897594a050ec5aaf20e6ef3679d",
+      "candidate_scope": "source-bound content from one prepared GM chunk",
+      "source_basis": [
+        "FORM-007",
+        "FORM-008",
+        "FORM-009"
+      ]
+    }
+  ],
+  "provisional_candidates": [
+    {
+      "candidate_id": "CAND-SRC002-GM-096-MEASUREMENTTOACTIONLPAWORKSHOPCROSSCHECK",
+      "chunk_id": "GM-096-MEASUREMENTTOACTIONLPAWORKSHOPCROSSCHECK",
+      "title": "GM-096-Measurement-to-Action-LPA-Workshop-CrossCheck",
+      "object_type": "SOURCE_BOUND_CANDIDATE",
+      "basis": "GM-096-Measurement-to-Action-LPA-Workshop-CrossCheck.md",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ],
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-GM-096-WORKSHOPCROSSCHECK",
+      "chunk_id": "GM-096-WORKSHOPCROSSCHECK",
+      "title": "GM-096-Workshop-CrossCheck",
+      "object_type": "SOURCE_BOUND_CANDIDATE",
+      "basis": "GM-096-Workshop-CrossCheck.md",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ],
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-GM-096-WORKSHOPHISTORY20260830",
+      "chunk_id": "GM-096-WORKSHOPHISTORY20260830",
+      "title": "GM-096-Workshop-History-2026-08-30",
+      "object_type": "SOURCE_BOUND_CANDIDATE",
+      "basis": "GM-096-Workshop-History-2026-08-30.md",
+      "source_basis": [
+        "FORM-007",
+        "FORM-008",
+        "FORM-009"
+      ],
+      "status": "PROVISIONAL"
+    }
+  ],
+  "processing_boundary": {
+    "semantic_decision": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "human_review_required": true
+  }
+}
