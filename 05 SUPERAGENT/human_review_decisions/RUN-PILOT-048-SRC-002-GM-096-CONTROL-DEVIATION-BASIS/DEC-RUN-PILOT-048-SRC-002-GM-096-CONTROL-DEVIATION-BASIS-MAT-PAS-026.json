@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат относится к тематике Control Means, Controlled Deviation, Bypass или управления несоответствующей продукцией и описывает процедуру, контрольное средство, различение, границу ответственности, решение или структурную связь. Однако самостоятельная граница объекта CMOC пока не установлена: кандидат может быть частью общей архитектуры управления отклонениями и обходными процессами, отдельным требованием, контрольным механизмом, решением или отношением между объектами. Требуется сопоставление с существующими объектами CMOC. Новизна отдельного объекта CMOC пока не доказана.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-02T13:11:12+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-048-SRC-002-GM-096-CONTROL-DEVIATION-BASIS-MAT-PAS-026",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-026",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-026",
+      "classification_id": "CLS-026",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-026",
+      "object_boundary": "Bound exclusively to the distinction expressed as “Control-means and controlled-state distinction” in SRC-002; no cross-source or canonical distinction is asserted.",
+      "passport_id": "PAS-026",
+      "reconciliation_id": "RECON-b56507690783e78a",
+      "source_basis": [
+        "FORM-076",
+        "FORM-077",
+        "FORM-078"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-026-GM096-CONTROL-DEVIATION-BASIS",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
