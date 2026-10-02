@@ -5,7 +5,7 @@
   "adapter": "M03",
   "progress": 35,
   "total": 100,
-  "elapsed_seconds": 160,
-  "last_activity": "2026-10-02T10:20:01.863996+05:00",
-  "message": "LLM request is still running: 160 seconds elapsed"
+  "elapsed_seconds": 210,
+  "last_activity": "2026-10-02T10:20:52.031339+05:00",
+  "message": "LLM request is still running: 210 seconds elapsed"
 }
