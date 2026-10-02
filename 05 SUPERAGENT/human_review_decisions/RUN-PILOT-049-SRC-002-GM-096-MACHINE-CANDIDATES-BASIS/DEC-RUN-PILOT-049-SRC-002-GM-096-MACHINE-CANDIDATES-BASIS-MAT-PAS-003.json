@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат относится к тематике Machine Candidates и описывает машинный объект, рабочую практику, контрольную конструкцию, системное различение или связанное правило управления. Однако самостоятельная граница объекта CMOC пока не установлена: кандидат может быть частью общей архитектуры машинных объектов, отдельным объектом, механизмом, правилом или отношением между объектами. Требуется сопоставление с существующими объектами CMOC. Новизна отдельного объекта CMOC пока не доказана.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-02T13:52:26+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-049-SRC-002-GM-096-MACHINE-CANDIDATES-BASIS-MAT-PAS-003",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-003",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-003",
+      "classification_id": "CLS-003",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-003",
+      "object_boundary": "Only the usage of \"Controlled Change Implementation\" in SRC-002 supported by FORM-007, FORM-008, and FORM-009; meanings outside this source basis are excluded.",
+      "passport_id": "PAS-003",
+      "reconciliation_id": "RECON-810c6689beddb506",
+      "source_basis": [
+        "FORM-007",
+        "FORM-008",
+        "FORM-009"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-027-GM096-MACHINE-CANDIDATES-BASIS",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
