@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат выявлен при анализе подготовленного чанка GM-052–GM-059 источника SRC-002. Он представляет потенциально полезную практику, различение, требование, форму или элемент стандартизированных операций. Самостоятельная граница объекта CMOC пока не установлена; требуется сопоставление с существующими объектами, разделение связанных кандидатов и проверка новизны. Автоматическое создание нового объекта не выполняется.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-02T04:43:32+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-028-SRC-002-GM-052-059-BASIS-MAT-PAS-012",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-012",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-012",
+      "classification_id": "CLS-012",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-012",
+      "object_boundary": "Bound exclusively to the representation of “5S safe, clean, and organized work environment” in SRC-002; no scope beyond this source is asserted.",
+      "passport_id": "PAS-012",
+      "reconciliation_id": "RECON-3432ab768e1e4e37",
+      "source_basis": [
+        "FORM-034",
+        "FORM-035",
+        "FORM-036"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-013-CHUNKS-GM052-GM059-BASIS",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
