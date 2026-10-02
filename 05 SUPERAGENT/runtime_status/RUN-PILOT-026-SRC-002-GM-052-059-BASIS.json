@@ -1,11 +1,11 @@
 {
   "run_id": "RUN-PILOT-026-SRC-002-GM-052-059-BASIS",
-  "status": "WAITING_LLM",
+  "status": "DISCOVERY_RESPONSE_RECEIVED",
   "stage": "DISCOVERY",
   "adapter": "M03",
-  "progress": 35,
+  "progress": 60,
   "total": 100,
-  "elapsed_seconds": 125,
-  "last_activity": "2026-10-02T09:01:04.700716+05:00",
-  "message": "LLM request is still running: 125 seconds elapsed"
+  "elapsed_seconds": 170,
+  "last_activity": "2026-10-02T09:01:49.517937+05:00",
+  "message": "Discovery adapter response received"
 }
