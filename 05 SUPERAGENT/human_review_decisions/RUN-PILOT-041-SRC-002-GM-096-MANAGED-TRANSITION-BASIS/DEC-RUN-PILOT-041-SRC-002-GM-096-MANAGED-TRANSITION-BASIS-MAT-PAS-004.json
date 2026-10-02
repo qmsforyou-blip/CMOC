@@ -1,0 +1,41 @@
+{
+  "boundary": {
+    "admission_execution": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "origin": "DECISION",
+    "reconciliation_mutation": "NONE"
+  },
+  "decision": {
+    "basis": "Кандидат относится к управляемому переходу, передаче состояния, изменению процесса, организационной передаче, независимой проверке или сопоставлению ожидаемого и фактического состояния. Однако граница самостоятельного объекта CMOC пока не установлена: кандидат может быть состоянием, переходом, процедурой, проверкой, паспортом, доказательством или частью общей архитектуры управляемого перехода. Требуется сопоставление с существующими объектами CMOC и разделение связанных конструкций. Новизна отдельного объекта CMOC пока не доказана.",
+    "cmoc_object_id": null,
+    "decided_at": "2026-10-02T12:18:40+00:00",
+    "decided_by": "СГ",
+    "decision_id": "DEC-RUN-PILOT-041-SRC-002-GM-096-MANAGED-TRANSITION-BASIS-MAT-PAS-004",
+    "decision_result": "DEFER",
+    "decision_type": "HUMAN",
+    "match_id": "MAT-PAS-004",
+    "rule_id": null,
+    "rule_version": null,
+    "source_id": "SRC-002",
+    "traceability": {
+      "candidate_id": "NOM-004",
+      "classification_id": "CLS-004",
+      "discovery_run": null,
+      "input_batch_id": "BATCH-SRC-002-M06-006",
+      "match_id": "MAT-PAS-004",
+      "object_boundary": "Limited to the candidate term \"PTR\" as represented in SRC-002 by the supplied basis references; no cross-source or canonical scope.",
+      "passport_id": "PAS-004",
+      "reconciliation_id": "RECON-f135ee03a5fb6a3f",
+      "source_basis": [
+        "FORM-010",
+        "FORM-011",
+        "FORM-012"
+      ],
+      "source_id": "SRC-002",
+      "source_package": "SOURCE-002-PACKAGE-021-GM096-MANAGED-TRANSITION-BASIS",
+      "upstream_batch": "BATCH-SRC-002-M05-005"
+    }
+  },
+  "type": "DECISION"
+}
