@@ -1,6 +1,6 @@
 {
   "type": "SOURCE_PACKAGE",
-  "package_id": "SOURCE-002-PACKAGE-024-GM096-CONTROL-DEVIATION-BASIS",
+  "package_id": "SOURCE-002-PACKAGE-026-GM096-CONTROL-DEVIATION-BASIS",
   "source_id": "SRC-002",
   "source_name": "GM Quality System Basics Overview Supplier Audit",
   "source_title": "GM Quality System Basics Overview - Supplier Audit",
@@ -8,7 +8,7 @@
   "scope": {
     "chunk_start": "GM-096",
     "chunk_end": "GM-096",
-    "chunk_count": 6,
+    "chunk_count": 5,
     "missing_chunks": [],
     "source_directory": "04 PATCH"
   },
@@ -82,20 +82,6 @@
         "FORM-014",
         "FORM-015"
       ]
-    },
-    {
-      "fragment_id": "FRAG-SRC002-GM-096-MACHINEPASSPORTBYPASSPROCESSCONTROL",
-      "chunk_id": "GM-096-MACHINEPASSPORTBYPASSPROCESSCONTROL",
-      "source_file": "GM-096-Machine-Passport-Bypass-Process-Control.md",
-      "title": "GM-096-Machine-Passport-Bypass-Process-Control",
-      "text": "# GM-096 — Machine Candidate Passport: Bypass Process Control\n\n**Source:** GM Quality Systems Basics rev. March 2009\n**Provenance:** GM SOURCE → SOURCE-FINAL → Distinctions → Mechanisms → Machine Candidates → Catalog Cross-Check\n**Status:** MACHINE-CANDIDATE / NON-CANON\n**Candidate:** Bypass Process Control\n\n## 1. Identity\n\n**Candidate type:** controlled-deviation / alternative-process machine candidate\n\n**Primary source realization:** Managing Change / Bypass Process Control\n\n## 2. Problem\n\nA normal approved process may temporarily be unable to operate as intended. Simply continuing outside the approved process creates an uncontrolled exception. GM instead defines a bypass as a controlled alternative process with explicit boundaries and controls.\n\n## 3. Input\n\nA need and authorization to operate temporarily outside the normal approved process, together with the applicable alternative process controls.\n\n## 4. Trigger\n\nA defined condition requires use of a bypass / backup process.\n\n## 5. Operating sequence\n\n`Normal Process → Authorized Entry → Entry Breakpoint → Controlled Bypass → Inspection / Audit / Control → Exit Breakpoint → Verified Return`\n\nThe bypass process is bounded by explicit starting and ending breakpoints.\n\n## 6. Output\n\nEither:\n\n- continued operation within a controlled bypass state; or\n- verified return to the normal approved process.\n\n## 7. State transition\n\n`NORMAL → CONTROLLED BYPASS`\n\nfollowed by:\n\n`CONTROLLED BYPASS → VERIFIED NORMAL`\n\nThe candidate therefore manages a temporary state transition rather than merely documenting an exception.\n\n## 8. Control architecture\n\nThe source-derived bypass architecture may include:\n\n- approved bypass methods;\n- responsible owner;\n- applicable PFMEA;\n- Control Plan;\n- Standardized Work;\n- inspection requirements;\n- audit requirements;\n- communication at the bypass point;\n- Backup Worksheet;\n- Action Plan;\n- trained personnel;\n- verification of parameters on return;\n- validation of the required quantity/condition before release back to normal;\n- management authorization for return where required.\n\n## 9. Evidence\n\nSource-derived evidence includes:\n\n- documented bypass/backup process;\n- starting breakpoint;\n- ending breakpoint;\n- applicable PFMEA / Control Plan / Standardized Work;\n- inspection records;\n- audit evidence;\n- Backup Worksheet;\n- Action Plan;\n- return verification/validation.\n\n## 10. Acceptance condition\n\nThe bypass is closed only when the organization has verified the conditions for returning to the normal approved process and the return boundary has been reached.\n\nThe existence of a bypass record alone is not evidence that the normal process has been safely restored.\n\n## 11. Failure / STOP conditions\n\nThe source supports stopping or withholding return when required controls or verification conditions are not satisfied. Exact reaction logic for every failure case is not inferred beyond the source-derived control requirements.\n\n## 12. Distinctions implemented\n\n- Temporary Deviation ≠ Uncontrolled Exception\n- Bypass ≠ Abandonment of Control\n- Normal State ≠ Bypass State\n- Entry ≠ Exit\n- Return ≠ Verified Return\n- Record ≠ Evidence of Effective Control\n\n## 13. Boundary\n\nBypass Process Control does **not**:\n\n- authorize arbitrary deviation;\n- replace the normal approved process permanently;\n- eliminate PFMEA, Control Plan, Standardized Work or inspection requirements;\n- establish effectiveness merely by entering the bypass;\n- treat return to normal as complete without required verification.\n\nIts boundary is:\n\n> **Maintain a controlled alternative process state between explicit entry and exit boundaries and verify the conditions for return to the normal process.**\n\n## 14. Relationship to other candidate Machines\n\n### Decision Gate → Bypass Process Control\n\nAuthorization may be required before entering the controlled bypass state.\n\n### Controlled Change Implementation ↔ Bypass Process Control\n\nA bypass is itself a controlled state transition. It may be a specialized implementation pattern or a distinct Machine. This relationship requires later CMOC comparison.\n\n### Production Trial Run ↔ Bypass Process Control\n\nBoth are bounded states with verification, but their purposes differ: PTR evaluates a changed process; bypass control maintains production under a temporary alternative process.\n\n### Controlled Deviation\n\nControlled Deviation may be the generic parent pattern, with Bypass Process Control as a specialized realization. Do not collapse them until CMOC architecture resolves the relationship.\n\n## 15. Reusability hypothesis\n\nThe candidate is potentially reusable wherever an organization must temporarily leave an approved process while retaining explicit control, traceability and a verified route back to the normal state.\n\nBroader reuse remains a CMOC hypothesis and requires confirmation from additional sources.\n\n## 16. Canonization assessment\n\n**Candidate strength:** STRONG\n\n**Independent boundary:** YES\n\n**Trigger/input:** YES\n\n**State transition:** YES\n\n**Defined entry/exit:** YES\n\n**Responsible role:** YES\n\n**Repeatable sequence:** YES\n\n**Evidence:** YES\n\n**Return/closure condition:** YES\n\n**Cross-source confirmation:** NOT YET ESTABLISHED\n\n**Existing-machine duplication:** relationship to Controlled Deviation and generic State Transition patterns remains unresolved.\n\n**Canon status:** NON-CANON.\n\n## 17. Architectural observation\n\nThe key value of this candidate is that it makes a temporary exception into a **controlled state** rather than an absence of control.\n\nThe source therefore demonstrates:\n\n`Deviation → Defined Alternative State → Boundary Control → Evidence → Verified Return`\n\nThis is a particularly useful CMOC pattern because many organizational failures occur not in the normal process but in the temporary state created when the normal process cannot be followed.\n\n## 18. Status\n\n**SOURCE-DERIVED / MACHINE-CANDIDATE / NON-CANON**\n\nNo REG-001 modification.\nNo Canon modification.\nNo existing Machine modified.\n\n**Next candidate:** Supplier Capability Assessment.",
-      "text_sha256": "0c3edecc36034b28db8b698a261a61a1e70c890b0f1be48567969433d0ce1488",
-      "candidate_scope": "source-bound content from one prepared GM chunk",
-      "source_basis": [
-        "FORM-016",
-        "FORM-017",
-        "FORM-018"
-      ]
     }
   ],
   "provisional_candidates": [
@@ -161,19 +147,6 @@
         "FORM-013",
         "FORM-014",
         "FORM-015"
-      ],
-      "status": "PROVISIONAL"
-    },
-    {
-      "candidate_id": "CAND-SRC002-GM-096-MACHINEPASSPORTBYPASSPROCESSCONTROL",
-      "chunk_id": "GM-096-MACHINEPASSPORTBYPASSPROCESSCONTROL",
-      "title": "GM-096-Machine-Passport-Bypass-Process-Control",
-      "object_type": "SOURCE_BOUND_CANDIDATE",
-      "basis": "GM-096-Machine-Passport-Bypass-Process-Control.md",
-      "source_basis": [
-        "FORM-016",
-        "FORM-017",
-        "FORM-018"
       ],
       "status": "PROVISIONAL"
     }
