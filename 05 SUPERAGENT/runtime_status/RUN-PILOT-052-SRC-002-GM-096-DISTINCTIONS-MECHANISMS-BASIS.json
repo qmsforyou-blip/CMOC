@@ -1,0 +1,11 @@
+{
+  "run_id": "RUN-PILOT-052-SRC-002-GM-096-DISTINCTIONS-MECHANISMS-BASIS",
+  "status": "WAITING_LLM",
+  "stage": "DISCOVERY",
+  "adapter": "M03",
+  "progress": 35,
+  "total": 100,
+  "elapsed_seconds": 55,
+  "last_activity": "2026-10-02T19:22:39.502302+05:00",
+  "message": "LLM request is still running: 55 seconds elapsed"
+}
