@@ -1,4 +1,4 @@
-"""PROD-ENTRY-001 вЂ” local manual-start runtime entry point.
+"""PROD-ENTRY-001 РІР‚вЂќ local manual-start runtime entry point.
 
 The CLI establishes a durable RUN and structurally splits the supplied
 SOURCE_PACKAGE. It then checks the production-adapter boundary.
@@ -11,6 +11,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import threading
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 

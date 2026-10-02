@@ -1,0 +1,11 @@
+{
+  "run_id": "RUN-PILOT-022-SRC-002-GM-052-059",
+  "status": "WAITING_LLM",
+  "stage": "DISCOVERY",
+  "adapter": "M03",
+  "progress": 35,
+  "total": 100,
+  "elapsed_seconds": 0,
+  "last_activity": "2026-10-02T08:24:38.936585+05:00",
+  "message": "LLM request is still running: 0 seconds elapsed"
+}
