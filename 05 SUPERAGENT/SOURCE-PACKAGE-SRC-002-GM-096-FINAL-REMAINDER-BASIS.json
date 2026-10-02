@@ -1,0 +1,106 @@
+{
+  "type": "SOURCE_PACKAGE",
+  "package_id": "SOURCE-002-PACKAGE-033-GM096-FINAL-REMAINDER-BASIS",
+  "source_id": "SRC-002",
+  "source_name": "GM Quality System Basics Overview Supplier Audit",
+  "source_title": "GM Quality System Basics Overview - Supplier Audit",
+  "source_revision": "March 2009",
+  "scope": {
+    "chunk_start": "GM-096",
+    "chunk_end": "GM-096",
+    "chunk_count": 3,
+    "missing_chunks": [],
+    "source_directory": "04 PATCH"
+  },
+  "fragments": [
+    {
+      "fragment_id": "FRAG-SRC002-GM-096-LPACROSSCHECK",
+      "chunk_id": "GM-096-LPACROSSCHECK",
+      "source_file": "GM-096-LPA-CrossCheck.md",
+      "title": "GM-096-LPA-CrossCheck",
+      "text": "# GM-096 — LPA Cross-Check\n\n## Извещение на изменение\n\n**0121+300826**\n\n---\n\n## 0. SOURCE\n\n**Источник:** GM Quality System Basics rev. March 2009  \n**Basis:** `GM-096-Machine-Candidates.md` + `GM-096-Machine-Candidate-CrossCheck.md` + LPA extraction in `LAB-003` / `REG-001`.\n\n**Status:** SOURCE-DERIVED / CROSS-CHECK / NON-CANON\n\n---\n\n## 1. OBJECT OF CHECK\n\n**Layered / Repeated Verification (LPA)**\n\nGM LPA представляет собой повторяющуюся проверку процесса, выполняемую на нескольких уровнях ответственности, с заданными вопросами, частотой, фиксацией отклонений и последующим действием.\n\nВ текущем Machine Candidate cross-check LPA получил статус:\n\n> **HOLD / POSSIBLE EXISTING AUDIT FAMILY**\n\nПричина: механизм может быть специализированной реализацией более общего `Audit` / `Process Verification`.\n\n---\n\n## 2. WHAT IS ACTUALLY DISTINCTIVE\n\nLPA нельзя свести просто к факту проведения аудита.\n\nЕго отличительные признаки образуют дополнительную архитектуру поверх проверки:\n\n```text\nAUDIT / PROCESS VERIFICATION\n        ↓\nLAYERING\n        ↓\nDEFINED FREQUENCY\n        ↓\nRISK-BASED QUESTIONS\n        ↓\nDEVIATION RECORD\n        ↓\nCOUNTERMEASURE / FOLLOW-UP\n        ↓\nESCALATION / MANAGEMENT REVIEW\n```\n\nСледовательно:\n\n**LPA ≠ Audit Event**\n\nи одновременно:\n\n**LPA ≠ доказанно отдельная Top-Level Machine.**\n\n---\n\n## 3. CROSS-CHECK AGAINST EXISTING CMOC ARCHITECTURE\n\nВ текущем каталоге уже существует:\n\n- `Audit` — MACHINE / VERIFICATION / STRONG CANDIDATE;\n- `Kamishibai` — System Machine, composing `Audit`;\n- `Process Verification` — umbrella mechanism, не отдельная Machine.\n\nСледовательно, создание отдельной Machine `LPA` прямо сейчас создаёт риск дублирования.\n\n---\n\n## 4. ARCHITECTURAL HYPOTHESIS\n\nРабочая гипотеза:\n\n```text\nAUDIT\n  +\nLAYERING\n  +\nFREQUENCY\n  +\nRISK SELECTION\n  +\nACTION / ESCALATION\n        ↓\nLPA\n```\n\nТо есть LPA может быть не новой базовой Machine, а **специализированной System Machine / Assembly**, использующей общий Audit-механизм.\n\n---\n\n## 5. IMPORTANT DISTINCTIONS\n\nИз материала LPA подтверждаются или усиливаются следующие различения:\n\n### D-01\n\n**Audit ≠ LPA**\n\nLPA добавляет к самой проверке архитектуру уровней, частоты, вопросов и последующего действия.\n\n### D-02\n\n**Detection ≠ Control**\n\nОбнаруженное при LPA отклонение не является автоматически устранённым отклонением; предусмотрен переход к countermeasure / follow-up.\n\n### D-03\n\n**Audit Event ≠ Verification System**\n\nРазовая проверка и организованная повторяющаяся система проверок имеют разный архитектурный масштаб.\n\n### D-04\n\n**Finding ≠ Closure**\n\nФакт обнаружения отклонения не является доказательством его устранения.\n\n---\n\n## 6. MACHINE TEST\n\n### Input\n\nПроцесс / операция / контрольный объект, подлежащий регулярной проверке.\n\n### Transformation\n\nПроверка по заданным вопросам на определённом уровне и с установленной периодичностью.\n\n### Output\n\nРезультат проверки и, при необходимости, зарегистрированное отклонение с последующим действием.\n\n### Evidence\n\nAudit / LPA record, deviation record, countermeasure / follow-up evidence.\n\n### Acceptance / Closure\n\nНе только выполнение проверки, но и предусмотренное закрытие выявленного отклонения.\n\n### Verdict\n\nГраница операционной последовательности достаточно сильна для Machine-подобной конструкции, однако пока не доказано, что эта конструкция должна существовать в CMOC как отдельная Top-Level Machine.\n\n---\n\n## 7. CURRENT CMOC STATUS\n\n**LPA = STRONG SPECIALIZED CANDIDATE / AUDIT FAMILY**\n\nНе создавать отдельную Top-Level Machine.\n\nНе изменять Canon.\n\nНе изменять `REG-001`.\n\nНе дублировать `Audit`.\n\n---\n\n## 8. NEXT ARCHITECTURAL CHECK\n\nПеред возможной канонизацией необходимо сравнить на уровне механизма:\n\n```text\nAudit\nProcess Verification\nLPA\nKamishibai\n```\n\nПроверяем:\n\n- Input;\n- Trigger;\n- Frequency;\n- Selection logic;\n- Layer / Role;\n- Verification operation;\n- Output;\n- Deviation handling;\n- Escalation;\n- Closure condition.\n\nЦель проверки — определить, является ли LPA:\n\n1. специализированной реализацией `Audit`;\n2. System Machine, composing `Audit`;\n3. самостоятельной Machine.\n\nПока наиболее вероятен вариант **№2**.\n\n---\n\n## 9. NON-DUPLICATION RULE\n\nНаличие в новом источнике названия или описания LPA не является основанием для создания новой Machine.\n\nЕсли LPA использует тот же базовый механизм проверки, что и существующий `Audit`, GM должен быть связан с `Audit` как дополнительная provenance, а отличительные элементы LPA должны быть представлены отдельными Mechanisms / Relations / Assembly.\n\n---\n\n## 10. FINAL WORKING VERDICT\n\n> **Layered / Repeated Verification (LPA) — специализированная архитектура повторяющейся проверки процесса с уровнями ответственности, частотой, риск-ориентированным содержанием, фиксацией отклонений и последующим действием; на текущем этапе не выделяется в отдельную Top-Level Machine и рассматривается как кандидат System Machine / Assembly семейства Audit.**\n\n**STATUS: HOLD / SPECIALIZED AUDIT FAMILY / NON-CANON**\n\n---\n\n**REG-001:** unchanged.  \n**Canon:** unchanged.  \n**Existing Machine files:** unchanged.\n",
+      "text_sha256": "874a82e5b8ab6c24bd4fb27d1b1daf0fe2b01e54bf57b75ff82d023da12cfd10",
+      "candidate_scope": "source-bound content from one prepared GM chunk",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ]
+    },
+    {
+      "fragment_id": "FRAG-SRC002-GM-096-MEASUREMENTTOACTIONCROSSCHECK",
+      "chunk_id": "GM-096-MEASUREMENTTOACTIONCROSSCHECK",
+      "source_file": "GM-096-Measurement-to-Action-CrossCheck.md",
+      "title": "GM-096-Measurement-to-Action-CrossCheck",
+      "text": "# GM-096 — Measurement-to-Action Control Loop — Cross-Check\n\n## Извещение на изменение\n\n**0122+300826**\n\n---\n\n## 0. SOURCE\n\n**Источник:** GM Quality System Basics rev. March 2009  \n**Basis:** `GM-096-Mechanisms.md` + `GM-096-Machine-Candidates.md` + source-derived extraction of measurement, reaction, contamination, supplier metrics and verification material.\n\n**Status:** SOURCE-DERIVED / CROSS-CHECK / NON-CANON\n\n---\n\n## 1. OBJECT OF CHECK\n\n**Measurement-to-Action Control Loop**\n\nQuestion:\n\n> Is this a separate Machine, a Mechanism, or a more fundamental CMOC control pattern?\n\n**Working verdict:** **PATTERN / FUNDAMENTAL MECHANISM — NOT A TOP-LEVEL MACHINE.**\n\n---\n\n## 2. SOURCE-DERIVED LOGIC\n\nAcross the GM material, measurement becomes operationally significant when it is connected to a criterion/status and a defined reaction.\n\nCompact form:\n\n```text\nMEASUREMENT\n    ↓\nRECORD / RESULT\n    ↓\nLIMIT / CRITERION / STATUS\n    ↓\nDECISION / REACTION\n    ↓\nACTION\n    ↓\nVERIFICATION / FOLLOW-UP\n```\n\nThe source realizes this pattern in different contexts rather than presenting it as one named universal Machine.\n\n---\n\n## 3. EXAMPLES IN GM\n\n### Contamination Control\n\nMeasurement of contamination or cleanliness is connected to limits and reaction requirements.\n\n### Supplier Performance\n\nOperational performance is converted into metrics/status and then into review, corrective action or supplier development.\n\n### Process Verification\n\nVerification produces findings which may require reaction and follow-up.\n\n### Error-Proofing / Control Means\n\nVerification of a control condition leads to action when the control is absent or ineffective.\n\nThese are different Machines/mechanisms, but they share the same control-loop structure.\n\n---\n\n## 4. WHY IT IS NOT A MACHINE\n\nThe pattern does not have one independent operational object or one unique domain boundary.\n\nIt is instantiated by many Machines:\n\n- Audit;\n- Process Verification;\n- Supplier Capability Assessment;\n- Nonconforming Product Control;\n- Contamination Control mechanisms;\n- Error-Proofing Verification;\n- other measurement-driven controls.\n\nTurning the pattern itself into a Machine would risk confusing an architectural primitive with its concrete implementations.\n\n---\n\n## 5. IMPORTANT DISTINCTIONS\n\n### Measurement ≠ Control\n\nA measurement is only an observation/result. Control requires a defined relationship between the result and a permitted/required response.\n\n### Detection ≠ Control\n\nDetection identifies a condition. Control establishes what happens because that condition has been detected.\n\n### Record ≠ Action\n\nRecording a result does not by itself change the controlled state.\n\n### Status ≠ Decision\n\nA status represents a condition; the control loop becomes operational when status is connected to a decision/reaction.\n\n### Action ≠ Effectiveness\n\nAn action being recorded or completed does not automatically establish that the intended effect was achieved.\n\n---\n\n## 6. CMOC INTERPRETATION\n\nThe source supports treating Measurement-to-Action as a **control-loop pattern** connecting observation to controlled response.\n\nIt can be represented as:\n\n`Observation → Interpretation → Decision → Action → Verification`\n\nThe pattern may be embedded in a Machine, composed into a System Machine, or used as a diagnostic lens.\n\n---\n\n## 7. RELATION TO EXISTING CANDIDATES\n\n### Measurement-to-Action → Audit\n\nAudit may instantiate the pattern when a finding produces a defined response.\n\n### Measurement-to-Action → Nonconforming Product Control\n\nDetection of nonconformance becomes control only through containment/disposition.\n\n### Measurement-to-Action → Supplier Capability Assessment\n\nSupplier evidence becomes capability management only when results are interpreted and connected to development/reassessment.\n\n### Measurement-to-Action → Error-Proofing Verification\n\nVerification results trigger action when error-proofing is absent or ineffective.\n\n### Measurement-to-Action → LPA\n\nLPA adds layering, frequency and risk-based selection to repeated verification; the measurement/action loop remains a lower-level pattern.\n\n---\n\n## 8. MACHINE TEST\n\n| Test | Result |\n|---|---|\n| Independent domain object | NO |\n| Unique trigger | NO — varies by implementation |\n| Generic transformation | YES |\n| State/decision relation | YES |\n| Reusable sequence | YES |\n| Independent evidence model | NO — implementation dependent |\n| Independent acceptance condition | NO — implementation dependent |\n| Cross-context reuse | YES |\n\nThe pattern therefore fails the test for a standalone Top-Level Machine while strongly satisfying the test for a reusable CMOC mechanism/pattern.\n\n---\n\n## 9. ARCHITECTURAL VALUE\n\nThis may be one of the more important findings of GM-096 because it reveals a recurring control grammar underneath apparently different quality tools.\n\n```text\nOBSERVE\n   ↓\nCOMPARE\n   ↓\nINTERPRET\n   ↓\nDECIDE\n   ↓\nACT\n   ↓\nVERIFY\n```\n\nThe same grammar can appear at different scales:\n\n- individual control point;\n- process;\n- supplier;\n- organizational system.\n\nThis should be preserved as a reusable CMOC pattern rather than hidden inside a particular Machine passport.\n\n---\n\n## 10. CANONIZATION STATUS\n\n**Decision:** Do not create a Machine.\n\n**Classification:** `PATTERN / FUNDAMENTAL MECHANISM CANDIDATE`\n\n**Status:** NON-CANON.\n\nBefore Canonization, compare this pattern with existing CMOC control-loop / feedback / state-transition concepts to avoid introducing duplicate primitives.\n\n---\n\n## 11. PROVENANCE\n\n`GM QSB 2009 → SOURCE-FINAL → GM-096-Distinctions → GM-096-Mechanisms → this Cross-Check`\n\nThe page-level source material remains the primary evidence of origin; this file is an architectural interpretation and must not replace source provenance.\n\n---\n\n## 12. DECISION RECORD\n\n- No new Machine created.\n- No existing Machine modified.\n- No REG-001 modification.\n- No Canon modification.\n- Preserve as candidate CMOC control-loop pattern.\n\n**Next step:** resolve `Control Means Verification` against this pattern and determine whether it is a specialized mechanism or an independent Machine candidate.",
+      "text_sha256": "9312b369a393b6dc345c527073eb7d7e302256ef6744d19209fd22afed875953",
+      "candidate_scope": "source-bound content from one prepared GM chunk",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ]
+    },
+    {
+      "fragment_id": "FRAG-SRC002-GM-096-REMAININGCONSTRUCTSCROSSCHECK",
+      "chunk_id": "GM-096-REMAININGCONSTRUCTSCROSSCHECK",
+      "source_file": "GM-096-Remaining-Constructs-CrossCheck.md",
+      "title": "GM-096-Remaining-Constructs-CrossCheck",
+      "text": "# GM-096 — Remaining Constructs — Cross-Check\n\n**Извещение на изменение:** 0135+170926\n\n## 1. Цель\n\nЗакрыть оставшиеся конструкции, которые фигурировали при анализе GM-096:\nSystemic Problem Resolution, Error-Proofing Verification, Process Verification,\nContamination Control, Fast Response и Decision Gate.\n\nЦель — определить их CMOC-класс без искусственного увеличения числа Machine.\n\n## 2. Systemic Problem Resolution\n\n**Класс:** EXISTING ARCHITECTURE / PATTERN — HOLD.\n\nКонструкция перекрывается с существующим `MP-003 Problem Solving`.\nGM-096 не даёт достаточной самостоятельной bounded identity, чтобы создавать\nновую Machine.\n\n**Решение:** новая Machine не создаётся; provenance GM-096 сохраняется в\nархитектуре Problem Solving при необходимости дальнейшего cross-check.\n\n## 3. Error-Proofing Verification\n\n**Класс:** VERIFICATION MECHANISM — HOLD.\n\nПроверка error-proofing является применением Verification к конкретному\nконтрольному средству. В рассмотренном GM-096 материале нет основания\nвыделять самостоятельную Machine с независимым lifecycle.\n\n**Решение:** Mechanism; отдельная Machine не создаётся.\n\n## 4. Process Verification\n\n**Класс:** VERIFICATION MECHANISM / EXISTING AUDIT ARCHITECTURE.\n\nProcess Verification может реализовываться через Audit / LPA и другие\nпроверочные конструкции. Само понятие проверки процесса не образует\nсамостоятельной Machine без дополнительной bounded construction.\n\n**Решение:** механизм; существующая Audit architecture используется там,\nгде она соответствует задаче.\n\n## 5. Contamination Control\n\n**Класс:** EXISTING SPECIALIZED CONTROL ARCHITECTURE / NEW PROVENANCE.\n\nGM QSB рассматривает Contamination Control как отдельную стратегию. Но в\nрамках GM-096 Managing Change рассмотренные страницы не дают достаточного\nоснования создавать новую Machine именно из этого материала.\n\n**Решение:** новая Machine не создаётся; возможная специализированная\nархитектура должна проверяться по источнику Contamination Control отдельно.\n\n## 6. Fast Response\n\n**Класс:** EXISTING ARCHITECTURE / NEW PROVENANCE.\n\nВ GM-096 Fast Response используется как механизм регулярного управленческого\nreview активного bypass. В CMOC уже существует `MC-009-10 Andon` и\n`MP-002 Response to Abnormality`.\n\n**Решение:** новую Machine не создавать. GM-096 добавляет provenance и\napplication context.\n\n## 7. Decision Gate\n\n**Класс:** DECISION MECHANISM / PATTERN.\n\nDecision Gate отвечает на вопрос, можно ли перейти к следующему состоянию\nпри выполнении заданных условий. Он используется в PPCR, PTR, Bypass и других\nконструкциях.\n\n**Решение:** фундаментальный механизм / Pattern, не Machine.\n\n## 8. Итоговая классификация хвоста\n\n| Конструкция | CMOC-класс | Новая Machine |\n|---|---|---|\n| Systemic Problem Resolution | Existing Problem Solving / HOLD | Нет |\n| Error-Proofing Verification | Verification Mechanism | Нет |\n| Process Verification | Verification Mechanism / Audit architecture | Нет |\n| Contamination Control | Existing specialized control / provenance | Нет |\n| Fast Response | Existing Andon / Response architecture | Нет |\n| Decision Gate | Decision Mechanism / Pattern | Нет |\n\n## 9. Архитектурный вывод\n\nОставшийся материал GM-096 в основном не добывает новые Machine. Он\nуточняет механизмы, паттерны и provenance существующих конструкций.\n\nТаким образом, GM-096 концентрирует новые Machine-кандидаты в четырёх\nспециализированных конструкциях:\n\n1. Plant Process Change Control (PPCR);\n2. Production Trial Run (PTR);\n3. Banking Process;\n4. Bypass Process Control.\n\nОстальные элементы образуют строительные блоки и существующие архитектуры.\n\n## 10. Статус\n\n`CROSS-CHECK COMPLETE / NON-CANON`\n\nREG-001: unchanged.\n\nCanon: unchanged.\n\nMACHINE-CATALOG: unchanged.\n\nСледующий шаг — отдельный итоговый патч-карта `GM-096 → CMOC` с фиксацией\nчетырёх Machine-кандидатов, Patterns, Mechanisms, Assemblies и provenance.\n",
+      "text_sha256": "abad4e1af5d354b58b6880a5feda2b8e312b184ec206ebb5f6854766df8f9917",
+      "candidate_scope": "source-bound content from one prepared GM chunk",
+      "source_basis": [
+        "FORM-007",
+        "FORM-008",
+        "FORM-009"
+      ]
+    }
+  ],
+  "provisional_candidates": [
+    {
+      "candidate_id": "CAND-SRC002-GM-096-LPACROSSCHECK",
+      "chunk_id": "GM-096-LPACROSSCHECK",
+      "title": "GM-096-LPA-CrossCheck",
+      "object_type": "SOURCE_BOUND_CANDIDATE",
+      "basis": "GM-096-LPA-CrossCheck.md",
+      "source_basis": [
+        "FORM-001",
+        "FORM-002",
+        "FORM-003"
+      ],
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-GM-096-MEASUREMENTTOACTIONCROSSCHECK",
+      "chunk_id": "GM-096-MEASUREMENTTOACTIONCROSSCHECK",
+      "title": "GM-096-Measurement-to-Action-CrossCheck",
+      "object_type": "SOURCE_BOUND_CANDIDATE",
+      "basis": "GM-096-Measurement-to-Action-CrossCheck.md",
+      "source_basis": [
+        "FORM-004",
+        "FORM-005",
+        "FORM-006"
+      ],
+      "status": "PROVISIONAL"
+    },
+    {
+      "candidate_id": "CAND-SRC002-GM-096-REMAININGCONSTRUCTSCROSSCHECK",
+      "chunk_id": "GM-096-REMAININGCONSTRUCTSCROSSCHECK",
+      "title": "GM-096-Remaining-Constructs-CrossCheck",
+      "object_type": "SOURCE_BOUND_CANDIDATE",
+      "basis": "GM-096-Remaining-Constructs-CrossCheck.md",
+      "source_basis": [
+        "FORM-007",
+        "FORM-008",
+        "FORM-009"
+      ],
+      "status": "PROVISIONAL"
+    }
+  ],
+  "processing_boundary": {
+    "semantic_decision": "NOT_PERFORMED",
+    "cmoc_write": "NONE",
+    "object_index_write": "NONE",
+    "human_review_required": true
+  }
+}
